@@ -1,7 +1,5 @@
 TODO: Camada de Insistência
 
-TODO: Fazer o infinite scroll funcionar
-
 TODO: Execução dos Testes
 
 TODO: Deploy na AWS + Continuous Integration GitHub
@@ -16,13 +14,11 @@ TODO: Upload de link de video
 
 TODO: Avatar para perfil
 
+TODO: Avatar para o grupo
+
 TODO: Fonte do Editor
 
 TODO: Upload de coleção de imagens
-
-TODO: Fazer os posts com scroll infinito
-
-TODO: Sumir com o flash de posts não encontrados
 
 TODO: Associação de usuários com grupos e favoritos
 Filtrar posts dos grupos
@@ -32,29 +28,19 @@ Tirar o card e ficar mais clean
 Colocar todas as mensagens
 Formatar os botões
 
+TODO: Sumir com o flash de posts não encontrados
+
 TODO: Formatar a página de grupos
 
 TODO: Fazer funcionar o básico das mensagens
 
 TODO: Fazer funcionar o básico das conversas
 
-TODO: Pesquisa full text do Postgres
-
-TODO: Permitir ver os posts de um grupo específico
-
-TODO: Comportamento diferenciado para o primeiro login
-
-TODO: Preview de link externo
-
 TODO: Reações em posts e mensagens
 
-TODO: Contador de drafts
+TODO: Contador de drafts e criador de post
 
 TODO: Rever menus
-
-TODO: Post ver mais
-
-TODO: Image header para grupos
 
 TODO: Controle de leitura de posts e mensagens
 
@@ -72,8 +58,6 @@ TODO: Fazer refactoring dos DTOs para serem mais restritivos nos campos que deix
 
 TODO: Filtro meus grupos, meus grupos formais, meus grupos informais, um grupo específico
 
-TODO: Avatar para o grupo
-
 TODO: Garantir o formato do nome dos grupos
 
 TODO: Garantir o tamanho máximo do conteúdo
@@ -83,6 +67,19 @@ TODO: Acertar as traduções dos objetos alterados
 TODO: Entender o esquema de tratamento de erros do JHIpster
 
 ------------------------------------------------------------------------------
+TODO: Moderador
+
+TODO: Image header para grupos
+
+TODO: Pesquisa full text do Postgres
+
+TODO: Post ver mais
+
+TODO: Preview de link externo
+
+TODO: Comportamento diferenciado para o primeiro login
+
+TODO: Mudar de PAGE para SLICE
 
 TODO: Upload de vídeo
 
