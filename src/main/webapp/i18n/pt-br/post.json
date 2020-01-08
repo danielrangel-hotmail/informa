@@ -1,0 +1,28 @@
+{
+  "informaApp": {
+    "post": {
+      "home": {
+        "title": "Posts",
+        "createLabel": "Criar novo Post",
+        "createOrEditLabel": "Criar ou editar Post",
+        "notFound": "Nenhum Post encontrado"
+      },
+      "created": "Um novo Post foi criado com o identificador {{ param }}",
+      "updated": "Um Post foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Post foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Post {{ id }}?"
+      },
+      "detail": {
+        "title": "Post"
+      },
+      "versao": "Versao",
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "conteudo": "Conteudo",
+      "publicacao": "Publicacao",
+      "autor": "Autor",
+      "grupo": "Grupo"
+    }
+  }
+}

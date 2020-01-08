@@ -1,0 +1,59 @@
+{
+    "name": "Mensagem",
+    "fields": [
+        {
+            "fieldName": "versao",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "criacao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ultimaEdicao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "conteudo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "temConversa",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "mensagem",
+            "relationshipValidateRules": "required",
+            "relationshipName": "autor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "mensagem",
+            "relationshipName": "post",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "mensagem",
+            "otherEntityRelationshipName": "mensagem",
+            "relationshipName": "conversa",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200106024145",
+    "entityTableName": "mensagem",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

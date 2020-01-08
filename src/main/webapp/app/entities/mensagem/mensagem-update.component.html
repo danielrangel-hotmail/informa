@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-mensagem-heading" jhiTranslate="informaApp.mensagem.home.createOrEditLabel">Create or edit a Mensagem</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.mensagem.conteudo" for="field_conteudo">Conteudo</label>
+                    <input type="text" class="form-control" name="conteudo" id="field_conteudo"
+                           formControlName="conteudo"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.mensagem.post" for="field_post">Post</label>
+                    <select class="form-control" id="field_post" name="post" formControlName="postId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="postOption.id" *ngFor="let postOption of posts; trackBy: trackById">{{postOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.mensagem.conversa" for="field_conversa">Conversa</label>
+                    <select class="form-control" id="field_conversa" name="conversa" formControlName="conversaId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="mensagemOption.id" *ngFor="let mensagemOption of mensagems; trackBy: trackById">{{mensagemOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

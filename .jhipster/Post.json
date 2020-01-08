@@ -1,0 +1,53 @@
+{
+    "name": "Post",
+    "fields": [
+        {
+            "fieldName": "versao",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "criacao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ultimaEdicao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "conteudo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "publicacao",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "post",
+            "relationshipValidateRules": "required",
+            "relationshipName": "autor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "grupo",
+            "otherEntityRelationshipName": "post",
+            "relationshipValidateRules": "required",
+            "relationshipName": "grupo",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200106024144",
+    "entityTableName": "post",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

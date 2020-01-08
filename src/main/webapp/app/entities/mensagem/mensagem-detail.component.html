@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="mensagem">
+            <h2><span jhiTranslate="informaApp.mensagem.detail.title">Mensagem</span> {{mensagem.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="informaApp.mensagem.versao">Versao</span></dt>
+                <dd>
+                    <span>{{mensagem.versao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.mensagem.criacao">Criacao</span></dt>
+                <dd>
+                    <span>{{mensagem.criacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.mensagem.ultimaEdicao">Ultima Edicao</span></dt>
+                <dd>
+                    <span>{{mensagem.ultimaEdicao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.mensagem.conteudo">Conteudo</span></dt>
+                <dd>
+                    <span>{{mensagem.conteudo}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.mensagem.temConversa">Tem Conversa</span></dt>
+                <dd>
+                    <span>{{mensagem.temConversa}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.mensagem.autor">Autor</span></dt>
+                <dd>
+                    {{mensagem.autorId}}
+                </dd>
+                <dt><span jhiTranslate="informaApp.mensagem.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="mensagem.postId">
+                        <a [routerLink]="['/post', mensagem.postId, 'view']">{{mensagem.postId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="informaApp.mensagem.conversa">Conversa</span></dt>
+                <dd>
+                    <div *ngIf="mensagem.conversaId">
+                        <a [routerLink]="['/mensagem', mensagem.conversaId, 'view']">{{mensagem.conversaId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/mensagem', mensagem.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

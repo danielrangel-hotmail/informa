@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-post-heading" jhiTranslate="informaApp.post.home.createOrEditLabel">Create or edit a Post</h2>
+            <div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.post.grupo" for="field_grupo">Grupo</label>
+                    <select class="form-control" id="field_grupo" name="grupo" formControlName="grupoId">
+                        <option *ngIf="!editForm.get('grupoId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="grupoOption.id" *ngFor="let grupoOption of grupos; trackBy: trackById">{{grupoOption.nome}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('grupoId')!.invalid && (editForm.get('grupoId')!.dirty || editForm.get('grupoId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('grupoId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <quill-editor
+                        [styles]="{borderTopLeftRadius: '0.25rem', borderTopRightRadius: '0.25rem'}"
+                        formControlName="conteudo"
+                        format="json"
+                        customToolbarPosition="bottom">
+                        <!--                    [modules]="{-->
+                        <!--                        toolbar: [-->
+                        <!--                            ['bold', 'italic', 'strike'],-->
+                        <!--                            ['blockquote', 'code-block'],-->
+                        <!--                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],-->
+
+                        <!--                            [{ 'color': [] }, { 'background': [] }],-->
+                        <!--                            [{ 'align': [] }],-->
+
+                        <!--                            ['clean'],-->
+
+                        <!--                            ['link']-->
+                        <!--                        ]-->
+                        <!--                    }"-->
+                        <div quill-editor-toolbar [ngStyle]="{borderTop: '0px',borderBottomLeftRadius: '0.25rem', borderBottomRightRadius: '0.25rem'}">
+                        <span class="ql-formats">
+                            <button class="ql-bold" placement="bottom" ngbTooltip="Negrito"></button>
+                            <button class="ql-italic" placement="bottom" ngbTooltip="Itálico"></button>
+                            <button class="ql-strike" placement="bottom" ngbTooltip="Riscado"></button>
+                            <button class="ql-blockquote" placement="bottom" ngbTooltip="Citação"></button>
+                            <button class="ql-code-block" placement="bottom" ngbTooltip="Código"></button>
+                            <button class="ql-list" value="ordered" placement="bottom" ngbTooltip="Lista Númerada"></button>
+                            <button class="ql-list" value="bullet" placement="bottom" ngbTooltip="Bullets"></button>
+                            <button class="ql-clean" placement="bottom" ngbTooltip="Sem formatação"></button>
+                            <button class="ql-link" placement="bottom" ngbTooltip="Link"></button>
+                        </span>
+                            <span class="ql-formats">
+                            <button class="ql-align" value="" placement="bottom" ngbTooltip="Esquerda"></button>
+                            <button class="ql-align" value="center" placement="bottom" ngbTooltip="Centro"></button>
+                            <button class="ql-align" value="right" placement="bottom" ngbTooltip="Direita"></button>
+                            <button class="ql-align" value="justify" placement="bottom" ngbTooltip="Justificado"></button>
+                        </span>
+                        </div>
+                    </quill-editor>
+
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.post.publicacao" for="field_publicacao">Publicacao</label>
+                    <div class="d-flex">
+                        <input id="field_publicacao" type="datetime-local" class="form-control" name="publicacao" formControlName="publicacao" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

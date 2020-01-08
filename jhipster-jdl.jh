@@ -1,0 +1,49 @@
+@dto(mapstruct)
+entity Grupo {
+	id UUID,
+    versao Long,
+    criacao ZonedDateTime,
+    ultimaEdicao ZonedDateTime,
+    nome String,
+    descricao String,
+    formal Boolean,
+    opcional Boolean
+}
+
+@dto(mapstruct)
+@service(serviceClass)
+@paginate(infinite-scroll)
+entity Post {
+	id UUID,
+    versao Long,
+    criacao ZonedDateTime,
+    ultimaEdicao ZonedDateTime,
+    conteudo String,
+    publicacao ZonedDateTime
+}
+
+relationship ManyToOne {
+	Post{autor required} to User,
+    Post{grupo required} to Grupo
+}
+
+@dto(mapstruct)
+@service(serviceClass)
+@paginate(infinite-scroll)
+entity Mensagem {
+	id UUID,
+    versao Long,
+    criacao ZonedDateTime,
+    ultimaEdicao ZonedDateTime,
+    conteudo String,
+    temConversa Boolean
+}
+
+relationship ManyToOne {
+	Mensagem{autor required} to User,
+    Mensagem{post} to Post,
+    Mensagem{conversa} to Mensagem
+}
+
+
+

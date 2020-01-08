@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.objective.informa",
+      "nativeLanguage": "pt-br"
+    },
+    "jhipsterVersion": "6.6.0",
+    "applicationType": "monolith",
+    "baseName": "informa",
+    "packageName": "com.objective.informa",
+    "packageFolder": "com/objective/informa",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NGMxYjVlOTNiZmY5NzliNmM0MzllODYxMmM0YTA5ZDBiZDMxMGVkNjY3MjZiMWI1ZGQyMjJjOWY3N2ZjZDViYjljZWIyMDc5YzM2NmIyZDRiOGQ2MzlhOTcxN2M1ZDFiYmVmYmEzNzgzYTU3ODc2ZTFiNDZiM2ZkMWVhYzk4MmY=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "materia",
+    "clientThemeVariant": "primary",
+    "creationTimestamp": 1578277942619,
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "pt-br",
+    "languages": ["pt-br", "en"],
+    "blueprints": []
+  }
+}

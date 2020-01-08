@@ -1,0 +1,28 @@
+{
+  "informaApp": {
+    "grupo": {
+      "home": {
+        "title": "Grupos",
+        "createLabel": "Criar novo Grupo",
+        "createOrEditLabel": "Criar ou editar Grupo",
+        "notFound": "Nenhum Grupo encontrado"
+      },
+      "created": "Um novo Grupo foi criado com o identificador {{ param }}",
+      "updated": "Um Grupo foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Grupo foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Grupo {{ id }}?"
+      },
+      "detail": {
+        "title": "Grupo"
+      },
+      "versao": "Versao",
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "nome": "Nome",
+      "descricao": "Descricao",
+      "formal": "Formal",
+      "opcional": "Opcional"
+    }
+  }
+}
