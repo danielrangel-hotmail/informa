@@ -11,10 +11,10 @@
     <jhi-alert-error></jhi-alert-error>
     <jhi-alert></jhi-alert>
     <br/>
-    <div class="alert alert-warning" *ngIf="posts?.length === 0">
+    <div class="alert alert-warning" *ngIf="posts?.length === 0" ng-cloak>
         <span jhiTranslate="informaApp.post.home.notFound">No posts found</span>
     </div>
-    <div *ngIf="posts?.length > 0">
+    <div *ngIf="posts?.length > 0" infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0" ng-cloak>
         <div *ngFor="let post of posts ;trackBy: trackId">
             <div class="row justify-content-center">
                 <div class="col-8">
