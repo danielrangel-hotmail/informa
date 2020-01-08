@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { InformaSharedModule } from 'app/shared/shared.module';
-import { PostComponent } from 'app/entities/shared-post/post.component';
+import { PostComponent } from './post.component';
 import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { PostPublicaDialogComponent } from './post-publica-dialog.component';

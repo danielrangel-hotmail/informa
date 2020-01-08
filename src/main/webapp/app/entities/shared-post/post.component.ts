@@ -11,7 +11,7 @@ import { PostService } from './post.service';
 import { PostDeleteDialogComponent } from '../post/post-delete-dialog.component';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
-import { PostPublicaDialogComponent } from 'app/entities/shared-post/post-publica-dialog.component';
+import { PostPublicaDialogComponent } from './post-publica-dialog.component';
 
 @Component({
   selector: 'jhi-post',
