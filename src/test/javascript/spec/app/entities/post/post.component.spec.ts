@@ -106,27 +106,15 @@ describe('Component Tests', () => {
       expect(comp.posts && comp.posts[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
-    it('should calculate the sort attribute for an id', () => {
-      // WHEN
-      comp.ngOnInit();
-      const result = comp.sort();
-
-      // THEN
-      expect(result).toEqual(['id,asc']);
-    });
-
     it('should calculate the sort attribute for a non-id attribute', () => {
       // INIT
       comp.ngOnInit();
 
-      // GIVEN
-      comp.predicate = 'name';
-
       // WHEN
       const result = comp.sort();
 
       // THEN
-      expect(result).toEqual(['name,asc', 'id']);
+      expect(result).toEqual(['criacao,desc', 'id']);
     });
   });
 });

@@ -41,14 +41,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = InformaApp.class)
 public class GrupoResourceIT {
 
-    private static final Long DEFAULT_VERSAO = 1L;
-    private static final Long UPDATED_VERSAO = 2L;
-
-    private static final ZonedDateTime DEFAULT_CRIACAO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_CRIACAO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
-    private static final ZonedDateTime DEFAULT_ULTIMA_EDICAO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_ULTIMA_EDICAO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final Long DEFAULT_VERSAO = 0L;
+    private static final Long UPDATED_VERSAO = 1L;
 
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
     private static final String UPDATED_NOME = "BBBBBBBBBB";
@@ -110,9 +104,6 @@ public class GrupoResourceIT {
      */
     public static Grupo createEntity(EntityManager em) {
         Grupo grupo = new Grupo()
-            .versao(DEFAULT_VERSAO)
-            .criacao(DEFAULT_CRIACAO)
-            .ultimaEdicao(DEFAULT_ULTIMA_EDICAO)
             .nome(DEFAULT_NOME)
             .descricao(DEFAULT_DESCRICAO)
             .formal(DEFAULT_FORMAL)
@@ -127,9 +118,6 @@ public class GrupoResourceIT {
      */
     public static Grupo createUpdatedEntity(EntityManager em) {
         Grupo grupo = new Grupo()
-            .versao(UPDATED_VERSAO)
-            .criacao(UPDATED_CRIACAO)
-            .ultimaEdicao(UPDATED_ULTIMA_EDICAO)
             .nome(UPDATED_NOME)
             .descricao(UPDATED_DESCRICAO)
             .formal(UPDATED_FORMAL)
@@ -159,8 +147,8 @@ public class GrupoResourceIT {
         assertThat(grupoList).hasSize(databaseSizeBeforeCreate + 1);
         Grupo testGrupo = grupoList.get(grupoList.size() - 1);
         assertThat(testGrupo.getVersao()).isEqualTo(DEFAULT_VERSAO);
-        assertThat(testGrupo.getCriacao()).isEqualTo(DEFAULT_CRIACAO);
-        assertThat(testGrupo.getUltimaEdicao()).isEqualTo(DEFAULT_ULTIMA_EDICAO);
+        assertThat(testGrupo.getCriacao()).isNotNull();
+        assertThat(testGrupo.getUltimaEdicao()).isEqualTo(testGrupo.getCriacao());
         assertThat(testGrupo.getNome()).isEqualTo(DEFAULT_NOME);
         assertThat(testGrupo.getDescricao()).isEqualTo(DEFAULT_DESCRICAO);
         assertThat(testGrupo.isFormal()).isEqualTo(DEFAULT_FORMAL);
@@ -200,14 +188,14 @@ public class GrupoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(grupo.getId().intValue())))
             .andExpect(jsonPath("$.[*].versao").value(hasItem(DEFAULT_VERSAO.intValue())))
-            .andExpect(jsonPath("$.[*].criacao").value(hasItem(sameInstant(DEFAULT_CRIACAO))))
-            .andExpect(jsonPath("$.[*].ultimaEdicao").value(hasItem(sameInstant(DEFAULT_ULTIMA_EDICAO))))
+//            .andExpect(jsonPath("$.[*].criacao").value(hasItem(sameInstant(DEFAULT_CRIACAO))))
+//            .andExpect(jsonPath("$.[*].ultimaEdicao").value(hasItem(sameInstant(DEFAULT_ULTIMA_EDICAO))))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
             .andExpect(jsonPath("$.[*].formal").value(hasItem(DEFAULT_FORMAL.booleanValue())))
             .andExpect(jsonPath("$.[*].opcional").value(hasItem(DEFAULT_OPCIONAL.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getGrupo() throws Exception {
@@ -220,8 +208,8 @@ public class GrupoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(grupo.getId().intValue()))
             .andExpect(jsonPath("$.versao").value(DEFAULT_VERSAO.intValue()))
-            .andExpect(jsonPath("$.criacao").value(sameInstant(DEFAULT_CRIACAO)))
-            .andExpect(jsonPath("$.ultimaEdicao").value(sameInstant(DEFAULT_ULTIMA_EDICAO)))
+//            .andExpect(jsonPath("$.criacao").value(grupo.getCriacao().))
+//            .andExpect(jsonPath("$.ultimaEdicao").exists())
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO))
             .andExpect(jsonPath("$.formal").value(DEFAULT_FORMAL.booleanValue()))
@@ -249,9 +237,6 @@ public class GrupoResourceIT {
         // Disconnect from session so that the updates on updatedGrupo are not directly saved in db
         em.detach(updatedGrupo);
         updatedGrupo
-            .versao(UPDATED_VERSAO)
-            .criacao(UPDATED_CRIACAO)
-            .ultimaEdicao(UPDATED_ULTIMA_EDICAO)
             .nome(UPDATED_NOME)
             .descricao(UPDATED_DESCRICAO)
             .formal(UPDATED_FORMAL)
@@ -268,8 +253,8 @@ public class GrupoResourceIT {
         assertThat(grupoList).hasSize(databaseSizeBeforeUpdate);
         Grupo testGrupo = grupoList.get(grupoList.size() - 1);
         assertThat(testGrupo.getVersao()).isEqualTo(UPDATED_VERSAO);
-        assertThat(testGrupo.getCriacao()).isEqualTo(UPDATED_CRIACAO);
-        assertThat(testGrupo.getUltimaEdicao()).isEqualTo(UPDATED_ULTIMA_EDICAO);
+        assertThat(testGrupo.getCriacao()).isNotNull();
+        assertThat(testGrupo.getUltimaEdicao()).isNotNull();
         assertThat(testGrupo.getNome()).isEqualTo(UPDATED_NOME);
         assertThat(testGrupo.getDescricao()).isEqualTo(UPDATED_DESCRICAO);
         assertThat(testGrupo.isFormal()).isEqualTo(UPDATED_FORMAL);

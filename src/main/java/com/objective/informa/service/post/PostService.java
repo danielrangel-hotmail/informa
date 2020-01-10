@@ -1,7 +1,9 @@
 package com.objective.informa.service.post;
 
 import com.objective.informa.domain.Post;
+import com.objective.informa.domain.User;
 import com.objective.informa.repository.PostRepository;
+import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.SecurityUtils;
 import com.objective.informa.service.UserService;
 import com.objective.informa.service.dto.PostDTO;
@@ -34,13 +36,13 @@ public class PostService {
 
     private final PostMapper postMapper;
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     public PostService(PostRepository postRepository, PostMapper postMapper,
-        UserService userService) {
+        UserRepository userRepository) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
-        this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,7 +57,8 @@ public class PostService {
         ZonedDateTime now = ZonedDateTime.now();
         post.setCriacao(now);
         post.setUltimaEdicao(now);
-        post.setAutor(userService.getUserWithAuthorities().get());
+        final Optional<User> user = SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin);
+        post.setAutor(user.get());
         post = postRepository.save(post);
         return postMapper.toDto(post);
     }
