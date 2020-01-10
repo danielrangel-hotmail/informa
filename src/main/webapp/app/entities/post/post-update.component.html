@@ -17,45 +17,32 @@
                     </small>
                 </div>
                 <div class="form-group">
-                    <quill-editor
-                        [styles]="{borderTopLeftRadius: '0.25rem', borderTopRightRadius: '0.25rem'}"
-                        formControlName="conteudo"
-                        format="json"
-                        customToolbarPosition="bottom">
-                        <!--                    [modules]="{-->
-                        <!--                        toolbar: [-->
-                        <!--                            ['bold', 'italic', 'strike'],-->
-                        <!--                            ['blockquote', 'code-block'],-->
-                        <!--                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],-->
-
-                        <!--                            [{ 'color': [] }, { 'background': [] }],-->
-                        <!--                            [{ 'align': [] }],-->
-
-                        <!--                            ['clean'],-->
-
-                        <!--                            ['link']-->
-                        <!--                        ]-->
-                        <!--                    }"-->
-                        <div quill-editor-toolbar [ngStyle]="{borderTop: '0px',borderBottomLeftRadius: '0.25rem', borderBottomRightRadius: '0.25rem'}">
-                        <span class="ql-formats">
-                            <button class="ql-bold" placement="bottom" ngbTooltip="Negrito"></button>
-                            <button class="ql-italic" placement="bottom" ngbTooltip="Itálico"></button>
-                            <button class="ql-strike" placement="bottom" ngbTooltip="Riscado"></button>
-                            <button class="ql-blockquote" placement="bottom" ngbTooltip="Citação"></button>
-                            <button class="ql-code-block" placement="bottom" ngbTooltip="Código"></button>
-                            <button class="ql-list" value="ordered" placement="bottom" ngbTooltip="Lista Númerada"></button>
-                            <button class="ql-list" value="bullet" placement="bottom" ngbTooltip="Bullets"></button>
-                            <button class="ql-clean" placement="bottom" ngbTooltip="Sem formatação"></button>
-                            <button class="ql-link" placement="bottom" ngbTooltip="Link"></button>
-                        </span>
-                            <span class="ql-formats">
-                            <button class="ql-align" value="" placement="bottom" ngbTooltip="Esquerda"></button>
-                            <button class="ql-align" value="center" placement="bottom" ngbTooltip="Centro"></button>
-                            <button class="ql-align" value="right" placement="bottom" ngbTooltip="Direita"></button>
-                            <button class="ql-align" value="justify" placement="bottom" ngbTooltip="Justificado"></button>
-                        </span>
-                        </div>
-                    </quill-editor>
+                    <jhi-quill-editor formControlName="conteudo"></jhi-quill-editor>
+<!--                    <quill-editor-->
+<!--                        [styles]="{borderTopLeftRadius: '0.25rem', borderTopRightRadius: '0.25rem'}"-->
+<!--                        formControlName="conteudo"-->
+<!--                        format="json"-->
+<!--                        customToolbarPosition="bottom">-->
+<!--                        <div quill-editor-toolbar [ngStyle]="{borderTop: '0px',borderBottomLeftRadius: '0.25rem', borderBottomRightRadius: '0.25rem'}">-->
+<!--                        <span class="ql-formats">-->
+<!--                            <button class="ql-bold" placement="bottom" ngbTooltip="Negrito"></button>-->
+<!--                            <button class="ql-italic" placement="bottom" ngbTooltip="Itálico"></button>-->
+<!--                            <button class="ql-strike" placement="bottom" ngbTooltip="Riscado"></button>-->
+<!--                            <button class="ql-blockquote" placement="bottom" ngbTooltip="Citação"></button>-->
+<!--                            <button class="ql-code-block" placement="bottom" ngbTooltip="Código"></button>-->
+<!--                            <button class="ql-list" value="ordered" placement="bottom" ngbTooltip="Lista Númerada"></button>-->
+<!--                            <button class="ql-list" value="bullet" placement="bottom" ngbTooltip="Bullets"></button>-->
+<!--                            <button class="ql-clean" placement="bottom" ngbTooltip="Sem formatação"></button>-->
+<!--                            <button class="ql-link" placement="bottom" ngbTooltip="Link"></button>-->
+<!--                        </span>-->
+<!--                            <span class="ql-formats">-->
+<!--                            <button class="ql-align" value="" placement="bottom" ngbTooltip="Esquerda"></button>-->
+<!--                            <button class="ql-align" value="center" placement="bottom" ngbTooltip="Centro"></button>-->
+<!--                            <button class="ql-align" value="right" placement="bottom" ngbTooltip="Direita"></button>-->
+<!--                            <button class="ql-align" value="justify" placement="bottom" ngbTooltip="Justificado"></button>-->
+<!--                        </span>-->
+<!--                        </div>-->
+<!--                    </quill-editor>-->
 
                 </div>
                 <div class="form-group">
