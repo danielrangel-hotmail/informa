@@ -1,10 +1,6 @@
 TODO: Deploy na AWS + Continuous Integration GitHub
 
-TODO: Menções
-
-TODO: Emojis
-
-TODO: Upload de uma imagem
+TODO: Upload de coleção de imagens
 
 TODO: Upload de link de video
 
@@ -14,15 +10,15 @@ TODO: Avatar para o grupo
 
 TODO: Fonte do Editor
 
-TODO: Upload de coleção de imagens
-
-TODO: Associação de usuários com grupos e favoritos
-Filtrar posts dos grupos
-
 TODO: Formatar o card do post
 Tirar o card e ficar mais clean
 Colocar todas as mensagens
 Formatar os botões
+
+TODO: Criar post mais convidativo
+
+TODO: Associação de usuários com grupos e favoritos
+Filtrar posts dos grupos
 
 TODO: Sumir com o flash de posts não encontrados
 
@@ -63,6 +59,8 @@ TODO: Acertar as traduções dos objetos alterados
 TODO: Entender o esquema de tratamento de erros do JHIpster
 
 ------------------------------------------------------------------------------
+TODO: Menção poder abrir uma página do cara...
+
 TODO: Execução dos Testes
 
 TODO: Camada de Insistência
