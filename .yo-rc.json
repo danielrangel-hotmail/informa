@@ -38,6 +38,15 @@
     "enableTranslation": true,
     "nativeLanguage": "pt-br",
     "languages": ["pt-br", "en"],
-    "blueprints": []
+    "blueprints": [],
+    "aws": {
+      "applicationName": "bjk-informa",
+      "environmentName": "bjk-informa-env",
+      "bucketName": "bjk-informa",
+      "instanceType": "t2.small",
+      "awsRegion": "us-east-2",
+      "dbName": "bjkinforma",
+      "dbInstanceClass": "db.t2.small"
+    }
   }
 }

@@ -153,3 +153,9 @@ jhipster:
 # ===================================================================
 
 # application:
+aws:
+  s3:
+    bucket:
+      name: bjk-informa-arquivos
+  region: us-east-2
+
