@@ -7,10 +7,12 @@ import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { QuillEditorCustomComponent } from './quill/quill-editor-custom.component';
 import { QuillModule } from 'ngx-quill';
+import {FileUploadComponent} from 'app/shared/file-upload/file-upload.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
-  imports: [InformaSharedLibsModule, QuillModule.forRoot()],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent],
+  imports: [InformaSharedLibsModule, QuillModule.forRoot(), FileUploadModule ],
+  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, FileUploadComponent],
   entryComponents: [LoginModalComponent],
   exports: [
     InformaSharedLibsModule,
@@ -19,7 +21,8 @@ import { QuillModule } from 'ngx-quill';
     AlertErrorComponent,
     LoginModalComponent,
     HasAnyAuthorityDirective,
-    QuillEditorCustomComponent
+    QuillEditorCustomComponent,
+    FileUploadComponent
   ]
 })
 export class InformaSharedModule {}
