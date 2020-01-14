@@ -9,11 +9,11 @@ import org.mapstruct.*;
  * Mapper for the entity {@link Grupo} and its DTO {@link GrupoDTO}.
  */
 @Mapper(componentModel = "spring", uses = {})
-public interface GrupoMapper extends EntityMapper<GrupoDTO, Grupo> {
+public abstract class GrupoMapper implements EntityMapper<GrupoDTO, Grupo> {
 
 
 
-    default Grupo fromId(Long id) {
+    public Grupo fromId(Long id) {
         if (id == null) {
             return null;
         }

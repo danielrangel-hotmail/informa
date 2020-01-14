@@ -24,6 +24,12 @@
     ],
     "relationships": [
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "arquivo",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "arquivos"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "post",

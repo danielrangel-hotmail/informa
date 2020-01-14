@@ -26,6 +26,8 @@ public abstract class MensagemMapper implements EntityMapper<MensagemDTO, Mensag
     @Mapping(source = "autor.firstName", target = "autorNome")
     public abstract MensagemDTO toDto(Mensagem mensagem);
 
+    @Mapping(target = "arquivos", ignore = true)
+    @Mapping(target = "removeArquivos", ignore = true)
     @Mapping(source = "autorId", target = "autor")
     @Mapping(source = "postId", target = "post")
     @Mapping(source = "conversaId", target = "conversa", qualifiedByName = "conversaFromId")

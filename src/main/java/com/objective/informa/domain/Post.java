@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Post.
@@ -39,6 +41,10 @@ public class Post implements Serializable {
 
     @Column(name = "publicacao")
     private ZonedDateTime publicacao;
+
+    @OneToMany(mappedBy = "post")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Arquivo> arquivos = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -122,6 +128,31 @@ public class Post implements Serializable {
 
     public void setPublicacao(ZonedDateTime publicacao) {
         this.publicacao = publicacao;
+    }
+
+    public Set<Arquivo> getArquivos() {
+        return arquivos;
+    }
+
+    public Post arquivos(Set<Arquivo> arquivos) {
+        this.arquivos = arquivos;
+        return this;
+    }
+
+    public Post addArquivos(Arquivo arquivo) {
+        this.arquivos.add(arquivo);
+        arquivo.setPost(this);
+        return this;
+    }
+
+    public Post removeArquivos(Arquivo arquivo) {
+        this.arquivos.remove(arquivo);
+        arquivo.setPost(null);
+        return this;
+    }
+
+    public void setArquivos(Set<Arquivo> arquivos) {
+        this.arquivos = arquivos;
     }
 
     public User getAutor() {

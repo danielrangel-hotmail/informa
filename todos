@@ -17,6 +17,13 @@ Formatar os botões
 
 TODO: Criar post mais convidativo
 
+TODO: Role do Post Oficial
+Um post pode ser marcado como oficial da empresa
+O post sairá em nome da empresa by o criador
+Somente admins e caras com post oficial podem postar desta forma
+
+TODO: Registrar o número de vezes que cada pessoa carregou os posts
+
 TODO: Associação de usuários com grupos e favoritos
 Filtrar posts dos grupos
 

@@ -19,7 +19,7 @@
             <div class="row justify-content-center">
                 <div class="col-8">
                     <div *ngIf="post">
-                        <div class="card bg-secondary mb-3">
+                        <div class="card bg-secondary mb-3 max-width-main-view">
                             <div class="card-header small">
                                 <div *ngIf="post.grupoId">
                                     <a [routerLink]="['/grupo', post.grupoId, 'view']">{{post.grupoNome}}</a>

@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="arquivo">
+            <h2><span jhiTranslate="informaApp.arquivo.detail.title">Arquivo</span> {{arquivo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="informaApp.arquivo.versao">Versao</span></dt>
+                <dd>
+                    <span>{{arquivo.versao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.criacao">Criacao</span></dt>
+                <dd>
+                    <span>{{arquivo.criacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.ultimaEdicao">Ultima Edicao</span></dt>
+                <dd>
+                    <span>{{arquivo.ultimaEdicao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.nome">Nome</span></dt>
+                <dd>
+                    <span>{{arquivo.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.colecao">Colecao</span></dt>
+                <dd>
+                    <span>{{arquivo.colecao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.tipo">Tipo</span></dt>
+                <dd>
+                    <span>{{arquivo.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.link">Link</span></dt>
+                <dd>
+                    <span>{{arquivo.link}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.uploadConfirmado">Upload Confirmado</span></dt>
+                <dd>
+                    <span>{{arquivo.uploadConfirmado}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.usuario">Usuario</span></dt>
+                <dd>
+                    {{arquivo.usuarioId}}
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="arquivo.postId">
+                        <a [routerLink]="['/post', arquivo.postId, 'view']">{{arquivo.postId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="informaApp.arquivo.mensagem">Mensagem</span></dt>
+                <dd>
+                    <div *ngIf="arquivo.mensagemId">
+                        <a [routerLink]="['/mensagem', arquivo.mensagemId, 'view']">{{arquivo.mensagemId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/arquivo', arquivo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="informaApp.arquivo.home.title">Arquivos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-arquivo" [routerLink]="['/arquivo/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="informaApp.arquivo.home.createLabel">
+            Create a new Arquivo
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="arquivos?.length === 0">
+        <span jhiTranslate="informaApp.arquivo.home.notFound">No arquivos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="arquivos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="versao"><span jhiTranslate="informaApp.arquivo.versao">Versao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="criacao"><span jhiTranslate="informaApp.arquivo.criacao">Criacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="ultimaEdicao"><span jhiTranslate="informaApp.arquivo.ultimaEdicao">Ultima Edicao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nome"><span jhiTranslate="informaApp.arquivo.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="colecao"><span jhiTranslate="informaApp.arquivo.colecao">Colecao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="informaApp.arquivo.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="link"><span jhiTranslate="informaApp.arquivo.link">Link</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="uploadConfirmado"><span jhiTranslate="informaApp.arquivo.uploadConfirmado">Upload Confirmado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="usuarioId"><span jhiTranslate="informaApp.arquivo.usuario">Usuario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="postId"><span jhiTranslate="informaApp.arquivo.post">Post</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="mensagemId"><span jhiTranslate="informaApp.arquivo.mensagem">Mensagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let arquivo of arquivos ;trackBy: trackId">
+                <td><a [routerLink]="['/arquivo', arquivo.id, 'view' ]">{{arquivo.id}}</a></td>
+                <td>{{arquivo.versao}}</td>
+                <td>{{arquivo.criacao | date:'medium'}}</td>
+                <td>{{arquivo.ultimaEdicao | date:'medium'}}</td>
+                <td>{{arquivo.nome}}</td>
+                <td>{{arquivo.colecao}}</td>
+                <td>{{arquivo.tipo}}</td>
+                <td>{{arquivo.link}}</td>
+                <td>{{arquivo.uploadConfirmado}}</td>
+                <td>
+                    {{arquivo.usuarioId}}
+                </td>
+                <td>
+                    <div *ngIf="arquivo.postId">
+                        <a [routerLink]="['/post', arquivo.postId , 'view' ]" >{{arquivo.postId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="arquivo.mensagemId">
+                        <a [routerLink]="['/mensagem', arquivo.mensagemId , 'view' ]" >{{arquivo.mensagemId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/arquivo', arquivo.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/arquivo', arquivo.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(arquivo)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

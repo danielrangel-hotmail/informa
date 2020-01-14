@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IArquivo } from 'app/shared/model/arquivo.model';
 
 export interface IMensagem {
   id?: number;
@@ -7,6 +8,7 @@ export interface IMensagem {
   ultimaEdicao?: Moment;
   conteudo?: string;
   temConversa?: boolean;
+  arquivos?: IArquivo[];
   autorId?: number;
   postId?: number;
   conversaId?: number;
@@ -21,6 +23,7 @@ export class Mensagem implements IMensagem {
     public ultimaEdicao?: Moment,
     public conteudo?: string,
     public temConversa?: boolean,
+    public arquivos?: IArquivo[],
     public autorId?: number,
     public postId?: number,
     public conversaId?: number,

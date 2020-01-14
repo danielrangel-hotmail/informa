@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="humberto (generated)" id="1579027664556-3">
+        <createTable tableName="arquivo">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="arquivoPK"/>
+            </column>
+            <column name="colecao" type="VARCHAR(255)"/>
+            <column name="criacao" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="link" type="VARCHAR(255)"/>
+            <column name="nome" type="VARCHAR(255)"/>
+            <column name="tipo" type="VARCHAR(255)"/>
+            <column name="ultima_edicao" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="upload_confirmado" type="BOOLEAN"/>
+            <column name="versao" type="BIGINT"/>
+            <column name="mensagem_id" type="BIGINT"/>
+            <column name="post_id" type="BIGINT"/>
+            <column name="usuario_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1579027664556-4">
+        <addForeignKeyConstraint baseColumnNames="usuario_id" baseTableName="arquivo" constraintName="FK2hd5jh1j69vyjmv5e5360b9uc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1579027664556-5">
+        <addForeignKeyConstraint baseColumnNames="mensagem_id" baseTableName="arquivo" constraintName="FK57np5vird23pxxo7uat2b3os8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mensagem" validate="true"/>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1579027664556-6">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="arquivo" constraintName="FKpw4wh570dy5aiwns38t6l98an" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="post" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

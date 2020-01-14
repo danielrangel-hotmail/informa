@@ -1,0 +1,32 @@
+{
+  "informaApp": {
+    "arquivo": {
+      "home": {
+        "title": "Arquivos",
+        "createLabel": "Create a new Arquivo",
+        "createOrEditLabel": "Create or edit a Arquivo",
+        "notFound": "No Arquivos found"
+      },
+      "created": "A new Arquivo is created with identifier {{ param }}",
+      "updated": "A Arquivo is updated with identifier {{ param }}",
+      "deleted": "A Arquivo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Arquivo {{ id }}?"
+      },
+      "detail": {
+        "title": "Arquivo"
+      },
+      "versao": "Versao",
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "nome": "Nome",
+      "colecao": "Colecao",
+      "tipo": "Tipo",
+      "link": "Link",
+      "uploadConfirmado": "Upload Confirmado",
+      "usuario": "Usuario",
+      "post": "Post",
+      "mensagem": "Mensagem"
+    }
+  }
+}

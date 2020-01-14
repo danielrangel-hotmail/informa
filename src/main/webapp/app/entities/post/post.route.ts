@@ -10,6 +10,8 @@ import { PostService } from '../shared-post/post.service';
 import { PostDetailComponent } from './post-detail.component';
 import { PostUpdateComponent } from './post-update.component';
 import { MyPostComponent } from 'app/entities/post/my-post.component';
+import {PostImageComponent} from 'app/entities/post/post-image/post-image.component';
+import {PostVideoLinkComponent} from 'app/entities/post/post-video-link/post-video-link.component';
 
 @Injectable({ providedIn: 'root' })
 export class PostResolve implements Resolve<IPost> {
@@ -65,7 +67,12 @@ export const postRoute: Routes = [
       authorities: ['ROLE_USER'],
       pageTitle: 'informaApp.post.home.title'
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
+    children: [
+      {path: 'image', component: PostImageComponent},
+      {path: 'video-link', component: PostVideoLinkComponent},
+      {path: '', redirectTo:'image', pathMatch:"full" },
+    ]
   },
   {
     path: ':id/edit',
@@ -77,6 +84,11 @@ export const postRoute: Routes = [
       authorities: ['ROLE_USER'],
       pageTitle: 'informaApp.post.home.title'
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
+    children: [
+      {path: 'image', component: PostImageComponent},
+      {path: 'video-link', component: PostVideoLinkComponent},
+      {path: '', redirectTo:'image', pathMatch:"full" },
+    ]
   }
 ];

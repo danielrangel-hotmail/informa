@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IArquivo } from 'app/shared/model/arquivo.model';
 
 export interface IPost {
   id?: number;
@@ -7,6 +8,7 @@ export interface IPost {
   ultimaEdicao?: Moment;
   conteudo?: string;
   publicacao?: Moment;
+  arquivos?: IArquivo[];
   autorId?: number;
   grupoId?: number;
   autorNome?: string;
@@ -21,6 +23,7 @@ export class Post implements IPost {
     public ultimaEdicao?: Moment,
     public conteudo?: string,
     public publicacao?: Moment,
+    public arquivos?: IArquivo[],
     public autorId?: number,
     public grupoId?: number,
     public autorNome?: string,

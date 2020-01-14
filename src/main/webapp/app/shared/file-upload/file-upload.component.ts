@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader, FileItem } from 'ng2-file-upload';
-import {GrupoService} from 'app/entities/grupo/grupo.service';
 import {FileUploadService} from 'app/shared/file-upload/file-upload.service';
 import {IPreSignS3} from 'app/shared/model/presigns3.model';
 import { HttpResponse } from '@angular/common/http';

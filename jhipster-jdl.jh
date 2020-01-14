@@ -45,5 +45,26 @@ relationship ManyToOne {
     Mensagem{conversa} to Mensagem
 }
 
+@dto(mapstruct)
+@service(serviceClass)
+@paginate(infinite-scroll)
+entity Arquivo {
+	id UUID,
+    versao Long,
+    criacao ZonedDateTime,
+    ultimaEdicao ZonedDateTime,
+    nome String,
+    colecao String,
+    tipo String,
+    link String,
+    uploadConfirmado Boolean
+}
 
+relationship ManyToOne {
+	Arquivo{usuario required} to User,
+}
 
+relationship OneToMany {
+    Post{arquivos} to Arquivo{post},
+    Mensagem{arquivos} to Arquivo{mensagem} 
+}

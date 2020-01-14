@@ -23,7 +23,7 @@ type SelectableEntity = IUser | IGrupo;
 })
 export class PostUpdateComponent implements OnInit {
   isSaving = false;
-
+  isNavbarCollapsed = false;
   users: IUser[] = [];
 
   grupos: IGrupo[] = [];
@@ -137,4 +137,13 @@ export class PostUpdateComponent implements OnInit {
   trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
+
+  collapseNavbar(): void {
+    this.isNavbarCollapsed = true;
+  }
+
+  toggleNavbar(): void {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
 }

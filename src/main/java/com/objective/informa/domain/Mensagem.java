@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Mensagem.
@@ -39,6 +41,10 @@ public class Mensagem implements Serializable {
 
     @Column(name = "tem_conversa")
     private Boolean temConversa;
+
+    @OneToMany(mappedBy = "mensagem")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Arquivo> arquivos = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -125,6 +131,31 @@ public class Mensagem implements Serializable {
 
     public void setTemConversa(Boolean temConversa) {
         this.temConversa = temConversa;
+    }
+
+    public Set<Arquivo> getArquivos() {
+        return arquivos;
+    }
+
+    public Mensagem arquivos(Set<Arquivo> arquivos) {
+        this.arquivos = arquivos;
+        return this;
+    }
+
+    public Mensagem addArquivos(Arquivo arquivo) {
+        this.arquivos.add(arquivo);
+        arquivo.setMensagem(this);
+        return this;
+    }
+
+    public Mensagem removeArquivos(Arquivo arquivo) {
+        this.arquivos.remove(arquivo);
+        arquivo.setMensagem(null);
+        return this;
+    }
+
+    public void setArquivos(Set<Arquivo> arquivos) {
+        this.arquivos = arquivos;
     }
 
     public User getAutor() {

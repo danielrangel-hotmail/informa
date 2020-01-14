@@ -17,13 +17,14 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Autowired private GrupoRepository grupoRepository;
     @Autowired private UserRepository userRepository;
 
-
     @Mapping(source = "autor.id", target = "autorId")
     @Mapping(source = "autor.firstName", target = "autorNome")
     @Mapping(source = "grupo.id", target = "grupoId")
     @Mapping(source = "grupo.nome", target = "grupoNome")
     public abstract PostDTO toDto(Post post);
 
+    @Mapping(target = "arquivos", ignore = true)
+    @Mapping(target = "removeArquivos", ignore = true)
     @Mapping(source = "autorId", target = "autor")
     @Mapping(source = "grupoId", target = "grupo")
     public abstract Post toEntity(PostDTO postDTO);
