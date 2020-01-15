@@ -21,21 +21,21 @@ export class FileUploadComponent implements OnInit{
 
   constructor (protected arquivoService: ArquivoService ){
 
-    const ourFormatDataFunction = async (item: any) => {
-      return new Promise((resolve, reject) => {
-        resolve({
-          name: item._file.name,
-          length: item._file.size,
-          contentType: item._file.type,
-          date: new Date()
-        });
-      });
-    }
+    // const ourFormatDataFunction = async (item: any) => {
+    //   return new Promise((resolve, reject) => {
+    //     resolve({
+    //       name: item._file.name,
+    //       length: item._file.size,
+    //       contentType: item._file.type,
+    //       date: new Date()
+    //     });
+    //   });
+    // }
     this.uploader = new FileUploader({
       url: URL,
       disableMultipart: true,
-      formatDataFunctionIsAsync: true,
-      formatDataFunction: ourFormatDataFunction
+      // formatDataFunctionIsAsync: true,
+      // formatDataFunction: ourFormatDataFunction
     });
     this.hasBaseDropZoneOver = false;
     this.response = '';
@@ -66,7 +66,9 @@ export class FileUploadComponent implements OnInit{
           const url = result.body ? result.body.s3PresignedURL : null;
           if (url != null) item.url = url;
           item.method = 'PUT';
-          item.headers =  [{name: 'Content-Type', value: item.file.type}];
+          item.headers =  [
+            {name: 'Content-Type', value: item.file.type},
+          ];
           item.withCredentials = false;
           item.upload();
         }

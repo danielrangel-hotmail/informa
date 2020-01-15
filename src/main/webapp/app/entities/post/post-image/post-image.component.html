@@ -1,3 +1,6 @@
 <div *ngIf="post$ | async as post">
-    <jhi-file-upload [post]="post"></jhi-file-upload>
+    <div *ngFor="let arquivo of post.arquivos ;trackBy: trackId">
+        {{arquivo.nome}}
+    </div>
+    <jhi-file-upload *ngIf="post.arquivos.length==0" [post]="post"></jhi-file-upload>
 </div>

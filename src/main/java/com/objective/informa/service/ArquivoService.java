@@ -54,6 +54,7 @@ public class ArquivoService {
         arquivo.setUltimaEdicao(now);
         final Optional<User> user = SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin);
         arquivo.setUsuario(user.get());
+        arquivo.getPost().addArquivos(arquivo);
         arquivo = arquivoRepository.save(arquivo);
         return arquivoMapper.toDto(arquivo);
     }

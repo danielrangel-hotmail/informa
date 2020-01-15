@@ -18,30 +18,23 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+            <th scope="col"><span>Imagem</span> </th>
             <th scope="col"  jhiSortBy="nome"><span jhiTranslate="informaApp.arquivo.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="colecao"><span jhiTranslate="informaApp.arquivo.colecao">Colecao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="informaApp.arquivo.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="link"><span jhiTranslate="informaApp.arquivo.link">Link</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="uploadConfirmado"><span jhiTranslate="informaApp.arquivo.uploadConfirmado">Upload Confirmado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="usuarioId"><span jhiTranslate="informaApp.arquivo.usuario">Usuario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="postId"><span jhiTranslate="informaApp.arquivo.post">Post</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="mensagemId"><span jhiTranslate="informaApp.arquivo.mensagem">Mensagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  ><span>Post/Mens</span> </th>
             <th scope="col"></th>
             </tr>
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let arquivo of arquivos ;trackBy: trackId">
-                <td><a [routerLink]="['/arquivo', arquivo.id, 'view' ]">{{arquivo.nome}}</a></td>
-                <td>{{arquivo.colecao}}</td>
-                <td>{{arquivo.tipo}}</td>
-                <td>{{arquivo.link}}</td>
-                <td>
-                    <div *ngIf="arquivo.postId">
+                <td><img src="{{bucketURL}}{{arquivo.link}}" width="128"></td>
+                <td><a href="{{bucketURL}}{{arquivo.nome}}">{{arquivo.nome}}</a></td>
+                <td *ngIf="arquivo.postId">
+                    <div>
                         <a [routerLink]="['/post', arquivo.postId , 'view' ]" >{{arquivo.postId}}</a>
                     </div>
                 </td>
-                <td>
-                    <div *ngIf="arquivo.mensagemId">
+                <td *ngIf="arquivo.mensagemId">
+                    <div>
                         <a [routerLink]="['/mensagem', arquivo.mensagemId , 'view' ]" >{{arquivo.mensagemId}}</a>
                     </div>
                 </td>

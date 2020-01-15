@@ -9,7 +9,9 @@ import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import java.net.URL;
 import java.time.Duration;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
+import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,9 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import software.amazon.awssdk.services.s3.model.ObjectAlreadyInActiveTierErrorException;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
 
@@ -49,8 +54,12 @@ public class ArquivoResource {
 
     private final ArquivoService arquivoService;
 
+    private final S3Presigner presigner;
+
     public ArquivoResource(ArquivoService arquivoService) {
+
         this.arquivoService = arquivoService;
+        this.presigner = S3Presigner.create();
     }
 
     /**
@@ -66,14 +75,15 @@ public class ArquivoResource {
         if (arquivoDTO.getId() != null) {
             throw new BadRequestAlertException("A new arquivo cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        arquivoDTO.setLink(UUID.randomUUID().toString()+arquivoDTO.getNome());
         ArquivoDTO result = arquivoService.create(arquivoDTO);
-        S3Presigner presigner = S3Presigner.create();
         PresignedPutObjectRequest presignedPutObjectRequest = presigner.presignPutObject(z ->
             z.signatureDuration(Duration.ofMinutes(10))
                 .putObjectRequest(por -> por
                     .bucket(bucketName)
-                    .key(result.getId().toString())
-                    .contentType(result.getTipo())));
+                    .key(result.getLink())
+                    .contentType(result.getTipo())
+                ));
         URL url = presignedPutObjectRequest.url();
         result.setS3PresignedURL(url.toString());
         return ResponseEntity.created(new URI("/api/arquivos/" + result.getId()))

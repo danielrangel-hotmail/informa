@@ -3,6 +3,7 @@ import { RouterStateSnapshot, ActivatedRouteSnapshot, ActivatedRoute } from '@an
 import { IPost } from 'app/shared/model/post.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {IArquivo} from 'app/shared/model/arquivo.model';
 
 @Component({
   selector: 'jhi-post-image',
@@ -21,7 +22,10 @@ export class PostImageComponent implements OnInit {
     if (routerParent != null) {
       this.post$ = routerParent.data.pipe(map((data) => { return data.post}));
     }
-
   }
 
+  trackId(index: number, item: IArquivo): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    return item.id!;
+  }
 }

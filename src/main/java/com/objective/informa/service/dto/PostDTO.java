@@ -1,5 +1,10 @@
 package com.objective.informa.service.dto;
+import com.objective.informa.domain.Arquivo;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -34,6 +39,8 @@ public class PostDTO implements Serializable {
     private String grupoNome;
 
     private Boolean oficial;
+
+    private List<ArquivoDTO> arquivos = new ArrayList<ArquivoDTO>();
 
     public Long getId() {
         return id;
@@ -121,6 +128,14 @@ public class PostDTO implements Serializable {
 
     public void setOficial(Boolean oficial) {
         this.oficial = oficial;
+    }
+
+    public List<ArquivoDTO> getArquivos() {
+        return arquivos;
+    }
+
+    public void setArquivos(List<ArquivoDTO> arquivos) {
+        this.arquivos = arquivos;
     }
 
     @Override

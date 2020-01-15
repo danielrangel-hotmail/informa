@@ -9,6 +9,7 @@ import { IArquivo } from 'app/shared/model/arquivo.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { ArquivoService } from './arquivo.service';
 import { ArquivoDeleteDialogComponent } from './arquivo-delete-dialog.component';
+import {AMAZON_S3_BUCKET_URL} from 'app/entities/arquivo/arquivo.constants';
 
 @Component({
   selector: 'jhi-arquivo',
@@ -22,6 +23,7 @@ export class ArquivoComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  bucketURL = AMAZON_S3_BUCKET_URL;
 
   constructor(
     protected arquivoService: ArquivoService,
