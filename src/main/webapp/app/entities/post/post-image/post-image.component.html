@@ -1,1 +1,3 @@
-<p>post-image works!</p>
+<div *ngIf="post$ | async as post">
+    <jhi-file-upload [post]="post"></jhi-file-upload>
+</div>

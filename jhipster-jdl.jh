@@ -19,12 +19,13 @@ entity Post {
     criacao ZonedDateTime,
     ultimaEdicao ZonedDateTime,
     conteudo String,
+    oficial Boolean,
     publicacao ZonedDateTime
 }
 
 relationship ManyToOne {
 	Post{autor required} to User,
-    Post{grupo required} to Grupo
+    Post{grupo} to Grupo
 }
 
 @dto(mapstruct)
@@ -66,5 +67,5 @@ relationship ManyToOne {
 
 relationship OneToMany {
     Post{arquivos} to Arquivo{post},
-    Mensagem{arquivos} to Arquivo{mensagem} 
+    Mensagem{arquivos} to Arquivo{mensagem}
 }

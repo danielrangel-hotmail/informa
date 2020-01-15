@@ -18,10 +18,6 @@
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
-            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="versao"><span jhiTranslate="informaApp.arquivo.versao">Versao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="criacao"><span jhiTranslate="informaApp.arquivo.criacao">Criacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="ultimaEdicao"><span jhiTranslate="informaApp.arquivo.ultimaEdicao">Ultima Edicao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="nome"><span jhiTranslate="informaApp.arquivo.nome">Nome</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="colecao"><span jhiTranslate="informaApp.arquivo.colecao">Colecao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="informaApp.arquivo.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -35,18 +31,10 @@
             </thead>
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let arquivo of arquivos ;trackBy: trackId">
-                <td><a [routerLink]="['/arquivo', arquivo.id, 'view' ]">{{arquivo.id}}</a></td>
-                <td>{{arquivo.versao}}</td>
-                <td>{{arquivo.criacao | date:'medium'}}</td>
-                <td>{{arquivo.ultimaEdicao | date:'medium'}}</td>
-                <td>{{arquivo.nome}}</td>
+                <td><a [routerLink]="['/arquivo', arquivo.id, 'view' ]">{{arquivo.nome}}</a></td>
                 <td>{{arquivo.colecao}}</td>
                 <td>{{arquivo.tipo}}</td>
                 <td>{{arquivo.link}}</td>
-                <td>{{arquivo.uploadConfirmado}}</td>
-                <td>
-                    {{arquivo.usuarioId}}
-                </td>
                 <td>
                     <div *ngIf="arquivo.postId">
                         <a [routerLink]="['/post', arquivo.postId , 'view' ]" >{{arquivo.postId}}</a>

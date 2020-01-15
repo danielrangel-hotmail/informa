@@ -27,12 +27,13 @@ public class ArquivoDTO implements Serializable {
 
     private Boolean uploadConfirmado;
 
-
     private Long usuarioId;
 
     private Long postId;
 
     private Long mensagemId;
+
+    private String s3PresignedURL;
 
     public Long getId() {
         return id;
@@ -130,6 +131,13 @@ public class ArquivoDTO implements Serializable {
         this.mensagemId = mensagemId;
     }
 
+    public String getS3PresignedURL() {
+        return s3PresignedURL;
+    }
+    public void setS3PresignedURL(String s3PresignedURL) {
+        this.s3PresignedURL = s3PresignedURL;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -166,6 +174,7 @@ public class ArquivoDTO implements Serializable {
             ", usuarioId=" + getUsuarioId() +
             ", postId=" + getPostId() +
             ", mensagemId=" + getMensagemId() +
+            ", s3PresignedURL=" + getS3PresignedURL() +
             "}";
     }
 }

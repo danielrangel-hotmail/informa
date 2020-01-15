@@ -18,6 +18,10 @@
             "fieldType": "String"
         },
         {
+            "fieldName": "oficial",
+            "fieldType": "Boolean"
+        },
+        {
             "fieldName": "publicacao",
             "fieldType": "ZonedDateTime"
         }
@@ -41,7 +45,6 @@
             "relationshipType": "many-to-one",
             "otherEntityName": "grupo",
             "otherEntityRelationshipName": "post",
-            "relationshipValidateRules": "required",
             "relationshipName": "grupo",
             "otherEntityField": "id"
         }

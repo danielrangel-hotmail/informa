@@ -36,7 +36,7 @@ export class PostUpdateComponent implements OnInit {
     conteudo: [],
     publicacao: [],
     autorId: [null],
-    grupoId: [null, Validators.required]
+    grupoId: [null]
   });
 
   constructor(

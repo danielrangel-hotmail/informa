@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FileUploader, FileItem } from 'ng2-file-upload';
-import {FileUploadService} from 'app/shared/file-upload/file-upload.service';
-import {IPreSignS3} from 'app/shared/model/presigns3.model';
 import { HttpResponse } from '@angular/common/http';
+import {ArquivoService} from 'app/entities/arquivo/arquivo.service';
+import {Arquivo} from 'app/shared/model/arquivo.model';
+import {IPost} from 'app/shared/model/post.model';
 
 // const URL = '/api/';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
@@ -13,11 +14,12 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 })
 export class FileUploadComponent implements OnInit{
 
+  @Input() post?: IPost;
   uploader:FileUploader;
   hasBaseDropZoneOver:boolean;
   response:string;
 
-  constructor (protected fileUploadService: FileUploadService){
+  constructor (protected arquivoService: ArquivoService ){
 
     const ourFormatDataFunction = async (item: any) => {
       return new Promise((resolve, reject) => {
@@ -45,10 +47,23 @@ export class FileUploadComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    if (!this.post) {
+      throw new TypeError("'Post é obrigatório");
+    }
     this.uploader.onAfterAddingFile = ((item: FileItem) => {
-      this.fileUploadService.preSign(item).subscribe(
-        (result: HttpResponse<IPreSignS3>) => {
-          const url = result.body ? result.body.url : null;
+      const arquivo = new Arquivo();
+      arquivo.nome = item.file.name;
+      arquivo.tipo = item.file.type;
+      if (!this.post) {
+        throw new TypeError("'Post é obrigatório");
+      }
+      if (!this.post.id) {
+        throw new TypeError("'Post com id é obrigatório");
+      }
+      arquivo.postId = this.post.id;
+      this.arquivoService.create(arquivo).subscribe(
+        (result: HttpResponse<Arquivo>) => {
+          const url = result.body ? result.body.s3PresignedURL : null;
           if (url != null) item.url = url;
           item.method = 'PUT';
           item.headers =  [{name: 'Content-Type', value: item.file.type}];

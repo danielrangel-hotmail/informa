@@ -13,6 +13,7 @@ export interface IArquivo {
   usuarioId?: number;
   postId?: number;
   mensagemId?: number;
+  s3PresignedURL?: string
 }
 
 export class Arquivo implements IArquivo {
@@ -28,7 +29,8 @@ export class Arquivo implements IArquivo {
     public uploadConfirmado?: boolean,
     public usuarioId?: number,
     public postId?: number,
-    public mensagemId?: number
+    public mensagemId?: number,
+    public s3PresignedURL?: string
   ) {
     this.uploadConfirmado = this.uploadConfirmado || false;
   }

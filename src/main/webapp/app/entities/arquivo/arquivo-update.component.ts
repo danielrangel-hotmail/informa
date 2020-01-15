@@ -42,7 +42,7 @@ export class ArquivoUpdateComponent implements OnInit {
     tipo: [],
     link: [],
     uploadConfirmado: [],
-    usuarioId: [null, Validators.required],
+    usuarioId: [],
     postId: [],
     mensagemId: []
   });

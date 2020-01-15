@@ -4,28 +4,6 @@
             <h2 id="jhi-arquivo-heading" jhiTranslate="informaApp.arquivo.home.createOrEditLabel">Create or edit a Arquivo</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
-                <div class="form-group" [hidden]="!editForm.get('id')!.value">
-                    <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.arquivo.versao" for="field_versao">Versao</label>
-                    <input type="number" class="form-control" name="versao" id="field_versao"
-                           formControlName="versao"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.arquivo.criacao" for="field_criacao">Criacao</label>
-                    <div class="d-flex">
-                        <input id="field_criacao" type="datetime-local" class="form-control" name="criacao" formControlName="criacao" placeholder="YYYY-MM-DD HH:mm"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.arquivo.ultimaEdicao" for="field_ultimaEdicao">Ultima Edicao</label>
-                    <div class="d-flex">
-                        <input id="field_ultimaEdicao" type="datetime-local" class="form-control" name="ultimaEdicao" formControlName="ultimaEdicao" placeholder="YYYY-MM-DD HH:mm"/>
-                    </div>
-                </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="informaApp.arquivo.nome" for="field_nome">Nome</label>
                     <input type="text" class="form-control" name="nome" id="field_nome"
@@ -50,34 +28,6 @@
                     <label class="form-control-label" jhiTranslate="informaApp.arquivo.uploadConfirmado" for="field_uploadConfirmado">Upload Confirmado</label>
                     <input type="checkbox" class="form-control" name="uploadConfirmado" id="field_uploadConfirmado"
                            formControlName="uploadConfirmado"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.arquivo.usuario" for="field_usuario">Usuario</label>
-                    <select class="form-control" id="field_usuario" name="usuario" formControlName="usuarioId">
-                        <option *ngIf="!editForm.get('usuarioId')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{userOption.id}}</option>
-                    </select>
-                </div>
-                <div *ngIf="editForm.get('usuarioId')!.invalid && (editForm.get('usuarioId')!.dirty || editForm.get('usuarioId')!.touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('usuarioId')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.arquivo.post" for="field_post">Post</label>
-                    <select class="form-control" id="field_post" name="post" formControlName="postId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="postOption.id" *ngFor="let postOption of posts; trackBy: trackById">{{postOption.id}}</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.arquivo.mensagem" for="field_mensagem">Mensagem</label>
-                    <select class="form-control" id="field_mensagem" name="mensagem" formControlName="mensagemId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="mensagemOption.id" *ngFor="let mensagemOption of mensagems; trackBy: trackById">{{mensagemOption.id}}</option>
-                    </select>
                 </div>
             </div>
             <div>

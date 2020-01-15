@@ -4,7 +4,7 @@ import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IPost } from 'app/shared/model/post.model';
+import {IPost, Post} from 'app/shared/model/post.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { PostService } from './post.service';
@@ -12,6 +12,7 @@ import { PostDeleteDialogComponent } from '../post/post-delete-dialog.component'
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { PostPublicaDialogComponent } from './post-publica-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-post',
@@ -33,7 +34,8 @@ export class PostComponent implements OnInit, OnDestroy {
     protected accountService: AccountService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
-    protected parseLinks: JhiParseLinks
+    protected parseLinks: JhiParseLinks,
+    protected router: Router
   ) {
     this.posts = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -115,6 +117,21 @@ export class PostComponent implements OnInit, OnDestroy {
     return result;
   }
 
+  createPost(): void {
+    this.subscribeToSaveResponse(this.postService.create(new Post()));
+  }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IPost>>): void {
+    result.subscribe(
+      (resultPost: HttpResponse<IPost>) => {
+        const id = resultPost.body ? resultPost.body.id : null;
+        // eslint-disable-next-line no-console
+        console.log(`/post/${id}/edit`);
+        if (id != null) this.router.navigateByUrl(`/post/${id}/edit`);
+      },
+      () => {}
+    );
+  }
   protected paginatePosts(data: IPost[] | null, headers: HttpHeaders): void {
     const headersLink = headers.get('link');
     this.links = this.parseLinks.parse(headersLink ? headersLink : '');

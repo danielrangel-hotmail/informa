@@ -42,6 +42,9 @@ public class Post implements Serializable {
     @Column(name = "publicacao")
     private ZonedDateTime publicacao;
 
+    @Column(name = "oficial")
+    private Boolean oficial;
+
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Arquivo> arquivos = new HashSet<>();
@@ -51,8 +54,7 @@ public class Post implements Serializable {
     @JsonIgnoreProperties("posts")
     private User autor;
 
-    @ManyToOne(optional = false)
-    @NotNull
+    @ManyToOne
     @JsonIgnoreProperties("posts")
     private Grupo grupo;
 
@@ -139,6 +141,19 @@ public class Post implements Serializable {
         return this;
     }
 
+    public Boolean isOficial() {
+        return oficial;
+    }
+
+    public Post oficial(Boolean oficical) {
+        this.oficial = oficical;
+        return this;
+    }
+
+    public void setOficial(Boolean oficial) {
+        this.oficial = oficial;
+    }
+
     public Post addArquivos(Arquivo arquivo) {
         this.arquivos.add(arquivo);
         arquivo.setPost(this);
@@ -207,6 +222,7 @@ public class Post implements Serializable {
             ", ultimaEdicao='" + getUltimaEdicao() + "'" +
             ", conteudo='" + getConteudo() + "'" +
             ", publicacao='" + getPublicacao() + "'" +
+            ", oficial='" + isOficial() + "'" +
             "}";
     }
 }

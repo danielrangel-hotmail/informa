@@ -7,6 +7,9 @@ import com.objective.informa.service.dto.ArquivoDTO;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URL;
+import java.time.Duration;
+import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +27,8 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
 
 /**
  * REST controller for managing {@link com.objective.informa.domain.Arquivo}.
@@ -38,6 +43,9 @@ public class ArquivoResource {
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
+
+    @Value("${aws.s3.bucket.name}")
+    private String bucketName;
 
     private final ArquivoService arquivoService;
 
@@ -58,7 +66,16 @@ public class ArquivoResource {
         if (arquivoDTO.getId() != null) {
             throw new BadRequestAlertException("A new arquivo cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ArquivoDTO result = arquivoService.save(arquivoDTO);
+        ArquivoDTO result = arquivoService.create(arquivoDTO);
+        S3Presigner presigner = S3Presigner.create();
+        PresignedPutObjectRequest presignedPutObjectRequest = presigner.presignPutObject(z ->
+            z.signatureDuration(Duration.ofMinutes(10))
+                .putObjectRequest(por -> por
+                    .bucket(bucketName)
+                    .key(result.getId().toString())
+                    .contentType(result.getTipo())));
+        URL url = presignedPutObjectRequest.url();
+        result.setS3PresignedURL(url.toString());
         return ResponseEntity.created(new URI("/api/arquivos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);

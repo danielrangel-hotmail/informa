@@ -10,10 +10,12 @@ import { MyPostComponent } from './my-post.component';
 import { InformaSharedPostModule } from '../shared-post/informa-shared-post.module';
 import { PostVideoLinkComponent } from './post-video-link/post-video-link.component';
 import { PostImageComponent } from './post-image/post-image.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import {FileUploadComponent} from 'app/entities/post/file-upload/file-upload.component';
 
 @NgModule({
-  imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(postRoute)],
-  declarations: [PostDetailComponent, PostUpdateComponent, PostDeleteDialogComponent, MyPostComponent, PostVideoLinkComponent, PostImageComponent],
+  imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(postRoute), FileUploadModule],
+  declarations: [PostDetailComponent, PostUpdateComponent, PostDeleteDialogComponent, MyPostComponent, PostVideoLinkComponent, PostImageComponent, FileUploadComponent],
   entryComponents: [PostDeleteDialogComponent]
 })
 export class InformaPostModule {}

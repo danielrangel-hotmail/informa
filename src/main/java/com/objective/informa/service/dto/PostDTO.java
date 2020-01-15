@@ -33,6 +33,8 @@ public class PostDTO implements Serializable {
 
     private String grupoNome;
 
+    private Boolean oficial;
+
     public Long getId() {
         return id;
     }
@@ -113,6 +115,14 @@ public class PostDTO implements Serializable {
         this.grupoNome = grupoNome;
     }
 
+    public Boolean isOficial() {
+        return oficial;
+    }
+
+    public void setOficial(Boolean oficial) {
+        this.oficial = oficial;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -145,6 +155,7 @@ public class PostDTO implements Serializable {
             ", publicacao='" + getPublicacao() + "'" +
             ", autorId=" + getAutorId() +
             ", grupoId=" + getGrupoId() +
+            ", oficial=" + isOficial() +
             "}";
     }
 }
