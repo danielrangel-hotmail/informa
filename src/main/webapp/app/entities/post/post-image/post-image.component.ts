@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { RouterStateSnapshot, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IPost } from 'app/shared/model/post.model';
 import { Observable } from 'rxjs';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import {IArquivo} from 'app/shared/model/arquivo.model';
 import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import {AMAZON_S3_BUCKET_URL} from 'app/entities/arquivo/arquivo.constants';
@@ -67,7 +67,11 @@ export class PostImageComponent implements OnInit {
     return  !this.fazendoUpload;
   }
 
-  terminouUpload(message: string): void {
+  terminouUpload(): void {
     this.fazendoUpload = false;
+  }
+
+  maisImagens(): void {
+    this.fazendoUpload = true;
   }
 }
