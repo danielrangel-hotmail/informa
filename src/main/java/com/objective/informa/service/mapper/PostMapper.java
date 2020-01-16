@@ -25,6 +25,8 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
 
     @Mapping(target = "arquivos", ignore = true)
     @Mapping(target = "removeArquivos", ignore = true)
+    @Mapping(target = "linksExternos", ignore = true)
+    @Mapping(target = "removeLinksExternos", ignore = true)
     @Mapping(source = "autorId", target = "autor")
     @Mapping(source = "grupoId", target = "grupo")
     public abstract Post toEntity(PostDTO postDTO);

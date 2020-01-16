@@ -1,0 +1,29 @@
+{
+  "informaApp": {
+    "linkExterno": {
+      "home": {
+        "title": "Link Externos",
+        "createLabel": "Create a new Link Externo",
+        "createOrEditLabel": "Create or edit a Link Externo",
+        "notFound": "No Link Externos found"
+      },
+      "created": "A new Link Externo is created with identifier {{ param }}",
+      "updated": "A Link Externo is updated with identifier {{ param }}",
+      "deleted": "A Link Externo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Link Externo {{ id }}?"
+      },
+      "detail": {
+        "title": "Link Externo"
+      },
+      "versao": "Versao",
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "tipo": "Tipo",
+      "link": "Link",
+      "usuario": "Usuario",
+      "post": "Post",
+      "mensagem": "Mensagem"
+    }
+  }
+}

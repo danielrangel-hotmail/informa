@@ -26,7 +26,6 @@ public class Mensagem implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Version
     @Column(name = "versao")
     private Long versao;
 
@@ -45,6 +44,10 @@ public class Mensagem implements Serializable {
     @OneToMany(mappedBy = "mensagem")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Arquivo> arquivos = new HashSet<>();
+
+    @OneToMany(mappedBy = "mensagem")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<LinkExterno> linksExternos = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -156,6 +159,31 @@ public class Mensagem implements Serializable {
 
     public void setArquivos(Set<Arquivo> arquivos) {
         this.arquivos = arquivos;
+    }
+
+    public Set<LinkExterno> getLinksExternos() {
+        return linksExternos;
+    }
+
+    public Mensagem linksExternos(Set<LinkExterno> linkExternos) {
+        this.linksExternos = linkExternos;
+        return this;
+    }
+
+    public Mensagem addLinksExternos(LinkExterno linkExterno) {
+        this.linksExternos.add(linkExterno);
+        linkExterno.setMensagem(this);
+        return this;
+    }
+
+    public Mensagem removeLinksExternos(LinkExterno linkExterno) {
+        this.linksExternos.remove(linkExterno);
+        linkExterno.setMensagem(null);
+        return this;
+    }
+
+    public void setLinksExternos(Set<LinkExterno> linkExternos) {
+        this.linksExternos = linkExternos;
     }
 
     public User getAutor() {

@@ -76,6 +76,7 @@ class PostGatlingTest extends Simulation {
                 , "criacao":"2020-01-01T00:00:00.000Z"
                 , "ultimaEdicao":"2020-01-01T00:00:00.000Z"
                 , "conteudo":"SAMPLE_TEXT"
+                , "oficial":null
                 , "publicacao":"2020-01-01T00:00:00.000Z"
                 }""")).asJson
             .check(status.is(201))

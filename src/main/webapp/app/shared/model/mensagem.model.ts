@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IArquivo } from 'app/shared/model/arquivo.model';
+import { ILinkExterno } from 'app/shared/model/link-externo.model';
 
 export interface IMensagem {
   id?: number;
@@ -9,6 +10,7 @@ export interface IMensagem {
   conteudo?: string;
   temConversa?: boolean;
   arquivos?: IArquivo[];
+  linksExternos?: ILinkExterno[];
   autorId?: number;
   postId?: number;
   conversaId?: number;
@@ -24,6 +26,7 @@ export class Mensagem implements IMensagem {
     public conteudo?: string,
     public temConversa?: boolean,
     public arquivos?: IArquivo[],
+    public linksExternos?: ILinkExterno[],
     public autorId?: number,
     public postId?: number,
     public conversaId?: number,

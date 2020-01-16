@@ -19,6 +19,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'arquivo',
         loadChildren: () => import('./arquivo/arquivo.module').then(m => m.InformaArquivoModule)
+      },
+      {
+        path: 'link-externo',
+        loadChildren: () => import('./link-externo/link-externo.module').then(m => m.InformaLinkExternoModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

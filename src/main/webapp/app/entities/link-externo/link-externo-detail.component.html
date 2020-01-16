@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="linkExterno">
+            <h2><span jhiTranslate="informaApp.linkExterno.detail.title">Link Externo</span> {{linkExterno.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="informaApp.linkExterno.versao">Versao</span></dt>
+                <dd>
+                    <span>{{linkExterno.versao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.linkExterno.criacao">Criacao</span></dt>
+                <dd>
+                    <span>{{linkExterno.criacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.linkExterno.ultimaEdicao">Ultima Edicao</span></dt>
+                <dd>
+                    <span>{{linkExterno.ultimaEdicao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.linkExterno.tipo">Tipo</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'informaApp.LinkTipo.' + linkExterno.tipo}}">{{linkExterno.tipo}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.linkExterno.link">Link</span></dt>
+                <dd>
+                    <span>{{linkExterno.link}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.linkExterno.usuario">Usuario</span></dt>
+                <dd>
+                    {{linkExterno.usuarioId}}
+                </dd>
+                <dt><span jhiTranslate="informaApp.linkExterno.post">Post</span></dt>
+                <dd>
+                    <div *ngIf="linkExterno.postId">
+                        <a [routerLink]="['/post', linkExterno.postId, 'view']">{{linkExterno.postId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="informaApp.linkExterno.mensagem">Mensagem</span></dt>
+                <dd>
+                    <div *ngIf="linkExterno.mensagemId">
+                        <a [routerLink]="['/mensagem', linkExterno.mensagemId, 'view']">{{linkExterno.mensagemId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/link-externo', linkExterno.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

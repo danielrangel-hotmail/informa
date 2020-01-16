@@ -1,0 +1,60 @@
+{
+    "name": "LinkExterno",
+    "fields": [
+        {
+            "fieldName": "versao",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "criacao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ultimaEdicao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "tipo",
+            "fieldType": "LinkTipo",
+            "fieldValues": "VIDEO,EXTERNO"
+        },
+        {
+            "fieldName": "link",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "linkExterno",
+            "relationshipValidateRules": "required",
+            "relationshipName": "usuario",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "post",
+            "otherEntityRelationshipName": "linksExternos",
+            "relationshipName": "post",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "mensagem",
+            "otherEntityRelationshipName": "linksExternos",
+            "relationshipName": "mensagem",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200116153759",
+    "entityTableName": "link_externo",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

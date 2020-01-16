@@ -27,6 +27,7 @@ public abstract class ArquivoMapper implements EntityMapper<ArquivoDTO, Arquivo>
     @Mapping(source = "usuario.id", target = "usuarioId")
     @Mapping(source = "post.id", target = "postId")
     @Mapping(source = "mensagem.id", target = "mensagemId")
+    @Mapping(target = "s3PresignedURL", ignore = true)
     public abstract ArquivoDTO toDto(Arquivo arquivo);
 
     @Mapping(source = "usuarioId", target = "usuario", qualifiedByName = "usarioArquivo")

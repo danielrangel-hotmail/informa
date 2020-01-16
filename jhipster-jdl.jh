@@ -69,3 +69,30 @@ relationship OneToMany {
     Post{arquivos} to Arquivo{post},
     Mensagem{arquivos} to Arquivo{mensagem}
 }
+
+@dto(mapstruct)
+@service(serviceClass)
+@paginate(infinite-scroll)
+entity LinkExterno {
+	id UUID,
+    versao Long,
+    criacao ZonedDateTime,
+    ultimaEdicao ZonedDateTime,
+    tipo LinkTipo,
+    link String,
+}
+
+relationship ManyToOne {
+	LinkExterno{usuario required} to User,
+}
+
+relationship OneToMany {
+    Post{linksExternos} to LinkExterno{post},
+    Mensagem{linksExternos} to LinkExterno{mensagem}
+}
+
+enum LinkTipo {
+	VIDEO,
+    EXTERNO
+}
+

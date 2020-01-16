@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="informaApp.linkExterno.home.title">Link Externos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-link-externo" [routerLink]="['/link-externo/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="informaApp.linkExterno.home.createLabel">
+            Create a new Link Externo
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="linkExternos?.length === 0">
+        <span jhiTranslate="informaApp.linkExterno.home.notFound">No linkExternos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="linkExternos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="versao"><span jhiTranslate="informaApp.linkExterno.versao">Versao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="criacao"><span jhiTranslate="informaApp.linkExterno.criacao">Criacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="ultimaEdicao"><span jhiTranslate="informaApp.linkExterno.ultimaEdicao">Ultima Edicao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipo"><span jhiTranslate="informaApp.linkExterno.tipo">Tipo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="link"><span jhiTranslate="informaApp.linkExterno.link">Link</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="usuarioId"><span jhiTranslate="informaApp.linkExterno.usuario">Usuario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="postId"><span jhiTranslate="informaApp.linkExterno.post">Post</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="mensagemId"><span jhiTranslate="informaApp.linkExterno.mensagem">Mensagem</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let linkExterno of linkExternos ;trackBy: trackId">
+                <td><a [routerLink]="['/link-externo', linkExterno.id, 'view' ]">{{linkExterno.id}}</a></td>
+                <td>{{linkExterno.versao}}</td>
+                <td>{{linkExterno.criacao | date:'medium'}}</td>
+                <td>{{linkExterno.ultimaEdicao | date:'medium'}}</td>
+                <td jhiTranslate="{{'informaApp.LinkTipo.' + linkExterno.tipo}}">{{linkExterno.tipo}}</td>
+                <td>{{linkExterno.link}}</td>
+                <td>
+                    {{linkExterno.usuarioId}}
+                </td>
+                <td>
+                    <div *ngIf="linkExterno.postId">
+                        <a [routerLink]="['/post', linkExterno.postId , 'view' ]" >{{linkExterno.postId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="linkExterno.mensagemId">
+                        <a [routerLink]="['/mensagem', linkExterno.mensagemId , 'view' ]" >{{linkExterno.mensagemId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/link-externo', linkExterno.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/link-externo', linkExterno.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(linkExterno)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

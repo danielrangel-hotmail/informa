@@ -48,6 +48,9 @@ public class CacheConfiguration {
             createCache(cm, com.objective.informa.domain.Post.class.getName() + ".arquivos");
             createCache(cm, com.objective.informa.domain.Mensagem.class.getName() + ".arquivos");
             createCache(cm, com.objective.informa.domain.Arquivo.class.getName());
+            createCache(cm, com.objective.informa.domain.Post.class.getName() + ".linksExternos");
+            createCache(cm, com.objective.informa.domain.Mensagem.class.getName() + ".linksExternos");
+            createCache(cm, com.objective.informa.domain.LinkExterno.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="humberto (generated)" id="1579195885006-3">
+        <createTable tableName="link_externo">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="link_externoPK"/>
+            </column>
+            <column name="criacao" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="link" type="VARCHAR(255)"/>
+            <column name="tipo" type="VARCHAR(255)"/>
+            <column name="ultima_edicao" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="versao" type="BIGINT"/>
+            <column name="mensagem_id" type="BIGINT"/>
+            <column name="post_id" type="BIGINT"/>
+            <column name="usuario_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1579195885006-4">
+        <addForeignKeyConstraint baseColumnNames="mensagem_id" baseTableName="link_externo" constraintName="FK7miuv7g88w8rfbhj7ad7ouuaa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="mensagem" validate="true"/>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1579195885006-5">
+        <addForeignKeyConstraint baseColumnNames="usuario_id" baseTableName="link_externo" constraintName="FKb2mvgpbq5nh7uhbqoq09vhicr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1579195885006-6">
+        <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="link_externo" constraintName="FKj40cxqapck3mmevovts7u5v8k" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="post" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

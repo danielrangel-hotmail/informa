@@ -1,5 +1,6 @@
 package com.objective.informa.service.post;
 
+import com.objective.informa.domain.LinkExterno;
 import com.objective.informa.domain.Post;
 import com.objective.informa.domain.User;
 import com.objective.informa.repository.PostRepository;
@@ -27,7 +28,6 @@ import java.util.Optional;
 @Service
 @Transactional
 public class PostService {
-
 
 
     private final Logger log = LoggerFactory.getLogger(PostService.class);
@@ -110,6 +110,13 @@ public class PostService {
         return postMapper.toDto(post);
     }
 
+    public void removeLink(LinkExterno linkExterno)
+        throws PostUpdateNullException, PostNonAuthorizedException {
+        Post post = linkExterno.getPost();
+        postPrepareUpdate(post.getId(), post.getVersao());
+        post.removeLinksExternos(linkExterno);
+        postPosUpdate(post);
+    }
 
     /**
      * Get all the posts.

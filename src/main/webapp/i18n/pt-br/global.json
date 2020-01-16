@@ -11,6 +11,7 @@
         "post": "Post",
         "mensagem": "Mensagem",
         "arquivo": "Arquivo",
+        "linkExterno": "Link Externo",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

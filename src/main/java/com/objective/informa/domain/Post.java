@@ -39,15 +39,19 @@ public class Post implements Serializable {
     @Column(name = "conteudo")
     private String conteudo;
 
-    @Column(name = "publicacao")
-    private ZonedDateTime publicacao;
-
     @Column(name = "oficial")
     private Boolean oficial;
+
+    @Column(name = "publicacao")
+    private ZonedDateTime publicacao;
 
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Arquivo> arquivos = new HashSet<>();
+
+    @OneToMany(mappedBy = "post")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<LinkExterno> linksExternos = new HashSet<>();
 
     @ManyToOne(optional = false)
     @NotNull
@@ -119,6 +123,19 @@ public class Post implements Serializable {
         this.conteudo = conteudo;
     }
 
+    public Boolean isOficial() {
+        return oficial;
+    }
+
+    public Post oficial(Boolean oficial) {
+        this.oficial = oficial;
+        return this;
+    }
+
+    public void setOficial(Boolean oficial) {
+        this.oficial = oficial;
+    }
+
     public ZonedDateTime getPublicacao() {
         return publicacao;
     }
@@ -141,19 +158,6 @@ public class Post implements Serializable {
         return this;
     }
 
-    public Boolean isOficial() {
-        return oficial;
-    }
-
-    public Post oficial(Boolean oficical) {
-        this.oficial = oficical;
-        return this;
-    }
-
-    public void setOficial(Boolean oficial) {
-        this.oficial = oficial;
-    }
-
     public Post addArquivos(Arquivo arquivo) {
         this.arquivos.add(arquivo);
         arquivo.setPost(this);
@@ -168,6 +172,31 @@ public class Post implements Serializable {
 
     public void setArquivos(Set<Arquivo> arquivos) {
         this.arquivos = arquivos;
+    }
+
+    public Set<LinkExterno> getLinksExternos() {
+        return linksExternos;
+    }
+
+    public Post linksExternos(Set<LinkExterno> linkExternos) {
+        this.linksExternos = linkExternos;
+        return this;
+    }
+
+    public Post addLinksExternos(LinkExterno linkExterno) {
+        this.linksExternos.add(linkExterno);
+        linkExterno.setPost(this);
+        return this;
+    }
+
+    public Post removeLinksExternos(LinkExterno linkExterno) {
+        this.linksExternos.remove(linkExterno);
+        linkExterno.setPost(null);
+        return this;
+    }
+
+    public void setLinksExternos(Set<LinkExterno> linkExternos) {
+        this.linksExternos = linkExternos;
     }
 
     public User getAutor() {
@@ -221,8 +250,8 @@ public class Post implements Serializable {
             ", criacao='" + getCriacao() + "'" +
             ", ultimaEdicao='" + getUltimaEdicao() + "'" +
             ", conteudo='" + getConteudo() + "'" +
-            ", publicacao='" + getPublicacao() + "'" +
             ", oficial='" + isOficial() + "'" +
+            ", publicacao='" + getPublicacao() + "'" +
             "}";
     }
 }

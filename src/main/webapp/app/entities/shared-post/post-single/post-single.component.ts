@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {IPost} from 'app/shared/model/post.model';
+import { IPost } from 'app/shared/model/post.model';
 import {PostPublicaDialogComponent} from 'app/entities/shared-post/post-publica-dialog.component';
 import {PostDeleteDialogComponent} from 'app/entities/post/post-delete-dialog.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

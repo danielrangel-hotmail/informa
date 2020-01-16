@@ -51,6 +51,12 @@
                             <span jhiTranslate="global.menu.entities.arquivo">Arquivo</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="link-externo" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.linkExterno">Link Externo</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

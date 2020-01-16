@@ -30,6 +30,12 @@
             "relationshipName": "arquivos"
         },
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "linkExterno",
+            "otherEntityRelationshipName": "mensagem",
+            "relationshipName": "linksExternos"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "mensagem",

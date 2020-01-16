@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-link-externo-heading" jhiTranslate="informaApp.linkExterno.home.createOrEditLabel">Create or edit a Link Externo</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.versao" for="field_versao">Versao</label>
+                    <input type="number" class="form-control" name="versao" id="field_versao"
+                           formControlName="versao"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.criacao" for="field_criacao">Criacao</label>
+                    <div class="d-flex">
+                        <input id="field_criacao" type="datetime-local" class="form-control" name="criacao" formControlName="criacao" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.ultimaEdicao" for="field_ultimaEdicao">Ultima Edicao</label>
+                    <div class="d-flex">
+                        <input id="field_ultimaEdicao" type="datetime-local" class="form-control" name="ultimaEdicao" formControlName="ultimaEdicao" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.tipo" for="field_tipo">Tipo</label>
+                    <select class="form-control" name="tipo" formControlName="tipo" id="field_tipo">
+                        <option value="VIDEO">{{'informaApp.LinkTipo.VIDEO' | translate}}</option>
+                        <option value="EXTERNO">{{'informaApp.LinkTipo.EXTERNO' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.link" for="field_link">Link</label>
+                    <input type="text" class="form-control" name="link" id="field_link"
+                           formControlName="link"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.usuario" for="field_usuario">Usuario</label>
+                    <select class="form-control" id="field_usuario" name="usuario" formControlName="usuarioId">
+                        <option *ngIf="!editForm.get('usuarioId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{userOption.id}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('usuarioId')!.invalid && (editForm.get('usuarioId')!.dirty || editForm.get('usuarioId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('usuarioId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.post" for="field_post">Post</label>
+                    <select class="form-control" id="field_post" name="post" formControlName="postId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="postOption.id" *ngFor="let postOption of posts; trackBy: trackById">{{postOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.mensagem" for="field_mensagem">Mensagem</label>
+                    <select class="form-control" id="field_mensagem" name="mensagem" formControlName="mensagemId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="mensagemOption.id" *ngFor="let mensagemOption of mensagems; trackBy: trackById">{{mensagemOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
