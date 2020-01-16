@@ -1,7 +1,5 @@
 TODO: Deploy na AWS + Continuous Integration GitHub
 
-TODO: Upload de coleção de imagens
-
 TODO: Upload de link de video
 
 TODO: Avatar para perfil
@@ -75,6 +73,10 @@ PUSH Notifications
 TODO: Controle de dirty e salvamento automatico de post
 
 TODO: Remover e adicionar imagens
+
+TODO: Cologar a ngx-gallery dentro do projeto.
+Resolvemos o problema do erro besta do hammer.
+Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delete
 
 ------------------------------------------------------------------------------
 TODO: Férias
