@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPost } from 'app/shared/model/post.model';
+import { IPost } from 'app/shared/model/post.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {IArquivo} from 'app/shared/model/arquivo.model';
@@ -13,7 +13,7 @@ import {AMAZON_S3_BUCKET_URL} from 'app/entities/arquivo/arquivo.constants';
   styleUrls: ['./post-image.component.scss']
 })
 export class PostImageComponent implements OnInit {
-  private post$?: Observable<IPost>;
+  post$?: Observable<IPost>;
   galleryOptions: NgxGalleryOptions[];
   bucketUrl = AMAZON_S3_BUCKET_URL;
   galleryImagesParaPost?: NgxGalleryImage[];
@@ -63,7 +63,7 @@ export class PostImageComponent implements OnInit {
     return this.galleryImagesParaPost;
   }
 
-  mostraGaleria(post: IPost): boolean {
+  mostraGaleria(): boolean {
     return  !this.fazendoUpload;
   }
 

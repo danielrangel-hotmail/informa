@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IPost } from 'app/shared/model/post.model';
+import { IPost } from 'app/shared/model/post.interface';
 import {PostPublicaDialogComponent} from 'app/entities/shared-post/post-publica-dialog.component';
 import {PostDeleteDialogComponent} from 'app/entities/post/post-delete-dialog.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -24,5 +24,15 @@ export class PostSingleComponent {
     modalRef.componentInstance.post = post;
   }
 
+  postAutorId(): string {
+    return this.post ? ( this.post.autorId ? this.post.autorId.toString() : "" ) : "";
+  }
+  accountId(): string {
+    return this.account ? this.account.id  : "";
+  }
+
+  autorEUser():boolean {
+    return this.postAutorId() === this.accountId();
+  }
 
 }

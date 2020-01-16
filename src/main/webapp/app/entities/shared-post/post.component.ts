@@ -4,7 +4,8 @@ import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import {IPost, Post} from 'app/shared/model/post.model';
+import {IPost} from 'app/shared/model/post.interface';
+import {Post} from 'app/shared/model/post.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { PostService } from './post.service';

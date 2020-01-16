@@ -12,7 +12,7 @@ import { ILinkExterno, LinkExterno } from 'app/shared/model/link-externo.model';
 import { LinkExternoService } from './link-externo.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
-import { IPost } from 'app/shared/model/post.model';
+import { IPost } from 'app/shared/model/post.interface';
 import { IMensagem } from 'app/shared/model/mensagem.model';
 import { MensagemService } from 'app/entities/mensagem/mensagem.service';
 import {PostService} from 'app/entities/shared-post/post.service';

@@ -12,7 +12,7 @@ import { IMensagem, Mensagem } from 'app/shared/model/mensagem.model';
 import { MensagemService } from './mensagem.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
-import { IPost } from 'app/shared/model/post.model';
+import { IPost } from 'app/shared/model/post.interface';
 import { PostService } from 'app/entities/shared-post/post.service';
 
 type SelectableEntity = IUser | IPost | IMensagem;

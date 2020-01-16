@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { IPost } from 'app/shared/model/post.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { IPost } from 'app/shared/model/post.interface';
 import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import {AMAZON_S3_BUCKET_URL} from 'app/entities/arquivo/arquivo.constants';
+import {IArquivo} from 'app/shared/model/arquivo.model';
 
 @Component({
   selector: 'jhi-post-image-view',
@@ -91,6 +92,18 @@ export class PostImageViewComponent implements OnInit {
     return (this.post ? (this.post.arquivos ? this.post.arquivos.length > 1 : false)  : false);
   }
   mostraImagem(): boolean {
-    return (this.post ? (this.post.arquivos ? this.post.arquivos.length === 1 : false)  : false);
+    return this.arquivos().length === 1;
+  }
+
+  arquivos(): IArquivo[] {
+    return this.post ? (this.post.arquivos ? this.post.arquivos : []) : [];
+  }
+
+  linkPostUnico(): string {
+    if (!this.arquivos()[0] ) return "";
+    const oLink = this.arquivos()[0].link;
+    if (!oLink) return "";
+    if (oLink === undefined) return ""; else return oLink;
+
   }
 }

@@ -3,7 +3,7 @@ import { FileUploader, FileItem } from 'ng2-file-upload';
 import { HttpResponse } from '@angular/common/http';
 import {ArquivoService} from 'app/entities/arquivo/arquivo.service';
 import {Arquivo} from 'app/shared/model/arquivo.model';
-import {IPost} from 'app/shared/model/post.model';
+import {IPost} from 'app/shared/model/post.interface';
 
 // const URL = '/api/';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';

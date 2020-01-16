@@ -1,22 +1,8 @@
 import { Moment } from 'moment';
 import { IArquivo } from 'app/shared/model/arquivo.model';
 import { ILinkExterno } from 'app/shared/model/link-externo.model';
+import {IPost} from 'app/shared/model/post.interface';
 
-export interface IPost {
-  id?: number;
-  versao?: number;
-  criacao?: Moment;
-  ultimaEdicao?: Moment;
-  conteudo?: string;
-  oficial?: boolean;
-  publicacao?: Moment;
-  arquivos?: IArquivo[];
-  linksExternos?: ILinkExterno[];
-  autorId?: number;
-  grupoId?: number;
-  autorNome?: string;
-  grupoNome?: string;
-}
 
 export class Post implements IPost {
   constructor(

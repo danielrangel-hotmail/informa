@@ -1,2 +1,2 @@
 <ngx-gallery *ngIf="mostraGaleria()" [options]="galleryOptions" [images]="galeriaImages()"></ngx-gallery>
-<img *ngIf="mostraImagem()" src="{{bucketUrl}}{{post.arquivos[0].link}}" width="558">
+<img *ngIf="mostraImagem()" src="{{bucketUrl}}{{linkPostUnico()}}" width="558">

@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
-import { IPost, Post } from 'app/shared/model/post.model';
+import { Post } from 'app/shared/model/post.model';
+import { IPost } from 'app/shared/model/post.interface';
 import { PostService } from '../shared-post/post.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';

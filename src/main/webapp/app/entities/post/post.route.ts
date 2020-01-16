@@ -5,7 +5,8 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IPost, Post } from 'app/shared/model/post.model';
+import { Post } from 'app/shared/model/post.model';
+import { IPost } from 'app/shared/model/post.interface';
 import { PostService } from '../shared-post/post.service';
 import { PostDetailComponent } from './post-detail.component';
 import { PostUpdateComponent } from './post-update.component';
