@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
@@ -44,6 +44,7 @@ export class PostUpdateComponent implements OnInit {
     protected userService: UserService,
     protected grupoService: GrupoService,
     protected activatedRoute: ActivatedRoute,
+    protected router: Router,
     private fb: FormBuilder
   ) {}
 
@@ -85,7 +86,7 @@ export class PostUpdateComponent implements OnInit {
   }
 
   previousState(): void {
-    window.history.back();
+    this.router.navigateByUrl('/post')
   }
 
   save(): void {

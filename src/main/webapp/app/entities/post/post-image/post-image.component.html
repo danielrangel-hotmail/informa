@@ -1,6 +1,4 @@
 <div *ngIf="post$ | async as post">
-    <div *ngFor="let arquivo of post.arquivos ;trackBy: trackId">
-        {{arquivo.nome}}
-    </div>
-    <jhi-file-upload *ngIf="post.arquivos.length==0" [post]="post"></jhi-file-upload>
+    <ngx-gallery *ngIf="mostraGaleria(post)" [options]="galleryOptions" [images]="galleryImages(post)"></ngx-gallery>
+    <jhi-file-upload *ngIf="!mostraGaleria(post)" (uploadFinalizado)="terminouUpload($event)" [post]="post"></jhi-file-upload>
 </div>

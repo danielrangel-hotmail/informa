@@ -16,50 +16,7 @@
     </div>
     <div *ngIf="posts?.length > 0" infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0" ng-cloak>
         <div *ngFor="let post of posts ;trackBy: trackId">
-            <div class="row justify-content-center">
-                <div class="col-8">
-                    <div *ngIf="post">
-                        <div class="card bg-secondary mb-3 max-width-main-view">
-                            <div class="card-header small">
-                                <div *ngIf="post.grupoId">
-                                    <a [routerLink]="['/grupo', post.grupoId, 'view']">{{post.grupoNome}}</a>
-                                </div>
-                                <div>
-                                    {{post.autorNome}}
-                                </div>
-                                <div>
-                                    {{post.criacao}}
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class = "mb-3">
-                                    <quill-view [content]="post.conteudo" format="json" theme="snow"></quill-view>
-                                </div>
-                                <div class="d-flex justify-content-end" *ngIf="account.id == post.autorId">
-                                    <div class="btn-group">
-                                        <button type="submit" (click)="publica(post)"
-                                                class="btn btn-success btn-sm" *ngIf="!post.publicacao">>
-                                            <fa-icon [icon]="'plane'"></fa-icon>
-                                            <span class="d-none d-md-inline">Publica</span>
-                                        </button>
-                                        <button type="submit"
-                                                [routerLink]="['/post', post.id, 'edit']"
-                                                class="btn btn-primary btn-sm">
-                                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                                        </button>
-                                        <button type="submit" (click)="delete(post)"
-                                                class="btn btn-danger btn-sm">
-                                            <fa-icon [icon]="'times'"></fa-icon>
-                                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <jhi-post-single [post]="post" [account]="account"></jhi-post-single>
         </div>
     </div>
 </div>

@@ -3,8 +3,20 @@
 <div class="d-flex justify-content-center">
     <div class="width-main-view">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" >
-            <h4 *ngIf="!editForm.get('id')!.value">Crie um novo post</h4>
-            <h4 *ngIf="editForm.get('id')!.value">Edite o seu post</h4>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h4 *ngIf="!editForm.get('id')!.value">Crie um novo post</h4>
+                    <h4 *ngIf="editForm.get('id')!.value">Edite o seu post</h4>
+                </div>
+                <div>
+                    <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </div>
             <div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="informaApp.post.grupo" for="field_grupo">Grupo</label>
@@ -32,14 +44,6 @@
                 </ul>
                 <router-outlet></router-outlet>
 <!--                <jhi-file-upload></jhi-file-upload>-->
-            </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
             </div>
         </form>
     </div>

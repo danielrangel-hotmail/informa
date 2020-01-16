@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FileUploader, FileItem } from 'ng2-file-upload';
 import { HttpResponse } from '@angular/common/http';
 import {ArquivoService} from 'app/entities/arquivo/arquivo.service';
@@ -15,27 +15,16 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 export class FileUploadComponent implements OnInit{
 
   @Input() post?: IPost;
+  @Output() uploadFinalizado = new EventEmitter<string>();
   uploader:FileUploader;
   hasBaseDropZoneOver:boolean;
   response:string;
 
   constructor (protected arquivoService: ArquivoService ){
 
-    // const ourFormatDataFunction = async (item: any) => {
-    //   return new Promise((resolve, reject) => {
-    //     resolve({
-    //       name: item._file.name,
-    //       length: item._file.size,
-    //       contentType: item._file.type,
-    //       date: new Date()
-    //     });
-    //   });
-    // }
     this.uploader = new FileUploader({
       url: URL,
       disableMultipart: true,
-      // formatDataFunctionIsAsync: true,
-      // formatDataFunction: ourFormatDataFunction
     });
     this.hasBaseDropZoneOver = false;
     this.response = '';
@@ -63,6 +52,17 @@ export class FileUploadComponent implements OnInit{
       arquivo.postId = this.post.id;
       this.arquivoService.create(arquivo).subscribe(
         (result: HttpResponse<Arquivo>) => {
+          if (!result.body) {
+            throw new TypeError("Deveria ter retornado um arquivo");
+          }
+          if (!this.post) {
+            throw new TypeError("'Post é obrigatório");
+          }
+          if (!this.post.arquivos) {
+            this.post.arquivos = [ result.body ];
+          } else {
+            this.post.arquivos.push(result.body);
+          }
           const url = result.body ? result.body.s3PresignedURL : null;
           if (url != null) item.url = url;
           item.method = 'PUT';
@@ -74,6 +74,9 @@ export class FileUploadComponent implements OnInit{
         }
       )
     });
+    this.uploader.onCompleteAll = () => {
+      this.uploadFinalizado.emit("cabou!");
+    }
   }
 
 }
