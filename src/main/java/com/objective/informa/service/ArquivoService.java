@@ -1,13 +1,18 @@
 package com.objective.informa.service;
 
 import com.objective.informa.domain.Arquivo;
+import com.objective.informa.domain.Post;
 import com.objective.informa.domain.User;
 import com.objective.informa.repository.ArquivoRepository;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.SecurityUtils;
 import com.objective.informa.service.dto.ArquivoDTO;
 import com.objective.informa.service.mapper.ArquivoMapper;
+import com.objective.informa.service.post.PostNonAuthorizedException;
+import com.objective.informa.service.post.PostService;
+import com.objective.informa.service.post.PostUpdateNullException;
 import java.time.ZonedDateTime;
+import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,14 +32,18 @@ public class ArquivoService {
 
     private final Logger log = LoggerFactory.getLogger(ArquivoService.class);
 
+    private final PostService postService;
+    private final MensagemService mensagemService;
     private final ArquivoRepository arquivoRepository;
-
     private final ArquivoMapper arquivoMapper;
-
     private final UserRepository userRepository;
 
-    public ArquivoService(ArquivoRepository arquivoRepository, ArquivoMapper arquivoMapper,
+    public ArquivoService(PostService postService,
+        MensagemService mensagemService,
+        ArquivoRepository arquivoRepository, ArquivoMapper arquivoMapper,
         UserRepository userRepository) {
+        this.postService = postService;
+        this.mensagemService = mensagemService;
         this.arquivoRepository = arquivoRepository;
         this.arquivoMapper = arquivoMapper;
         this.userRepository = userRepository;
@@ -104,8 +113,15 @@ public class ArquivoService {
      *
      * @param id the id of the entity.
      */
-    public void delete(Long id) {
+    public void delete(Long id) throws PostUpdateNullException, PostNonAuthorizedException {
         log.debug("Request to delete Arquivo : {}", id);
+        final Optional<Arquivo> optionalArquivo = arquivoRepository.findById(id);
+        if (!optionalArquivo.isPresent()) return;
+        Arquivo arquivo = optionalArquivo.get();
+        if (arquivo.getPost() != null) {
+            Function<Post, Post> removeArquivoDoPost = post -> post.removeArquivos(arquivo);
+            postService.processaAlteracao(removeArquivoDoPost, arquivo.getPost());
+        }
         arquivoRepository.deleteById(id);
     }
 }

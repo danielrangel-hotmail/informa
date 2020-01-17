@@ -29,9 +29,7 @@ public class LinkExternoService {
 
     private final PostService postService;
     private final MensagemService mensagemService;
-
     private final LinkExternoRepository linkExternoRepository;
-
     private final LinkExternoMapper linkExternoMapper;
 
     public LinkExternoService(PostService postService,

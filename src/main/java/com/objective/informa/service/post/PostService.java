@@ -11,6 +11,7 @@ import com.objective.informa.service.dto.PostDTO;
 import com.objective.informa.service.dto.SimplePostDTO;
 import com.objective.informa.service.mapper.PostMapper;
 import java.time.ZonedDateTime;
+import java.util.function.Function;
 import javax.persistence.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,8 +107,7 @@ public class PostService {
             throw new PostException(simplePostDTO, "Post já estava publicado");
         }
         post.setPublicacao(ZonedDateTime.now());
-        post = postRepository.save(post);
-        return postMapper.toDto(post);
+        return this.postPosUpdate(post);
     }
 
     public void removeLink(LinkExterno linkExterno)
@@ -115,6 +115,13 @@ public class PostService {
         Post post = linkExterno.getPost();
         postPrepareUpdate(post.getId(), post.getVersao());
         post.removeLinksExternos(linkExterno);
+        postPosUpdate(post);
+    }
+
+    public void processaAlteracao(Function<Post, Post> alteracao, Post post)
+        throws PostUpdateNullException, PostNonAuthorizedException {
+        postPrepareUpdate(post.getId(), post.getVersao());
+        alteracao.apply(post);
         postPosUpdate(post);
     }
 

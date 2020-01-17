@@ -1,6 +1,8 @@
 package com.objective.informa.web.rest;
 
 import com.objective.informa.service.ArquivoService;
+import com.objective.informa.service.post.PostException;
+import com.objective.informa.service.post.PostNonAuthorizedException;
 import com.objective.informa.web.rest.errors.BadRequestAlertException;
 import com.objective.informa.service.dto.ArquivoDTO;
 
@@ -150,7 +152,13 @@ public class ArquivoResource {
     @DeleteMapping("/arquivos/{id}")
     public ResponseEntity<Void> deleteArquivo(@PathVariable Long id) {
         log.debug("REST request to delete Arquivo : {}", id);
-        arquivoService.delete(id);
+        try {
+            arquivoService.delete(id);
+        } catch (PostNonAuthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (PostException e) {
+            throw new BadRequestAlertException(e.getMessage(), ENTITY_NAME, id.toString());
+        }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }
