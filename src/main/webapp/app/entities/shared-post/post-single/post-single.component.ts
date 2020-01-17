@@ -3,6 +3,7 @@ import { IPost } from 'app/shared/model/post.interface';
 import {PostPublicaDialogComponent} from 'app/entities/shared-post/post-publica-dialog.component';
 import {PostDeleteDialogComponent} from 'app/entities/post/post-delete-dialog.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 
 @Component({
   selector: 'jhi-post-single',
@@ -33,6 +34,14 @@ export class PostSingleComponent {
 
   autorEUser():boolean {
     return this.postAutorId() === this.accountId();
+  }
+
+  tempoRelativo(post: IPost): string {
+    const ultimaDataRelevante = post.publicacao ? post.publicacao : post.ultimaEdicao;
+    ultimaDataRelevante!.locale("pt-br");
+    const duration: moment.Duration = moment.duration(ultimaDataRelevante!.diff(moment()));
+    if (duration.asDays() > 1) return ultimaDataRelevante!.fromNow();
+    return ultimaDataRelevante!.calendar();
   }
 
 }

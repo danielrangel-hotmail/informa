@@ -19,6 +19,7 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
 
     @Mapping(source = "autor.id", target = "autorId")
     @Mapping(source = "autor.firstName", target = "autorNome")
+    @Mapping(source = "autor.email", target = "autorEmail")
     @Mapping(source = "grupo.id", target = "grupoId")
     @Mapping(source = "grupo.nome", target = "grupoNome")
     public abstract PostDTO toDto(Post post);

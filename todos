@@ -1,7 +1,3 @@
-TODO: Deploy na AWS + Continuous Integration GitHub
-
-TODO: Upload de link de video
-
 TODO: Avatar para perfil
 
 TODO: Avatar para o grupo
@@ -14,6 +10,8 @@ Colocar todas as mensagens
 Formatar os botões
 
 TODO: Criar post mais convidativo
+
+TODO: Debugar o erro que está rolando na edição
 
 TODO: Role do Post Oficial
 Um post pode ser marcado como oficial da empresa
@@ -77,6 +75,12 @@ TODO: Remover e adicionar imagens
 TODO: Cologar a ngx-gallery dentro do projeto.
 Resolvemos o problema do erro besta do hammer.
 Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delete
+
+TODO: Logo do informa
+
+TODO: Segurança AWS
+
+TODO: Continuous Integration GitHub
 
 ------------------------------------------------------------------------------
 TODO: Férias

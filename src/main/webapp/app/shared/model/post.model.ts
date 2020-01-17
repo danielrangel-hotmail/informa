@@ -16,6 +16,8 @@ export class Post implements IPost {
     public arquivos?: IArquivo[],
     public linksExternos?: ILinkExterno[],
     public autorId?: number,
+    public autorNome?: string,
+    public autorEmail?: string,
     public grupoId?: number
   ) {
     this.oficial = this.oficial || false;

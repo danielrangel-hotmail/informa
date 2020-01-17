@@ -15,5 +15,6 @@ export interface IPost {
   autorId?: number;
   grupoId?: number;
   autorNome?: string;
+  autorEmail?: string;
   grupoNome?: string;
 }

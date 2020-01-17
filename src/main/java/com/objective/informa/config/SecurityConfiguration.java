@@ -67,7 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .headers()
                 .contentSecurityPolicy("default-src 'self';")
                 .and()
-                .contentSecurityPolicy("frame-src 'self' data:;")
+                .contentSecurityPolicy("frame-src 'self' data: *.vimeo.com *.youtube.com *.youtu.be *.dailymotion.com;")
                 .and()
                 .contentSecurityPolicy("script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com;")
                 .and()

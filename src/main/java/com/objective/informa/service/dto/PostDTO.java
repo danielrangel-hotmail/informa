@@ -36,6 +36,8 @@ public class PostDTO implements Serializable {
 
     private String autorNome;
 
+    private String autorEmail;
+
     private String grupoNome;
 
     private Boolean oficial;
@@ -114,6 +116,14 @@ public class PostDTO implements Serializable {
 
     public void setAutorNome(String autorNome) {
         this.autorNome = autorNome;
+    }
+
+    public String getAutorEmail() {
+        return autorEmail;
+    }
+
+    public void setAutorEmail(String autorEmail) {
+        this.autorEmail = autorEmail;
     }
 
     public String getGrupoNome() {
