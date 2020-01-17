@@ -18,7 +18,9 @@ import {LinkTipo} from 'app/shared/model/enumerations/link-tipo.model';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 
-const YOUTUBE_URL_REGEX = new RegExp('(?:youtube\\.com\\/\\S*(?:(?:\\/e(?:mbed))?\\/|watch\\?(?:\\S*?&?v\\=))|youtu\\.be\\/)([a-zA-Z0-9_-]{6,11})');
+const YOUTUBE_URL_REGEX = new RegExp('(http|https)?:\\/\\/(www\\.)?(?:youtube\\.com\\/\\S*(?:(?:\\/e(?:mbed))?\\/|watch\\?(?:\\S*?&?v\\=))|youtu\\.be\\/)([a-zA-Z0-9_-]{6,11})');
+const DAILYMOTION_URL_REGEX = new RegExp('(http|https)?:\\/\\/(www\\.)?(?:dailymotion\\.com(?:\\/video|\\/hub)|dai\\.ly)\\/([0-9a-z]+)(?:[\\-_0-9a-zA-Z]+#video=([a-z0-9]+))?');
+const VIMEO_URL_REGEX = new RegExp('(http|https)?:\\/\\/(www\\.)?vimeo.com\\/(?:channels\\/(?:\\w+\\/)?|groups\\/([^\\/]*)\\/videos\\/|)(\\d+)(?:|\\/\\?)');
 
 const UrlValidator = (controlName: string) => (formGroup: FormGroup) => {
   const control = formGroup.controls[controlName];
@@ -26,7 +28,11 @@ const UrlValidator = (controlName: string) => (formGroup: FormGroup) => {
     return;
   }
   const url = formGroup ? (formGroup.get(controlName) ? formGroup.get(controlName) : null) : null;
-  if ((url) && (url.value) && ((!url.value.match(YOUTUBE_URL_REGEX)))) {
+  if ((url) && (url.value) && (
+      (!url.value.match(YOUTUBE_URL_REGEX)) &&
+      (!url.value.match(DAILYMOTION_URL_REGEX)) &&
+      (!url.value.match(VIMEO_URL_REGEX))
+      )) {
       control.setErrors({notMatching: true});
   } else {
       control.setErrors(null);

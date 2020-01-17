@@ -10,14 +10,14 @@
     <!--                    </select>-->
     <!--                </div>-->
             <div class="form-group">
-                <label class="form-control-label" for="field_link">Link (Youtube)</label>
+                <label class="form-control-label" for="field_link">Link (Youtube, Dailymotion e Vimeo)</label>
                 <input type="text" class="form-control" name="link" id="field_link"
                        formControlName="link"/>
             </div>
             <div class="mb-3" *ngIf="editForm.get('link')!.invalid && (editForm.get('link')!.dirty || editForm.get('link')!.touched)">
                 <small class="form-text text-danger"
                        *ngIf="editForm.get('link')?.errors?.notMatching" >
-                    Só são aceitos links de video do youtube
+                    Só são aceitos links de video do youtube, dailymotion e vimeo
                 </small>
             </div>
         </div>
