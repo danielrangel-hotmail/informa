@@ -1,1 +1,1 @@
-export const AMAZON_S3_BUCKET_URL = 'https://bjk-informa-arquivos.s3.us-east-2.amazonaws.com/'
+export const AMAZON_S3_BUCKET_URL = 'https://objective-informa-arquivos.s3.us-east-1.amazonaws.com/'

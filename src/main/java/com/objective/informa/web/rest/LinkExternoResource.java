@@ -1,6 +1,9 @@
 package com.objective.informa.web.rest;
 
 import com.objective.informa.service.LinkExternoService;
+import com.objective.informa.service.post.PostException;
+import com.objective.informa.service.post.PostNonAuthorizedException;
+import com.objective.informa.service.post.PostUpdateNullException;
 import com.objective.informa.web.rest.errors.BadRequestAlertException;
 import com.objective.informa.service.dto.LinkExternoDTO;
 
@@ -123,7 +126,13 @@ public class LinkExternoResource {
     @DeleteMapping("/link-externos/{id}")
     public ResponseEntity<Void> deleteLinkExterno(@PathVariable Long id) {
         log.debug("REST request to delete LinkExterno : {}", id);
-        linkExternoService.delete(id);
+        try {
+            linkExternoService.delete(id);
+        } catch (PostNonAuthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (PostException e) {
+            throw new BadRequestAlertException(e.getMessage(), ENTITY_NAME, id.toString());
+        }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

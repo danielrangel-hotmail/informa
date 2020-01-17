@@ -40,12 +40,12 @@
     "languages": ["pt-br", "en"],
     "blueprints": [],
     "aws": {
-      "applicationName": "bjk-informa",
-      "environmentName": "bjk-informa-env",
-      "bucketName": "bjk-informa",
+      "applicationName": "objective-informa",
+      "environmentName": "objective-informa-env",
+      "bucketName": "objective-informa",
       "instanceType": "t2.small",
-      "awsRegion": "us-east-2",
-      "dbName": "bjkinforma",
+      "awsRegion": "us-east-1",
+      "dbName": "objinforma",
       "dbInstanceClass": "db.t2.small"
     }
   }

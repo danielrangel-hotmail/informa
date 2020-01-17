@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Mapper for the entity {@link Post} and its DTO {@link PostDTO}.
  */
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {ArquivoMapper.class})
 public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
 
     @Autowired private GrupoRepository grupoRepository;

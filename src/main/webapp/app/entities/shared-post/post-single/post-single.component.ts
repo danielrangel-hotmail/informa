@@ -28,7 +28,7 @@ export class PostSingleComponent {
     return this.post ? ( this.post.autorId ? this.post.autorId.toString() : "" ) : "";
   }
   accountId(): string {
-    return this.account ? this.account.id  : "";
+    return this.account ? (this.account.id ? this.account.id.toString() : "") : "";
   }
 
   autorEUser():boolean {
