@@ -9,6 +9,8 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IPost } from 'app/shared/model/post.interface';
 import { IEntity } from 'app/shared/model/entity.model';
+import {LinkExternoService} from 'app/entities/link-externo/link-externo.service';
+import {ArquivoService} from 'app/entities/arquivo/arquivo.service';
 
 type EntityResponseType = HttpResponse<IPost>;
 type EntityArrayResponseType = HttpResponse<IPost[]>;
@@ -17,7 +19,9 @@ type EntityArrayResponseType = HttpResponse<IPost[]>;
 export class PostService {
   public resourceUrl = SERVER_API_URL + 'api/posts';
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient,
+              protected linkExternoService: LinkExternoService,
+              protected arquivoService: ArquivoService) {}
 
   create(post: IPost): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(post);
@@ -86,6 +90,7 @@ export class PostService {
       res.body.criacao = res.body.criacao ? moment(res.body.criacao) : undefined;
       res.body.ultimaEdicao = res.body.ultimaEdicao ? moment(res.body.ultimaEdicao) : undefined;
       res.body.publicacao = res.body.publicacao ? moment(res.body.publicacao) : undefined;
+      res.body.linksExternos!.forEach((link) => this.linkExternoService.convertDateFromServerLinkExterno(link));
     }
     return res;
   }
@@ -96,6 +101,7 @@ export class PostService {
         post.criacao = post.criacao ? moment(post.criacao) : undefined;
         post.ultimaEdicao = post.ultimaEdicao ? moment(post.ultimaEdicao) : undefined;
         post.publicacao = post.publicacao ? moment(post.publicacao) : undefined;
+        post.linksExternos!.forEach((link) => this.linkExternoService.convertDateFromServerLinkExterno(link));
       });
     }
     return res;

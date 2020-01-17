@@ -1,36 +1,34 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <div>
-                <jhi-alert-error></jhi-alert-error>
-<!--                <div class="form-group">-->
-<!--                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.tipo" for="field_tipo">Tipo</label>-->
-<!--                    <select class="form-control" name="tipo" formControlName="tipo" id="field_tipo">-->
-<!--                        <option value="VIDEO">{{'informaApp.LinkTipo.VIDEO' | translate}}</option>-->
-<!--                        <option value="EXTERNO">{{'informaApp.LinkTipo.EXTERNO' | translate}}</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.link" for="field_link">Link</label>
-                    <input type="text" class="form-control" name="link" id="field_link"
-                           formControlName="link"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.usuario" for="field_usuario">Usuario</label>
-                    <select class="form-control" id="field_usuario" name="usuario" formControlName="usuarioId">
-                        <option *ngIf="!editForm.get('usuarioId')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{userOption.id}}</option>
-                    </select>
-                </div>
+<div class = "mt-3">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+        <div>
+            <jhi-alert-error></jhi-alert-error>
+    <!--                <div class="form-group">-->
+    <!--                    <label class="form-control-label" jhiTranslate="informaApp.linkExterno.tipo" for="field_tipo">Tipo</label>-->
+    <!--                    <select class="form-control" name="tipo" formControlName="tipo" id="field_tipo">-->
+    <!--                        <option value="VIDEO">{{'informaApp.LinkTipo.VIDEO' | translate}}</option>-->
+    <!--                        <option value="EXTERNO">{{'informaApp.LinkTipo.EXTERNO' | translate}}</option>-->
+    <!--                    </select>-->
+    <!--                </div>-->
+            <div class="form-group">
+                <label class="form-control-label" for="field_link">Link (Youtube)</label>
+                <input type="text" class="form-control" name="link" id="field_link"
+                       formControlName="link"/>
             </div>
-            <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                </button>
+            <div class="mb-3" *ngIf="editForm.get('link')!.invalid && (editForm.get('link')!.dirty || editForm.get('link')!.touched)">
+                <small class="form-text text-danger"
+                       *ngIf="editForm.get('link')?.errors?.notMatching" >
+                    Só são aceitos links de video do youtube
+                </small>
             </div>
-        </form>
-    </div>
+        </div>
+        <div *ngIf="iframeHtml" [innerHtml]="iframeHtml"></div>
+<!--        <div>-->
+<!--            <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">-->
+<!--                <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>-->
+<!--            </button>-->
+<!--            <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">-->
+<!--                <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>-->
+<!--            </button>-->
+<!--        </div>-->
+    </form>
 </div>

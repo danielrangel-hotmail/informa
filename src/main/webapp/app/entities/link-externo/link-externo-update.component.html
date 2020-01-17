@@ -1,6 +1,7 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-link-externo-heading" jhiTranslate="informaApp.linkExterno.home.createOrEditLabel">Create or edit a Link Externo</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
@@ -44,6 +45,12 @@
                         <option *ngIf="!editForm.get('usuarioId')!.value" [ngValue]="null" selected></option>
                         <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{userOption.id}}</option>
                     </select>
+                </div>
+                <div *ngIf="editForm.get('usuarioId')!.invalid && (editForm.get('usuarioId')!.dirty || editForm.get('usuarioId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('usuarioId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="informaApp.linkExterno.post" for="field_post">Post</label>

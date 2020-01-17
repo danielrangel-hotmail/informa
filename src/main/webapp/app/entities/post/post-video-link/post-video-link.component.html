@@ -1,1 +1,3 @@
-<div [innerHtml]="iframeHtml"></div>
+<div *ngIf="post$ | async as post">
+    <jhi-link-externo-shared [post]="post"></jhi-link-externo-shared>
+</div>

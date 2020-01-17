@@ -58,19 +58,25 @@ export class LinkExternoService {
     return copy;
   }
 
-  protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
+  public convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.criacao = res.body.criacao ? moment(res.body.criacao) : undefined;
-      res.body.ultimaEdicao = res.body.ultimaEdicao ? moment(res.body.ultimaEdicao) : undefined;
+      this.convertDateFromServerLinkExterno(res.body);
     }
     return res;
   }
 
-  protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+  public convertDateFromServerLinkExterno(link: ILinkExterno): ILinkExterno {
+    if (link) {
+      link.criacao = link.criacao ? moment(link.criacao) : undefined;
+      link.ultimaEdicao = link.ultimaEdicao ? moment(link.ultimaEdicao) : undefined;
+    }
+    return link;
+  }
+
+  public convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((linkExterno: ILinkExterno) => {
-        linkExterno.criacao = linkExterno.criacao ? moment(linkExterno.criacao) : undefined;
-        linkExterno.ultimaEdicao = linkExterno.ultimaEdicao ? moment(linkExterno.ultimaEdicao) : undefined;
+        this.convertDateFromServerLinkExterno(linkExterno)
       });
     }
     return res;

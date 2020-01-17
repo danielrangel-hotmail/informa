@@ -61,7 +61,7 @@ public class LinkExternoResource {
         if (linkExternoDTO.getId() != null) {
             throw new BadRequestAlertException("A new linkExterno cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        LinkExternoDTO result = linkExternoService.save(linkExternoDTO);
+        LinkExternoDTO result = linkExternoService.create(linkExternoDTO);
         return ResponseEntity.created(new URI("/api/link-externos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);

@@ -7,10 +7,12 @@ import { PostPublicaDialogComponent } from './post-publica-dialog.component';
 import { PostSingleComponent } from './post-single/post-single.component';
 import { PostImageViewComponent } from './post-image-view/post-image-view.component';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { PostLinkExternoVideoViewComponent } from './post-link-externo-video-view/post-link-externo-video-view.component';
+import { EmbedVideo } from 'ngx-embed-video';
 
 @NgModule({
-  imports: [InformaSharedModule, RouterModule, QuillModule.forRoot(), NgxGalleryModule],
-  declarations: [PostComponent, PostPublicaDialogComponent, PostSingleComponent, PostImageViewComponent],
+  imports: [InformaSharedModule, RouterModule, QuillModule.forRoot(), NgxGalleryModule, EmbedVideo],
+  declarations: [PostComponent, PostPublicaDialogComponent, PostSingleComponent, PostImageViewComponent, PostLinkExternoVideoViewComponent],
   exports: [PostComponent],
   entryComponents: [PostPublicaDialogComponent]
 })

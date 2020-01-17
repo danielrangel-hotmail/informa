@@ -1,4 +1,4 @@
 export const enum LinkTipo {
-  VIDEO,
-  EXTERNO
+  VIDEO = "VIDEO",
+  EXTERNO = "EXTERNO"
 }

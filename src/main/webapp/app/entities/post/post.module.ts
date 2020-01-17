@@ -14,10 +14,11 @@ import { FileUploadModule } from 'ng2-file-upload';
 import {FileUploadComponent} from 'app/entities/post/file-upload/file-upload.component';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { EmbedVideo } from 'ngx-embed-video';
+import { LinkExternoSharedModule} from 'app/entities/link-externo-shared/link-externo-shared.module';
 
 
 @NgModule({
-  imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(postRoute), FileUploadModule, NgxGalleryModule, EmbedVideo],
+  imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(postRoute), FileUploadModule, NgxGalleryModule, EmbedVideo, LinkExternoSharedModule],
   declarations: [PostDetailComponent, PostUpdateComponent, PostDeleteDialogComponent, MyPostComponent, PostVideoLinkComponent, PostImageComponent, FileUploadComponent],
   entryComponents: [PostDeleteDialogComponent]
 })

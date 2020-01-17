@@ -1,7 +1,10 @@
 package com.objective.informa.service;
 
 import com.objective.informa.domain.LinkExterno;
+import com.objective.informa.domain.User;
 import com.objective.informa.repository.LinkExternoRepository;
+import com.objective.informa.repository.UserRepository;
+import com.objective.informa.security.SecurityUtils;
 import com.objective.informa.service.dto.LinkExternoDTO;
 import com.objective.informa.service.mapper.LinkExternoMapper;
 import com.objective.informa.service.post.PostNonAuthorizedException;
@@ -31,14 +34,38 @@ public class LinkExternoService {
     private final MensagemService mensagemService;
     private final LinkExternoRepository linkExternoRepository;
     private final LinkExternoMapper linkExternoMapper;
+    private final UserRepository userRepository;
 
     public LinkExternoService(PostService postService,
         MensagemService mensagemService,
-        LinkExternoRepository linkExternoRepository, LinkExternoMapper linkExternoMapper) {
+        LinkExternoRepository linkExternoRepository, LinkExternoMapper linkExternoMapper,
+        UserRepository userRepository) {
         this.postService = postService;
         this.mensagemService = mensagemService;
         this.linkExternoRepository = linkExternoRepository;
         this.linkExternoMapper = linkExternoMapper;
+        this.userRepository = userRepository;
+    }
+
+    /**
+     * Create um arquivo.
+     *
+     * @param linkExternoDTO the entity to save.
+     * @return the persisted entity.
+     */
+    public LinkExternoDTO create(LinkExternoDTO linkExternoDTO) {
+
+        log.debug("Request to create LinkExterno : {}", linkExternoDTO);
+        LinkExterno linkExterno = linkExternoMapper.toEntity(linkExternoDTO);
+        ZonedDateTime now = ZonedDateTime.now();
+        linkExterno.setCriacao(now);
+        linkExterno.setUltimaEdicao(now);
+        final Optional<User> user = SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin);
+        linkExterno.setUsuario(user.get());
+        linkExterno.getPost().addLinksExternos(linkExterno);
+        linkExterno = linkExternoRepository.save(linkExterno);
+        return linkExternoMapper.toDto(linkExterno);
+
     }
 
     /**
@@ -55,7 +82,7 @@ public class LinkExternoService {
             linkExterno.setCriacao(now);
         }
         linkExterno.setUltimaEdicao(now);
-        linkExterno = linkExternoRepository.save(linkExterno);
+        linkExterno = linkExternoRepository.saveAndFlush(linkExterno);
         return linkExternoMapper.toDto(linkExterno);
     }
 

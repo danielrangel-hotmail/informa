@@ -42,6 +42,8 @@ public class PostDTO implements Serializable {
 
     private List<ArquivoDTO> arquivos = new ArrayList<ArquivoDTO>();
 
+    private List<LinkExternoDTO> linksExternos = new ArrayList<LinkExternoDTO>();
+
     public Long getId() {
         return id;
     }
@@ -136,6 +138,15 @@ public class PostDTO implements Serializable {
 
     public void setArquivos(List<ArquivoDTO> arquivos) {
         this.arquivos = arquivos;
+    }
+
+    public List<LinkExternoDTO> getLinksExternos() {
+        return linksExternos;
+    }
+
+    public void setLinksExternos(
+        List<LinkExternoDTO> linksExternos) {
+        this.linksExternos = linksExternos;
     }
 
     @Override

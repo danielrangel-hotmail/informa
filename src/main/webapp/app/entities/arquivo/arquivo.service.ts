@@ -58,7 +58,7 @@ export class ArquivoService {
     return copy;
   }
 
-  protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
+  public convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.criacao = res.body.criacao ? moment(res.body.criacao) : undefined;
       res.body.ultimaEdicao = res.body.ultimaEdicao ? moment(res.body.ultimaEdicao) : undefined;
@@ -66,7 +66,7 @@ export class ArquivoService {
     return res;
   }
 
-  protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+  public convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((arquivo: IArquivo) => {
         arquivo.criacao = arquivo.criacao ? moment(arquivo.criacao) : undefined;
