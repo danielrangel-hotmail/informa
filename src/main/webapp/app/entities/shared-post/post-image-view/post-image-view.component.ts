@@ -4,6 +4,8 @@ import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import {AMAZON_S3_BUCKET_URL} from 'app/entities/arquivo/arquivo.constants';
 import {IArquivo} from 'app/shared/model/arquivo.model';
 
+const GALLERY_SIZE = '598px';
+
 @Component({
   selector: 'jhi-post-image-view',
   templateUrl: './post-image-view.component.html',
@@ -38,7 +40,7 @@ export class PostImageViewComponent implements OnInit {
       case 1:
         this.galleryOptions = [
           {
-            width: '558px',
+            width: GALLERY_SIZE,
             thumbnails: false
           }
         ];
@@ -46,7 +48,7 @@ export class PostImageViewComponent implements OnInit {
       case 2:
         this.galleryOptions = [
           {
-            width: '558px',
+            width: GALLERY_SIZE,
             thumbnailsRows: 1,
             thumbnailsColumns: 2,
             image: false
@@ -56,7 +58,7 @@ export class PostImageViewComponent implements OnInit {
       case 3:
         this.galleryOptions = [
           {
-            width: '558px',
+            width: GALLERY_SIZE,
             thumbnailsRows: 1,
             thumbnailsColumns: 2,
             thumbnailsRemainingCount: true,
@@ -67,7 +69,7 @@ export class PostImageViewComponent implements OnInit {
       case 4:
         this.galleryOptions = [
           {
-            width: '558px',
+            width: GALLERY_SIZE,
             thumbnailsRows: 2,
             thumbnailsColumns: 2,
             image: false
@@ -78,7 +80,7 @@ export class PostImageViewComponent implements OnInit {
       default:
         this.galleryOptions = [
           {
-            width: '558px',
+            width: GALLERY_SIZE,
             thumbnailsRows: 2,
             thumbnailsColumns: 2,
             thumbnailsRemainingCount: true,

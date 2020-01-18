@@ -17,7 +17,7 @@ export class PostLinkExternoVideoViewComponent implements OnInit {
     const linkExterno = this.post!.linksExternos!.find( link => link.tipo === "VIDEO");
     if (linkExterno) {
       this.iframeHtml = this.embedService.embed(linkExterno.link ,
-        { attr: { width: 558, height: 314 } } );
+        { attr: { width: 598, height: 338 } } );
     } else {
       this.iframeHtml = null;
     }

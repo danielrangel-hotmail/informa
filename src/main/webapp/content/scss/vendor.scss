@@ -4,6 +4,9 @@
 put Sass variables here:
 eg $input-color: red;
 ****************************/
+$primary: #2d67ff;
+$body-bg: rgb(219, 224, 230);
+
 @import '~bootswatch/dist/simplex/variables';
 // Override Bootstrap variables
 @import 'bootstrap-variables';

@@ -17,7 +17,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-post',
-  templateUrl: './post.component.html'
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit, OnDestroy {
   @Input() onlyLoggedUser = false;

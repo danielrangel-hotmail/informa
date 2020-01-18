@@ -38,12 +38,17 @@ Browser Upgrade Prompt
 Generic styles
 ========================================================================== */
 
+.container-fluid {
+  background-color: rgb(219, 224, 230)
+}
+
 /* other generic styles */
 
 .jh-card {
   padding: 1.5%;
   margin-top: 20px;
   border: none;
+  background-color: rgb(219, 224, 230)
 }
 
 .error {
@@ -179,7 +184,33 @@ largura da visão principal
   max-width: 600px;
 }
 .width-main-view {
- width: 600px;
+ width: 620px;
 }
+
+.form-group-card {
+  width: 620px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.ql-container {
+  font-size: 14px;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.ql-editor {
+  padding: 8px;
+}
+//.card-borda {
+//  border: 1px #ccc;
+//  border-radius: 4px;
+//}
+
+//div.card-borda:hover {
+//  border-color: black;
+//  border: 1px;
+//  border-radius: 4px;
+//}
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */

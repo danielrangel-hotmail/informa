@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-center">
     <div class="width-main-view">
         <div *ngIf="post">
-            <div class="card bg-secondary mb-3 max-width-main-view">
-                <div class="card-header d-flex flex-row">
+            <div class="bg-secondary mb-3 max-width-main-view border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
+                <div class="d-flex flex-row p-2">
                     <div class="mr-1">
                         <img ngxGravatar [round]="false" [size]="50" [cornerRadius]="7" [email]="post.autorEmail">
                     </div>
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="">
                     <div class = "mb-3">
                         <quill-view [content]="post.conteudo" format="json" theme="snow"></quill-view>
                     </div>
