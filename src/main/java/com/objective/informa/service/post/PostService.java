@@ -152,6 +152,29 @@ public class PostService {
     }
 
     /**
+     * Get all the drafts from loggedUser.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<PostDTO> findAllDraftsFromLoggedUser(Pageable pageable) {
+        log.debug("Request to get all Posts from User");
+        return postRepository.findByAutorIsCurrentUserAndPublicacaoIsNull(pageable)
+            .map(postMapper::toDto);
+    }
+
+    /**
+     * Count all the drafts from loggedUser.
+     * @return the count.
+     */
+    @Transactional(readOnly = true)
+    public Long countAllDraftsFromLoggedUser() {
+        log.debug("Request to get all Posts from User");
+        return postRepository.countByAutorIsCurrentUserAndPublicacaoIsNull();
+    }
+
+    /**
      * Get all the posts from loggedUser.
      *
      * @param pageable the pagination information.

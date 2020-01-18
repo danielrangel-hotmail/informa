@@ -138,11 +138,18 @@ public class PostResource {
     @GetMapping("/posts-user")
     public ResponseEntity<List<PostDTO>> getUserPosts(Pageable pageable) {
         log.debug("REST request to get a page of Posts from logged user");
-        Page<PostDTO> page = postService.findAllFromLoggedUser(pageable);
+        Page<PostDTO> page = postService.findAllDraftsFromLoggedUser(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+
+    @GetMapping("/posts-user-count")
+    public ResponseEntity<Long> getUserPostsCount() {
+        log.debug("REST request to get a page of Posts from logged user");
+        Long count = postService.countAllDraftsFromLoggedUser();
+        return ResponseEntity.ok().body(count);
+    }
     /**
      * {@code GET  /posts} : get all the posts.
      *

@@ -64,6 +64,13 @@ export class PostService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
+  countDrafts(req?: any): Observable<number> {
+    const options = createRequestOption(req);
+    return this.http
+    .get<number>(`${this.resourceUrl}-user-count`, { params: options, observe: 'response' })
+    .pipe(map((res: HttpResponse<number>) => (res.body) ? res.body : 0));
+  }
+
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }

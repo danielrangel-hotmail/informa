@@ -30,6 +30,7 @@ export class PostComponent implements OnInit, OnDestroy {
   predicate: string;
   ascending: boolean;
   account$?: Observable<Account | null>;
+  draftsQtd$?: Observable<number>;
 
   constructor(
     protected postService: PostService,
@@ -39,6 +40,7 @@ export class PostComponent implements OnInit, OnDestroy {
     protected parseLinks: JhiParseLinks,
     protected router: Router
   ) {
+    this.loadDraftQtd();
     this.posts = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
     this.page = 0;
@@ -47,6 +49,10 @@ export class PostComponent implements OnInit, OnDestroy {
     };
     this.predicate = 'criacao';
     this.ascending = false;
+  }
+
+  private loadDraftQtd(): void {
+    this.draftsQtd$ = this.postService.countDrafts();
   }
 
   loadAll(): void {
@@ -72,6 +78,7 @@ export class PostComponent implements OnInit, OnDestroy {
   reset(): void {
     this.page = 0;
     this.posts = [];
+    this.loadDraftQtd();
     this.loadAll();
   }
 
