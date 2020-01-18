@@ -1,20 +1,6 @@
-TODO: Avatar para o grupo
+TODO: Fazer funcionar o básico das mensagens
 
-TODO: Fonte do Editor
-
-TODO: Formatar o card do post
-Tirar o card e ficar mais clean
-Colocar todas as mensagens
-Formatar os botões
-
-TODO: Criar post mais convidativo
-
-TODO: Debugar o erro que está rolando na edição
-
-TODO: Role do Post Oficial
-Um post pode ser marcado como oficial da empresa
-O post sairá em nome da empresa by o criador
-Somente admins e caras com post oficial podem postar desta forma
+TODO: Fazer funcionar o básico das conversas
 
 TODO: Registrar o número de vezes que cada pessoa carregou os posts
 
@@ -25,13 +11,12 @@ TODO: Sumir com o flash de posts não encontrados
 
 TODO: Formatar a página de grupos
 
-TODO: Fazer funcionar o básico das mensagens
-
-TODO: Fazer funcionar o básico das conversas
-
 TODO: Reações em posts e mensagens
 
-TODO: Contador de drafts e criador de post
+TODO: Role do Post Oficial
+Um post pode ser marcado como oficial da empresa
+O post sairá em nome da empresa by o criador
+Somente admins e caras com post oficial podem postar desta forma
 
 TODO: Rever menus
 
@@ -80,7 +65,11 @@ TODO: Segurança AWS
 
 TODO: Continuous Integration GitHub
 
+TODO: Debugar o erro que está rolando na edição
+
 ------------------------------------------------------------------------------
+TODO: Avatar para o grupo
+
 TODO: Melhorar o uso de cache
 
 TODO: Mostrar o post só quando tudo for carregado.
