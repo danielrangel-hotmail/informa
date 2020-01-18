@@ -1,5 +1,3 @@
-TODO: Avatar para perfil
-
 TODO: Avatar para o grupo
 
 TODO: Fonte do Editor
@@ -83,6 +81,13 @@ TODO: Segurança AWS
 TODO: Continuous Integration GitHub
 
 ------------------------------------------------------------------------------
+TODO: Melhorar o uso de cache
+
+TODO: Mostrar o post só quando tudo for carregado.
+
+TODO: Na edição do Post, manter as coisas em um serviço para ficar mais rápido, ou usar hide and show
+Principalemente quando pulamos de imagem para video
+
 TODO: Férias
 
 TODO: Aniversários
