@@ -1,20 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IMensagem } from 'app/shared/model/mensagem.model';
-
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { MensagemService } from './mensagem.service';
 import { MensagemDeleteDialogComponent } from './mensagem-delete-dialog.component';
+import {IPost} from 'app/shared/model/post.interface';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 @Component({
   selector: 'jhi-mensagem',
   templateUrl: './mensagem.component.html'
 })
 export class MensagemComponent implements OnInit, OnDestroy {
+  @Input() post!: IPost;
   mensagems: IMensagem[];
   eventSubscriber?: Subscription;
   itemsPerPage: number;
@@ -35,16 +36,16 @@ export class MensagemComponent implements OnInit, OnDestroy {
     this.links = {
       last: 0
     };
-    this.predicate = 'id';
-    this.ascending = true;
+    this.predicate = 'criacao';
+    this.ascending = false;
   }
 
   loadAll(): void {
     this.mensagemService
-      .query({
-        page: this.page,
-        size: this.itemsPerPage,
-        sort: this.sort()
+      .query( this.post.id!, {
+          page: this.page,
+          size: this.itemsPerPage,
+          sort: this.sort()
       })
       .subscribe((res: HttpResponse<IMensagem[]>) => this.paginateMensagems(res.body, res.headers));
   }

@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
-import { IMensagem, Mensagem } from 'app/shared/model/mensagem.model';
+import { Mensagem } from 'app/shared/model/mensagem.model';
 import { MensagemService } from './mensagem.service';
 import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
 import { IPost } from 'app/shared/model/post.interface';
-import { PostService } from 'app/entities/shared-post/post.service';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
+import { JhiEventManager } from 'ng-jhipster';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 
@@ -23,12 +21,8 @@ type SelectableEntity = IUser | IPost | IMensagem;
 })
 export class MensagemUpdateComponent implements OnInit {
   isSaving = false;
-
-  users: IUser[] = [];
-
-  posts: IPost[] = [];
-
-  mensagems: IMensagem[] = [];
+  @Input() mensagem?: IMensagem;
+  @Input() post?: IPost;
 
   editForm = this.fb.group({
     id: [],
@@ -44,42 +38,25 @@ export class MensagemUpdateComponent implements OnInit {
 
   constructor(
     protected mensagemService: MensagemService,
-    protected userService: UserService,
-    protected postService: PostService,
-    protected activatedRoute: ActivatedRoute,
+    protected eventManager: JhiEventManager,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ mensagem }) => {
-      this.updateForm(mensagem);
+    this.resetForm();
+  }
 
-      this.userService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IUser[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IUser[]) => (this.users = resBody));
-
-      this.postService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IPost[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IPost[]) => (this.posts = resBody));
-
-      this.mensagemService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IMensagem[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IMensagem[]) => (this.mensagems = resBody));
+  resetForm(): void {
+    this.editForm.patchValue({
+      id: null,
+      versao: null,
+      criacao: null,
+      ultimaEdicao: null,
+      conteudo: null,
+      temConversa: null,
+      autorId: null,
+      conversaId: null,
+      postId: this.post!.id
     });
   }
 
@@ -104,12 +81,13 @@ export class MensagemUpdateComponent implements OnInit {
   save(): void {
     this.isSaving = true;
     const mensagem = this.createFromForm();
-    if (mensagem.id !== undefined) {
+    if (mensagem.id != null) {
       this.subscribeToSaveResponse(this.mensagemService.update(mensagem));
     } else {
       this.subscribeToSaveResponse(this.mensagemService.create(mensagem));
     }
   }
+
 
   private createFromForm(): IMensagem {
     return {
@@ -137,8 +115,10 @@ export class MensagemUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
+    this.eventManager.broadcast('mensagemListModification');
+    this.post!.numeroDeMensagens = this.post!.numeroDeMensagens! + 1;
+    this.resetForm();
     this.isSaving = false;
-    this.previousState();
   }
 
   protected onSaveError(): void {

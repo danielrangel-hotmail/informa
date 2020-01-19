@@ -5,11 +5,12 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IMensagem, Mensagem } from 'app/shared/model/mensagem.model';
+import { Mensagem } from 'app/shared/model/mensagem.model';
 import { MensagemService } from './mensagem.service';
 import { MensagemComponent } from './mensagem.component';
 import { MensagemDetailComponent } from './mensagem-detail.component';
 import { MensagemUpdateComponent } from './mensagem-update.component';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 @Injectable({ providedIn: 'root' })
 export class MensagemResolve implements Resolve<IMensagem> {

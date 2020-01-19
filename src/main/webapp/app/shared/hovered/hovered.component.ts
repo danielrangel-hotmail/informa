@@ -10,7 +10,7 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 })
 export class HoveredComponent implements OnInit {
 @Input() hoverStyle: any;
-private isHovered = false;
+isHovered = false;
 
   constructor() { }
 

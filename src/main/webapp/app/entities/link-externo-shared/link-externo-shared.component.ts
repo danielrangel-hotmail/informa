@@ -12,9 +12,9 @@ import {ILinkExterno, LinkExterno} from 'app/shared/model/link-externo.model';
 import {LinkExternoService} from '../link-externo/link-externo.service';
 import {IUser} from 'app/core/user/user.model';
 import {IPost} from 'app/shared/model/post.interface';
-import {IMensagem} from 'app/shared/model/mensagem.model';
 import {EmbedVideoService} from 'ngx-embed-video';
 import {LinkTipo} from 'app/shared/model/enumerations/link-tipo.model';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 

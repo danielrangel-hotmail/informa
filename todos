@@ -20,10 +20,6 @@ Somente admins e caras com post oficial podem postar desta forma
 
 TODO: Rever menus
 
-TODO: Controle de leitura de posts e mensagens
-
-TODO: Autenticação por LDAP ou Social Login no Google
-
 TODO: E-mails de criação de conta
 
 TODO: PWA
@@ -53,13 +49,11 @@ PUSH Notifications
 
 TODO: Controle de dirty e salvamento automatico de post
 
-TODO: Remover e adicionar imagens
+TODO: Remover imagens
 
 TODO: Cologar a ngx-gallery dentro do projeto.
 Resolvemos o problema do erro besta do hammer.
 Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delete
-
-TODO: Logo do informa
 
 TODO: Segurança AWS
 
@@ -68,6 +62,10 @@ TODO: Continuous Integration GitHub
 TODO: Debugar o erro que está rolando na edição
 
 ------------------------------------------------------------------------------
+TODO: Controle de leitura de posts e mensagens
+
+TODO: Autenticação por LDAP ou Social Login no Google
+
 TODO: Avatar para o grupo
 
 TODO: Melhorar o uso de cache

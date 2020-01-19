@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { IMensagem } from 'app/shared/model/mensagem.model';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 type EntityResponseType = HttpResponse<IMensagem>;
 type EntityArrayResponseType = HttpResponse<IMensagem[]>;
@@ -39,10 +39,10 @@ export class MensagemService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  query(req?: any): Observable<EntityArrayResponseType> {
+  query(postId: number, req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<IMensagem[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<IMensagem[]>(`${this.resourceUrl}/post/${postId}`, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 

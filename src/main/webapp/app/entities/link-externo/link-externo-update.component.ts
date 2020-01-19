@@ -13,9 +13,9 @@ import { LinkExternoService } from './link-externo.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { IPost } from 'app/shared/model/post.interface';
-import { IMensagem } from 'app/shared/model/mensagem.model';
 import { MensagemService } from 'app/entities/mensagem/mensagem.service';
 import {PostService} from 'app/entities/shared-post/post.service';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 
@@ -56,33 +56,6 @@ export class LinkExternoUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ linkExterno }) => {
       this.updateForm(linkExterno);
-
-      this.userService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IUser[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IUser[]) => (this.users = resBody));
-
-      this.postService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IPost[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IPost[]) => (this.posts = resBody));
-
-      this.mensagemService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IMensagem[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IMensagem[]) => (this.mensagems = resBody));
     });
   }
 

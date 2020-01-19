@@ -3,7 +3,6 @@
     [(ngModel)]="content"
     [modules]="modules"
     (onContentChanged) = "contentChanged($event)"
-    (onEditorCreated)="addBindingCreated($event)"
     trackChanges="all"
      format="json"
     customToolbarPosition="bottom">

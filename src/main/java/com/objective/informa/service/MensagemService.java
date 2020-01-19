@@ -70,6 +70,11 @@ public class MensagemService {
             .map(mensagemMapper::toDto);
     }
 
+    public Page<MensagemDTO> findAll(Pageable pageable, Long postId) {
+        return mensagemRepository.findByPostId(postId, pageable)
+            .map(mensagemMapper::toDto);
+    }
+
 
     /**
      * Get one mensagem by id.

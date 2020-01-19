@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -93,10 +92,10 @@ public class MensagemResource {
 
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of mensagems in body.
      */
-    @GetMapping("/mensagems")
-    public ResponseEntity<List<MensagemDTO>> getAllMensagems(Pageable pageable) {
+    @GetMapping("/mensagems/post/{id}")
+    public ResponseEntity<List<MensagemDTO>> getAllPostMensagems(@PathVariable Long id, Pageable pageable) {
         log.debug("REST request to get a page of Mensagems");
-        Page<MensagemDTO> page = mensagemService.findAll(pageable);
+        Page<MensagemDTO> page = mensagemService.findAll(pageable, id);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

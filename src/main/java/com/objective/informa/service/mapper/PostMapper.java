@@ -2,6 +2,7 @@ package com.objective.informa.service.mapper;
 
 import com.objective.informa.domain.*;
 import com.objective.informa.repository.GrupoRepository;
+import com.objective.informa.repository.MensagemRepository;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.service.dto.PostDTO;
 
@@ -16,12 +17,14 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
 
     @Autowired private GrupoRepository grupoRepository;
     @Autowired private UserRepository userRepository;
+    @Autowired private MensagemRepository mensagemRepository;
 
     @Mapping(source = "autor.id", target = "autorId")
     @Mapping(source = "autor.firstName", target = "autorNome")
     @Mapping(source = "autor.email", target = "autorEmail")
     @Mapping(source = "grupo.id", target = "grupoId")
     @Mapping(source = "grupo.nome", target = "grupoNome")
+    @Mapping(source = "id", target = "numeroDeMensagens", qualifiedByName = "numeroDeMensagens")
     public abstract PostDTO toDto(Post post);
 
     @Mapping(target = "arquivos", ignore = true)
@@ -31,6 +34,11 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Mapping(source = "autorId", target = "autor")
     @Mapping(source = "grupoId", target = "grupo")
     public abstract Post toEntity(PostDTO postDTO);
+
+    @Named("numeroDeMensagens")
+    public Long numeroDeMensagensFromId(Long id) {
+        return this.mensagemRepository.countByPostId(id);
+    }
 
     public User autorFromId(Long id) {
         if (id == null) {

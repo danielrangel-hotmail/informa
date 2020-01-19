@@ -37,10 +37,10 @@
                                     <span>Sem reações</span>
                                 </div>
                             </jhi-hovered>
-                            <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao">
+                            <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao" (click)="mostrarMensagens()">
                                 <div class="p-1">
                                     <fa-icon icon="comment"></fa-icon>
-                                    <span>Sem mensagens</span>
+                                    <span>{{numeroDeMensagens()}}</span>
                                 </div>
                             </jhi-hovered>
                         </div>
@@ -67,6 +67,7 @@
                         </div>
                     </div>
                 </div>
+                <jhi-mensagem *ngIf="mostraMensagens" [post]="post"></jhi-mensagem>
             </div>
         </div>
     </div>

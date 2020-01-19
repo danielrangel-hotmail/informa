@@ -13,6 +13,7 @@ import * as moment from 'moment';
 export class PostSingleComponent {
 @Input() post?: IPost;
 @Input() account?: Account;
+protected mostraMensagens = false;
 
   constructor(protected modalService: NgbModal) { }
   publica(post: IPost): void {
@@ -44,4 +45,13 @@ export class PostSingleComponent {
     return ultimaDataRelevante!.calendar();
   }
 
+  mostrarMensagens(): void {
+    this.mostraMensagens = true;
+  }
+
+  numeroDeMensagens(): string {
+    if (this.post!.numeroDeMensagens! === 0) return "Sem comentários";
+    if (this.post!.numeroDeMensagens! === 1) return "1 comentário";
+    return `${this.post!.numeroDeMensagens!} comentários`;
+  }
 }

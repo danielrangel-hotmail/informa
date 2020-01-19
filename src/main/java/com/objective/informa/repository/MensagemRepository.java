@@ -1,6 +1,8 @@
 package com.objective.informa.repository;
 
 import com.objective.informa.domain.Mensagem;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +18,7 @@ public interface MensagemRepository extends JpaRepository<Mensagem, Long> {
     @Query("select mensagem from Mensagem mensagem where mensagem.autor.login = ?#{principal.username}")
     List<Mensagem> findByAutorIsCurrentUser();
 
+    Page<Mensagem> findByPostId(Long postId, Pageable pageable);
+
+    Long countByPostId(Long postId);
 }

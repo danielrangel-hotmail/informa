@@ -42,6 +42,8 @@ public class PostDTO implements Serializable {
 
     private Boolean oficial;
 
+    private Long numeroDeMensagens;
+
     private List<ArquivoDTO> arquivos = new ArrayList<ArquivoDTO>();
 
     private List<LinkExternoDTO> linksExternos = new ArrayList<LinkExternoDTO>();
@@ -157,6 +159,14 @@ public class PostDTO implements Serializable {
     public void setLinksExternos(
         List<LinkExternoDTO> linksExternos) {
         this.linksExternos = linksExternos;
+    }
+
+    public Long getNumeroDeMensagens() {
+        return numeroDeMensagens;
+    }
+
+    public void setNumeroDeMensagens(Long numeroDeMensagens) {
+        this.numeroDeMensagens = numeroDeMensagens;
     }
 
     @Override

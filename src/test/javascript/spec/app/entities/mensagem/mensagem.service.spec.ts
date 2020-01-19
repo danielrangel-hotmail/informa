@@ -4,7 +4,8 @@ import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { MensagemService } from 'app/entities/mensagem/mensagem.service';
-import { IMensagem, Mensagem } from 'app/shared/model/mensagem.model';
+import { Mensagem } from 'app/shared/model/mensagem.model';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 describe('Service Tests', () => {
   describe('Mensagem Service', () => {
@@ -118,7 +119,7 @@ describe('Service Tests', () => {
           returnedFromService
         );
         service
-          .query()
+          .query(1)
           .pipe(
             take(1),
             map(resp => resp.body)

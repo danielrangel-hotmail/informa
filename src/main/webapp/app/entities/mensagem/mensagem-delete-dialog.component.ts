@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IMensagem } from 'app/shared/model/mensagem.model';
 import { MensagemService } from './mensagem.service';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 @Component({
   templateUrl: './mensagem-delete-dialog.component.html'

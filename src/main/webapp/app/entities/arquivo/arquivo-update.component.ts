@@ -3,7 +3,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
@@ -13,8 +12,8 @@ import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { IPost } from 'app/shared/model/post.interface';
 import { PostService } from 'app/entities/shared-post/post.service';
-import { IMensagem } from 'app/shared/model/mensagem.model';
 import { MensagemService } from 'app/entities/mensagem/mensagem.service';
+import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 
@@ -59,32 +58,6 @@ export class ArquivoUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ arquivo }) => {
       this.updateForm(arquivo);
 
-      this.userService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IUser[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IUser[]) => (this.users = resBody));
-
-      this.postService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IPost[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IPost[]) => (this.posts = resBody));
-
-      this.mensagemService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IMensagem[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IMensagem[]) => (this.mensagems = resBody));
     });
   }
 

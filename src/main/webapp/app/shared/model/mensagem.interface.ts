@@ -1,21 +1,18 @@
-import { Moment } from 'moment';
+import {Moment} from 'moment';
 import {IArquivo} from 'app/shared/model/arquivo.model';
 import {ILinkExterno} from 'app/shared/model/link-externo.model';
 
-export interface IPost {
+export interface IMensagem {
   id?: number;
   versao?: number;
   criacao?: Moment;
   ultimaEdicao?: Moment;
   conteudo?: string;
-  oficial?: boolean;
-  publicacao?: Moment;
+  temConversa?: boolean;
   arquivos?: IArquivo[];
   linksExternos?: ILinkExterno[];
   autorId?: number;
-  grupoId?: number;
-  numeroDeMensagens?: number;
+  postId?: number;
+  conversaId?: number;
   autorNome?: string;
-  autorEmail?: string;
-  grupoNome?: string;
 }

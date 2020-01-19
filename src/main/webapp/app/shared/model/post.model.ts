@@ -16,6 +16,7 @@ export class Post implements IPost {
     public arquivos?: IArquivo[],
     public linksExternos?: ILinkExterno[],
     public autorId?: number,
+    public numeroDeMensagens?: number,
     public autorNome?: string,
     public autorEmail?: string,
     public grupoId?: number
