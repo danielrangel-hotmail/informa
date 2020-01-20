@@ -1,3 +1,17 @@
-.ql-editor {
+.autorNome {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.avatar {
+  padding: 4px 7px 0px 20px;
+}
+
+.horario {
+  padding: 2px 7px 0px 20px;
+  color: white;
+}
+
+:host ::ng-deep .ql-editor {
   padding: 0px;
 }

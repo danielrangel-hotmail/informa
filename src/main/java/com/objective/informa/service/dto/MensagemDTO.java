@@ -29,6 +29,8 @@ public class MensagemDTO implements Serializable {
 
     private String autorNome;
 
+    private String autorEmail;
+
     public Long getId() {
         return id;
     }
@@ -107,6 +109,14 @@ public class MensagemDTO implements Serializable {
 
     public void setAutorNome(String autorNome) {
         this.autorNome = autorNome;
+    }
+
+    public String getAutorEmail() {
+        return autorEmail;
+    }
+
+    public void setAutorEmail(String autorEmail) {
+        this.autorEmail = autorEmail;
     }
 
     @Override

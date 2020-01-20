@@ -7,11 +7,13 @@ import { MensagemDetailComponent } from './mensagem-detail.component';
 import { MensagemUpdateComponent } from './mensagem-update.component';
 import { MensagemDeleteDialogComponent } from './mensagem-delete-dialog.component';
 import { GravatarModule } from  'ngx-gravatar';
+import { mensagemRoute } from './mensagem.route';
+import { MensagemPostComponent } from './mensagem-post/mensagem-post.component';
+import {InformaSharedPostModule} from 'app/entities/shared-post/informa-shared-post.module';
 
 @NgModule({
-  imports: [InformaSharedModule, RouterModule, GravatarModule, QuillModule],
-  declarations: [MensagemComponent, MensagemDetailComponent, MensagemUpdateComponent, MensagemDeleteDialogComponent],
-  exports: [MensagemComponent, MensagemDetailComponent, MensagemUpdateComponent, MensagemDeleteDialogComponent],
+  imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(mensagemRoute), GravatarModule, QuillModule],
+  declarations: [MensagemComponent, MensagemDetailComponent, MensagemUpdateComponent, MensagemDeleteDialogComponent, MensagemPostComponent],
   entryComponents: [MensagemDeleteDialogComponent]
 })
 export class InformaMensagemModule {}

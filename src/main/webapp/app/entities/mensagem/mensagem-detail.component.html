@@ -1,25 +1,28 @@
-<div *ngIf="mensagem">
-    <div class="row">
-        <div class="col-1">
-            <div class="pl-3 mt-2">
-                <img ngxGravatar [round]="false" [size]="35" [cornerRadius]="7" email="humberto@objective.com.br">
+<div *ngIf="mensagem" style="background: white">
+    <jhi-hovered [hoverStyle]="{background: 'rgb(249,249,249)' }">
+        <div class="d-flex pt-1 pb-1">
+            <div class="avatar" *ngIf = "!mensagem.conversaContinuada">
+                <img ngxGravatar [round]="false" [size]="33" [cornerRadius]="7" [email]="mensagem.autorEmail" >
             </div>
-        </div>
-        <div class="col-11 mb-2">
-            <div class="" style="background-color: rgb(243,246,248); padding: 4px; margin: 4px; border-radius: 6px;}">
-                <div class="d-flex justify-content-between align-items-end ml-2" >
-                    <div class="bold">
-                        {{mensagem.autorNome}}
+            <div class = "horario" *ngIf = "mensagem.conversaContinuada">
+                <div class = "small" style="width: 33px">{{mensagem.criacao.format("HH:mm")}}</div>
+            </div>
+            <div class="">
+                <div class="" style="">
+                    <div class="d-flex align-items-baseline" *ngIf = "!mensagem.conversaContinuada">
+                        <div class="autorNome">
+                            {{mensagem.autorNome}}
+                        </div>
+                        <div class="small pl-2">
+                            {{tempoRelativo(mensagem)}}
+                        </div>
                     </div>
-                    <div class="small pr-2">
-                        {{tempoRelativo(mensagem)}}
+                    <div>
+                        <quill-view id="vmensagem" [content]="mensagem.conteudo" format="json" theme="snow"></quill-view>
                     </div>
                 </div>
-                <div>
-                    <quill-view [content]="mensagem.conteudo" format="json" theme="snow"></quill-view>
-                </div>
             </div>
-        </div>
+    </jhi-hovered>
     </div>
 <!--        <div class = "mb-1">-->
 <!--            <jhi-post-image-view [post]="post" ></jhi-post-image-view>-->

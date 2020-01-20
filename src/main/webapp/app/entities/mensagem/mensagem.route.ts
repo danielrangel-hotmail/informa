@@ -5,24 +5,23 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { Mensagem } from 'app/shared/model/mensagem.model';
-import { MensagemService } from './mensagem.service';
-import { MensagemComponent } from './mensagem.component';
-import { MensagemDetailComponent } from './mensagem-detail.component';
-import { MensagemUpdateComponent } from './mensagem-update.component';
 import {IMensagem} from 'app/shared/model/mensagem.interface';
+import {MensagemPostComponent} from 'app/entities/mensagem/mensagem-post/mensagem-post.component';
+import {PostService} from 'app/entities/shared-post/post.service';
+import {IPost} from 'app/shared/model/post.interface';
+import {Post} from 'app/shared/model/post.model';
 
 @Injectable({ providedIn: 'root' })
-export class MensagemResolve implements Resolve<IMensagem> {
-  constructor(private service: MensagemService, private router: Router) {}
+export class PostResolve implements Resolve<IMensagem> {
+  constructor(private service: PostService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IMensagem> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IPost> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        flatMap((mensagem: HttpResponse<Mensagem>) => {
-          if (mensagem.body) {
-            return of(mensagem.body);
+        flatMap((post: HttpResponse<Post>) => {
+          if (post.body) {
+            return of(post.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -30,49 +29,16 @@ export class MensagemResolve implements Resolve<IMensagem> {
         })
       );
     }
-    return of(new Mensagem());
+    return of(new Post());
   }
 }
 
 export const mensagemRoute: Routes = [
   {
-    path: '',
-    component: MensagemComponent,
-    data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'informaApp.mensagem.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/view',
-    component: MensagemDetailComponent,
+    path: 'post/:id',
+    component: MensagemPostComponent,
     resolve: {
-      mensagem: MensagemResolve
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'informaApp.mensagem.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: 'new',
-    component: MensagemUpdateComponent,
-    resolve: {
-      mensagem: MensagemResolve
-    },
-    data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'informaApp.mensagem.home.title'
-    },
-    canActivate: [UserRouteAccessService]
-  },
-  {
-    path: ':id/edit',
-    component: MensagemUpdateComponent,
-    resolve: {
-      mensagem: MensagemResolve
+      post: PostResolve
     },
     data: {
       authorities: ['ROLE_USER'],

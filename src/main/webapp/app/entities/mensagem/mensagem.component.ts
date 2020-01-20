@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild, ViewChildren, ElementRef, QueryList, AfterViewInit, HostListener } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -12,9 +12,13 @@ import {IMensagem} from 'app/shared/model/mensagem.interface';
 
 @Component({
   selector: 'jhi-mensagem',
-  templateUrl: './mensagem.component.html'
+  templateUrl: './mensagem.component.html',
+  styleUrls: [ './mensagem.component.scss' ]
 })
-export class MensagemComponent implements OnInit, OnDestroy {
+export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('message_container', {static: false}) scrollFrame!: ElementRef;
+  @ViewChildren('message') itemElements!: QueryList<any>;
+  private scrollContainer: any;
   @Input() post!: IPost;
   mensagems: IMensagem[];
   eventSubscriber?: Subscription;
@@ -23,6 +27,7 @@ export class MensagemComponent implements OnInit, OnDestroy {
   page: number;
   predicate: string;
   ascending: boolean;
+  reseting = false;
 
   constructor(
     protected mensagemService: MensagemService,
@@ -40,6 +45,24 @@ export class MensagemComponent implements OnInit, OnDestroy {
     this.ascending = false;
   }
 
+
+  ngAfterViewInit(): void {
+    // this.scrollContainer = this.scrollFrame.nativeElement;
+    // this.itemElements.changes.subscribe(() => this.onItemElementsChanged());
+  }
+
+  private onItemElementsChanged(): void {
+    this.scrollToBottom();
+  }
+
+  private scrollToBottom(): void {
+    // this.scrollContainer.scroll({
+    //   top: this.scrollContainer.scrollHeight,
+    //   left: 0,
+    //   behavior: 'smooth'
+    // });
+  }
+
   loadAll(): void {
     this.mensagemService
       .query( this.post.id!, {
@@ -52,7 +75,7 @@ export class MensagemComponent implements OnInit, OnDestroy {
 
   reset(): void {
     this.page = 0;
-    this.mensagems = [];
+    this.reseting = true;
     this.loadAll();
   }
 
@@ -95,10 +118,21 @@ export class MensagemComponent implements OnInit, OnDestroy {
   }
 
   protected paginateMensagems(data: IMensagem[] | null, headers: HttpHeaders): void {
+    if (this.reseting) {
+      this.mensagems = [];
+      this.reseting = false;
+    }
     const headersLink = headers.get('link');
     this.links = this.parseLinks.parse(headersLink ? headersLink : '');
     if (data) {
-      for (let i = 0; i < data.length; i++) {
+      for (let i = data.length - 1; i >= 0; i--) {
+        data[i].conversaContinuada = false;
+        if (this.mensagems.length > 0) {
+          const ultimaMensagem = this.mensagems[this.mensagems.length - 1];
+          if (ultimaMensagem.autorId === data[i].autorId) {
+            data[i].conversaContinuada = true;
+          }
+        }
         this.mensagems.push(data[i]);
       }
     }

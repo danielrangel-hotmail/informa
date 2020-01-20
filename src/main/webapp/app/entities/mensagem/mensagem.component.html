@@ -1,7 +1,18 @@
-<div>
-    <jhi-mensagem-update [post]="post"></jhi-mensagem-update>
-    <hr class="mt-1 mb-1">
-    <div *ngFor="let mensagem of mensagems ;trackBy: trackId">
-        <jhi-mensagem-detail [mensagem]="mensagem"></jhi-mensagem-detail>
+<div class="chat-content">
+    <div class="message-content" #message_container>
+        <div class="first-div"></div>
+        <div class="padding_navbar_fixed"></div>
+        <jhi-post-single [post]="post"></jhi-post-single>
+        <div *ngFor="let mensagem of mensagems ;trackBy: trackId" #message>
+            <jhi-mensagem-detail [mensagem]="mensagem"></jhi-mensagem-detail>
+        </div>
+        <div>
+            <div class="last-div"></div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class = "footer-div"></div>
+        <jhi-mensagem-update class= "flex-grow-1"[post]="post"></jhi-mensagem-update>
+        <div class = "footer-div"></div>
     </div>
 </div>

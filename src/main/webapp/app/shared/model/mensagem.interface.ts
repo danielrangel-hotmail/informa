@@ -15,4 +15,6 @@ export interface IMensagem {
   postId?: number;
   conversaId?: number;
   autorNome?: string;
+  autorEmail?: string;
+  conversaContinuada?: boolean;
 }

@@ -22,13 +22,9 @@ TODO: Rever menus
 
 TODO: E-mails de criação de conta
 
-TODO: PWA
-
 TODO: Melhorar a home para não logados
 
-TODO: Entender porque unauthorized está desconectando o usuário, e decidir se este é o melhor comportamento
-
-TODO: Fazer refactoring dos DTOs para serem mais restritivos nos campos que deixam rolar alteração
+TODO: Remover imagens
 
 TODO: Filtro meus grupos, meus grupos formais, meus grupos informais, um grupo específico
 
@@ -36,44 +32,76 @@ TODO: Garantir o formato do nome dos grupos
 
 TODO: Garantir o tamanho máximo do conteúdo
 
-TODO: Acertar as traduções dos objetos alterados
+TODO: Menu para a Intranet
+
+TODO: Segurança AWS
+
+TODO: Melhorar os Emojis e Menções
+Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
+
+TODO: Criar o conceito básico de Customer Success
+Para o pessoal que está entrando, haverá um wizard no sistema que conduzirá o colaborador, experimentar cada uma das features do sistema.
+PAra o pessoal já velho, para novas features, ou alteração de features existenes, haverá um wizar no sistema para explicar a nova feature ou versão
+No profile ficará registrado quais features o colaborador experimentou, assim, ele pode saber das novidades
+Deve ser fácil experimentar o onboarding, para verificarmos como está a experiência de um novo colaborador.
+
+------------------------------------------------------------------------------
+Débito Técnico e Não Funcional
+
+TODO: Facilitar a entrada de novos desenvolvedores
+Fazer os testes atuais funcionarem
+Melhorar alguns testes
+Criar projeto no Jira
+Usar a IDE padrão dos desenvolvedores para o projeto
+Configurar o GitHub para funcionar
+Criar uma S3 de desenvolvimento
+- Políticas para o usuário, somente usar a S3
+Branches
+
+TODO: Entender porque unauthorized está desconectando o usuário, e decidir se este é o melhor comportamento
+
+TODO: Fazer refactoring dos DTOs para serem mais restritivos nos campos que deixam rolar alteração
 
 TODO: Entender o esquema de tratamento de erros do JHIpster
 
-TODO: Banner da Ligia
+TODO: Cologar a ngx-gallery dentro do projeto.
+Resolvemos o problema do erro besta do hammer.
+Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delete
 
-TODO: Menu para a Intranet
+TODO: Continuous Integration
+
+TODO: Debugar o erro que está rolando na edição
+
+TODO: Aumentar Robustez do Upload de Imagens e Vídeos
+Creio que se para no meio, o upload de imagens vai dar pau
+Também percebi que quando rola erro, não aparece nada para o usuário
+
+TODO: Acertar as traduções dos objetos alterados
+
+TODO: Melhorar o uso de cache
+
+TODO: Na edição do Post, manter as coisas em um serviço para ficar mais rápido, ou usar hide and show
+Principalemente quando pulamos de imagem para video
+
+TODO: Mudar de PAGE para SLICE
+
+------------------------------------------------------------------------------
+TODO: PWA
 
 TODO: Notificações
 PUSH Notifications
 
 TODO: Controle de dirty e salvamento automatico de post
 
-TODO: Remover imagens
+TODO: Banner da Ligia
 
-TODO: Cologar a ngx-gallery dentro do projeto.
-Resolvemos o problema do erro besta do hammer.
-Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delete
-
-TODO: Segurança AWS
-
-TODO: Continuous Integration GitHub
-
-TODO: Debugar o erro que está rolando na edição
-
-------------------------------------------------------------------------------
 TODO: Controle de leitura de posts e mensagens
 
 TODO: Autenticação por LDAP ou Social Login no Google
 
 TODO: Avatar para o grupo
 
-TODO: Melhorar o uso de cache
-
 TODO: Mostrar o post só quando tudo for carregado.
-
-TODO: Na edição do Post, manter as coisas em um serviço para ficar mais rápido, ou usar hide and show
-Principalemente quando pulamos de imagem para video
 
 TODO: Férias
 
@@ -96,8 +124,6 @@ TODO: Post ver mais
 TODO: Preview de link externo
 
 TODO: Comportamento diferenciado para o primeiro login
-
-TODO: Mudar de PAGE para SLICE
 
 TODO: Upload de vídeo
 
@@ -123,8 +149,9 @@ TODO: Denuncia de posts e comentários
 
 TODO: Salvar posts
 
-TODO: Extensão Pesquisa
+TODO: Extensão Pesquisa Nomeada e Anônima
 
 TODO: Extensão Check de Leitura feita
 
+TODO: Extensão NPS Nomeada e Anônima
 

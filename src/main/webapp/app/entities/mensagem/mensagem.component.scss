@@ -1,0 +1,40 @@
+
+.footer {
+  //position: -webkit-sticky;
+  //position: sticky;
+  //position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+}
+
+.footer-div {
+  background-color: rgb(219, 224, 230);;
+  width: 15px;
+}
+
+.chat-content{
+  background-color: white;
+  height: 100vh;
+}
+
+.message-content{
+  overflow-y: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100%;
+}
+
+.first-div {
+  height: 1px;
+  margin-top: auto;
+}
+
+.last-div {
+  height: 160px;
+}
+

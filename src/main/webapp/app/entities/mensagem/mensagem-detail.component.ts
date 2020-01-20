@@ -20,11 +20,11 @@ export class MensagemDetailComponent implements OnInit {
     window.history.back();
   }
 
-  tempoRelativo(post: IPost): string {
-    const ultimaDataRelevante = post.publicacao ? post.publicacao : post.ultimaEdicao;
+  tempoRelativo(mensagem: IMensagem): string {
+    const ultimaDataRelevante = mensagem.ultimaEdicao;
     ultimaDataRelevante!.locale("pt-br");
     const duration: moment.Duration = moment.duration(ultimaDataRelevante!.diff(moment()));
-    if (duration.asDays() > 1) return ultimaDataRelevante!.fromNow();
+    if (duration.asDays() < 1) return ultimaDataRelevante!.fromNow();
     return ultimaDataRelevante!.calendar();
   }
 

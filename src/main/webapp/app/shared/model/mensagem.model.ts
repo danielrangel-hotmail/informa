@@ -17,7 +17,10 @@ export class Mensagem implements IMensagem {
     public postId?: number,
     public conversaId?: number,
     public autorNome?: string,
+    public autorEmail?: string,
+    public conversaContinuada?: boolean,
   ) {
     this.temConversa = this.temConversa || false;
+    this.conversaContinuada = this.conversaContinuada || false;
   }
 }
