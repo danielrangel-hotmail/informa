@@ -1,6 +1,4 @@
-TODO: Fazer funcionar o básico das mensagens
-
-TODO: Fazer funcionar o básico das conversas
+TODO: E-mails de criação de conta
 
 TODO: Registrar o número de vezes que cada pessoa carregou os posts
 
@@ -15,12 +13,10 @@ TODO: Reações em posts e mensagens
 
 TODO: Role do Post Oficial
 Um post pode ser marcado como oficial da empresa
-O post sairá em nome da empresa by o criador
+O post sairá em nome da empresa by o criador somente para admins e post oficial
 Somente admins e caras com post oficial podem postar desta forma
 
 TODO: Rever menus
-
-TODO: E-mails de criação de conta
 
 TODO: Melhorar a home para não logados
 
@@ -34,10 +30,19 @@ TODO: Garantir o tamanho máximo do conteúdo
 
 TODO: Menu para a Intranet
 
-TODO: Segurança AWS
-
 TODO: Melhorar os Emojis e Menções
 Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
+
+TODO: Fazer o ENTER funcionar na mensagem como um SUBMIT
+E o SHIFT ENTER como ENTER
+
+TODO: Confidencialidade
+
+TODO: Fazer funcionar o básico das conversas
+
+TODO: Remoção de Posts
+
+TODO: Edição e Remoção de Mensagens
 
 TODO: Criar o conceito básico de Customer Success
 Para o pessoal que está entrando, haverá um wizard no sistema que conduzirá o colaborador, experimentar cada uma das features do sistema.
@@ -45,6 +50,7 @@ PAra o pessoal já velho, para novas features, ou alteração de features existe
 No profile ficará registrado quais features o colaborador experimentou, assim, ele pode saber das novidades
 Deve ser fácil experimentar o onboarding, para verificarmos como está a experiência de um novo colaborador.
 
+TODO: Segurança AWS
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
 
@@ -53,10 +59,11 @@ Fazer os testes atuais funcionarem
 Melhorar alguns testes
 Criar projeto no Jira
 Usar a IDE padrão dos desenvolvedores para o projeto
-Configurar o GitHub para funcionar
+Configurar o GitHub para funcionar => Continuous Integration & Deploy
 Criar uma S3 de desenvolvimento
 - Políticas para o usuário, somente usar a S3
 Branches
+Preparar um mob programing
 
 TODO: Entender porque unauthorized está desconectando o usuário, e decidir se este é o melhor comportamento
 
@@ -85,6 +92,12 @@ Principalemente quando pulamos de imagem para video
 
 TODO: Mudar de PAGE para SLICE
 
+TODO: Partições
+Criar partições para todas as tabelas
+partição de removido
+partição de arquivado
+
+TODO: Facilitar o uso por outras empresas
 ------------------------------------------------------------------------------
 TODO: PWA
 
