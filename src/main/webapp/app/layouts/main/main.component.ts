@@ -4,12 +4,15 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '
 import { TranslateService } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
+import {MensagemPostComponent} from 'app/entities/mensagem/mensagem-post/mensagem-post.component';
 
 @Component({
   selector: 'jhi-main',
   templateUrl: './main.component.html'
 })
 export class MainComponent implements OnInit {
+  poePadding = true;
+
   constructor(
     private accountService: AccountService,
     private translateService: TranslateService,
@@ -47,5 +50,9 @@ export class MainComponent implements OnInit {
       pageTitle = 'global.title';
     }
     this.translateService.get(pageTitle).subscribe(title => this.titleService.setTitle(title));
+  }
+
+  activateEvent(event: any): void {
+    this.poePadding = !(event instanceof MensagemPostComponent);
   }
 }

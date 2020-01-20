@@ -1,5 +1,6 @@
 <div class="chat-content">
     <div class="message-content" #message_container>
+<!--         infinite-scroll (scrolled)="loadPage(page + 1)" (scrolledUp)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="5" [infiniteScrollUpDistance]="5" [alwaysCallback]="true"-->
         <div class="first-div"></div>
         <div class="padding_navbar_fixed"></div>
         <jhi-post-single [post]="post"></jhi-post-single>

@@ -36,7 +36,7 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
     protected parseLinks: JhiParseLinks
   ) {
     this.mensagems = [];
-    this.itemsPerPage = ITEMS_PER_PAGE;
+    this.itemsPerPage = 100;
     this.page = 0;
     this.links = {
       last: 0
@@ -47,8 +47,8 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   ngAfterViewInit(): void {
-    // this.scrollContainer = this.scrollFrame.nativeElement;
-    // this.itemElements.changes.subscribe(() => this.onItemElementsChanged());
+    this.scrollContainer = this.scrollFrame.nativeElement;
+    this.itemElements.changes.subscribe(() => this.onItemElementsChanged());
   }
 
   private onItemElementsChanged(): void {
@@ -56,11 +56,11 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private scrollToBottom(): void {
-    // this.scrollContainer.scroll({
-    //   top: this.scrollContainer.scrollHeight,
-    //   left: 0,
-    //   behavior: 'smooth'
-    // });
+    this.scrollContainer.scroll({
+      top: this.scrollContainer.scrollHeight,
+      left: 0,
+      behavior: 'auto'
+    });
   }
 
   loadAll(): void {
