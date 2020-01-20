@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild, ViewChildren, ElementRef, QueryList, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ViewChild, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+// import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { MensagemService } from './mensagem.service';
 import { MensagemDeleteDialogComponent } from './mensagem-delete-dialog.component';
 import {IPost} from 'app/shared/model/post.interface';

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {IPost} from 'app/shared/model/post.interface';
 import * as moment from 'moment';
 import {IMensagem} from 'app/shared/model/mensagem.interface';
 

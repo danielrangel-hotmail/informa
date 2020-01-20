@@ -5,7 +5,7 @@
                 <img ngxGravatar [round]="false" [size]="33" [cornerRadius]="7" [email]="mensagem.autorEmail" >
             </div>
             <div class = "horario" *ngIf = "mensagem.conversaContinuada">
-                <div class = "small" style="width: 33px">{{mensagem.criacao.format("HH:mm")}}</div>
+                <div class = "small" style="width: 33px">{{mensagem.criacao!.format("HH:mm")}}</div>
             </div>
             <div class="">
                 <div class="" style="">
