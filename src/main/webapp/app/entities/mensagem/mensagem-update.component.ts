@@ -11,7 +11,8 @@ import { MensagemService } from './mensagem.service';
 import { IUser } from 'app/core/user/user.model';
 import { IPost } from 'app/shared/model/post.interface';
 import {IMensagem} from 'app/shared/model/mensagem.interface';
-import { JhiEventManager } from 'ng-jhipster';
+import { JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import { MatomoTracker } from 'ngx-matomo';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 
@@ -39,7 +40,8 @@ export class MensagemUpdateComponent implements OnInit {
   constructor(
     protected mensagemService: MensagemService,
     protected eventManager: JhiEventManager,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected matomoTracker: MatomoTracker
   ) {}
 
   ngOnInit(): void {
@@ -116,6 +118,7 @@ export class MensagemUpdateComponent implements OnInit {
 
   protected onSaveSuccess(): void {
     this.eventManager.broadcast('mensagemListModification');
+    this.analyticsEvent();
     this.post!.numeroDeMensagens = this.post!.numeroDeMensagens! + 1;
     this.resetForm();
     this.isSaving = false;
@@ -128,4 +131,10 @@ export class MensagemUpdateComponent implements OnInit {
   trackById(index: number, item: SelectableEntity): any {
     return item.id;
   }
+
+  analyticsEvent(): void {
+    this.matomoTracker.trackEvent('Mensagem', 'envioMensagem', this.post!.grupoId!.toString(), this.post!.id);
+
+  }
+
 }

@@ -1,6 +1,10 @@
-TODO: E-mails de criação de conta
+TODO: Responsivo
 
-TODO: Registrar o número de vezes que cada pessoa carregou os posts
+TODO: PWA
+
+TODO: Notificações
+PUSH Notifications
+
 
 TODO: Associação de usuários com grupos e favoritos
 Filtrar posts dos grupos
@@ -50,7 +54,15 @@ PAra o pessoal já velho, para novas features, ou alteração de features existe
 No profile ficará registrado quais features o colaborador experimentou, assim, ele pode saber das novidades
 Deve ser fácil experimentar o onboarding, para verificarmos como está a experiência de um novo colaborador.
 
+TODO: Registrar o número de vezes que cada pessoa carregou os posts
+Aguardando o Renato voltar para configurar o Matomo na aws
+
 TODO: Segurança AWS
+
+TODO: Melhorar o texto dos e-mails de ativação, criação e senha
+
+TODO: Travar e-mails de fora da Objective.
+
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
 
@@ -98,11 +110,9 @@ partição de removido
 partição de arquivado
 
 TODO: Facilitar o uso por outras empresas
-------------------------------------------------------------------------------
-TODO: PWA
 
-TODO: Notificações
-PUSH Notifications
+TODO: Fazer uma receita para implantar o sistema do ZERO!!!!
+------------------------------------------------------------------------------
 
 TODO: Controle de dirty e salvamento automatico de post
 

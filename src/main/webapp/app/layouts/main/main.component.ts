@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
 import {MensagemPostComponent} from 'app/entities/mensagem/mensagem-post/mensagem-post.component';
+import { MatomoTracker } from 'ngx-matomo';
 
 @Component({
   selector: 'jhi-main',
@@ -12,21 +13,45 @@ import {MensagemPostComponent} from 'app/entities/mensagem/mensagem-post/mensage
 })
 export class MainComponent implements OnInit {
   poePadding = true;
+  lastUrl = "Nenhuma";
 
   constructor(
     private accountService: AccountService,
     private translateService: TranslateService,
     private titleService: Title,
-    private router: Router
-  ) {}
+    private router: Router,
+    private matomoTracker: MatomoTracker
+  ) { }
 
   ngOnInit(): void {
     // try to log in automatically
     this.accountService.identity().subscribe();
+    this.accountService.getAuthenticationState().subscribe((account) => {
+      if (account == null) {
+        // eslint-disable-next-line no-console
+        console.log("matomo id resetado")
+        this.matomoTracker.resetUserId();
+      } else {
+        // eslint-disable-next-line no-console
+        console.log(`matomo id setado ${account.login}`)
+        this.matomoTracker.setUserId(account.login);
+        this.matomoTracker.setCustomUrl(this.lastUrl);
+        this.matomoTracker.trackPageView();
+      }
+    });
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        this.lastUrl = event.url;
         this.updateTitle();
+        if (this.accountService.isAuthenticated()) {
+          this.matomoTracker.setCustomUrl(event.url);
+        } else {
+          this.matomoTracker.setCustomUrl(event.url+'/non-authenticated');
+        }
+        // eslint-disable-next-line no-console
+        console.log(`matomo trackPageView ${event.url}`);
+        this.matomoTracker.trackPageView();
       }
       if (event instanceof NavigationError && event.error.status === 404) {
         this.router.navigate(['/404']);
@@ -49,10 +74,14 @@ export class MainComponent implements OnInit {
     if (!pageTitle) {
       pageTitle = 'global.title';
     }
-    this.translateService.get(pageTitle).subscribe(title => this.titleService.setTitle(title));
+    this.translateService.get(pageTitle).subscribe(title => {
+      this.matomoTracker.setDocumentTitle(title);
+      this.titleService.setTitle(title)
+    });
   }
 
   activateEvent(event: any): void {
     this.poePadding = !(event instanceof MensagemPostComponent);
   }
+
 }
