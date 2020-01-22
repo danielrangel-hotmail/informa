@@ -3,7 +3,7 @@
     <div style="height: 0px;">
         <router-outlet name="navbar"></router-outlet>
     </div>
-    <div class="container-fluid vh100">
+    <div class="container-fluid vh100 p-0">
         <div class="card jh-card" [ngClass] ="{'padding_navbar_fixed': poePadding}">
             <router-outlet (activate)="activateEvent($event)"></router-outlet>
         </div>

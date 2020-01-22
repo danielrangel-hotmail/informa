@@ -4,7 +4,7 @@ import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import {AMAZON_S3_BUCKET_URL} from 'app/entities/arquivo/arquivo.constants';
 import {IArquivo} from 'app/shared/model/arquivo.model';
 
-const GALLERY_SIZE = '598px';
+const GALLERY_SIZE = '100%';
 
 @Component({
   selector: 'jhi-post-image-view',

@@ -14,11 +14,11 @@
         <div class="width-main-view">
             <div class="bg-secondary mb-3 max-width-main-view border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
                 <form>
-                    <div class="row">
-                        <div class="col-10">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
                             <input type="text" class = "form-control input-cria-novo-post" placeholder="Crie um novo post" (click)="createPost()"></input>
                         </div>
-                        <div class="col-2 d-flex align-items-center" *ngIf="draftsQtd$ | async as draftCount">
+                        <div class="d-flex align-items-center" *ngIf="draftsQtd$ | async as draftCount">
                             <a [routerLink]="['/post']" class="draft">{{draftCount}} drafts</a>
                         </div>
                     </div>

@@ -32,16 +32,26 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-flex align-items-center">
                             <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao">
-                                <div class="p-1">
+                                <div class="p-1 d-none d-sm-block">
                                     <fa-icon icon="thumbs-up"></fa-icon>
                                     <span>Sem reações</span>
                                 </div>
+                                <div class="p-1 d-block d-sm-none">
+                                    <fa-icon icon="thumbs-up"></fa-icon>
+                                    <span>0</span>
+                                </div>
+
                             </jhi-hovered>
                             <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao" [routerLink]="['/mensagem/post/', post.id]">
-                                <div class="p-1">
+                                <div class="p-1 d-none d-sm-block">
                                     <fa-icon icon="comment"></fa-icon>
                                     <span>{{numeroDeMensagens()}}</span>
                                 </div>
+                                <div class="p-1 d-block d-sm-none">
+                                    <fa-icon icon="comment"></fa-icon>
+                                    <span>{{post.numeroDeMensagens}}</span>
+                                </div>
+
                             </jhi-hovered>
                         </div>
                         <div class="d-flex align-items-center">
