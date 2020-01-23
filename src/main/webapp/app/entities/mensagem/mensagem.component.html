@@ -1,5 +1,5 @@
 <div class="chat-content">
-    <div class="message-content" #message_container>
+    <div class="message-content " #message_container>
 <!--         infinite-scroll (scrolled)="loadPage(page + 1)" (scrolledUp)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="5" [infiniteScrollUpDistance]="5" [alwaysCallback]="true"-->
         <div class="first-div"></div>
         <div class="padding_navbar_fixed"></div>
@@ -11,9 +11,9 @@
             <div class="last-div"></div>
         </div>
     </div>
-    <div class="footer">
-        <div class = "footer-div"></div>
-        <jhi-mensagem-update class= "flex-grow-1"[post]="post"></jhi-mensagem-update>
-        <div class = "footer-div"></div>
+    <div class="footer-mensagem">
+        <div class="footer-background width-main-view">
+            <jhi-mensagem-update class= "width-main-view"[post]="post"></jhi-mensagem-update>
+        </div>
     </div>
 </div>

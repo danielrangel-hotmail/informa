@@ -1,33 +1,29 @@
-<div *ngIf="mensagem" style="background: white">
-    <jhi-hovered [hoverStyle]="{background: 'rgb(249,249,249)' }">
-        <div class="d-flex pt-1 pb-1">
-            <div class="avatar" *ngIf = "!mensagem.conversaContinuada">
-                <img ngxGravatar [round]="false" [size]="33" [cornerRadius]="7" [email]="mensagem.autorEmail" >
-            </div>
-            <div class = "horario" *ngIf = "mensagem.conversaContinuada">
-                <div class = "small" style="width: 33px">{{mensagem.criacao!.format("HH:mm")}}</div>
-            </div>
-            <div class="">
-                <div class="" style="">
-                    <div class="d-flex align-items-baseline" *ngIf = "!mensagem.conversaContinuada">
-                        <div class="autorNome">
-                            {{mensagem.autorNome}}
+<div *ngIf="mensagem" class="d-flex justify-content-center">
+    <div class="width-main-view" style="background: white">
+        <jhi-hovered [hoverStyle]="{background: 'rgb(249,249,249)' }">
+            <div class="d-flex pt-1 pb-1">
+                <div class="avatar" *ngIf = "!mensagem.conversaContinuada">
+                    <img ngxGravatar [round]="false" [size]="33" [cornerRadius]="7" [email]="mensagem.autorEmail" >
+                </div>
+                <div class = "horario" *ngIf = "mensagem.conversaContinuada">
+                    <div class = "small" style="width: 33px">{{mensagem.criacao!.format("HH:mm")}}</div>
+                </div>
+                <div class="">
+                    <div class="" style="">
+                        <div class="d-flex align-items-baseline" *ngIf = "!mensagem.conversaContinuada">
+                            <div class="autorNome">
+                                {{mensagem.autorNome}}
+                            </div>
+                            <div class="small pl-2">
+                                {{tempoRelativo(mensagem)}}
+                            </div>
                         </div>
-                        <div class="small pl-2">
-                            {{tempoRelativo(mensagem)}}
+                        <div>
+                            <quill-view id="vmensagem" [content]="mensagem.conteudo" format="json" theme="snow"></quill-view>
                         </div>
-                    </div>
-                    <div>
-                        <quill-view id="vmensagem" [content]="mensagem.conteudo" format="json" theme="snow"></quill-view>
                     </div>
                 </div>
             </div>
-    </jhi-hovered>
+        </jhi-hovered>
     </div>
-<!--        <div class = "mb-1">-->
-<!--            <jhi-post-image-view [post]="post" ></jhi-post-image-view>-->
-<!--        </div>-->
-<!--        <div class = "mb-1">-->
-<!--            <jhi-post-link-externo-video-view [post]="post" ></jhi-post-link-externo-video-view>-->
-<!--        </div>-->
 </div>

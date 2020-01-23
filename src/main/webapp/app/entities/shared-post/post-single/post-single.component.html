@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
     <div class="width-main-view">
         <div *ngIf="post">
-            <div class="bg-secondary mb-3 max-width-main-view border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
+            <div class="bg-secondary mb-3 border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
                 <div class="d-flex flex-row p-2">
                     <div class="mr-1">
                         <img ngxGravatar [round]="false" [size]="50" [cornerRadius]="7" [email]="post.autorEmail">
