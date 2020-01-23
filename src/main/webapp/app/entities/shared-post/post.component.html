@@ -1,15 +1,5 @@
 <div *ngIf="account$ | async as account">
-<!--    <h2 id="page-heading">-->
-<!--        <span jhiTranslate="informaApp.post.home.title">Posts</span>-->
-<!--        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-post" (click)="createPost()">-->
-<!--            <fa-icon [icon]="'plus'"></fa-icon>-->
-<!--            <span  jhiTranslate="informaApp.post.home.createLabel">-->
-<!--            Create a new Post-->
-<!--            </span>-->
-<!--        </button>-->
-<!--    </h2>-->
     <jhi-alert-error></jhi-alert-error>
-    <br/>
     <div class="d-flex justify-content-center ">
         <div class="width-main-view">
             <div class="bg-secondary mb-3 border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
@@ -25,14 +15,13 @@
                 </form>
             </div>
         </div>
-
     </div>
-    <div class="alert alert-warning" *ngIf="posts?.length === 0" ng-cloak>
-        <span jhiTranslate="informaApp.post.home.notFound">No posts found</span>
-    </div>
-    <div *ngIf="posts?.length > 0" infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0" ng-cloak>
-        <div *ngFor="let post of posts ;trackBy: trackId">
-            <jhi-post-single [post]="post" [account]="account"></jhi-post-single>
-        </div>
+</div>
+<div class="alert alert-warning" *ngIf="posts?.length === 0" ng-cloak>
+    <span jhiTranslate="informaApp.post.home.notFound">No posts found</span>
+</div>
+<div *ngIf="posts?.length > 0" infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0" ng-cloak>
+    <div *ngFor="let post of posts ;trackBy: trackId">
+        <jhi-post-single [post]="post" [account]="account"></jhi-post-single>
     </div>
 </div>

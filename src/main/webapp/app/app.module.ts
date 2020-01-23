@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 import './vendor';
 import { InformaSharedModule } from 'app/shared/shared.module';
@@ -21,6 +22,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     InformaSharedModule,
     InformaCoreModule,
     InformaHomeModule,
+    ServiceWorkerModule.register('/service-worker.js'),
     // jhipster-needle-angular-add-module JHipster will add new module here
     InformaEntityModule,
     InformaAppRoutingModule

@@ -1,5 +1,8 @@
 <div [ngSwitch]="isAuthenticated()">
-    <jhi-post *ngSwitchCase="true"></jhi-post>
+    <div  *ngSwitchCase="true" class = "d-flex justify-content-center">
+        <jhi-web-notification></jhi-web-notification>
+        <router-outlet></router-outlet>
+    </div>
     <div class="row" *ngSwitchCase="false">
         <div class="col-md-3"></div>
         <div class="col-md-9">
