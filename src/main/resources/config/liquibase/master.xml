@@ -17,9 +17,13 @@
     <include file="config/liquibase/changelog/20200106024143_added_entity_Grupo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200106024144_added_entity_Post.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200106024145_added_entity_Mensagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200123212228_added_entity_PushSubscription.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200123212229_added_entity_PerfilUsuario.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200106024144_added_entity_constraints_Post.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200106024145_added_entity_constraints_Mensagem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200123212228_added_entity_constraints_PushSubscription.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200123212229_added_entity_constraints_PerfilUsuario.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <include file="config/liquibase/changelog/20200114154740_added_entity_Arquivo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200114195552_post_oficial_grupo_nullable.xml" relativeToChangelogFile="false"/>

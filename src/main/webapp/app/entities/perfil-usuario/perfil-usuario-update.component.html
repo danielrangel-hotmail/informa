@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-perfil-usuario-heading" jhiTranslate="informaApp.perfilUsuario.home.createOrEditLabel">Create or edit a Perfil Usuario</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.perfilUsuario.criacao" for="field_criacao">Criacao</label>
+                    <div class="d-flex">
+                        <input id="field_criacao" type="datetime-local" class="form-control" name="criacao" formControlName="criacao" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.perfilUsuario.ultimaEdicao" for="field_ultimaEdicao">Ultima Edicao</label>
+                    <div class="d-flex">
+                        <input id="field_ultimaEdicao" type="datetime-local" class="form-control" name="ultimaEdicao" formControlName="ultimaEdicao" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.perfilUsuario.versao" for="field_versao">Versao</label>
+                    <input type="number" class="form-control" name="versao" id="field_versao"
+                           formControlName="versao"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.perfilUsuario.entradaNaEmpresa" for="field_entradaNaEmpresa">Entrada Na Empresa</label>
+                    <div class="input-group">
+                        <input id="field_entradaNaEmpresa" type="text" class="form-control" name="entradaNaEmpresa" ngbDatepicker  #entradaNaEmpresaDp="ngbDatepicker" formControlName="entradaNaEmpresa"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="entradaNaEmpresaDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.perfilUsuario.saidaDaEmpresa" for="field_saidaDaEmpresa">Saida Da Empresa</label>
+                    <div class="input-group">
+                        <input id="field_saidaDaEmpresa" type="text" class="form-control" name="saidaDaEmpresa" ngbDatepicker  #saidaDaEmpresaDp="ngbDatepicker" formControlName="saidaDaEmpresa"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="saidaDaEmpresaDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.perfilUsuario.nascimento" for="field_nascimento">Nascimento</label>
+                    <div class="input-group">
+                        <input id="field_nascimento" type="text" class="form-control" name="nascimento" ngbDatepicker  #nascimentoDp="ngbDatepicker" formControlName="nascimento"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="nascimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.perfilUsuario.skype" for="field_skype">Skype</label>
+                    <input type="text" class="form-control" name="skype" id="field_skype"
+                           formControlName="skype"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.perfilUsuario.usuario" for="field_usuario">Usuario</label>
+                    <select class="form-control" id="field_usuario" name="usuario" formControlName="usuarioId">
+                        <option *ngIf="!editForm.get('usuarioId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackById">{{userOption.id}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('usuarioId')!.invalid && (editForm.get('usuarioId')!.dirty || editForm.get('usuarioId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('usuarioId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

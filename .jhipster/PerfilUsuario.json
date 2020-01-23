@@ -1,0 +1,60 @@
+{
+    "name": "PerfilUsuario",
+    "fields": [
+        {
+            "fieldName": "criacao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ultimaEdicao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "versao",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "entradaNaEmpresa",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "saidaDaEmpresa",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "nascimento",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "skype",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "perfil",
+            "relationshipValidateRules": "required",
+            "relationshipName": "usuario",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "pushSubscription",
+            "otherEntityRelationshipName": "perfil",
+            "relationshipName": "subscriptions"
+        }
+    ],
+    "changelogDate": "20200123212229",
+    "entityTableName": "perfil_usuario",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

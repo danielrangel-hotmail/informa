@@ -96,3 +96,37 @@ enum LinkTipo {
     EXTERNO
 }
 
+
+@dto(mapstruct)
+@service(serviceClass)
+entity PushSubscription {
+	id UUID,
+    versao Long,
+    criacao ZonedDateTime,
+    endpoint String,
+    key String,
+    auth String
+}
+
+@dto(mapstruct)
+@service(serviceClass)
+@paginate(infinite-scroll)
+entity PerfilUsuario {
+	id UUID,
+    criacao ZonedDateTime,
+    ultimaEdicao ZonedDateTime,
+    versao Long,
+	entradaNaEmpresa LocalDate,
+    saidaDaEmpresa LocalDate,
+	nascimento LocalDate,
+    skype String
+}
+
+relationship OneToOne {
+	PerfilUsuario{usuario required} to User{perfil}
+}
+
+relationship OneToMany {
+	PerfilUsuario{subscriptions} to PushSubscription{perfil required}
+}
+

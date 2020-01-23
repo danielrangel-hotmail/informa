@@ -23,6 +23,14 @@ import { RouterModule } from '@angular/router';
       {
         path: 'link-externo',
         loadChildren: () => import('./link-externo/link-externo.module').then(m => m.InformaLinkExternoModule)
+      },
+      {
+        path: 'push-subscription',
+        loadChildren: () => import('./push-subscription/push-subscription.module').then(m => m.InformaPushSubscriptionModule)
+      },
+      {
+        path: 'perfil-usuario',
+        loadChildren: () => import('./perfil-usuario/perfil-usuario.module').then(m => m.InformaPerfilUsuarioModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

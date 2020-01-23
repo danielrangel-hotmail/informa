@@ -57,6 +57,18 @@
                             <span jhiTranslate="global.menu.entities.linkExterno">Link Externo</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="push-subscription" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.pushSubscription">Push Subscription</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="perfil-usuario" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" fixedWidth="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.perfilUsuario">Perfil Usuario</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

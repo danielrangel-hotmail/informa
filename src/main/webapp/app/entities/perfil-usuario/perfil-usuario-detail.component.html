@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="perfilUsuario">
+            <h2><span jhiTranslate="informaApp.perfilUsuario.detail.title">Perfil Usuario</span> {{perfilUsuario.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="informaApp.perfilUsuario.criacao">Criacao</span></dt>
+                <dd>
+                    <span>{{perfilUsuario.criacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilUsuario.ultimaEdicao">Ultima Edicao</span></dt>
+                <dd>
+                    <span>{{perfilUsuario.ultimaEdicao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilUsuario.versao">Versao</span></dt>
+                <dd>
+                    <span>{{perfilUsuario.versao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilUsuario.entradaNaEmpresa">Entrada Na Empresa</span></dt>
+                <dd>
+                    <span>{{perfilUsuario.entradaNaEmpresa}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilUsuario.saidaDaEmpresa">Saida Da Empresa</span></dt>
+                <dd>
+                    <span>{{perfilUsuario.saidaDaEmpresa}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilUsuario.nascimento">Nascimento</span></dt>
+                <dd>
+                    <span>{{perfilUsuario.nascimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilUsuario.skype">Skype</span></dt>
+                <dd>
+                    <span>{{perfilUsuario.skype}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilUsuario.usuario">Usuario</span></dt>
+                <dd>
+                    {{perfilUsuario.usuarioId}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/perfil-usuario', perfilUsuario.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

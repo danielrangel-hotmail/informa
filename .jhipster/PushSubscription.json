@@ -1,0 +1,45 @@
+{
+    "name": "PushSubscription",
+    "fields": [
+        {
+            "fieldName": "versao",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "criacao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "endpoint",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "key",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "auth",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "perfilUsuario",
+            "otherEntityRelationshipName": "subscriptions",
+            "relationshipValidateRules": "required",
+            "relationshipName": "perfil",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200123212228",
+    "entityTableName": "push_subscription",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

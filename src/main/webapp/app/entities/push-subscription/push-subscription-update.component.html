@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-push-subscription-heading" jhiTranslate="informaApp.pushSubscription.home.createOrEditLabel">Create or edit a Push Subscription</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.pushSubscription.versao" for="field_versao">Versao</label>
+                    <input type="number" class="form-control" name="versao" id="field_versao"
+                           formControlName="versao"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.pushSubscription.criacao" for="field_criacao">Criacao</label>
+                    <div class="d-flex">
+                        <input id="field_criacao" type="datetime-local" class="form-control" name="criacao" formControlName="criacao" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.pushSubscription.endpoint" for="field_endpoint">Endpoint</label>
+                    <input type="text" class="form-control" name="endpoint" id="field_endpoint"
+                           formControlName="endpoint"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.pushSubscription.key" for="field_key">Key</label>
+                    <input type="text" class="form-control" name="key" id="field_key"
+                           formControlName="key"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.pushSubscription.auth" for="field_auth">Auth</label>
+                    <input type="text" class="form-control" name="auth" id="field_auth"
+                           formControlName="auth"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.pushSubscription.perfil" for="field_perfil">Perfil</label>
+                    <select class="form-control" id="field_perfil" name="perfil" formControlName="perfilId">
+                        <option *ngIf="!editForm.get('perfilId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="perfilUsuarioOption.id" *ngFor="let perfilUsuarioOption of perfilusuarios; trackBy: trackById">{{perfilUsuarioOption.id}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('perfilId')!.invalid && (editForm.get('perfilId')!.dirty || editForm.get('perfilId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('perfilId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

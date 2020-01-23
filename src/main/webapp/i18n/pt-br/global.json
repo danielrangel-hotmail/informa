@@ -12,6 +12,8 @@
         "mensagem": "Mensagem",
         "arquivo": "Arquivo",
         "linkExterno": "Link Externo",
+        "pushSubscription": "Push Subscription",
+        "perfilUsuario": "Perfil Usuario",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

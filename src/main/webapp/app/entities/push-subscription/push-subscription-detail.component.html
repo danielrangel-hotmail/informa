@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pushSubscription">
+            <h2><span jhiTranslate="informaApp.pushSubscription.detail.title">Push Subscription</span> {{pushSubscription.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="informaApp.pushSubscription.versao">Versao</span></dt>
+                <dd>
+                    <span>{{pushSubscription.versao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.pushSubscription.criacao">Criacao</span></dt>
+                <dd>
+                    <span>{{pushSubscription.criacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.pushSubscription.endpoint">Endpoint</span></dt>
+                <dd>
+                    <span>{{pushSubscription.endpoint}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.pushSubscription.key">Key</span></dt>
+                <dd>
+                    <span>{{pushSubscription.key}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.pushSubscription.auth">Auth</span></dt>
+                <dd>
+                    <span>{{pushSubscription.auth}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.pushSubscription.perfil">Perfil</span></dt>
+                <dd>
+                    <div *ngIf="pushSubscription.perfilId">
+                        <a [routerLink]="['/perfil-usuario', pushSubscription.perfilId, 'view']">{{pushSubscription.perfilId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/push-subscription', pushSubscription.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

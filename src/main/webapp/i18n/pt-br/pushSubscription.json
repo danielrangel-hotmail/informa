@@ -1,0 +1,27 @@
+{
+  "informaApp": {
+    "pushSubscription": {
+      "home": {
+        "title": "Push Subscriptions",
+        "createLabel": "Criar novo Push Subscription",
+        "createOrEditLabel": "Criar ou editar Push Subscription",
+        "notFound": "Nenhum Push Subscription encontrado"
+      },
+      "created": "Um novo Push Subscription foi criado com o identificador {{ param }}",
+      "updated": "Um Push Subscription foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Push Subscription foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Push Subscription {{ id }}?"
+      },
+      "detail": {
+        "title": "Push Subscription"
+      },
+      "versao": "Versao",
+      "criacao": "Criacao",
+      "endpoint": "Endpoint",
+      "key": "Key",
+      "auth": "Auth",
+      "perfil": "Perfil"
+    }
+  }
+}

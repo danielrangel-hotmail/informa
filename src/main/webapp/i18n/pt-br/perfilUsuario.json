@@ -1,0 +1,30 @@
+{
+  "informaApp": {
+    "perfilUsuario": {
+      "home": {
+        "title": "Perfil Usuarios",
+        "createLabel": "Criar novo Perfil Usuario",
+        "createOrEditLabel": "Criar ou editar Perfil Usuario",
+        "notFound": "Nenhum Perfil Usuario encontrado"
+      },
+      "created": "Um novo Perfil Usuario foi criado com o identificador {{ param }}",
+      "updated": "Um Perfil Usuario foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Perfil Usuario foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Perfil Usuario {{ id }}?"
+      },
+      "detail": {
+        "title": "Perfil Usuario"
+      },
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "versao": "Versao",
+      "entradaNaEmpresa": "Entrada Na Empresa",
+      "saidaDaEmpresa": "Saida Da Empresa",
+      "nascimento": "Nascimento",
+      "skype": "Skype",
+      "usuario": "Usuario",
+      "subscriptions": "Subscriptions"
+    }
+  }
+}

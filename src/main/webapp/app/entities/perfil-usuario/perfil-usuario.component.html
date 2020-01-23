@@ -1,0 +1,71 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="informaApp.perfilUsuario.home.title">Perfil Usuarios</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-perfil-usuario" [routerLink]="['/perfil-usuario/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="informaApp.perfilUsuario.home.createLabel">
+            Create a new Perfil Usuario
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="perfilUsuarios?.length === 0">
+        <span jhiTranslate="informaApp.perfilUsuario.home.notFound">No perfilUsuarios found</span>
+    </div>
+    <div class="table-responsive" *ngIf="perfilUsuarios?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="criacao"><span jhiTranslate="informaApp.perfilUsuario.criacao">Criacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="ultimaEdicao"><span jhiTranslate="informaApp.perfilUsuario.ultimaEdicao">Ultima Edicao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="versao"><span jhiTranslate="informaApp.perfilUsuario.versao">Versao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="entradaNaEmpresa"><span jhiTranslate="informaApp.perfilUsuario.entradaNaEmpresa">Entrada Na Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="saidaDaEmpresa"><span jhiTranslate="informaApp.perfilUsuario.saidaDaEmpresa">Saida Da Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nascimento"><span jhiTranslate="informaApp.perfilUsuario.nascimento">Nascimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="skype"><span jhiTranslate="informaApp.perfilUsuario.skype">Skype</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="usuarioId"><span jhiTranslate="informaApp.perfilUsuario.usuario">Usuario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let perfilUsuario of perfilUsuarios ;trackBy: trackId">
+                <td><a [routerLink]="['/perfil-usuario', perfilUsuario.id, 'view' ]">{{perfilUsuario.id}}</a></td>
+                <td>{{perfilUsuario.criacao | date:'medium'}}</td>
+                <td>{{perfilUsuario.ultimaEdicao | date:'medium'}}</td>
+                <td>{{perfilUsuario.versao}}</td>
+                <td>{{perfilUsuario.entradaNaEmpresa | date:'mediumDate'}}</td>
+                <td>{{perfilUsuario.saidaDaEmpresa | date:'mediumDate'}}</td>
+                <td>{{perfilUsuario.nascimento | date:'mediumDate'}}</td>
+                <td>{{perfilUsuario.skype}}</td>
+                <td>
+                    {{perfilUsuario.usuarioId}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/perfil-usuario', perfilUsuario.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/perfil-usuario', perfilUsuario.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(perfilUsuario)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
