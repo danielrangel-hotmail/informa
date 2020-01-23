@@ -1,4 +1,3 @@
-TODO: Responsivo
 
 TODO: PWA
 
@@ -68,7 +67,11 @@ TODO: Travar e-mails de fora da Objective.
 
 TODO: CSS => Resolver a lista do quill-editor de align. Está 3px para baixo o svg
 
+TODO: Ver a responsividade para o restante do app
 
+TODO: Rever o esquema de criar um post
+Para não criar sempre do zero
+Quando tentar adicionar imagem ou vídeo, aí cria
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
 
