@@ -25,6 +25,9 @@ TODO: Rever menus
 TODO: Melhorar a home para não logados
 
 TODO: Remover imagens
+Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
+https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
+Tirar o router e fazer hide and show
 
 TODO: Filtro meus grupos, meus grupos formais, meus grupos informais, um grupo específico
 
@@ -62,6 +65,9 @@ TODO: Segurança AWS
 TODO: Melhorar o texto dos e-mails de ativação, criação e senha
 
 TODO: Travar e-mails de fora da Objective.
+
+TODO: CSS => Resolver a lista do quill-editor de align. Está 3px para baixo o svg
+
 
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
@@ -113,6 +119,8 @@ TODO: Facilitar o uso por outras empresas
 
 TODO: Fazer uma receita para implantar o sistema do ZERO!!!!
 ------------------------------------------------------------------------------
+
+TODO: Share https://web.dev/web-share-target/
 
 TODO: Controle de dirty e salvamento automatico de post
 

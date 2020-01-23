@@ -11,6 +11,7 @@ import { HttpResponse } from '@angular/common/http';
 @Component({
   selector: 'jhi-quill-editor',
   templateUrl: './quill-editor-custom.component.html',
+  styleUrls: [ './quil-editor-custom.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

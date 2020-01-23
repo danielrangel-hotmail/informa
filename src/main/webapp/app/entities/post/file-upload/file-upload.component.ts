@@ -4,6 +4,7 @@ import { HttpResponse } from '@angular/common/http';
 import {ArquivoService} from 'app/entities/arquivo/arquivo.service';
 import {Arquivo} from 'app/shared/model/arquivo.model';
 import {IPost} from 'app/shared/model/post.interface';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 // const URL = '/api/';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
@@ -20,7 +21,9 @@ export class FileUploadComponent implements OnInit{
   hasBaseDropZoneOver:boolean;
   response:string;
 
-  constructor (protected arquivoService: ArquivoService ){
+  constructor (
+    protected arquivoService: ArquivoService,
+    protected deviceService: DeviceDetectorService ){
 
     this.uploader = new FileUploader({
       url: URL,
@@ -61,7 +64,7 @@ export class FileUploadComponent implements OnInit{
           if (!this.post.arquivos) {
             this.post.arquivos = [ result.body ];
           } else {
-            this.post.arquivos.push(result.body);
+            this.post.arquivos = [ ...this.post.arquivos, result.body];
           }
           const url = result.body ? result.body.s3PresignedURL : null;
           if (url != null) item.url = url;

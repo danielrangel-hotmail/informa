@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import {IArquivo} from 'app/shared/model/arquivo.model';
 import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import {AMAZON_S3_BUCKET_URL} from 'app/entities/arquivo/arquivo.constants';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'jhi-post-image',
@@ -20,10 +21,12 @@ export class PostImageComponent implements OnInit {
   arquivosDoPost?: IArquivo[];
   fazendoUpload = false;
 
-  constructor(protected activatedRoute: ActivatedRoute) {
+  constructor(
+    protected activatedRoute: ActivatedRoute,
+    protected deviceService: DeviceDetectorService) {
     this.galleryOptions = [
       {
-        width: '600px',
+        width: '100%',
         height: '400px',
         thumbnailsColumns: 4,
         thumbnailsRows: 1,
@@ -63,8 +66,16 @@ export class PostImageComponent implements OnInit {
     return this.galleryImagesParaPost;
   }
 
+  mostraMaisImagens(): boolean {
+    return (!this.deviceService.isMobile()) && (!this.fazendoUpload);
+  }
+
+  mostraFileUpload(): boolean {
+    return (this.deviceService.isMobile()) || (this.fazendoUpload);
+  }
+
   mostraGaleria(): boolean {
-    return  !this.fazendoUpload;
+    return  (this.deviceService.isMobile()) || (!this.fazendoUpload);
   }
 
   terminouUpload(): void {

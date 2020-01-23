@@ -22,8 +22,7 @@
 </style>
 
 
-<div class="mb-3">
-
+<div class="mb-3"  *ngIf="!deviceService.isMobile()">
     <div ng2FileDrop
          [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
          (fileOver)="fileOverBase($event)"
@@ -36,6 +35,15 @@
             </label>
             <input id="file-upload" type="file" ng2FileSelect [uploader]="uploader" multiple/><br/>
         </div>
+    </div>
+</div>
+
+<div class="mb-3 mt-3"  *ngIf="deviceService.isMobile()">
+    <div>
+        <label for="file-upload-solo" class="btn btn-success btn-s">
+            <fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span>Mais Imagens</span>
+        </label>
+        <input id="file-upload-solo" type="file" ng2FileSelect [uploader]="uploader" multiple/><br/>
     </div>
 </div>
 

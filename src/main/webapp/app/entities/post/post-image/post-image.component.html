@@ -1,14 +1,16 @@
 <div *ngIf="post$ | async as post">
-    <div *ngIf="mostraGaleria()" >
+    <div *ngIf="mostraMaisImagens()" >
         <div class="btn btn-primary mb-3 mt-3" (click)="maisImagens()">
             <fa-icon [icon]="'plus'"></fa-icon>&nbsp;<span>Mais Imagens</span>
         </div>
-        <ngx-gallery [options]="galleryOptions" [images]="galleryImages(post)"></ngx-gallery>
     </div>
-    <div *ngIf="!mostraGaleria()">
-        <div class="btn btn-primary mb-3 mt-3" (click)="terminouUpload() ">
+    <div *ngIf="mostraFileUpload()">
+        <div *ngIf="!deviceService.isMobile()" class="btn btn-primary mb-3 mt-3" (click)="terminouUpload() ">
             <fa-icon [icon]="'camera'"></fa-icon>&nbsp;<span>Ver Imagens</span>
         </div>
         <jhi-file-upload (uploadFinalizado)="terminouUpload()" [post]="post"></jhi-file-upload>
+    </div>
+    <div *ngIf="mostraGaleria()" >
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages(post)"></ngx-gallery>
     </div>
 </div>

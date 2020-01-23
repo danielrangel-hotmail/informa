@@ -18,12 +18,14 @@
         <button class="ql-clean" placement="bottom" ngbTooltip="Sem formatação"></button>
         <button class="ql-link" placement="bottom" ngbTooltip="Link"></button>
         <button class="ql-emoji" placement="bottom" ngbTooltip="Emoji"></button>
-    </span>
-        <span class="ql-formats">
-        <button class="ql-align" value="" placement="bottom" ngbTooltip="Esquerda"></button>
-        <button class="ql-align" value="center" placement="bottom" ngbTooltip="Centro"></button>
-        <button class="ql-align" value="right" placement="bottom" ngbTooltip="Direita"></button>
-        <button class="ql-align" value="justify" placement="bottom" ngbTooltip="Justificado"></button>
+        <span class="ql-align-svg">
+        <select class="ql-align" defaultValue="">
+            <option value="" label="Left"></option>
+            <option value="center" label="Center"></option>
+            <option value="right" label="Right"></option>
+            <option value="justify" label="Justify"></option>
+        </select>
+        </span>
     </span>
     </div>
 </quill-editor>
