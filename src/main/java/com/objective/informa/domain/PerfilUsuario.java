@@ -22,8 +22,6 @@ public class PerfilUsuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
     @Column(name = "criacao")
@@ -47,9 +45,10 @@ public class PerfilUsuario implements Serializable {
     @Column(name = "skype")
     private String skype;
 
-    @OneToOne(optional = false)
+    @OneToOne()
     @NotNull
-    @JoinColumn(unique = true)
+    @JoinColumn(name = "id")
+    @MapsId
     private User usuario;
 
     @OneToMany(mappedBy = "perfil")

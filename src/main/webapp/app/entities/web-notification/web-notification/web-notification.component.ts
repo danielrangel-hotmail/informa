@@ -21,7 +21,7 @@ export class WebNotificationComponent implements OnInit {
     this.swPush.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY
     })
-    .then(sub => this.webNotification.addPushSubscriber(sub).subscribe())
+    .then(sub => this.webNotification.addPushSubscriber(sub))
     .catch(err => console.error("Could not subscribe to notifications", err));
   }
 }

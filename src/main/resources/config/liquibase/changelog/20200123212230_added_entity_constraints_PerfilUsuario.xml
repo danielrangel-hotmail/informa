@@ -7,8 +7,8 @@
         Added the constraints for entity PerfilUsuario.
     -->
     <changeSet id="20200123212229-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="usuario_id"
+
+        <addForeignKeyConstraint baseColumnNames="id"
                                  baseTableName="perfil_usuario"
                                  constraintName="fk_perfil_usuario_usuario_id"
                                  referencedColumnNames="id"

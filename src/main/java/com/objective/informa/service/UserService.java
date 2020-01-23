@@ -7,6 +7,7 @@ import com.objective.informa.repository.AuthorityRepository;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.AuthoritiesConstants;
 import com.objective.informa.security.SecurityUtils;
+import com.objective.informa.service.dto.PerfilUsuarioDTO;
 import com.objective.informa.service.dto.UserDTO;
 
 import io.github.jhipster.security.RandomUtil;
@@ -43,11 +44,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final PerfilUsuarioService perfilUsuarioService;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, PerfilUsuarioService perfilUsuarioService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.perfilUsuarioService = perfilUsuarioService;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -122,6 +126,8 @@ public class UserService {
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
+
+        criaPerfilUsuario(newUser);
         return newUser;
     }
 
@@ -165,7 +171,15 @@ public class UserService {
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
+
+        criaPerfilUsuario(user);
         return user;
+    }
+
+    private void criaPerfilUsuario(User user) {
+        final PerfilUsuarioDTO perfilUsuarioDTO = new PerfilUsuarioDTO();
+        perfilUsuarioDTO.setUsuarioId(user.getId());
+        perfilUsuarioService.save(perfilUsuarioDTO);
     }
 
     /**
