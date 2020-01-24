@@ -72,4 +72,21 @@ export class PushSubscriptionService {
     }
     return res;
   }
+
+  private convertKeyToString(key: ArrayBuffer | null): string {
+    if (key == null) return "";
+    return btoa(String.fromCharCode.apply(null, Array.from(new Uint8Array(key))));
+  }
+
+
+  addPushSubscriber(sub: PushSubscription): Observable<EntityResponseType> {
+    const auth = this.convertKeyToString(sub.getKey("auth"));
+    const p256dh = this.convertKeyToString(sub.getKey("p256dh"));
+    const pushSubscription: IPushSubscription = {
+      endpoint: sub.endpoint,
+      key: p256dh,
+      auth
+    };
+    return this.create(pushSubscription);
+  }
 }

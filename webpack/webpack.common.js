@@ -3,6 +3,7 @@ const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin");
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const utils = require('./utils.js');
 
 module.exports = (options) => ({
@@ -89,6 +90,9 @@ module.exports = (options) => ({
             chunksSortMode: 'manual',
             inject: 'body'
         }),
-        new BaseHrefWebpackPlugin({ baseHref: '/' })
+        new BaseHrefWebpackPlugin({ baseHref: '/' }),
+        new WorkboxPlugin.InjectManifest({
+          swSrc: './src/main/webapp/service-worker/service-worker.js'
+        })
     ]
 });

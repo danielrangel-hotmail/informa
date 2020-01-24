@@ -22,7 +22,7 @@ import { ErrorComponent } from './layouts/error/error.component';
     InformaSharedModule,
     InformaCoreModule,
     InformaHomeModule,
-    ServiceWorkerModule.register('/service-worker.js'),
+    ServiceWorkerModule.register('/service-worker.js', { enabled: true }),
     // jhipster-needle-angular-add-module JHipster will add new module here
     InformaEntityModule,
     InformaAppRoutingModule

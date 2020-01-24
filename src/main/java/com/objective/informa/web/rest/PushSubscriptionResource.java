@@ -52,7 +52,7 @@ public class PushSubscriptionResource {
         if (pushSubscriptionDTO.getId() != null) {
             throw new BadRequestAlertException("A new pushSubscription cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        PushSubscriptionDTO result = pushSubscriptionService.save(pushSubscriptionDTO);
+        PushSubscriptionDTO result = pushSubscriptionService.create(pushSubscriptionDTO);
         return ResponseEntity.created(new URI("/api/push-subscriptions/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);

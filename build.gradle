@@ -274,6 +274,8 @@ dependencies {
     implementation "org.mapstruct:mapstruct:${mapstruct_version}"
     implementation platform('software.amazon.awssdk:bom:2.10.47')
     implementation 'software.amazon.awssdk:s3'
+    compile group: 'nl.martijndwars', name: 'web-push', version: '5.1.0'
+    compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.64'
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
     annotationProcessor "org.hibernate:hibernate-jpamodelgen:${hibernate_version}"
     annotationProcessor "org.glassfish.jaxb:jaxb-runtime:${jaxb_runtime_version}"

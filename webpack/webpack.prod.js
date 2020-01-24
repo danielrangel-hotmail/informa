@@ -147,11 +147,6 @@ module.exports = webpackMerge(commonConfig({ env: ENV }), {
         new webpack.LoaderOptionsPlugin({
             minimize: true,
             debug: false
-        }),
-        new WorkboxPlugin.GenerateSW({
-          clientsClaim: true,
-          skipWaiting: true,
-          exclude: [/swagger-ui/]
         })
     ],
     mode: 'production'
