@@ -23,7 +23,7 @@ export class PostImageComponent implements OnInit {
 
   constructor(
     protected activatedRoute: ActivatedRoute,
-    protected deviceService: DeviceDetectorService) {
+    public deviceService: DeviceDetectorService) {
     this.galleryOptions = [
       {
         width: '100%',

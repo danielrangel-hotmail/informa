@@ -1,11 +1,13 @@
 TODO: Usar ferramentas dos devs
 
-TODO: Criar título do post
-
 TODO: Associação de usuários com grupos e favoritos e notificações
 Filtrar posts dos grupos
 
+TODO: Criar título do post
+
 TODO: Sumir com o flash de posts não encontrados
+
+TODO: Mensagem tá zuada o alinhamento
 
 TODO: Formatar a página de grupos
 
@@ -77,6 +79,8 @@ TODO: Segurança AWS
 TODO: Websockets para mensagens
 
 TODO: Share https://web.dev/web-share-target/
+
+TODO: Implementar alteraçÕes e mudanças sugeridas pelo time de UX
 
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional

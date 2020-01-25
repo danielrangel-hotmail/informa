@@ -14,7 +14,7 @@ export class WebNotificationComponent implements OnInit {
   readonly VAPID_PUBLIC_KEY = "BKzVYXkDTzcYQfur-mkNoSuP08tdwNqivtKmVMg1Nfdv8x8nP-SWdWyTClaXXf9QXN_MqszxrTB50mdWm_8WC4U";
   pedeSubscription$: Observable<Boolean>;
 
-  constructor(protected swPush: SwPush,
+  constructor(public swPush: SwPush,
               protected pushSubscriptionService: PushSubscriptionService) {
     this.pedeSubscription$ = this.swPush.subscription.pipe(map(sub => sub === null));
   }

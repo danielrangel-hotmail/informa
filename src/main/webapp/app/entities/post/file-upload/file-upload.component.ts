@@ -23,7 +23,7 @@ export class FileUploadComponent implements OnInit{
 
   constructor (
     protected arquivoService: ArquivoService,
-    protected deviceService: DeviceDetectorService ){
+    public deviceService: DeviceDetectorService ){
 
     this.uploader = new FileUploader({
       url: URL,
