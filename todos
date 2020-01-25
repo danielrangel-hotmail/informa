@@ -1,11 +1,8 @@
+TODO: Usar ferramentas dos devs
 
-TODO: PWA
+TODO: Criar título do post
 
-TODO: Notificações
-PUSH Notifications
-
-
-TODO: Associação de usuários com grupos e favoritos
+TODO: Associação de usuários com grupos e favoritos e notificações
 Filtrar posts dos grupos
 
 TODO: Sumir com o flash de posts não encontrados
@@ -27,8 +24,6 @@ TODO: Remover imagens
 Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
 https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
 Tirar o router e fazer hide and show
-
-TODO: Filtro meus grupos, meus grupos formais, meus grupos informais, um grupo específico
 
 TODO: Garantir o formato do nome dos grupos
 
@@ -59,8 +54,6 @@ Deve ser fácil experimentar o onboarding, para verificarmos como está a experi
 TODO: Registrar o número de vezes que cada pessoa carregou os posts
 Aguardando o Renato voltar para configurar o Matomo na aws
 
-TODO: Segurança AWS
-
 TODO: Melhorar o texto dos e-mails de ativação, criação e senha
 
 TODO: Travar e-mails de fora da Objective.
@@ -69,9 +62,22 @@ TODO: CSS => Resolver a lista do quill-editor de align. Está 3px para baixo o s
 
 TODO: Ver a responsividade para o restante do app
 
+TODO: Add to Home
+
+TODO: Adicionar subscrição ao Perfil ao criar
+Também ver se faz sentido excluir subscrições
+Evitar duplicatas!!!!
+
 TODO: Rever o esquema de criar um post
 Para não criar sempre do zero
 Quando tentar adicionar imagem ou vídeo, aí cria
+
+TODO: Segurança AWS
+
+TODO: Websockets para mensagens
+
+TODO: Share https://web.dev/web-share-target/
+
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
 
@@ -122,9 +128,6 @@ TODO: Facilitar o uso por outras empresas
 
 TODO: Fazer uma receita para implantar o sistema do ZERO!!!!
 ------------------------------------------------------------------------------
-
-TODO: Share https://web.dev/web-share-target/
-
 TODO: Controle de dirty e salvamento automatico de post
 
 TODO: Banner da Ligia

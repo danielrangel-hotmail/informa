@@ -84,6 +84,10 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    public void setPerfilUsuario(PerfilUsuario perfilUsuario) {
+        this.perfilUsuario = perfilUsuario;
+    }
+
     public PerfilUsuario getPerfilUsuario() {
         return perfilUsuario;
     }

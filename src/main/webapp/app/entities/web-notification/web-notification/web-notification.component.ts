@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
 import {PushSubscriptionService} from 'app/entities/push-subscription/push-subscription.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-web-notification',
@@ -10,21 +12,17 @@ import {PushSubscriptionService} from 'app/entities/push-subscription/push-subsc
 export class WebNotificationComponent implements OnInit {
 
   readonly VAPID_PUBLIC_KEY = "BKzVYXkDTzcYQfur-mkNoSuP08tdwNqivtKmVMg1Nfdv8x8nP-SWdWyTClaXXf9QXN_MqszxrTB50mdWm_8WC4U";
+  pedeSubscription$: Observable<Boolean>;
 
-  constructor(private swPush: SwPush,
-              private pushSubscriptionService: PushSubscriptionService) { }
+  constructor(protected swPush: SwPush,
+              protected pushSubscriptionService: PushSubscriptionService) {
+    this.pedeSubscription$ = this.swPush.subscription.pipe(map(sub => sub === null));
+  }
 
   ngOnInit(): void {
   }
 
   pedeNotificacao(): void {
-    // navigator.serviceWorker.getRegistration().then((reg) => {
-    //   // eslint-disable-next-line no-console
-    //   console.log(`registration ${Notification.permission}`);
-    //   reg!.showNotification('Hello world!');
-    // });
-    //
-    this.swPush.isEnabled
     this.swPush.requestSubscription({
       serverPublicKey: this.VAPID_PUBLIC_KEY
     })

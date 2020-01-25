@@ -1,27 +1,29 @@
-<div *ngIf="account$ | async as account">
-    <jhi-alert-error></jhi-alert-error>
-    <div class="d-flex justify-content-center ">
-        <div class="width-main-view">
-            <div class="bg-secondary mb-3 border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
-                <form>
-                    <div class="d-flex p-2">
-                        <div class="flex-grow-1">
-                            <input type="text" class = "form-control input-cria-novo-post" placeholder="Crie um novo post" (click)="createPost()"></input>
+<ng-container *ngIf="account$ | async as account">
+    <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="d-flex justify-content-center ">
+            <div class="width-main-view">
+                <div class="bg-secondary mb-3 border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
+                    <form>
+                        <div class="d-flex p-2">
+                            <div class="flex-grow-1">
+                                <input type="text" class = "form-control input-cria-novo-post" placeholder="Crie um novo post" (click)="createPost()"></input>
+                            </div>
+                            <div class="d-flex align-items-center" *ngIf="draftsQtd$ | async as draftCount">
+                                <a [routerLink]="['/post']" class="draft">{{draftCount}} drafts</a>
+                            </div>
                         </div>
-                        <div class="d-flex align-items-center" *ngIf="draftsQtd$ | async as draftCount">
-                            <a [routerLink]="['/post']" class="draft">{{draftCount}} drafts</a>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="alert alert-warning" *ngIf="posts?.length === 0" ng-cloak>
-    <span jhiTranslate="informaApp.post.home.notFound">No posts found</span>
-</div>
-<div *ngIf="posts?.length > 0" infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0" ng-cloak>
-    <div *ngFor="let post of posts ;trackBy: trackId">
-        <jhi-post-single [post]="post" [account]="account"></jhi-post-single>
+    <div class="alert alert-warning" *ngIf="posts?.length === 0" ng-cloak>
+        <span jhiTranslate="informaApp.post.home.notFound">No posts found</span>
     </div>
-</div>
+    <div *ngIf="posts?.length > 0" infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0" ng-cloak>
+        <div *ngFor="let post of posts ;trackBy: trackId">
+            <jhi-post-single [post]="post" [account]="account"></jhi-post-single>
+        </div>
+    </div>
+</ng-container>

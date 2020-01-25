@@ -6,7 +6,6 @@ import com.objective.informa.domain.User;
 import com.objective.informa.repository.PostRepository;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.SecurityUtils;
-import com.objective.informa.service.UserService;
 import com.objective.informa.service.dto.PostDTO;
 import com.objective.informa.service.dto.SimplePostDTO;
 import com.objective.informa.service.mapper.PostMapper;
@@ -39,11 +38,15 @@ public class PostService {
 
     private final UserRepository userRepository;
 
+    private final PostPublisher postPublisher;
+
     public PostService(PostRepository postRepository, PostMapper postMapper,
-        UserRepository userRepository) {
+        UserRepository userRepository,
+        PostPublisher postPublisher) {
         this.postRepository = postRepository;
         this.postMapper = postMapper;
         this.userRepository = userRepository;
+        this.postPublisher = postPublisher;
     }
 
     /**
@@ -107,7 +110,9 @@ public class PostService {
             throw new PostException(simplePostDTO, "Post já estava publicado");
         }
         post.setPublicacao(ZonedDateTime.now());
-        return this.postPosUpdate(post);
+        final PostDTO postDTO = this.postPosUpdate(post);
+        postPublisher.publish(post);
+        return postDTO;
     }
 
     public void removeLink(LinkExterno linkExterno)

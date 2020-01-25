@@ -51,7 +51,7 @@ public class PerfilUsuario implements Serializable {
     @MapsId
     private User usuario;
 
-    @OneToMany(mappedBy = "perfil")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "perfil")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PushSubscription> subscriptions = new HashSet<>();
 

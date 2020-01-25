@@ -276,6 +276,7 @@ dependencies {
     implementation 'software.amazon.awssdk:s3'
     compile group: 'nl.martijndwars', name: 'web-push', version: '5.1.0'
     compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.64'
+    implementation "com.typesafe.akka:akka-stream_2.13:${akka_stream_version}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
     annotationProcessor "org.hibernate:hibernate-jpamodelgen:${hibernate_version}"
     annotationProcessor "org.glassfish.jaxb:jaxb-runtime:${jaxb_runtime_version}"
@@ -300,6 +301,7 @@ dependencies {
     testImplementation "org.mockito:mockito-core"
     testImplementation "org.hamcrest:hamcrest-library"
     testImplementation "com.h2database:h2"
+    testImplementation "com.typesafe.akka:akka-stream-testkit_2.13:${akka_stream_version}"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 }
 

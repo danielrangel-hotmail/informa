@@ -1,5 +1,9 @@
-<div class="pr-4">
-    <button type="submit" class="btn btn-success" (click) = "pedeNotificacao()">
-        <fa-icon [icon]="'bell'"></fa-icon>&nbsp;<span>Permite Notificação</span>
-    </button>
-</div>
+<ng-container *ngIf = "swPush.isEnabled">
+    <ng-container *ngIf = "pedeSubscription$ | async as pedeSubscription">
+        <div class="pr-4">
+            <button type="submit" class="btn btn-success" (click) = "pedeNotificacao()">
+                <fa-icon [icon]="'bell'"></fa-icon>&nbsp;<span>Permite Notificação</span>
+            </button>
+        </div>
+    </ng-container>
+</ng-container>

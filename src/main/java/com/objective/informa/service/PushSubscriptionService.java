@@ -97,7 +97,6 @@ public class PushSubscriptionService {
     public List<PushSubscriptionDTO> findAll() {
         log.debug("Request to get all PushSubscriptions");
         return pushSubscriptionRepository.findAll().stream()
-            .map(this::sendPushMessage)
             .map(pushSubscriptionMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -110,17 +109,20 @@ public class PushSubscriptionService {
         return kf.generatePublic(pubSpec);
     }
 
-    public PushSubscription sendPushMessage(PushSubscription sub) {
+    public Notification sendPushMessage(PushSubscription sub, String title, String body, String icon) {
         Notification notification;
         PushService pushService;
 
         // Create a notification with the endpoint, userPublicKey from the subscription and a custom payload
         try {
-            JSONObject json = new JSONObject();
-            json.put("title", "Informa");
-            json.put("data", "Teste de push");
+            JSONObject jsonBase = new JSONObject();
+            jsonBase.put("title", title);
+            JSONObject jsonOptions = new JSONObject();
+            jsonOptions.put("body", body);
+            jsonOptions.put("icon", icon);
+            jsonBase.put("options", jsonOptions);
             JSONObject jsonNotification = new JSONObject();
-            jsonNotification.put("notification", json);
+            jsonNotification.put("notification", jsonBase);
             notification = new Notification(
                 sub.getEndpoint(),
                 this.getUserPublicKey(sub),
@@ -133,6 +135,8 @@ public class PushSubscriptionService {
             pushService.setPrivateKey(Utils.loadPrivateKey("Yz-ewJCI36I4arboVKoJx7O_7q04zhCUxg1fZ_GcDPI"));
             // Send the notification
             pushService.send(notification);
+            log.debug("Push Notification::" + jsonNotification.toJSONString());
+            return notification;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
@@ -150,8 +154,7 @@ public class PushSubscriptionService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        return sub;
+        return null;
     }
 
     /**
