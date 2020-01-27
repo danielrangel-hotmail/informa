@@ -10,12 +10,10 @@ import { IPost } from 'app/shared/model/post.interface';
 import { PostService } from '../shared-post/post.service';
 import { PostDetailComponent } from './post-detail.component';
 import { PostUpdateComponent } from './post-update.component';
-import { MyPostComponent } from 'app/entities/post/my-post.component';
 import {PostImageComponent} from 'app/entities/post/post-image/post-image.component';
 import {PostVideoLinkComponent} from 'app/entities/post/post-video-link/post-video-link.component';
 import { PostComponent } from 'app/entities/shared-post/post.component';
-import { GRUPO, INFORMAIS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
-import { GrupoService } from 'app/entities/grupo/grupo.service';
+import { DRAFTS, GRUPO, INFORMAIS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
 import { GrupoResolve } from 'app/entities/grupo/grupo.route';
 
 @Injectable({ providedIn: 'root' })
@@ -43,10 +41,11 @@ export class PostResolve implements Resolve<IPost> {
 export const postRoute: Routes = [
   {
     path: '',
-    component: MyPostComponent,
+    component: PostComponent,
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'informaApp.post.home.title'
+      pageTitle: 'informaApp.post.home.title',
+      filtro: DRAFTS
     },
     canActivate: [UserRouteAccessService]
   },

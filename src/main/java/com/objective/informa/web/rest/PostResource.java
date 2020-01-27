@@ -224,7 +224,7 @@ public class PostResource {
      */
     @GetMapping("/posts-grupo/{id}")
     public ResponseEntity<List<PostDTO>> getPostsGrupo(@PathVariable Long id, Pageable pageable) {
-        log.debug("REST request to get a page of Posts do Grupo " + id);
+        log.debug("REST request to get a page of Posts do Grupo ");
         Page<PostDTO> page = postService.findAllPublicadosGrupoId(id, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

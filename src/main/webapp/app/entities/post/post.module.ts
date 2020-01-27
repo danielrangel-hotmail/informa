@@ -5,7 +5,6 @@ import { InformaSharedModule } from 'app/shared/shared.module';
 import { PostDetailComponent } from './post-detail.component';
 import { PostUpdateComponent } from './post-update.component';
 import { postRoute } from './post.route';
-import { MyPostComponent } from './my-post.component';
 import { InformaSharedPostModule } from '../shared-post/informa-shared-post.module';
 import { PostVideoLinkComponent } from './post-video-link/post-video-link.component';
 import { PostImageComponent } from './post-image/post-image.component';
@@ -19,6 +18,6 @@ import { LinkExternoSharedModule} from 'app/entities/link-externo-shared/link-ex
 
 @NgModule({
   imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(postRoute), FileUploadModule, NgxGalleryModule, EmbedVideo, LinkExternoSharedModule],
-  declarations: [PostDetailComponent, PostUpdateComponent, MyPostComponent, PostVideoLinkComponent, PostImageComponent, FileUploadComponent]
+  declarations: [PostDetailComponent, PostUpdateComponent, PostVideoLinkComponent, PostImageComponent, FileUploadComponent]
 })
 export class InformaPostModule {}

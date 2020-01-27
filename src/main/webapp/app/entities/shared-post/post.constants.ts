@@ -3,4 +3,4 @@ export const TRABALHO = '-trabalho';
 export const INFORMAIS = '-informais';
 export const TODOS = '';
 export const GRUPO = '-grupo';
-export const DRAFTS = '-drafts';
+export const DRAFTS = '-user';

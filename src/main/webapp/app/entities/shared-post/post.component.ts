@@ -14,7 +14,6 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { PostPublicaDialogComponent } from './post-publica-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MEUS_GRUPOS, TRABALHO } from 'app/entities/shared-post/post.constants';
 import { IGrupo } from 'app/shared/model/grupo.model';
 
 @Component({
