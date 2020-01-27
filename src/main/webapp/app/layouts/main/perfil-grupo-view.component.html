@@ -4,28 +4,28 @@
     </div>
     <div class="small mb-2 elemento">FILTROS</div>
     <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
-        <h5 class="elemento-filtros" routerLink="/" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}">
+        <h5 class="elemento-filtros" routerLink="/" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" *ngIf="filtroMatch('meus grupos')">
             meus grupos
         </h5>
     </jhi-hovered>
     <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
-        <h5 class="elemento-filtros" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" routerLink="post/todos">
+        <h5 class="elemento-filtros" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" routerLink="post/todos" *ngIf="filtroMatch('todos')">
             todos
         </h5>
     </jhi-hovered>
     <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
-        <h5 class="elemento-filtros" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" routerLink="post/trabalho">
+        <h5 class="elemento-filtros" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" routerLink="post/trabalho" *ngIf="filtroMatch('trabalho')">
             trabalho
         </h5>
     </jhi-hovered>
     <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
-        <h5 class="elemento-filtros" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" routerLink="post/informais">
+        <h5 class="elemento-filtros" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" routerLink="post/informais" *ngIf="filtroMatch('informais')">
             informais
         </h5>
     </jhi-hovered>
     <div class="small mb-2 mt-3 elemento">FAVORITOS</div>
     <div *ngFor="let perfilGrupo of perfilGruposFavoritos() ;trackBy: trackId" >
-        <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
+        <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }" *ngIf="filtroMatch(perfilGrupo.grupo.nome)">
             <div [routerLink]="['/post', 'grupo', perfilGrupo.grupo.id]" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" class="d-flex align-items-start elemento" style="padding-top: 6px">
                 <h5 class="flex-grow-1">{{perfilGrupo.grupo.nome}}</h5>
                 <div (click)="toggleNotifica(perfilGrupo)" [ngStyle]="{ 'color': perfilGrupo.notifica ? 'blue' : 'lightgrey' }" class="bell"><fa-icon icon="bell"></fa-icon></div>
@@ -39,7 +39,7 @@
     </div>
     <ng-container *ngIf="perfilGrupos?.length > 0">
         <div *ngFor="let perfilGrupo of perfilGrupos ;trackBy: trackId" >
-            <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
+            <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }" *ngIf="filtroMatch(perfilGrupo.grupo.nome)">
                 <div [routerLink]="['/post', 'grupo', perfilGrupo.grupo.id]" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" class="d-flex align-items-start elemento" style="padding-top: 6px">
                     <h5 class="flex-grow-1">{{perfilGrupo.grupo.nome}}</h5>
                     <div (click)="toggleNotifica(perfilGrupo)" [ngStyle]="{ 'color': perfilGrupo.notifica ? 'blue' : 'lightgrey' }" class="bell"><fa-icon icon="bell"></fa-icon></div>

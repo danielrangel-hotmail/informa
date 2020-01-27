@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,8 +8,8 @@ import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 
 import { PerfilGrupoService } from 'app/entities/perfil-grupo/perfil-grupo.service';
 import { AccountService } from 'app/core/auth/account.service';
-import { LoginModalService } from 'app/core/login/login-modal.service';
 import { FormControl } from '@angular/forms';
+import { debounceTime, filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-perfil-grupo-view',
@@ -23,6 +23,7 @@ export class PerfilGrupoViewComponent implements OnInit, OnDestroy {
   ascending: boolean;
   isSaving = false;
   filtro = new FormControl();
+  filtroValue = '';
 
   constructor(
     protected perfilGrupoService: PerfilGrupoService,
@@ -34,6 +35,15 @@ export class PerfilGrupoViewComponent implements OnInit, OnDestroy {
     this.perfilGrupos = [];
     this.predicate = 'id';
     this.ascending = true;
+    this.filtro.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe(val => {
+        this.filtroValue = val;
+      });
+  }
+
+  filtroMatch(valor: string): boolean {
+    return (this.filtroValue === '') || (RegExp(this.filtroValue).exec(valor) !== null);
   }
 
   isAuthenticated(): boolean {
