@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { IPost } from 'app/shared/model/post.interface';
-import { PostService } from '../shared-post/post.service';
+import { PostService } from './post.service';
 
 @Component({
   templateUrl: './post-delete-dialog.component.html'

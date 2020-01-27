@@ -13,6 +13,10 @@ import { PostUpdateComponent } from './post-update.component';
 import { MyPostComponent } from 'app/entities/post/my-post.component';
 import {PostImageComponent} from 'app/entities/post/post-image/post-image.component';
 import {PostVideoLinkComponent} from 'app/entities/post/post-video-link/post-video-link.component';
+import { PostComponent } from 'app/entities/shared-post/post.component';
+import { GRUPO, INFORMAIS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
+import { GrupoService } from 'app/entities/grupo/grupo.service';
+import { GrupoResolve } from 'app/entities/grupo/grupo.route';
 
 @Injectable({ providedIn: 'root' })
 export class PostResolve implements Resolve<IPost> {
@@ -46,6 +50,50 @@ export const postRoute: Routes = [
     },
     canActivate: [UserRouteAccessService]
   },
+  {
+    path: 'todos',
+    component: PostComponent,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'informaApp.post.home.title',
+      filtro: TODOS
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'trabalho',
+    component: PostComponent,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'informaApp.post.home.title',
+      filtro: TRABALHO
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'informais',
+    component: PostComponent,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'informaApp.post.home.title',
+      filtro: INFORMAIS
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'grupo/:id',
+    component: PostComponent,
+    resolve: {
+      grupo: GrupoResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'informaApp.post.home.title',
+      filtro: GRUPO
+    },
+    canActivate: [UserRouteAccessService]
+  },
+
   {
     path: ':id/view',
     component: PostDetailComponent,

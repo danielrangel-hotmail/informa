@@ -1,5 +1,6 @@
 package com.objective.informa.repository;
 
+import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,5 +26,16 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Long countByAutorIsCurrentUserAndPublicacaoIsNull();
 
     Page<Post> findByPublicacaoIsNotNull(Pageable pageable);
+    
+    Page<Post> findByPublicacaoIsNotNullAndGrupoIn(List<Grupo> grupos, Pageable pageable);
+    
+    Page<Post> findByPublicacaoIsNotNullAndGrupoIdIn(Long grupoId, Pageable pageable);
+    
+    @Query("select post from Post post where post.publicacao is not null and post.grupo.formal = true")
+    Page<Post> findByPublicacaoIsNotNullAndGrupoIsTrabalho(Pageable pageable);
+
+    @Query("select post from Post post where post.publicacao is not null and post.grupo.formal = false")
+    Page<Post> findByPublicacaoIsNotNullAndGrupoIsInformal(Pageable pageable);
+
 
 }

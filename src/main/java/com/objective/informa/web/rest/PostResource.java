@@ -166,6 +166,71 @@ public class PostResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    /**
+     * {@code GET  /posts} : get all the posts from my groups.
+     *
+
+     * @param pageable the pagination information.
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of posts in body.
+     */
+    @GetMapping("/posts-meus-grupos")
+    public ResponseEntity<List<PostDTO>> getPostsMeusGrupos(Pageable pageable) {
+        log.debug("REST request to get a page of Posts");
+        Page<PostDTO> page = postService.findAllPublicadosMeusGrupos(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /posts} : get all the posts from my groups.
+     *
+
+     * @param pageable the pagination information.
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of posts in body.
+     */
+    @GetMapping("/posts-informais")
+    public ResponseEntity<List<PostDTO>> getPostsInformais(Pageable pageable) {
+        log.debug("REST request to get a page of Posts");
+        Page<PostDTO> page = postService.findAllPublicadosInformais(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /posts} : get all the posts from my groups.
+     *
+
+     * @param pageable the pagination information.
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of posts in body.
+     */
+    @GetMapping("/posts-trabalho")
+    public ResponseEntity<List<PostDTO>> getPostsTrabalho(Pageable pageable) {
+        log.debug("REST request to get a page of Posts");
+        Page<PostDTO> page = postService.findAllPublicadosTrabalho(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /posts} : get all the posts from my groups.
+     *
+
+     * @param pageable the pagination information.
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of posts in body.
+     */
+    @GetMapping("/posts-grupo/{id}")
+    public ResponseEntity<List<PostDTO>> getPostsGrupo(@PathVariable Long id, Pageable pageable) {
+        log.debug("REST request to get a page of Posts do Grupo " + id);
+        Page<PostDTO> page = postService.findAllPublicadosGrupoId(id, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    
 
     /**
      * {@code GET  /posts/:id} : get the "id" post.

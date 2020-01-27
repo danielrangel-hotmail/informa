@@ -12,35 +12,35 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-01-25T14:55:41-0300",
+    date = "2020-01-27T09:16:03-0300",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 3.20.0.v20191203-2131, environment: Java 11.0.5 (AdoptOpenJDK)"
 )
 @Component
 public class ArquivoMapperImpl extends ArquivoMapper {
 
     @Override
-    public List<Arquivo> toEntity(List<ArquivoDTO> dtoList) {
-        if ( dtoList == null ) {
+    public List<ArquivoDTO> toDto(List<Arquivo> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<Arquivo> list = new ArrayList<Arquivo>( dtoList.size() );
-        for ( ArquivoDTO arquivoDTO : dtoList ) {
-            list.add( toEntity( arquivoDTO ) );
+        List<ArquivoDTO> list = new ArrayList<ArquivoDTO>( arg0.size() );
+        for ( Arquivo arquivo : arg0 ) {
+            list.add( toDto( arquivo ) );
         }
 
         return list;
     }
 
     @Override
-    public List<ArquivoDTO> toDto(List<Arquivo> entityList) {
-        if ( entityList == null ) {
+    public List<Arquivo> toEntity(List<ArquivoDTO> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<ArquivoDTO> list = new ArrayList<ArquivoDTO>( entityList.size() );
-        for ( Arquivo arquivo : entityList ) {
-            list.add( toDto( arquivo ) );
+        List<Arquivo> list = new ArrayList<Arquivo>( arg0.size() );
+        for ( ArquivoDTO arquivoDTO : arg0 ) {
+            list.add( toEntity( arquivoDTO ) );
         }
 
         return list;
@@ -57,15 +57,15 @@ public class ArquivoMapperImpl extends ArquivoMapper {
         arquivoDTO.setPostId( arquivoPostId( arquivo ) );
         arquivoDTO.setMensagemId( arquivoMensagemId( arquivo ) );
         arquivoDTO.setUsuarioId( arquivoUsuarioId( arquivo ) );
-        arquivoDTO.setId( arquivo.getId() );
-        arquivoDTO.setVersao( arquivo.getVersao() );
-        arquivoDTO.setCriacao( arquivo.getCriacao() );
-        arquivoDTO.setUltimaEdicao( arquivo.getUltimaEdicao() );
-        arquivoDTO.setNome( arquivo.getNome() );
         arquivoDTO.setColecao( arquivo.getColecao() );
-        arquivoDTO.setTipo( arquivo.getTipo() );
+        arquivoDTO.setCriacao( arquivo.getCriacao() );
+        arquivoDTO.setId( arquivo.getId() );
         arquivoDTO.setLink( arquivo.getLink() );
+        arquivoDTO.setNome( arquivo.getNome() );
+        arquivoDTO.setTipo( arquivo.getTipo() );
+        arquivoDTO.setUltimaEdicao( arquivo.getUltimaEdicao() );
         arquivoDTO.setUploadConfirmado( arquivo.isUploadConfirmado() );
+        arquivoDTO.setVersao( arquivo.getVersao() );
 
         return arquivoDTO;
     }
@@ -78,18 +78,18 @@ public class ArquivoMapperImpl extends ArquivoMapper {
 
         Arquivo arquivo = new Arquivo();
 
-        arquivo.setUsuario( usuarioFromId( arquivoDTO.getUsuarioId() ) );
+        arquivo.usuario( usuarioFromId( arquivoDTO.getUsuarioId() ) );
         arquivo.setPost( postFromId( arquivoDTO.getPostId() ) );
         arquivo.setMensagem( mensagemFromId( arquivoDTO.getMensagemId() ) );
-        arquivo.setId( arquivoDTO.getId() );
-        arquivo.setVersao( arquivoDTO.getVersao() );
-        arquivo.setCriacao( arquivoDTO.getCriacao() );
-        arquivo.setUltimaEdicao( arquivoDTO.getUltimaEdicao() );
-        arquivo.setNome( arquivoDTO.getNome() );
         arquivo.setColecao( arquivoDTO.getColecao() );
-        arquivo.setTipo( arquivoDTO.getTipo() );
+        arquivo.setCriacao( arquivoDTO.getCriacao() );
         arquivo.setLink( arquivoDTO.getLink() );
-        arquivo.setUploadConfirmado( arquivoDTO.isUploadConfirmado() );
+        arquivo.setNome( arquivoDTO.getNome() );
+        arquivo.setId( arquivoDTO.getId() );
+        arquivo.tipo( arquivoDTO.getTipo() );
+        arquivo.ultimaEdicao( arquivoDTO.getUltimaEdicao() );
+        arquivo.uploadConfirmado( arquivoDTO.isUploadConfirmado() );
+        arquivo.versao( arquivoDTO.getVersao() );
 
         return arquivo;
     }

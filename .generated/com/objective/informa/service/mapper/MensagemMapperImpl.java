@@ -11,35 +11,35 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-01-25T14:55:41-0300",
+    date = "2020-01-27T09:16:03-0300",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 3.20.0.v20191203-2131, environment: Java 11.0.5 (AdoptOpenJDK)"
 )
 @Component
 public class MensagemMapperImpl extends MensagemMapper {
 
     @Override
-    public List<Mensagem> toEntity(List<MensagemDTO> dtoList) {
-        if ( dtoList == null ) {
+    public List<MensagemDTO> toDto(List<Mensagem> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<Mensagem> list = new ArrayList<Mensagem>( dtoList.size() );
-        for ( MensagemDTO mensagemDTO : dtoList ) {
-            list.add( toEntity( mensagemDTO ) );
+        List<MensagemDTO> list = new ArrayList<MensagemDTO>( arg0.size() );
+        for ( Mensagem mensagem : arg0 ) {
+            list.add( toDto( mensagem ) );
         }
 
         return list;
     }
 
     @Override
-    public List<MensagemDTO> toDto(List<Mensagem> entityList) {
-        if ( entityList == null ) {
+    public List<Mensagem> toEntity(List<MensagemDTO> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<MensagemDTO> list = new ArrayList<MensagemDTO>( entityList.size() );
-        for ( Mensagem mensagem : entityList ) {
-            list.add( toDto( mensagem ) );
+        List<Mensagem> list = new ArrayList<Mensagem>( arg0.size() );
+        for ( MensagemDTO mensagemDTO : arg0 ) {
+            list.add( toEntity( mensagemDTO ) );
         }
 
         return list;
@@ -58,12 +58,12 @@ public class MensagemMapperImpl extends MensagemMapper {
         mensagemDTO.setPostId( mensagemPostId( mensagem ) );
         mensagemDTO.setAutorId( mensagemAutorId( mensagem ) );
         mensagemDTO.setAutorEmail( mensagemAutorEmail( mensagem ) );
-        mensagemDTO.setId( mensagem.getId() );
-        mensagemDTO.setVersao( mensagem.getVersao() );
-        mensagemDTO.setCriacao( mensagem.getCriacao() );
-        mensagemDTO.setUltimaEdicao( mensagem.getUltimaEdicao() );
         mensagemDTO.setConteudo( mensagem.getConteudo() );
+        mensagemDTO.setCriacao( mensagem.getCriacao() );
+        mensagemDTO.setId( mensagem.getId() );
         mensagemDTO.setTemConversa( mensagem.isTemConversa() );
+        mensagemDTO.setUltimaEdicao( mensagem.getUltimaEdicao() );
+        mensagemDTO.setVersao( mensagem.getVersao() );
 
         return mensagemDTO;
     }
@@ -79,12 +79,12 @@ public class MensagemMapperImpl extends MensagemMapper {
         mensagem.setPost( postFromId( mensagemDTO.getPostId() ) );
         mensagem.setConversa( conversaFromId( mensagemDTO.getConversaId() ) );
         mensagem.setAutor( autorFromId( mensagemDTO.getAutorId() ) );
-        mensagem.setId( mensagemDTO.getId() );
-        mensagem.setVersao( mensagemDTO.getVersao() );
-        mensagem.setCriacao( mensagemDTO.getCriacao() );
-        mensagem.setUltimaEdicao( mensagemDTO.getUltimaEdicao() );
         mensagem.setConteudo( mensagemDTO.getConteudo() );
-        mensagem.setTemConversa( mensagemDTO.isTemConversa() );
+        mensagem.setCriacao( mensagemDTO.getCriacao() );
+        mensagem.setId( mensagemDTO.getId() );
+        mensagem.temConversa( mensagemDTO.isTemConversa() );
+        mensagem.ultimaEdicao( mensagemDTO.getUltimaEdicao() );
+        mensagem.versao( mensagemDTO.getVersao() );
 
         return mensagem;
     }

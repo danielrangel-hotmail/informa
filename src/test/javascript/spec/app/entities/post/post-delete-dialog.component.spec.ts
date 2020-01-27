@@ -6,7 +6,7 @@ import { JhiEventManager } from 'ng-jhipster';
 import { InformaTestModule } from '../../../test.module';
 import { MockEventManager } from '../../../helpers/mock-event-manager.service';
 import { MockActiveModal } from '../../../helpers/mock-active-modal.service';
-import { PostDeleteDialogComponent } from 'app/entities/post/post-delete-dialog.component';
+import { PostDeleteDialogComponent } from 'app/entities/shared-post/post-delete-dialog.component';
 import { PostService } from 'app/entities/shared-post/post.service';
 
 describe('Component Tests', () => {

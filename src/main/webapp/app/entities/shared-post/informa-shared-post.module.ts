@@ -10,11 +10,12 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { PostLinkExternoVideoViewComponent } from './post-link-externo-video-view/post-link-externo-video-view.component';
 import { EmbedVideo } from 'ngx-embed-video';
 import { GravatarModule } from  'ngx-gravatar';
+import { PostDeleteDialogComponent } from 'app/entities/shared-post/post-delete-dialog.component';
 
 @NgModule({
   imports: [InformaSharedModule, RouterModule, QuillModule.forRoot(), NgxGalleryModule, EmbedVideo, GravatarModule ],
-  declarations: [PostComponent, PostPublicaDialogComponent, PostSingleComponent, PostImageViewComponent, PostLinkExternoVideoViewComponent],
+  declarations: [PostComponent, PostPublicaDialogComponent, PostDeleteDialogComponent, PostSingleComponent, PostImageViewComponent, PostLinkExternoVideoViewComponent],
   exports: [PostComponent, PostSingleComponent],
-  entryComponents: [PostPublicaDialogComponent]
+  entryComponents: [PostPublicaDialogComponent, PostDeleteDialogComponent]
 })
 export class InformaSharedPostModule {}

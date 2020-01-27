@@ -12,35 +12,35 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-01-25T14:55:41-0300",
+    date = "2020-01-27T09:16:03-0300",
     comments = "version: 1.3.1.Final, compiler: Eclipse JDT (IDE) 3.20.0.v20191203-2131, environment: Java 11.0.5 (AdoptOpenJDK)"
 )
 @Component
 public class LinkExternoMapperImpl extends LinkExternoMapper {
 
     @Override
-    public List<LinkExterno> toEntity(List<LinkExternoDTO> dtoList) {
-        if ( dtoList == null ) {
+    public List<LinkExternoDTO> toDto(List<LinkExterno> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<LinkExterno> list = new ArrayList<LinkExterno>( dtoList.size() );
-        for ( LinkExternoDTO linkExternoDTO : dtoList ) {
-            list.add( toEntity( linkExternoDTO ) );
+        List<LinkExternoDTO> list = new ArrayList<LinkExternoDTO>( arg0.size() );
+        for ( LinkExterno linkExterno : arg0 ) {
+            list.add( toDto( linkExterno ) );
         }
 
         return list;
     }
 
     @Override
-    public List<LinkExternoDTO> toDto(List<LinkExterno> entityList) {
-        if ( entityList == null ) {
+    public List<LinkExterno> toEntity(List<LinkExternoDTO> arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
-        List<LinkExternoDTO> list = new ArrayList<LinkExternoDTO>( entityList.size() );
-        for ( LinkExterno linkExterno : entityList ) {
-            list.add( toDto( linkExterno ) );
+        List<LinkExterno> list = new ArrayList<LinkExterno>( arg0.size() );
+        for ( LinkExternoDTO linkExternoDTO : arg0 ) {
+            list.add( toEntity( linkExternoDTO ) );
         }
 
         return list;
@@ -57,12 +57,12 @@ public class LinkExternoMapperImpl extends LinkExternoMapper {
         linkExternoDTO.setPostId( linkExternoPostId( linkExterno ) );
         linkExternoDTO.setMensagemId( linkExternoMensagemId( linkExterno ) );
         linkExternoDTO.setUsuarioId( linkExternoUsuarioId( linkExterno ) );
-        linkExternoDTO.setId( linkExterno.getId() );
-        linkExternoDTO.setVersao( linkExterno.getVersao() );
         linkExternoDTO.setCriacao( linkExterno.getCriacao() );
-        linkExternoDTO.setUltimaEdicao( linkExterno.getUltimaEdicao() );
-        linkExternoDTO.setTipo( linkExterno.getTipo() );
+        linkExternoDTO.setId( linkExterno.getId() );
         linkExternoDTO.setLink( linkExterno.getLink() );
+        linkExternoDTO.setTipo( linkExterno.getTipo() );
+        linkExternoDTO.setUltimaEdicao( linkExterno.getUltimaEdicao() );
+        linkExternoDTO.setVersao( linkExterno.getVersao() );
 
         return linkExternoDTO;
     }
@@ -75,15 +75,15 @@ public class LinkExternoMapperImpl extends LinkExternoMapper {
 
         LinkExterno linkExterno = new LinkExterno();
 
-        linkExterno.setUsuario( usuarioFromId( linkExternoDTO.getUsuarioId() ) );
+        linkExterno.usuario( usuarioFromId( linkExternoDTO.getUsuarioId() ) );
         linkExterno.setPost( postFromId( linkExternoDTO.getPostId() ) );
         linkExterno.setMensagem( mensagemFromId( linkExternoDTO.getMensagemId() ) );
-        linkExterno.setId( linkExternoDTO.getId() );
-        linkExterno.setVersao( linkExternoDTO.getVersao() );
         linkExterno.setCriacao( linkExternoDTO.getCriacao() );
-        linkExterno.setUltimaEdicao( linkExternoDTO.getUltimaEdicao() );
-        linkExterno.setTipo( linkExternoDTO.getTipo() );
         linkExterno.setLink( linkExternoDTO.getLink() );
+        linkExterno.setId( linkExternoDTO.getId() );
+        linkExterno.tipo( linkExternoDTO.getTipo() );
+        linkExterno.ultimaEdicao( linkExternoDTO.getUltimaEdicao() );
+        linkExterno.versao( linkExternoDTO.getVersao() );
 
         return linkExterno;
     }

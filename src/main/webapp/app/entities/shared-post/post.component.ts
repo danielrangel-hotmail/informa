@@ -9,11 +9,13 @@ import {Post} from 'app/shared/model/post.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { PostService } from './post.service';
-import { PostDeleteDialogComponent } from '../post/post-delete-dialog.component';
+import { PostDeleteDialogComponent } from './post-delete-dialog.component';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { PostPublicaDialogComponent } from './post-publica-dialog.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MEUS_GRUPOS, TRABALHO } from 'app/entities/shared-post/post.constants';
+import { IGrupo } from 'app/shared/model/grupo.model';
 
 @Component({
   selector: 'jhi-post',
@@ -31,6 +33,8 @@ export class PostComponent implements OnInit, OnDestroy {
   ascending: boolean;
   account$?: Observable<Account | null>;
   draftsQtd$?: Observable<number>;
+  filtro: string;
+  grupo?: IGrupo;
 
   constructor(
     protected postService: PostService,
@@ -38,8 +42,10 @@ export class PostComponent implements OnInit, OnDestroy {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
-    protected router: Router
+    protected router: Router,
+    protected activatedRoute: ActivatedRoute
   ) {
+    this.filtro='';
     this.loadDraftQtd();
     this.posts = [];
     this.itemsPerPage = ITEMS_PER_PAGE;
@@ -56,9 +62,9 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   loadAll(): void {
-    if (this.onlyLoggedUser) {
+    if (this.grupo != null) {
       this.postService
-        .queryLoggedUser({
+        .queryGrupo(this.grupo.id!,{
           page: this.page,
           size: this.itemsPerPage,
           sort: this.sort()
@@ -66,7 +72,7 @@ export class PostComponent implements OnInit, OnDestroy {
         .subscribe((res: HttpResponse<IPost[]>) => this.paginatePosts(res.body, res.headers));
     } else {
       this.postService
-        .query({
+        .queryFiltro(this.filtro, {
           page: this.page,
           size: this.itemsPerPage,
           sort: this.sort()
@@ -88,9 +94,14 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.loadAll();
-    this.registerChangeInPosts();
     this.account$ = this.accountService.identity();
+    this.activatedRoute.data.subscribe(({ filtro, grupo }) => {
+      this.posts = [];
+      this.filtro = filtro;
+      this.grupo = grupo;
+      this.loadAll();
+      this.registerChangeInPosts();
+    });
   }
 
   ngOnDestroy(): void {

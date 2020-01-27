@@ -64,6 +64,20 @@ export class PostService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
+  queryFiltro(filtro: string, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IPost[]>(`${this.resourceUrl}${filtro}`, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
+  queryGrupo(grupoId: number, req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http
+      .get<IPost[]>(`${this.resourceUrl}-grupo/${grupoId}`, { params: options, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   countDrafts(req?: any): Observable<number> {
     const options = createRequestOption(req);
     return this.http

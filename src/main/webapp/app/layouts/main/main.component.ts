@@ -4,7 +4,6 @@ import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '
 import { TranslateService } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
-import {MensagemPostComponent} from 'app/entities/mensagem/mensagem-post/mensagem-post.component';
 import { MatomoTracker } from 'ngx-matomo';
 
 @Component({
@@ -12,7 +11,6 @@ import { MatomoTracker } from 'ngx-matomo';
   templateUrl: './main.component.html'
 })
 export class MainComponent implements OnInit {
-  poePadding = true;
   lastUrl = "Nenhuma";
 
   constructor(
@@ -20,7 +18,7 @@ export class MainComponent implements OnInit {
     private translateService: TranslateService,
     private titleService: Title,
     private router: Router,
-    private matomoTracker: MatomoTracker
+    private matomoTracker: MatomoTracker,
   ) { }
 
   ngOnInit(): void {
@@ -79,9 +77,4 @@ export class MainComponent implements OnInit {
       this.titleService.setTitle(title)
     });
   }
-
-  activateEvent(event: any): void {
-    this.poePadding = !(event instanceof MensagemPostComponent);
-  }
-
 }

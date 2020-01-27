@@ -1,6 +1,8 @@
 package com.objective.informa.service.post;
 
+import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.LinkExterno;
+import com.objective.informa.domain.PerfilUsuario;
 import com.objective.informa.domain.Post;
 import com.objective.informa.domain.User;
 import com.objective.informa.repository.PostRepository;
@@ -11,6 +13,8 @@ import com.objective.informa.service.dto.SimplePostDTO;
 import com.objective.informa.service.mapper.PostMapper;
 import java.time.ZonedDateTime;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import javax.persistence.OptimisticLockException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -214,4 +219,32 @@ public class PostService {
         log.debug("Request to delete Post : {}", id);
         postRepository.deleteById(id);
     }
+
+	public Page<PostDTO> findAllPublicadosMeusGrupos(Pageable pageable) {
+		List<Grupo> grupos = this.perfilUsuarioLogado().getGrupos().stream()
+			.map(grupo->grupo.getGrupo())
+			.collect(Collectors.toList());
+		return this.postRepository.findByPublicacaoIsNotNullAndGrupoIn(grupos, pageable)
+				.map(postMapper::toDto);
+	}
+
+	public Page<PostDTO> findAllPublicadosInformais(Pageable pageable) {
+		return this.postRepository.findByPublicacaoIsNotNullAndGrupoIsInformal(pageable)
+				.map(postMapper::toDto);
+	}
+
+	public Page<PostDTO> findAllPublicadosTrabalho(Pageable pageable) {
+		return this.postRepository.findByPublicacaoIsNotNullAndGrupoIsTrabalho(pageable)
+				.map(postMapper::toDto);
+	}
+	
+	private PerfilUsuario perfilUsuarioLogado() {
+		PerfilUsuario perfilUsuario = this.userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get().getPerfilUsuario();
+		return perfilUsuario;
+	}
+
+	public Page<PostDTO> findAllPublicadosGrupoId(Long id, Pageable pageable) {
+		return this.postRepository.findByPublicacaoIsNotNullAndGrupoIdIn(id, pageable)
+				.map(postMapper::toDto);	
+	}
 }
