@@ -54,6 +54,9 @@ public class CacheConfiguration {
             createCache(cm, com.objective.informa.domain.PushSubscription.class.getName());
             createCache(cm, com.objective.informa.domain.PerfilUsuario.class.getName());
             createCache(cm, com.objective.informa.domain.PerfilUsuario.class.getName() + ".subscriptions");
+            createCache(cm, com.objective.informa.domain.Grupo.class.getName() + ".usuarios");
+            createCache(cm, com.objective.informa.domain.PerfilUsuario.class.getName() + ".grupos");
+            createCache(cm, com.objective.informa.domain.PerfilGrupo.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -130,3 +130,21 @@ relationship OneToMany {
 	PerfilUsuario{subscriptions} to PushSubscription{perfil required}
 }
 
+@dto(mapstruct)
+@service(serviceClass)
+@paginate(infinite-scroll)
+entity PerfilGrupo {
+	id UUID,
+    criacao ZonedDateTime,
+    ultimaEdicao ZonedDateTime,
+    versao Long,
+    favorito Boolean,
+    notifica Boolean,
+}
+
+relationship OneToMany {
+	PerfilUsuario{grupos} to PerfilGrupo{perfil required}
+	Grupo{usuarios} to PerfilGrupo{grupo required}
+}
+
+

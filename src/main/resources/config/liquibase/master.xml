@@ -28,4 +28,7 @@
     <include file="config/liquibase/changelog/20200123212229_added_entity_PerfilUsuario.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200123212228_added_entity_constraints_PushSubscription.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200123212230_added_entity_constraints_PerfilUsuario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200125161558_added_entity_constraints_PerfilGrupo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200125161558_added_entity_PerfilGrupo.xml" relativeToChangelogFile="false"/>
+    
 </databaseChangeLog>

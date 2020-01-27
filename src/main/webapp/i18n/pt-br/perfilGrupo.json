@@ -1,0 +1,28 @@
+{
+  "informaApp": {
+    "perfilGrupo": {
+      "home": {
+        "title": "Perfil Grupos",
+        "createLabel": "Criar novo Perfil Grupo",
+        "createOrEditLabel": "Criar ou editar Perfil Grupo",
+        "notFound": "Nenhum Perfil Grupo encontrado"
+      },
+      "created": "Um novo Perfil Grupo foi criado com o identificador {{ param }}",
+      "updated": "Um Perfil Grupo foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Perfil Grupo foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Perfil Grupo {{ id }}?"
+      },
+      "detail": {
+        "title": "Perfil Grupo"
+      },
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "versao": "Versao",
+      "favorito": "Favorito",
+      "notifica": "Notifica",
+      "perfil": "Perfil",
+      "grupo": "Grupo"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IPushSubscription } from 'app/shared/model/push-subscription.model';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 
 export interface IPerfilUsuario {
   id?: number;
@@ -12,6 +13,7 @@ export interface IPerfilUsuario {
   skype?: string;
   usuarioId?: number;
   subscriptions?: IPushSubscription[];
+  grupos?: IPerfilGrupo[];
 }
 
 export class PerfilUsuario implements IPerfilUsuario {
@@ -25,6 +27,7 @@ export class PerfilUsuario implements IPerfilUsuario {
     public nascimento?: Moment,
     public skype?: string,
     public usuarioId?: number,
-    public subscriptions?: IPushSubscription[]
+    public subscriptions?: IPushSubscription[],
+    public grupos?: IPerfilGrupo[]
   ) {}
 }

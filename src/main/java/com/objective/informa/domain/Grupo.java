@@ -6,8 +6,8 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A Grupo.
@@ -45,6 +45,10 @@ public class Grupo implements Serializable {
 
     @Column(name = "opcional")
     private Boolean opcional;
+
+    @OneToMany(mappedBy = "grupo")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PerfilGrupo> usuarios = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -144,6 +148,31 @@ public class Grupo implements Serializable {
 
     public void setOpcional(Boolean opcional) {
         this.opcional = opcional;
+    }
+
+    public Set<PerfilGrupo> getUsuarios() {
+        return usuarios;
+    }
+
+    public Grupo usuarios(Set<PerfilGrupo> perfilGrupos) {
+        this.usuarios = perfilGrupos;
+        return this;
+    }
+
+    public Grupo addUsuarios(PerfilGrupo perfilGrupo) {
+        this.usuarios.add(perfilGrupo);
+        perfilGrupo.setGrupo(this);
+        return this;
+    }
+
+    public Grupo removeUsuarios(PerfilGrupo perfilGrupo) {
+        this.usuarios.remove(perfilGrupo);
+        perfilGrupo.setGrupo(null);
+        return this;
+    }
+
+    public void setUsuarios(Set<PerfilGrupo> perfilGrupos) {
+        this.usuarios = perfilGrupos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

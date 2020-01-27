@@ -31,6 +31,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'perfil-usuario',
         loadChildren: () => import('./perfil-usuario/perfil-usuario.module').then(m => m.InformaPerfilUsuarioModule)
+      },
+      {
+        path: 'perfil-grupo',
+        loadChildren: () => import('./perfil-grupo/perfil-grupo.module').then(m => m.InformaPerfilGrupoModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

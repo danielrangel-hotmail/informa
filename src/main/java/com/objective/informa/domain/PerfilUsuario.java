@@ -55,6 +55,10 @@ public class PerfilUsuario implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PushSubscription> subscriptions = new HashSet<>();
 
+    @OneToMany(mappedBy = "perfil")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<PerfilGrupo> grupos = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -191,6 +195,31 @@ public class PerfilUsuario implements Serializable {
 
     public void setSubscriptions(Set<PushSubscription> pushSubscriptions) {
         this.subscriptions = pushSubscriptions;
+    }
+
+    public Set<PerfilGrupo> getGrupos() {
+        return grupos;
+    }
+
+    public PerfilUsuario grupos(Set<PerfilGrupo> perfilGrupos) {
+        this.grupos = perfilGrupos;
+        return this;
+    }
+
+    public PerfilUsuario addGrupos(PerfilGrupo perfilGrupo) {
+        this.grupos.add(perfilGrupo);
+        perfilGrupo.setPerfil(this);
+        return this;
+    }
+
+    public PerfilUsuario removeGrupos(PerfilGrupo perfilGrupo) {
+        this.grupos.remove(perfilGrupo);
+        perfilGrupo.setPerfil(null);
+        return this;
+    }
+
+    public void setGrupos(Set<PerfilGrupo> perfilGrupos) {
+        this.grupos = perfilGrupos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

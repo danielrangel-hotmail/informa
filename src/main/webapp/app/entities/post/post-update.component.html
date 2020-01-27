@@ -1,50 +1,48 @@
-<div class="d-flex justify-content-center mt-3">
-    <div class="width-main-view" >
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" >
-            <div class="d-flex justify-content-between mb-3">
-                <div>
-                    <h4 *ngIf="!editForm.get('id')!.value">Crie um novo post</h4>
-                    <h4 *ngIf="editForm.get('id')!.value">Edite o seu post</h4>
-                </div>
-                <div>
-                    <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                        <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-                    </button>
-                    <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                        <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-                    </button>
-                </div>
-            </div>
-            <hr>
+<div class="mt-3">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" >
+        <div class="d-flex justify-content-between mb-3">
             <div>
-                <div class="form-group">
-                    <select class="form-control" id="field_grupo" name="grupo" formControlName="grupoId" >
-                        <option *ngIf="!editForm.get('grupoId')!.value" [ngValue]="null" selected>Escolha um grupo</option>
-                        <option [ngValue]="grupoOption.id" *ngFor="let grupoOption of grupos; trackBy: trackById">{{grupoOption.nome}}</option>
-                    </select>
-                </div>
-                <div *ngIf="editForm.get('grupoId')!.invalid && (editForm.get('grupoId')!.dirty || editForm.get('grupoId')!.touched)">
-                    <small class="form-text text-danger"
-                           *ngIf="editForm.get('grupoId')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-                <div class="form-group-card">
-                    <div class="form-group">
-                        <jhi-quill-editor formControlName="conteudo"></jhi-quill-editor>
-                    </div>
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-toggle="tab" [routerLink]="['image']">Imagens</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-toggle="tab" [routerLink]="['video-link']">Videos</a>
-                        </li>
-                    </ul>
-                    <router-outlet></router-outlet>
-                </div>
-<!--                <jhi-file-upload></jhi-file-upload>-->
+                <h4 *ngIf="!editForm.get('id')!.value">Crie um novo post</h4>
+                <h4 *ngIf="editForm.get('id')!.value">Edite o seu post</h4>
             </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div>
+            <div class="form-group">
+                <select class="form-control" id="field_grupo" name="grupo" formControlName="grupoId" >
+                    <option *ngIf="!editForm.get('grupoId')!.value" [ngValue]="null" selected>Escolha um grupo</option>
+                    <option [ngValue]="grupoOption.id" *ngFor="let grupoOption of grupos; trackBy: trackById">{{grupoOption.nome}}</option>
+                </select>
+            </div>
+            <div *ngIf="editForm.get('grupoId')!.invalid && (editForm.get('grupoId')!.dirty || editForm.get('grupoId')!.touched)">
+                <small class="form-text text-danger"
+                       *ngIf="editForm.get('grupoId')?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+            <div class="form-group-card">
+                <div class="form-group">
+                    <jhi-quill-editor formControlName="conteudo"></jhi-quill-editor>
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-toggle="tab" [routerLink]="['image']">Imagens</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" data-toggle="tab" [routerLink]="['video-link']">Videos</a>
+                    </li>
+                </ul>
+                <router-outlet></router-outlet>
+            </div>
+<!--                <jhi-file-upload></jhi-file-upload>-->
+        </div>
         </form>
-    </div>
 </div>

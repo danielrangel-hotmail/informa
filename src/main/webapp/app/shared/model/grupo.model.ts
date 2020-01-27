@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 
 export interface IGrupo {
   id?: number;
@@ -9,6 +10,7 @@ export interface IGrupo {
   descricao?: string;
   formal?: boolean;
   opcional?: boolean;
+  usuarios?: IPerfilGrupo[];
 }
 
 export class Grupo implements IGrupo {
@@ -20,7 +22,8 @@ export class Grupo implements IGrupo {
     public nome?: string,
     public descricao?: string,
     public formal?: boolean,
-    public opcional?: boolean
+    public opcional?: boolean,
+    public usuarios?: IPerfilGrupo[]
   ) {
     this.formal = this.formal || false;
     this.opcional = this.opcional || false;

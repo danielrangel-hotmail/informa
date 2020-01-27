@@ -30,7 +30,14 @@
             "fieldType": "Boolean"
         }
     ],
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "perfilGrupo",
+            "otherEntityRelationshipName": "grupo",
+            "relationshipName": "usuarios"
+        }
+    ],
     "changelogDate": "20200106024143",
     "entityTableName": "grupo",
     "dto": "mapstruct",

@@ -57,7 +57,12 @@ $cor-de-fundo: rgb(219, 224, 230);
 /* other generic styles */
 
 .padding_navbar_fixed {
-  padding-top: 90px;
+  padding-top: 55px;
+}
+
+.navbar-brand {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .jh-card {
@@ -196,7 +201,12 @@ ui quill editor
 largura da visão principal
 ========================================================================== */
 .width-main-view {
- width: 600px;
+  //width: 600px;
+}
+
+.max-width-main-view {
+  max-width: 600px;
+  margin: auto;
 }
 
 .form-group-card {

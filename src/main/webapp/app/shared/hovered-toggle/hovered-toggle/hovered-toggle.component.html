@@ -1,0 +1,4 @@
+<div (mouseover)="estouIn=true" (mouseout)="estouIn=false">
+    <ng-content *ngIf="estouIn" select="[hoverin]"></ng-content>
+    <ng-content *ngIf="!estouIn" select="[hoverout]"></ng-content>
+</div>

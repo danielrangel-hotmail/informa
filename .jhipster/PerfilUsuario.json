@@ -45,6 +45,12 @@
             "otherEntityName": "pushSubscription",
             "otherEntityRelationshipName": "perfil",
             "relationshipName": "subscriptions"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "perfilGrupo",
+            "otherEntityRelationshipName": "perfil",
+            "relationshipName": "grupos"
         }
     ],
     "changelogDate": "20200123212229",

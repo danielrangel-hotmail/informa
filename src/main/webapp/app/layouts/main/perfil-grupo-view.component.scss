@@ -1,0 +1,26 @@
+.perfil-grupo-list {
+  background: white;
+  width: 260px;
+  border: 1px;
+  padding-top: 16px;
+}
+
+.perfil-grupo-list-docked {
+  position: fixed;
+  top: 56px;
+  height: calc(100% - 56px);
+}
+
+.bell {
+  padding-top: 2px;
+}
+
+.star {
+  padding-top: 1px;
+  padding-left: 8px
+}
+
+.elemento {
+  padding-left: 16px;
+  padding-right: 16px;
+}

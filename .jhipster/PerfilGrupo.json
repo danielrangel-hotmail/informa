@@ -1,0 +1,53 @@
+{
+    "name": "PerfilGrupo",
+    "fields": [
+        {
+            "fieldName": "criacao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "ultimaEdicao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "versao",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "favorito",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "notifica",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "perfilUsuario",
+            "otherEntityRelationshipName": "grupos",
+            "relationshipValidateRules": "required",
+            "relationshipName": "perfil",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "grupo",
+            "otherEntityRelationshipName": "usuarios",
+            "relationshipValidateRules": "required",
+            "relationshipName": "grupo",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200125161558",
+    "entityTableName": "perfil_grupo",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

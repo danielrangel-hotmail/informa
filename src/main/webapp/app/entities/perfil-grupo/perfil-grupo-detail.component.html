@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="perfilGrupo">
+            <h2><span jhiTranslate="informaApp.perfilGrupo.detail.title">Perfil Grupo</span> {{perfilGrupo.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="informaApp.perfilGrupo.criacao">Criacao</span></dt>
+                <dd>
+                    <span>{{perfilGrupo.criacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilGrupo.ultimaEdicao">Ultima Edicao</span></dt>
+                <dd>
+                    <span>{{perfilGrupo.ultimaEdicao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilGrupo.versao">Versao</span></dt>
+                <dd>
+                    <span>{{perfilGrupo.versao}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilGrupo.favorito">Favorito</span></dt>
+                <dd>
+                    <span>{{perfilGrupo.favorito}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilGrupo.notifica">Notifica</span></dt>
+                <dd>
+                    <span>{{perfilGrupo.notifica}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilGrupo.perfil">Perfil</span></dt>
+                <dd>
+                    <div *ngIf="perfilGrupo.perfilId">
+                        <a [routerLink]="['/perfil-usuario', perfilGrupo.perfilId, 'view']">{{perfilGrupo.perfilId}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="informaApp.perfilGrupo.grupo">Grupo</span></dt>
+                <dd>
+                    <div *ngIf="perfilGrupo.grupoId">
+                        <a [routerLink]="['/grupo', perfilGrupo.grupoId, 'view']">{{perfilGrupo.grupoId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/perfil-grupo', perfilGrupo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

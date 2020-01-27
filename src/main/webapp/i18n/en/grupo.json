@@ -22,7 +22,8 @@
       "nome": "Nome",
       "descricao": "Descricao",
       "formal": "Formal",
-      "opcional": "Opcional"
+      "opcional": "Opcional",
+      "usuarios": "Usuarios"
     }
   }
 }

@@ -1,0 +1,28 @@
+{
+  "informaApp": {
+    "perfilGrupo": {
+      "home": {
+        "title": "Perfil Grupos",
+        "createLabel": "Create a new Perfil Grupo",
+        "createOrEditLabel": "Create or edit a Perfil Grupo",
+        "notFound": "No Perfil Grupos found"
+      },
+      "created": "A new Perfil Grupo is created with identifier {{ param }}",
+      "updated": "A Perfil Grupo is updated with identifier {{ param }}",
+      "deleted": "A Perfil Grupo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Perfil Grupo {{ id }}?"
+      },
+      "detail": {
+        "title": "Perfil Grupo"
+      },
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "versao": "Versao",
+      "favorito": "Favorito",
+      "notifica": "Notifica",
+      "perfil": "Perfil",
+      "grupo": "Grupo"
+    }
+  }
+}

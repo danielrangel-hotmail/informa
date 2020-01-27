@@ -1,83 +1,78 @@
-<div class="d-flex justify-content-center">
-    <div class="width-main-view">
-        <div *ngIf="post">
-            <div class="bg-secondary mb-3 border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
-                <div class="d-flex flex-row p-2">
-                    <div class="mr-1">
-                        <img ngxGravatar [round]="false" [size]="50" [cornerRadius]="7" [email]="post.autorEmail">
-                    </div>
-                    <div>
-                        <div *ngIf="post.grupoId" class="small">
-                            <a [routerLink]="['/grupo', post.grupoId, 'view']">{{post.grupoNome}}</a>
-                        </div>
-                        <div>
-                            {{post.autorNome}}
-                        </div>
-                        <div class="small">
-                            {{tempoRelativo(post)}}
-                        </div>
-                    </div>
+<div *ngIf="post">
+    <div class="bg-secondary mb-3 border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
+        <div class="d-flex flex-row p-2">
+            <div class="mr-1">
+                <img ngxGravatar [round]="false" [size]="50" [cornerRadius]="7" [email]="post.autorEmail">
+            </div>
+            <div>
+                <div *ngIf="post.grupoId" class="small">
+                    <a [routerLink]="['/grupo', post.grupoId, 'view']">{{post.grupoNome}}</a>
                 </div>
-                <div class="">
-                    <div class = "mb-1">
-                        <quill-view [content]="post.conteudo" format="json" theme="snow"></quill-view>
-                    </div>
-                    <div class = "mb-1">
-                        <jhi-post-image-view [post]="post" ></jhi-post-image-view>
-                    </div>
-                    <div class = "mb-1">
-                        <jhi-post-link-externo-video-view [post]="post" ></jhi-post-link-externo-video-view>
-                    </div>
-                    <hr class="mt-0 mb-0">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex align-items-center">
-                            <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao">
-                                <div class="p-1 d-none d-sm-block">
-                                    <fa-icon icon="thumbs-up"></fa-icon>
-                                    <span>Sem reações</span>
-                                </div>
-                                <div class="p-1 d-block d-sm-none">
-                                    <fa-icon icon="thumbs-up"></fa-icon>
-                                    <span>0</span>
-                                </div>
-
-                            </jhi-hovered>
-                            <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao" [routerLink]="['/mensagem/post/', post.id]">
-                                <div class="p-1 d-none d-sm-block">
-                                    <fa-icon icon="comment"></fa-icon>
-                                    <span>{{numeroDeMensagens()}}</span>
-                                </div>
-                                <div class="p-1 d-block d-sm-none">
-                                    <fa-icon icon="comment"></fa-icon>
-                                    <span>{{post.numeroDeMensagens}}</span>
-                                </div>
-
-                            </jhi-hovered>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser()" [routerLink]="['/post', post.id, 'edit']">
-                                <div class="p-1">
-                                    <fa-icon icon="pencil-alt"></fa-icon>
-                                    <span>Editar</span>
-                                </div>
-                            </jhi-hovered>
-                            <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser()" (click)="delete(post)">
-                                <div class="p-1">
-                                    <fa-icon icon="trash"></fa-icon>
-                                    <span>Excluir</span>
-                                </div>
-                            </jhi-hovered>
-                            <jhi-hovered
-                                [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser() && !post.publicacao" (click)="publica(post)">
-                                <div class="p-1">
-                                    <fa-icon icon="plane"></fa-icon>
-                                    <span>Publicar</span>
-                                </div>
-                            </jhi-hovered>
-                        </div>
-                    </div>
+                <div>
+                    {{post.autorNome}}
                 </div>
-<!--                <jhi-mensagem *ngIf="mostraMensagens" [post]="post"></jhi-mensagem>-->
+                <div class="small">
+                    {{tempoRelativo(post)}}
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class = "mb-1">
+                <quill-view [content]="post.conteudo" format="json" theme="snow"></quill-view>
+            </div>
+            <div class = "mb-1">
+                <jhi-post-image-view [post]="post" ></jhi-post-image-view>
+            </div>
+            <div class = "mb-1">
+                <jhi-post-link-externo-video-view [post]="post" ></jhi-post-link-externo-video-view>
+            </div>
+            <hr class="mt-0 mb-0">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao">
+                        <div class="p-1 d-none d-sm-block">
+                            <fa-icon icon="thumbs-up"></fa-icon>
+                            <span>Sem reações</span>
+                        </div>
+                        <div class="p-1 d-block d-sm-none">
+                            <fa-icon icon="thumbs-up"></fa-icon>
+                            <span>0</span>
+                        </div>
+
+                    </jhi-hovered>
+                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao" [routerLink]="['/mensagem/post/', post.id]">
+                        <div class="p-1 d-none d-sm-block">
+                            <fa-icon icon="comment"></fa-icon>
+                            <span>{{numeroDeMensagens()}}</span>
+                        </div>
+                        <div class="p-1 d-block d-sm-none">
+                            <fa-icon icon="comment"></fa-icon>
+                            <span>{{post.numeroDeMensagens}}</span>
+                        </div>
+
+                    </jhi-hovered>
+                </div>
+                <div class="d-flex align-items-center">
+                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser()" [routerLink]="['/post', post.id, 'edit']">
+                        <div class="p-1">
+                            <fa-icon icon="pencil-alt"></fa-icon>
+                            <span>Editar</span>
+                        </div>
+                    </jhi-hovered>
+                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser()" (click)="delete(post)">
+                        <div class="p-1">
+                            <fa-icon icon="trash"></fa-icon>
+                            <span>Excluir</span>
+                        </div>
+                    </jhi-hovered>
+                    <jhi-hovered
+                        [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser() && !post.publicacao" (click)="publica(post)">
+                        <div class="p-1">
+                            <fa-icon icon="plane"></fa-icon>
+                            <span>Publicar</span>
+                        </div>
+                    </jhi-hovered>
+                </div>
             </div>
         </div>
     </div>

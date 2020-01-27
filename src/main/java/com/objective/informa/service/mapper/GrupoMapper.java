@@ -2,6 +2,7 @@ package com.objective.informa.service.mapper;
 
 import com.objective.informa.domain.*;
 import com.objective.informa.service.dto.GrupoDTO;
+import com.objective.informa.service.dto.PerfilUsuarioDTO;
 
 import org.mapstruct.*;
 
@@ -11,7 +12,9 @@ import org.mapstruct.*;
 @Mapper(componentModel = "spring", uses = {})
 public abstract class GrupoMapper implements EntityMapper<GrupoDTO, Grupo> {
 
-
+    @Mapping(target = "usuarios", ignore = true)
+    @Mapping(target = "removeUsuarios", ignore = true)
+    public abstract Grupo toEntity(GrupoDTO grupoDTO);
 
     public Grupo fromId(Long id) {
         if (id == null) {

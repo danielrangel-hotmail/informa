@@ -8,10 +8,12 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { QuillEditorCustomComponent } from './quill/quill-editor-custom.component';
 import { QuillModule } from 'ngx-quill';
 import { HoveredComponent } from './hovered/hovered.component';
+import { JhiInputUserComponent } from 'app/shared/input-user/input-user.component';
+import { HoveredToggleComponent } from 'app/shared/hovered-toggle/hovered-toggle/hovered-toggle.component';
 
 @NgModule({
   imports: [InformaSharedLibsModule, QuillModule.forRoot() ],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent],
+  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, JhiInputUserComponent, HoveredToggleComponent],
   entryComponents: [LoginModalComponent],
   exports: [
     InformaSharedLibsModule,
@@ -21,7 +23,9 @@ import { HoveredComponent } from './hovered/hovered.component';
     LoginModalComponent,
     HasAnyAuthorityDirective,
     QuillEditorCustomComponent,
-    HoveredComponent
+    HoveredComponent,
+    HoveredToggleComponent,
+    JhiInputUserComponent
   ]
 })
 export class InformaSharedModule {}

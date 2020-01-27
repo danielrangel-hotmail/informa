@@ -8,8 +8,7 @@
   left: 0;
   width: 100%;
   display: flex;
-  align-items: stretch;
-  justify-content: center;
+  flex-grow: 1;
 }
 
 .footer-background {
@@ -20,16 +19,10 @@
   width: 15px;
 }
 
-.chat-content{
-  //background-color: white;
-  height: 100vh;
-}
-
 .message-content{
-  overflow-y: auto;
   display: flex;
   flex-flow: column nowrap;
-  height: 100%;
+  height: calc(100vh - 56px);
 }
 
 .first-div {

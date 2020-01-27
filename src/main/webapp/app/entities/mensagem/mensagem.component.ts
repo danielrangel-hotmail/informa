@@ -56,7 +56,7 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private scrollToBottom(): void {
-    this.scrollContainer.scroll({
+    window.scroll({
       top: this.scrollContainer.scrollHeight,
       left: 0,
       behavior: 'auto'

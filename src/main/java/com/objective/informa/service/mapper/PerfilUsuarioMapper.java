@@ -22,6 +22,8 @@ public abstract class PerfilUsuarioMapper implements EntityMapper<PerfilUsuarioD
     @Mapping(source = "usuarioId", target = "usuario", qualifiedByName = "usuarioPerfil")
     @Mapping(target = "subscriptions", ignore = true)
     @Mapping(target = "removeSubscriptions", ignore = true)
+    @Mapping(target = "grupos", ignore = true)
+    @Mapping(target = "removeGrupos", ignore = true)
     public abstract PerfilUsuario toEntity(PerfilUsuarioDTO perfilUsuarioDTO);
 
     @Named("usuarioPerfil")
