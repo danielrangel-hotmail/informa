@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -15,13 +15,15 @@ import { Account } from 'app/core/user/account.model';
 import { PostPublicaDialogComponent } from './post-publica-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGrupo } from 'app/shared/model/grupo.model';
+import { PerfilGrupoViewService } from 'app/layouts/main/perfil-grupo-view.service';
+import { DRAFTS, GRUPO, INFORMAIS, MEUS_GRUPOS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
 
 @Component({
   selector: 'jhi-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnInit, OnDestroy {
+export class PostComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() onlyLoggedUser = false;
   posts: IPost[];
   eventSubscriber?: Subscription;
@@ -42,7 +44,8 @@ export class PostComponent implements OnInit, OnDestroy {
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
     protected router: Router,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected perfilGrupoViewService: PerfilGrupoViewService
   ) {
     this.filtro='';
     this.loadDraftQtd();
@@ -103,6 +106,19 @@ export class PostComponent implements OnInit, OnDestroy {
     });
   }
 
+  updateNavegacao(): void {
+    switch (this.filtro) {
+      case MEUS_GRUPOS: this.perfilGrupoViewService.navega('meus grupos'); break;
+      case TODOS: this.perfilGrupoViewService.navega('todos'); break;
+      case TRABALHO: this.perfilGrupoViewService.navega('trabalho'); break;
+      case INFORMAIS: this.perfilGrupoViewService.navega('informais'); break;
+      case DRAFTS: this.perfilGrupoViewService.navega('drafts'); break;
+      case GRUPO: this.perfilGrupoViewService.navega(this.grupo!.nome!); break;
+      default:  this.perfilGrupoViewService.navega('Não sei');
+    }
+
+  }
+
   ngOnDestroy(): void {
     if (this.eventSubscriber) {
       this.eventManager.destroy(this.eventSubscriber);
@@ -159,5 +175,9 @@ export class PostComponent implements OnInit, OnDestroy {
         this.posts.push(data[i]);
       }
     }
+  }
+
+  ngAfterViewInit(): void {
+    this.updateNavegacao();
   }
 }

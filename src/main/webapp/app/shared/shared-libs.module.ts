@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatomoModule } from 'ngx-matomo';
 import { DeviceDetectorModule } from 'ngx-device-detector';
+import { LayoutModule } from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { DeviceDetectorModule } from 'ngx-device-detector';
     ReactiveFormsModule,
     TranslateModule,
     MatomoModule,
+    LayoutModule
   ]
 })
 export class InformaSharedLibsModule {}

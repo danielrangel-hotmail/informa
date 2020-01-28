@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -55,7 +55,7 @@ export class PerfilGrupoComponent implements OnInit, OnDestroy {
     }
   }
 
-  trackId(index: number, item: IPerfilGrupo): number {
+  trackId(index: number): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return index;
   }
@@ -79,7 +79,7 @@ export class PerfilGrupoComponent implements OnInit, OnDestroy {
   sai(perfilGrupo: IPerfilGrupo): void {
     if (perfilGrupo.id === undefined) return;
     this.perfilGrupoService.delete(perfilGrupo.id).subscribe(
-      (res) => this.onDeleteSuccess(perfilGrupo.grupo!),
+      () => this.onDeleteSuccess(perfilGrupo.grupo!),
       () => this.onSaveError()
     );
   }

@@ -9,6 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { DOCKED, PerfilGrupoViewService, UNDOCKABLE, UNDOCKED } from 'app/layouts/main/perfil-grupo-view.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -21,6 +22,9 @@ export class NavbarComponent implements OnInit {
   languages = LANGUAGES;
   swaggerEnabled?: boolean;
   version: string;
+  UNDOCKED = UNDOCKED;
+  DOCKED = DOCKED;
+  UNDOCKABLE = UNDOCKABLE;
 
   constructor(
     private loginService: LoginService,
@@ -29,7 +33,8 @@ export class NavbarComponent implements OnInit {
     private accountService: AccountService,
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
-    private router: Router
+    private router: Router,
+    protected perfilGrupoViewService: PerfilGrupoViewService
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
   }

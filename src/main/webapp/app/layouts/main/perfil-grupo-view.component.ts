@@ -10,6 +10,8 @@ import { PerfilGrupoService } from 'app/entities/perfil-grupo/perfil-grupo.servi
 import { AccountService } from 'app/core/auth/account.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime, filter, map } from 'rxjs/operators';
+import { DOCKED, PerfilGrupoViewService, UNDOCKED } from 'app/layouts/main/perfil-grupo-view.service';
+
 
 @Component({
   selector: 'jhi-perfil-grupo-view',
@@ -24,19 +26,22 @@ export class PerfilGrupoViewComponent implements OnInit, OnDestroy {
   isSaving = false;
   filtro = new FormControl();
   filtroValue = '';
+  DOCKED = DOCKED;
+
 
   constructor(
     protected perfilGrupoService: PerfilGrupoService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
-    protected accountService: AccountService
+    protected accountService: AccountService,
+    public perfilGrupoViewService: PerfilGrupoViewService
   ) {
     this.perfilGrupos = [];
     this.predicate = 'id';
     this.ascending = true;
     this.filtro.valueChanges
-      .pipe(debounceTime(500))
+      .pipe(debounceTime(200))
       .subscribe(val => {
         this.filtroValue = val;
       });

@@ -52,3 +52,22 @@ Logo styles
   background: url('../../../content/images/logo-informa.png') no-repeat center center;
   background-size: contain;
 }
+
+.base-navegacao {
+  margin-top: 7px;
+  padding-left: 7px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  width: 260px;
+  border: 1px solid;
+  border-radius: 4px;
+}
+.navegacao-undocked {
+  @extend .base-navegacao;
+  border-color: #ebebeb;
+}
+
+.navegacao {
+  @extend .base-navegacao;
+  border-color: white;
+}

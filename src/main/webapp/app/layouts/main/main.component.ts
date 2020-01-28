@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { MatomoTracker } from 'ngx-matomo';
+import { DOCKED, PerfilGrupoViewService } from 'app/layouts/main/perfil-grupo-view.service';
 
 @Component({
   selector: 'jhi-main',
@@ -12,6 +13,7 @@ import { MatomoTracker } from 'ngx-matomo';
 })
 export class MainComponent implements OnInit {
   lastUrl = "Nenhuma";
+  DOCKED = DOCKED;
 
   constructor(
     private accountService: AccountService,
@@ -19,6 +21,7 @@ export class MainComponent implements OnInit {
     private titleService: Title,
     private router: Router,
     private matomoTracker: MatomoTracker,
+    protected perfilGrupoViewService: PerfilGrupoViewService
   ) { }
 
   ngOnInit(): void {
