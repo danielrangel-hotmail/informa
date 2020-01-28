@@ -9,7 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
-import { DOCKED, PerfilGrupoViewService, UNDOCKABLE, UNDOCKED } from 'app/layouts/main/perfil-grupo-view.service';
+import { DOCKED, PerfilGrupoViewService, UNDOCKABLE, UNDOCKED } from 'app/layouts/navbar/perfil-grupo-view.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
   UNDOCKED = UNDOCKED;
   DOCKED = DOCKED;
   UNDOCKABLE = UNDOCKABLE;
+  perfilGrupoOpened = false;
 
   constructor(
     private loginService: LoginService,
@@ -37,6 +38,16 @@ export class NavbarComponent implements OnInit {
     protected perfilGrupoViewService: PerfilGrupoViewService
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
+  }
+
+  toggleOpened(dockingState: string): void {
+    if (dockingState === this.DOCKED) return;
+    this.perfilGrupoOpened = !this.perfilGrupoOpened;
+  }
+
+  dock() : void {
+    this.perfilGrupoViewService.dock();
+    this.perfilGrupoOpened = false;
   }
 
   ngOnInit(): void {

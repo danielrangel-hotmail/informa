@@ -3,13 +3,20 @@
         <span class="logo-img"></span>
         <span jhiTranslate="global.title" class="navbar-title">Informa</span> <span class="navbar-version">{{version}}</span>
     </a>
-    <ng-container *ngIf = "perfilGrupoViewService.status$ | async as breakpoint">
-        <div class="form-inline mr-auto" >
-            <h5 [ngClass]="{ 'navegacao-undocked' : (breakpoint === UNDOCKED || breakpoint === UNDOCKABLE), 'navegacao' : breakpoint === DOCKED }" *ngIf = "perfilGrupoViewService.navegacao$ | async as navegacao">{{navegacao}}</h5>
-            <div *ngIf = "breakpoint === UNDOCKED" (click)="perfilGrupoViewService.dock()"> undock </div>
+    <ng-container *ngIf = "perfilGrupoViewService.status$ | async as dockingState">
+        <div class="form-inline mr-auto position-relative" *ngIf="isAuthenticated()">
+            <div class="d-flex align-items-center" [ngClass]="{ 'navegacao-undocked' : (dockingState === UNDOCKED || dockingState === UNDOCKABLE), 'navegacao' : dockingState === DOCKED }">
+                <h5 (click)="toggleOpened(dockingState)" class="flex-grow-1 mb-0" *ngIf = "perfilGrupoViewService.navegacao$ | async as navegacao">{{navegacao}}</h5>
+                <div *ngIf = "(dockingState === UNDOCKED || dockingState === UNDOCKABLE)" class="pr-2">
+                    <fa-icon class="pr-2" icon="caret-square-left" (click)="dock()" *ngIf = "perfilGrupoOpened && (dockingState === UNDOCKED)"></fa-icon>
+                    <fa-icon icon="caret-down" (click)="toggleOpened(dockingState)"></fa-icon>
+                </div>
+                <div [ngClass]="{ 'perfil-grupo-list-undocked' : (dockingState === UNDOCKED || dockingState === UNDOCKABLE), 'perfil-grupo-list-docked' : dockingState === DOCKED }" class="perfil-grupo-list" *ngIf="perfilGrupoOpened || ( dockingState === DOCKED)">
+                    <jhi-perfil-grupo-view [dockingState]="dockingState"></jhi-perfil-grupo-view>
+                </div>
+            </div>
         </div>
     </ng-container>
-
     <a class="navbar-toggler d-lg-none" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
         <fa-icon icon="bars"></fa-icon>
     </a>

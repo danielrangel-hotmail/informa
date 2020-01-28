@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { BehaviorSubject, combineLatest, iif, Observable, of, Subject, merge } from 'rxjs';
-import { combineAll, delay, map, mergeMap, scan, startWith } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, merge } from 'rxjs';
+import { delay, map, scan, startWith } from 'rxjs/operators';
 
 export const MOBILE = 'mobile';
 export const UNDOCKED = 'undocked';

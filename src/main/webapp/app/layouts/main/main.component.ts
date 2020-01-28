@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { MatomoTracker } from 'ngx-matomo';
-import { DOCKED, PerfilGrupoViewService } from 'app/layouts/main/perfil-grupo-view.service';
+import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 
 @Component({
   selector: 'jhi-main',

@@ -16,7 +16,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { InformaPerfilGrupoModule } from 'app/entities/perfil-grupo/perfil-grupo.module';
-import { PerfilGrupoViewComponent } from 'app/layouts/main/perfil-grupo-view.component';
+import { PerfilGrupoViewComponent } from 'app/layouts/navbar/perfil-grupo-view.component';
 
 @NgModule({
   imports: [

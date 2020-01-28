@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,8 +9,8 @@ import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 import { PerfilGrupoService } from 'app/entities/perfil-grupo/perfil-grupo.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { FormControl } from '@angular/forms';
-import { debounceTime, filter, map } from 'rxjs/operators';
-import { DOCKED, PerfilGrupoViewService, UNDOCKED } from 'app/layouts/main/perfil-grupo-view.service';
+import { debounceTime } from 'rxjs/operators';
+import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 
 
 @Component({
@@ -19,6 +19,7 @@ import { DOCKED, PerfilGrupoViewService, UNDOCKED } from 'app/layouts/main/perfi
   styleUrls: [ './perfil-grupo-view.component.scss']
 })
 export class PerfilGrupoViewComponent implements OnInit, OnDestroy {
+  @Input() dockingState!: string;
   perfilGrupos: IPerfilGrupo[];
   eventSubscriber?: Subscription;
   predicate: string;

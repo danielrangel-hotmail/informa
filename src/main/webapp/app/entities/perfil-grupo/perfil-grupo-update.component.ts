@@ -36,7 +36,7 @@ export class PerfilGrupoUpdateComponent implements OnInit {
     favorito: [],
     notifica: [],
     perfilId: [null, Validators.required],
-    grupoId: [null, Validators.required]
+    grupo: [null, Validators.required]
   });
 
   constructor(
@@ -80,7 +80,7 @@ export class PerfilGrupoUpdateComponent implements OnInit {
       favorito: perfilGrupo.favorito,
       notifica: perfilGrupo.notifica,
       perfilId: perfilGrupo.perfilId,
-      grupoId: perfilGrupo.grupoId
+      grupo: perfilGrupo.grupo
     });
   }
 
@@ -111,7 +111,7 @@ export class PerfilGrupoUpdateComponent implements OnInit {
       favorito: this.editForm.get(['favorito'])!.value,
       notifica: this.editForm.get(['notifica'])!.value,
       perfilId: this.editForm.get(['perfilId'])!.value,
-      grupoId: this.editForm.get(['grupoId'])!.value
+      grupo: this.editForm.get(['grupo'])!.value
     };
   }
 

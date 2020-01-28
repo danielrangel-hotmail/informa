@@ -3,7 +3,6 @@
     <div style="height: 0px;">
         <router-outlet name="navbar"></router-outlet>
     </div>
-    <jhi-perfil-grupo-view class="padding_navbar_fixed"></jhi-perfil-grupo-view>
     <div class="container-fluid vh100 p-0" style="display: flex">
         <ng-container *ngIf = "perfilGrupoViewService.status$ | async as breakpoint">
             <div *ngIf = "breakpoint === DOCKED" style="width: 260px"></div>

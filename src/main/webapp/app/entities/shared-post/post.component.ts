@@ -15,7 +15,7 @@ import { Account } from 'app/core/user/account.model';
 import { PostPublicaDialogComponent } from './post-publica-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IGrupo } from 'app/shared/model/grupo.model';
-import { PerfilGrupoViewService } from 'app/layouts/main/perfil-grupo-view.service';
+import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 import { DRAFTS, GRUPO, INFORMAIS, MEUS_GRUPOS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
 
 @Component({

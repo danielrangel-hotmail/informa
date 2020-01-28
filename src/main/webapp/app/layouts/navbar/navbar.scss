@@ -71,3 +71,32 @@ Logo styles
   @extend .base-navegacao;
   border-color: white;
 }
+
+.perfil-grupo-list {
+  background: white;
+  width: 260px;
+  border: 1px;
+  padding-top: 16px;
+}
+
+.perfil-grupo-list-undocked {
+  position: absolute;
+  top: 41px;
+  left: 0;
+  height: 50vh;
+  overflow: auto;
+  border-top: 0px;
+  border-left: 1px;
+  border-right: 1px;
+  border-bottom: 1px;
+  border-style: solid;
+  border-color: #ebebeb;
+  border-radius: 4px;
+}
+.perfil-grupo-list-docked {
+  position: fixed;
+  top: 59px;
+  left: 0;
+  height: calc(100% - 59px);
+}
+
