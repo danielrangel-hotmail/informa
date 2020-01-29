@@ -1,38 +1,34 @@
-TODO: Sumir com o flash de posts não encontrados
-
-TODO: Mensagem tá zuada o alinhamento
-
 TODO: Formatar a página de grupos
+Incluir dono do grupo e avatar
+Admin pode mudar o dono do grupo
 
 TODO: Reações em posts e mensagens
 
-TODO: Role do Post Oficial
+TODO: Role do Supervisor
 Um post pode ser marcado como oficial da empresa
-O post sairá em nome da empresa by o criador somente para admins e post oficial
+O post sairá em nome da empresa by o criador somente para admins e outros supervisores
 Somente admins e caras com post oficial podem postar desta forma
 
 TODO: Rever menus
-
-TODO: Melhorar a home para não logados
 
 TODO: Remover imagens
 Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
 https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
 Tirar o router e fazer hide and show
 
-TODO: Garantir o formato do nome dos grupos
+TODO: Rever o esquema de criar um post
+Para não criar sempre do zero
+Quando tentar adicionar imagem ou vídeo, aí cria
 
-TODO: Garantir o tamanho máximo do conteúdo
-
-TODO: Menu para a Intranet
 
 TODO: Melhorar os Emojis e Menções
 Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
 
+TODO: Fazer o bold funcionar de novo
+Algo quebrou o bold...
+
 TODO: Fazer o ENTER funcionar na mensagem como um SUBMIT
 E o SHIFT ENTER como ENTER
-
-TODO: Confidencialidade
 
 TODO: Fazer funcionar o básico das conversas
 
@@ -40,20 +36,8 @@ TODO: Remoção de Posts
 
 TODO: Edição e Remoção de Mensagens
 
-TODO: Criar o conceito básico de Customer Success
-Para o pessoal que está entrando, haverá um wizard no sistema que conduzirá o colaborador, experimentar cada uma das features do sistema.
-PAra o pessoal já velho, para novas features, ou alteração de features existenes, haverá um wizar no sistema para explicar a nova feature ou versão
-No profile ficará registrado quais features o colaborador experimentou, assim, ele pode saber das novidades
-Deve ser fácil experimentar o onboarding, para verificarmos como está a experiência de um novo colaborador.
-
 TODO: Registrar o número de vezes que cada pessoa carregou os posts
 Aguardando o Renato voltar para configurar o Matomo na aws
-
-TODO: Melhorar o texto dos e-mails de ativação, criação e senha
-
-TODO: Travar e-mails de fora da Objective.
-
-TODO: CSS => Resolver a lista do quill-editor de align. Está 3px para baixo o svg
 
 TODO: Ver a responsividade para o restante do app
 
@@ -63,10 +47,6 @@ TODO: Adicionar subscrição ao Perfil ao criar
 Também ver se faz sentido excluir subscrições
 Evitar duplicatas!!!!
 
-TODO: Rever o esquema de criar um post
-Para não criar sempre do zero
-Quando tentar adicionar imagem ou vídeo, aí cria
-
 TODO: Segurança AWS
 
 TODO: Websockets para mensagens
@@ -75,13 +55,32 @@ TODO: Share https://web.dev/web-share-target/
 
 TODO: Implementar alteraçÕes e mudanças sugeridas pelo time de UX
 
-TODO: Incluir moderadores do grupo e avatar
-
 TODO: Repassar as subscriptions... tem um monte que precisam ser fechadas...
 
 TODO: Resolver parada do scroll
 Scroll só dentro da área de posts e mensagens?
 Evitar o shift de ir de um filtro sem scroll para um filtro com scroll?
+
+------------------------------------------------------------------------------
+Miscelâneas: pequenas coisinhas
+
+TODO: Garantir o formato do nome dos grupos
+
+TODO: Garantir o tamanho máximo do conteúdo
+
+TODO: Menu para a Intranet
+
+TODO: Confidencialidade
+
+TODO: Melhorar a home para não logados
+Forçar a home também estar logado e já abrir o login?
+
+TODO: Melhorar o texto dos e-mails de ativação, criação e senha
+
+TODO: Travar e-mails de fora da Objective.
+
+TODO: CSS => Resolver a lista do quill-editor de align. Está 3px para baixo o svg
+
 
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
@@ -133,6 +132,16 @@ TODO: Facilitar o uso por outras empresas
 
 TODO: Fazer uma receita para implantar o sistema do ZERO!!!!
 ------------------------------------------------------------------------------
+TODO: Criar o conceito básico de Customer Success
+Para o pessoal que está entrando, haverá um wizard no sistema que conduzirá o colaborador, experimentar cada uma das features do sistema.
+PAra o pessoal já velho, para novas features, ou alteração de features existenes, haverá um wizar no sistema para explicar a nova feature ou versão
+No profile ficará registrado quais features o colaborador experimentou, assim, ele pode saber das novidades
+Deve ser fácil experimentar o onboarding, para verificarmos como está a experiência de um novo colaborador.
+
+
+TODO: Aplicar o esquema de carregamento nas routes para todos os objetos
+Verificar o comportamento do EMPTY no forkJoin
+
 TODO: Controle de dirty e salvamento automatico de post
 
 TODO: Banner da Ligia

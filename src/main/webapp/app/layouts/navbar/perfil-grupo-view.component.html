@@ -2,7 +2,7 @@
     <button class="btn btn-sm" (click)="perfilGrupoViewService.undock()"><fa-icon icon="times"></fa-icon></button>
 </div>
 <div class="mb-3 elemento">
-    <input type="text" class="form-control" name="filtro" placeholder="Filtre a lista" [formControl]="filtro"/>
+    <input type="text" class="form-control" style="width: 100%" name="filtro" placeholder="Filtre a lista" [formControl]="filtro"/>
 </div>
 
 <div class="small mb-2 elemento">FILTROS</div>
@@ -13,7 +13,7 @@
 </jhi-hovered>
 <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
     <h5 class="elemento-filtros" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" routerLink="post/todos" *ngIf="filtroMatch('todos')">
-        todos
+        h5
     </h5>
 </jhi-hovered>
 <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
