@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+import { Observable, of, EMPTY, forkJoin } from 'rxjs';
+import { flatMap, map, switchMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { Post } from 'app/shared/model/post.model';
@@ -14,7 +14,47 @@ import {PostImageComponent} from 'app/entities/post/post-image/post-image.compon
 import {PostVideoLinkComponent} from 'app/entities/post/post-video-link/post-video-link.component';
 import { PostComponent } from 'app/entities/shared-post/post.component';
 import { DRAFTS, GRUPO, INFORMAIS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
-import { GrupoResolve } from 'app/entities/grupo/grupo.route';
+import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { GrupoService } from 'app/entities/grupo/grupo.service';
+import { Grupo, IGrupo } from 'app/shared/model/grupo.model';
+
+
+const resolveGrupo$ = (id: number, service: GrupoService): Observable<IGrupo | never>  => {
+  return service.find(id).pipe(
+    flatMap((grupo: HttpResponse<Grupo>) => {
+      if (grupo.body) {
+        return of(grupo.body);
+      } else {
+        return EMPTY;
+      }
+    }))
+}
+
+@Injectable({ providedIn: 'root' })
+export class PostsGrupoResolve implements Resolve<HttpResponse<IPost[]>> {
+  constructor(private service: PostService, private grupoService: GrupoService) {}
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    const id = route.params['id'];
+    if (id) {
+      return resolveGrupo$(id, this.grupoService).pipe(
+        switchMap(grupo =>
+          forkJoin(
+            {
+              grupo: of(grupo),
+              httpPosts: this.service.loadAll(0, ITEMS_PER_PAGE, route.data.predicate, route.data.filtro, grupo)
+            }
+          ))
+      );
+    }
+    return this.service.loadAll(0, ITEMS_PER_PAGE, route.data.predicate, route.data.filtro, undefined).pipe(
+      map(httpPosts => ({
+        httpPosts,
+        grupo: null
+      }))
+    );
+  }
+}
+
 
 @Injectable({ providedIn: 'root' })
 export class PostResolve implements Resolve<IPost> {
@@ -45,7 +85,11 @@ export const postRoute: Routes = [
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'informaApp.post.home.title',
-      filtro: DRAFTS
+      filtro: DRAFTS,
+      predicate: 'criacao'
+    },
+    resolve: {
+      postsGrupo: PostsGrupoResolve
     },
     canActivate: [UserRouteAccessService]
   },
@@ -55,7 +99,11 @@ export const postRoute: Routes = [
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'informaApp.post.home.title',
-      filtro: TODOS
+      filtro: TODOS,
+      predicate: 'publicacao',
+    },
+    resolve: {
+      postsGrupo: PostsGrupoResolve
     },
     canActivate: [UserRouteAccessService]
   },
@@ -65,7 +113,11 @@ export const postRoute: Routes = [
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'informaApp.post.home.title',
-      filtro: TRABALHO
+      filtro: TRABALHO,
+      predicate: 'publicacao'
+    },
+    resolve: {
+      postsGrupo: PostsGrupoResolve
     },
     canActivate: [UserRouteAccessService]
   },
@@ -75,7 +127,11 @@ export const postRoute: Routes = [
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'informaApp.post.home.title',
-      filtro: INFORMAIS
+      filtro: INFORMAIS,
+      predicate: 'publicacao'
+    },
+    resolve: {
+      postsGrupo: PostsGrupoResolve
     },
     canActivate: [UserRouteAccessService]
   },
@@ -83,12 +139,13 @@ export const postRoute: Routes = [
     path: 'grupo/:id',
     component: PostComponent,
     resolve: {
-      grupo: GrupoResolve
+      postsGrupo: PostsGrupoResolve
     },
     data: {
       authorities: ['ROLE_USER'],
       pageTitle: 'informaApp.post.home.title',
-      filtro: GRUPO
+      filtro: GRUPO,
+      predicate: 'publicacao'
     },
     canActivate: [UserRouteAccessService]
   },

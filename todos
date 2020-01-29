@@ -1,8 +1,3 @@
-TODO: Associação de usuários com grupos e favoritos e notificações
-Filtrar posts dos grupos
-
-TODO: Criar título do post
-
 TODO: Sumir com o flash de posts não encontrados
 
 TODO: Mensagem tá zuada o alinhamento
@@ -81,6 +76,12 @@ TODO: Share https://web.dev/web-share-target/
 TODO: Implementar alteraçÕes e mudanças sugeridas pelo time de UX
 
 TODO: Incluir moderadores do grupo e avatar
+
+TODO: Repassar as subscriptions... tem um monte que precisam ser fechadas...
+
+TODO: Resolver parada do scroll
+Scroll só dentro da área de posts e mensagens?
+Evitar o shift de ir de um filtro sem scroll para um filtro com scroll?
 
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional

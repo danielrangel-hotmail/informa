@@ -30,8 +30,7 @@ export class PostComponent implements OnInit, OnDestroy, AfterViewInit {
   itemsPerPage: number;
   links: any;
   page: number;
-  predicate: string;
-  ascending: boolean;
+  predicate!: string;
   account$?: Observable<Account | null>;
   draftsQtd$?: Observable<number>;
   filtro: string;
@@ -55,8 +54,6 @@ export class PostComponent implements OnInit, OnDestroy, AfterViewInit {
     this.links = {
       last: 0
     };
-    this.predicate = 'criacao';
-    this.ascending = false;
   }
 
   private loadDraftQtd(): void {
@@ -64,23 +61,8 @@ export class PostComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   loadAll(): void {
-    if (this.grupo != null) {
-      this.postService
-        .queryGrupo(this.grupo.id!,{
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.sort()
-        })
+    this.postService.loadAll(this.page, this.itemsPerPage, this.predicate, this.filtro, this.grupo)
         .subscribe((res: HttpResponse<IPost[]>) => this.paginatePosts(res.body, res.headers));
-    } else {
-      this.postService
-        .queryFiltro(this.filtro, {
-          page: this.page,
-          size: this.itemsPerPage,
-          sort: this.sort()
-        })
-        .subscribe((res: HttpResponse<IPost[]>) => this.paginatePosts(res.body, res.headers));
-    }
   }
 
   reset(): void {
@@ -97,11 +79,12 @@ export class PostComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.account$ = this.accountService.identity();
-    this.activatedRoute.data.subscribe(({ filtro, grupo }) => {
+    this.activatedRoute.data.subscribe(({ filtro, predicate, postsGrupo }) => {
       this.posts = [];
       this.filtro = filtro;
-      this.grupo = grupo;
-      this.loadAll();
+      this.grupo = postsGrupo.grupo;
+      this.predicate = predicate;
+      this.paginatePosts(postsGrupo.httpPosts.body, postsGrupo.httpPosts.headers)
       this.registerChangeInPosts();
     });
   }
@@ -142,14 +125,6 @@ export class PostComponent implements OnInit, OnDestroy, AfterViewInit {
   delete(post: IPost): void {
     const modalRef = this.modalService.open(PostDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.post = post;
-  }
-
-  sort(): string[] {
-    const result = [this.predicate + ',' + (this.ascending ? 'asc' : 'desc')];
-    if (this.predicate !== 'id') {
-      result.push('id');
-    }
-    return result;
   }
 
   createPost(): void {
