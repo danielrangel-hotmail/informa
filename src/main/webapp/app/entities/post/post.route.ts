@@ -17,6 +17,7 @@ import { DRAFTS, GRUPO, INFORMAIS, TODOS, TRABALHO } from 'app/entities/shared-p
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
 import { Grupo, IGrupo } from 'app/shared/model/grupo.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 
 const resolveGrupo$ = (id: number, service: GrupoService): Observable<IGrupo | never>  => {
@@ -32,8 +33,14 @@ const resolveGrupo$ = (id: number, service: GrupoService): Observable<IGrupo | n
 
 @Injectable({ providedIn: 'root' })
 export class PostsGrupoResolve implements Resolve<HttpResponse<IPost[]>> {
-  constructor(private service: PostService, private grupoService: GrupoService) {}
+  constructor(private service: PostService, private grupoService: GrupoService, private accountService: AccountService) {}
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
+    if (!this.accountService.isAuthenticated()) {
+      return of({
+        httpPosts: null,
+        grupo: null,
+      });
+    }
     const id = route.params['id'];
     if (id) {
       return resolveGrupo$(id, this.grupoService).pipe(
@@ -47,7 +54,8 @@ export class PostsGrupoResolve implements Resolve<HttpResponse<IPost[]>> {
       );
     }
     return this.service.loadAll(0, ITEMS_PER_PAGE, route.data.predicate, route.data.filtro, undefined).pipe(
-      map(httpPosts => ({
+      map(httpPosts => (
+        {
         httpPosts,
         grupo: null
       }))

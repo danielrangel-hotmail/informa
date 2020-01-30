@@ -4,7 +4,7 @@
         <span jhiTranslate="global.title" class="navbar-title">Informa</span> <span class="navbar-version">{{version}}</span>
     </a>
     <ng-container *ngIf = "perfilGrupoViewService.status$ | async as dockingState">
-        <div class="form-inline mr-auto position-relative" *ngIf="isAuthenticated()">
+        <div class="form-inline mr-auto position-relative" *ngIf="isAuthenticated() && dockingState !== MOBILE">
             <div class="d-flex align-items-center" [ngClass]="{ 'navegacao-undocked' : (dockingState === UNDOCKED || dockingState === UNDOCKABLE), 'navegacao' : dockingState === DOCKED }">
                 <h5 (click)="toggleOpened(dockingState)" class="flex-grow-1 mb-0" *ngIf = "perfilGrupoViewService.navegacao$ | async as navegacao">{{navegacao}}</h5>
                 <div *ngIf = "(dockingState === UNDOCKED || dockingState === UNDOCKABLE)" class="pr-2">

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -9,28 +9,45 @@ import { IPerfilGrupo, PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 import { PerfilGrupoService } from './perfil-grupo.service';
 import { PerfilGrupoDeleteDialogComponent } from './perfil-grupo-delete-dialog.component';
 import { IGrupo } from 'app/shared/model/grupo.model';
+import { FormControl } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
+import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 
 @Component({
   selector: 'jhi-perfil-grupo',
   templateUrl: './perfil-grupo.component.html',
   styleUrls: [ './perfil-grupo.component.scss']
 })
-export class PerfilGrupoComponent implements OnInit, OnDestroy {
+export class PerfilGrupoComponent implements OnInit, OnDestroy, AfterViewInit {
   perfilGrupos: IPerfilGrupo[];
   eventSubscriber?: Subscription;
   predicate: string;
   ascending: boolean;
   isSaving = false;
+  filtro = new FormControl();
+  filtroValue = '';
+
 
   constructor(
     protected perfilGrupoService: PerfilGrupoService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
-    protected parseLinks: JhiParseLinks
+    protected parseLinks: JhiParseLinks,
+    protected perfilGrupoViewService: PerfilGrupoViewService,
   ) {
     this.perfilGrupos = [];
     this.predicate = 'id';
     this.ascending = true;
+    this.filtro.valueChanges
+      .pipe(debounceTime(200))
+      .subscribe(val => {
+        this.filtroValue = val;
+      });
+
+  }
+
+  filtroMatch(valor: string): boolean {
+    return (this.filtroValue === '') || (RegExp(this.filtroValue).exec(valor) !== null);
   }
 
   loadAll(): void {
@@ -103,4 +120,9 @@ export class PerfilGrupoComponent implements OnInit, OnDestroy {
   protected onSaveError(): void {
     this.isSaving = false;
   }
+
+  ngAfterViewInit(): void {
+    this.perfilGrupoViewService.navega("assinaturas");
+  }
+
 }

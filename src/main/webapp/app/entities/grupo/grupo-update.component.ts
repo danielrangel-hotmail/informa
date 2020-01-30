@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
@@ -9,12 +9,16 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IGrupo, Grupo } from 'app/shared/model/grupo.model';
 import { GrupoService } from './grupo.service';
+import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 
 @Component({
   selector: 'jhi-grupo-update',
-  templateUrl: './grupo-update.component.html'
+  templateUrl: './grupo-update.component.html',
+  styleUrls: [
+    './grupo-update.component.scss'
+  ]
 })
-export class GrupoUpdateComponent implements OnInit {
+export class GrupoUpdateComponent implements OnInit, AfterViewInit{
   isSaving = false;
 
   editForm = this.fb.group({
@@ -28,7 +32,11 @@ export class GrupoUpdateComponent implements OnInit {
     opcional: []
   });
 
-  constructor(protected grupoService: GrupoService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected grupoService: GrupoService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    protected perfilGrupoViewService: PerfilGrupoViewService) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ grupo }) => {
@@ -94,5 +102,9 @@ export class GrupoUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  ngAfterViewInit(): void {
+    this.perfilGrupoViewService.navega(this.editForm.get(['id'])!.value ? "editando grupo" : "criando grupo");
   }
 }

@@ -28,22 +28,23 @@ export class PerfilGrupoViewService {
     protected breakpointObserver: BreakpointObserver,
     protected deviceDetectorService: DeviceDetectorService) {
 
-      // if (this.deviceDetectorService.isMobile()) {
-      //   this.state$ = new BehaviorSubject(MOBILE);
-      //   return;
-      // }
-
-    const command$ = this.docking$.pipe(
-      startWith(DOCKED),
-    );
-
     this.navegacao$ = this.navegacaoCore$.pipe(delay(0));
     const initialBreakpointState = this.breakpointObserver.isMatched('(min-width: 910px)');
     const breakpoint$ = this.breakpointObserver.observe(['(min-width: 910px)']).pipe(
       map((state : BreakpointState) => state.matches),
       startWith(initialBreakpointState),
       map(sateBoolean => sateBoolean ? DOCKED : UNDOCKED)
-     );
+    );
+
+    if (this.deviceDetectorService.isMobile()) {
+        this.status$ = new BehaviorSubject(MOBILE);
+        return;
+    }
+
+    const command$ = this.docking$.pipe(
+      startWith(DOCKED),
+    );
+
 
     this.status$ = merge(command$, breakpoint$).pipe(
       scan((acc,curr)=> {

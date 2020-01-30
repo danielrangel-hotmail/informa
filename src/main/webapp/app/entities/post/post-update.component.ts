@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
@@ -14,6 +14,7 @@ import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { IGrupo } from 'app/shared/model/grupo.model';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
+import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 
 type SelectableEntity = IUser | IGrupo;
 
@@ -21,7 +22,7 @@ type SelectableEntity = IUser | IGrupo;
   selector: 'jhi-post-update',
   templateUrl: './post-update.component.html'
 })
-export class PostUpdateComponent implements OnInit {
+export class PostUpdateComponent implements OnInit, AfterViewInit {
   isSaving = false;
   isNavbarCollapsed = false;
   users: IUser[] = [];
@@ -45,7 +46,8 @@ export class PostUpdateComponent implements OnInit {
     protected grupoService: GrupoService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    protected perfilGrupoViewService: PerfilGrupoViewService
   ) {}
 
   ngOnInit(): void {
@@ -86,7 +88,7 @@ export class PostUpdateComponent implements OnInit {
   }
 
   previousState(): void {
-    this.router.navigateByUrl('/post')
+    window.history.back();
   }
 
   save(): void {
@@ -145,6 +147,10 @@ export class PostUpdateComponent implements OnInit {
 
   toggleNavbar(): void {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
+
+  ngAfterViewInit(): void {
+    this.perfilGrupoViewService.navega("editando post");
   }
 
 }

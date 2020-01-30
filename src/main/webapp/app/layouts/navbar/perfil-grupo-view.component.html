@@ -13,7 +13,7 @@
 </jhi-hovered>
 <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
     <h5 class="elemento-filtros" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" routerLink="post/todos" *ngIf="filtroMatch('todos')">
-        h5
+        todos
     </h5>
 </jhi-hovered>
 <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
@@ -36,7 +36,7 @@
         </div>
     </jhi-hovered>
 </div>
-<div class="small mb-2 mt-3 d-flex justify-content-between elemento">
+<div class="small mb-2 mt-3 d-flex justify-content-between elemento" routerLink="perfil-grupo">
     <div>MEUS GRUPOS</div>
     <div><fa-icon icon="pencil-alt"></fa-icon></div>
 </div>

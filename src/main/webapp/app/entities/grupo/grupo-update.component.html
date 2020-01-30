@@ -1,30 +1,9 @@
-<div class="row justify-content-center">
-    <div class="col-8">
-        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-            <h2 id="jhi-grupo-heading" jhiTranslate="informaApp.grupo.home.createOrEditLabel">Create or edit a Grupo</h2>
+<div class="m-3">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" >
+        <div class="d-flex justify-content-between mb-3">
             <div>
-                <jhi-alert-error></jhi-alert-error>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.grupo.nome" for="field_nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="field_nome"
-                           formControlName="nome"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.grupo.descricao" for="field_descricao">Descricao</label>
-                    <input type="text" class="form-control" name="descricao" id="field_descricao"
-                           formControlName="descricao"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.grupo.formal" for="field_formal">Formal</label>
-                    <input type="checkbox" class="form-control" name="formal" id="field_formal"
-                           formControlName="formal"/>
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="informaApp.grupo.opcional" for="field_opcional">Opcional</label>
-                    <input type="checkbox" class="form-control" name="opcional" id="field_opcional"
-                           formControlName="opcional"/>
-                </div>
-
+                <h4 *ngIf="!editForm.get('id')!.value">Crie um novo grupo</h4>
+                <h4 *ngIf="editForm.get('id')!.value">Edite o seu grupo</h4>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
@@ -34,6 +13,34 @@
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
-        </form>
-    </div>
+        </div>
+        <hr>
+        <div class="row justify-content-center grupo-card">
+            <div class="col-12">
+                <div>
+                    <jhi-alert-error></jhi-alert-error>
+                    <div class="form-group" style="width: 30vh">
+                        <label class="form-control-label" jhiTranslate="informaApp.grupo.nome" for="field_nome">Nome</label>
+                        <input type="text" class="form-control" name="nome" id="field_nome"
+                               formControlName="nome"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="informaApp.grupo.descricao" for="field_descricao">Descricao</label>
+                        <input type="text" class="form-control" name="descricao" id="field_descricao"
+                               formControlName="descricao"/>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="formal" id="field_formal"
+                               formControlName="formal"/>
+                        <label class="form-check-label" jhiTranslate="informaApp.grupo.formal" for="field_formal">Formal</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="opcional" id="field_opcional"
+                               formControlName="opcional"/>
+                        <label class="form-check-label" jhiTranslate="informaApp.grupo.opcional" for="field_opcional">Opcional</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>

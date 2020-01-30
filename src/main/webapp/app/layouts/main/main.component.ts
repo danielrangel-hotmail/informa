@@ -31,13 +31,13 @@ export class MainComponent implements OnInit {
       if (account == null) {
         // eslint-disable-next-line no-console
         console.log("matomo id resetado")
-        this.matomoTracker.resetUserId();
+        // this.matomoTracker.resetUserId();
       } else {
         // eslint-disable-next-line no-console
         console.log(`matomo id setado ${account.login}`)
-        this.matomoTracker.setUserId(account.login);
-        this.matomoTracker.setCustomUrl(this.lastUrl);
-        this.matomoTracker.trackPageView();
+        // this.matomoTracker.setUserId(account.login);
+        // this.matomoTracker.setCustomUrl(this.lastUrl);
+        // this.matomoTracker.trackPageView();
       }
     });
 

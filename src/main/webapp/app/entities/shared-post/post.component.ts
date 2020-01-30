@@ -84,7 +84,11 @@ export class PostComponent implements OnInit, OnDestroy, AfterViewInit {
       this.filtro = filtro;
       this.grupo = postsGrupo.grupo;
       this.predicate = predicate;
-      this.paginatePosts(postsGrupo.httpPosts.body, postsGrupo.httpPosts.headers)
+      if (!postsGrupo.httpPosts) {
+        this.loadAll();
+      } else {
+        this.paginatePosts(postsGrupo.httpPosts.body, postsGrupo.httpPosts.headers)
+      }
       this.registerChangeInPosts();
     });
   }
