@@ -32,7 +32,7 @@ import {
   faTrashAlt,
   faAsterisk,
   faTasks,
-  faHome
+  faHome, faArrowsAltH, faArrowsAltV, faRedo, faSearchPlus, faSearchMinus
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeIcons = [
@@ -69,5 +69,10 @@ export const fontAwesomeIcons = [
   faCalendarAlt,
   faSearch,
   faTrashAlt,
-  faAsterisk
+  faAsterisk,
+  faArrowsAltH,
+  faArrowsAltV,
+  faRedo,
+  faSearchPlus,
+  faSearchMinus
 ];

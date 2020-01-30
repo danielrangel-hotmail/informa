@@ -10,10 +10,11 @@ import { QuillModule } from 'ngx-quill';
 import { HoveredComponent } from './hovered/hovered.component';
 import { JhiInputUserComponent } from 'app/shared/input-user/input-user.component';
 import { HoveredToggleComponent } from 'app/shared/hovered-toggle/hovered-toggle/hovered-toggle.component';
+import { AvatarCroppedComponent } from './avatar-cropped/avatar-cropped.component';
 
 @NgModule({
   imports: [InformaSharedLibsModule, QuillModule.forRoot() ],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, JhiInputUserComponent, HoveredToggleComponent],
+  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, JhiInputUserComponent, HoveredToggleComponent, AvatarCroppedComponent],
   entryComponents: [LoginModalComponent],
   exports: [
     InformaSharedLibsModule,
@@ -25,7 +26,8 @@ import { HoveredToggleComponent } from 'app/shared/hovered-toggle/hovered-toggle
     QuillEditorCustomComponent,
     HoveredComponent,
     HoveredToggleComponent,
-    JhiInputUserComponent
+    JhiInputUserComponent,
+    AvatarCroppedComponent
   ]
 })
 export class InformaSharedModule {}

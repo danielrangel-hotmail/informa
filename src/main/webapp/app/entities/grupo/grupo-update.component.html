@@ -1,3 +1,4 @@
+<jhi-grupo-testa></jhi-grupo-testa>
 <div class="m-3">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" >
         <div class="d-flex justify-content-between mb-3">
@@ -39,8 +40,13 @@
                                formControlName="opcional"/>
                         <label class="form-check-label" jhiTranslate="informaApp.grupo.opcional" for="field_opcional">Opcional</label>
                     </div>
+                    <div class="form-group mt-3">
+                        <div>Logo</div>
+                        <jhi-avatar-cropped></jhi-avatar-cropped>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
+
 </div>

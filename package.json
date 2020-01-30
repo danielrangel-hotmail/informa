@@ -36,6 +36,7 @@
     "ngx-embed-video": "^1.0.4",
     "ngx-gallery": "^5.10.0",
     "ngx-gravatar": "^8.1.0",
+    "ngx-image-cropper": "^3.0.3",
     "ngx-infinite-scroll": "8.0.1",
     "ngx-matomo": "^0.1.4",
     "ngx-quill": "^7.3.11",

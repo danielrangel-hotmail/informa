@@ -7,9 +7,10 @@ import { GrupoDetailComponent } from './grupo-detail.component';
 import { GrupoUpdateComponent } from './grupo-update.component';
 import { GrupoDeleteDialogComponent } from './grupo-delete-dialog.component';
 import { grupoRoute } from './grupo.route';
+import { GrupoNoRouteModule } from 'app/entities/grupo/grupo-no-route/grupo-no-route.module';
 
 @NgModule({
-  imports: [InformaSharedModule, RouterModule.forChild(grupoRoute)],
+  imports: [InformaSharedModule, RouterModule.forChild(grupoRoute), GrupoNoRouteModule],
   declarations: [GrupoComponent, GrupoDetailComponent, GrupoUpdateComponent, GrupoDeleteDialogComponent],
   entryComponents: [GrupoDeleteDialogComponent]
 })

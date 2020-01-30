@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatomoModule } from 'ngx-matomo';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     ReactiveFormsModule,
     TranslateModule,
     MatomoModule,
-    LayoutModule
+    LayoutModule,
+    ImageCropperModule
   ]
 })
 export class InformaSharedLibsModule {}
