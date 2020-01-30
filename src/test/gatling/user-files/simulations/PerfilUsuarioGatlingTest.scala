@@ -79,6 +79,7 @@ class PerfilUsuarioGatlingTest extends Simulation {
                 , "saidaDaEmpresa":"2020-01-01T00:00:00.000Z"
                 , "nascimento":"2020-01-01T00:00:00.000Z"
                 , "skype":"SAMPLE_TEXT"
+                , "avatar":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_perfilUsuario_url"))).exitHereIfFailed

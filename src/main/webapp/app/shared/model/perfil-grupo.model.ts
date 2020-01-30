@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IGrupo } from 'app/shared/model/grupo.model';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 export interface IPerfilGrupo {
   id?: number;
@@ -8,6 +8,7 @@ export interface IPerfilGrupo {
   versao?: number;
   favorito?: boolean;
   notifica?: boolean;
+  moderador?: boolean;
   perfilId?: number;
   grupo?: IGrupo;
 }
@@ -20,10 +21,12 @@ export class PerfilGrupo implements IPerfilGrupo {
     public versao?: number,
     public favorito?: boolean,
     public notifica?: boolean,
+    public moderador?: boolean,
     public perfilId?: number,
     public grupo?: IGrupo
   ) {
     this.favorito = this.favorito || false;
     this.notifica = this.notifica || false;
+    this.moderador = this.moderador || false;
   }
 }

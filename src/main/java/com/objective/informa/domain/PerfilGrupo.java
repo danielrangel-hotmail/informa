@@ -39,6 +39,9 @@ public class PerfilGrupo implements Serializable {
     @Column(name = "notifica")
     private Boolean notifica;
 
+    @Column(name = "moderador")
+    private Boolean moderador;
+
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties("grupos")
@@ -123,6 +126,19 @@ public class PerfilGrupo implements Serializable {
         this.notifica = notifica;
     }
 
+    public Boolean isModerador() {
+        return moderador;
+    }
+
+    public PerfilGrupo moderador(Boolean moderador) {
+        this.moderador = moderador;
+        return this;
+    }
+
+    public void setModerador(Boolean moderador) {
+        this.moderador = moderador;
+    }
+
     public PerfilUsuario getPerfil() {
         return perfil;
     }
@@ -175,6 +191,7 @@ public class PerfilGrupo implements Serializable {
             ", versao=" + getVersao() +
             ", favorito='" + isFavorito() + "'" +
             ", notifica='" + isNotifica() + "'" +
+            ", moderador='" + isModerador() + "'" +
             "}";
     }
 }

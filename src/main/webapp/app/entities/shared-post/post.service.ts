@@ -11,7 +11,7 @@ import { IPost } from 'app/shared/model/post.interface';
 import { IEntity } from 'app/shared/model/entity.model';
 import {LinkExternoService} from 'app/entities/link-externo/link-externo.service';
 import {ArquivoService} from 'app/entities/arquivo/arquivo.service';
-import { IGrupo } from 'app/shared/model/grupo.model';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 type EntityResponseType = HttpResponse<IPost>;
 type EntityArrayResponseType = HttpResponse<IPost[]>;
@@ -81,19 +81,12 @@ export class PostService {
 
 
   loadAll(page: number, size: number, predicate: string, filtro: string, grupo?: IGrupo ): Observable<EntityArrayResponseType> {
-    const sortArr = this.sort(predicate);
     if (grupo != null && grupo !== undefined) {
       return this.queryGrupo(grupo.id!,{ page, size, sort: [predicate + ',desc', 'id,asc']});
     } else {
       return this.queryFiltro(filtro, { page, size, sort: [predicate + ',desc', 'id,asc']});
     }
   }
-
-  sort(predicate: string): string[] {
-    return [predicate];
-  }
-
-
 
   countDrafts(req?: any): Observable<number> {
     const options = createRequestOption(req);

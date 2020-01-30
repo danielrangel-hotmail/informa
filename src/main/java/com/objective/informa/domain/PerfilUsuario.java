@@ -45,12 +45,19 @@ public class PerfilUsuario implements Serializable {
     @Column(name = "skype")
     private String skype;
 
+    @Lob
+    @Column(name = "avatar")
+    private byte[] avatar;
+
+    @Column(name = "avatar_content_type")
+    private String avatarContentType;
+    
     @OneToOne()
     @NotNull
     @JoinColumn(name = "id")
     @MapsId
     private User usuario;
-
+    
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "perfil")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PushSubscription> subscriptions = new HashSet<>();
@@ -159,6 +166,32 @@ public class PerfilUsuario implements Serializable {
         this.skype = skype;
     }
 
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public PerfilUsuario avatar(byte[] avatar) {
+        this.avatar = avatar;
+        return this;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatarContentType() {
+        return avatarContentType;
+    }
+
+    public PerfilUsuario avatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
+        return this;
+    }
+
+    public void setAvatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
+    }
+
     public User getUsuario() {
         return usuario;
     }
@@ -250,6 +283,8 @@ public class PerfilUsuario implements Serializable {
             ", saidaDaEmpresa='" + getSaidaDaEmpresa() + "'" +
             ", nascimento='" + getNascimento() + "'" +
             ", skype='" + getSkype() + "'" +
+            ", avatar='" + getAvatar() + "'" +
+            ", avatarContentType='" + getAvatarContentType() + "'" +
             "}";
     }
 }

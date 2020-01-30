@@ -28,6 +28,23 @@
         {
             "fieldName": "opcional",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "logo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "cabecalhoSuperiorCor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cabecalhoInferiorCor",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "logoFundoCor",
+            "fieldType": "String"
         }
     ],
     "relationships": [
@@ -36,6 +53,14 @@
             "otherEntityName": "perfilGrupo",
             "otherEntityRelationshipName": "grupo",
             "relationshipName": "usuarios"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "topico",
+            "otherEntityRelationshipName": "grupos",
+            "relationshipName": "topicos",
+            "otherEntityField": "id",
+            "ownerSide": true
         }
     ],
     "changelogDate": "20200106024143",

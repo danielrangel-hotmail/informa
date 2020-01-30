@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new PerfilGrupo(0, currentDate, currentDate, 0, false, false);
+      elemDefault = new PerfilGrupo(0, currentDate, currentDate, 0, false, false, false);
     });
 
     describe('Service methods', () => {
@@ -78,7 +78,8 @@ describe('Service Tests', () => {
             ultimaEdicao: currentDate.format(DATE_TIME_FORMAT),
             versao: 1,
             favorito: true,
-            notifica: true
+            notifica: true,
+            moderador: true
           },
           elemDefault
         );
@@ -106,7 +107,8 @@ describe('Service Tests', () => {
             ultimaEdicao: currentDate.format(DATE_TIME_FORMAT),
             versao: 1,
             favorito: true,
-            notifica: true
+            notifica: true,
+            moderador: true
           },
           elemDefault
         );

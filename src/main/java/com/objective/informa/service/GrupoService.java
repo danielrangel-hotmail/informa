@@ -8,6 +8,8 @@ import java.time.ZonedDateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,11 +62,20 @@ public class GrupoService {
     @Transactional(readOnly = true)
     public List<GrupoDTO> findAll() {
         log.debug("Request to get all Grupos");
-        return grupoRepository.findAll().stream()
+        return grupoRepository.findAllWithEagerRelationships().stream()
             .map(grupoMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    /**
+     * Get all the grupos with eager load of many-to-many relationships.
+     *
+     * @return the list of entities.
+     */
+    public Page<GrupoDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return grupoRepository.findAllWithEagerRelationships(pageable).map(grupoMapper::toDto);
+    }
+    
 
     /**
      * Get one grupo by id.
@@ -75,7 +86,7 @@ public class GrupoService {
     @Transactional(readOnly = true)
     public Optional<GrupoDTO> findOne(Long id) {
         log.debug("Request to get Grupo : {}", id);
-        return grupoRepository.findById(id)
+        return grupoRepository.findOneWithEagerRelationships(id)
             .map(grupoMapper::toDto);
     }
 

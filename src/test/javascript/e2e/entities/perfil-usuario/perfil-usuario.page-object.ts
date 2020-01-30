@@ -33,6 +33,7 @@ export class PerfilUsuarioUpdatePage {
   saidaDaEmpresaInput = element(by.id('field_saidaDaEmpresa'));
   nascimentoInput = element(by.id('field_nascimento'));
   skypeInput = element(by.id('field_skype'));
+  avatarInput = element(by.id('file_avatar'));
   usuarioSelect = element(by.id('field_usuario'));
 
   async getPageTitle(): Promise<string> {
@@ -93,6 +94,14 @@ export class PerfilUsuarioUpdatePage {
 
   async getSkypeInput(): Promise<string> {
     return await this.skypeInput.getAttribute('value');
+  }
+
+  async setAvatarInput(avatar: string): Promise<void> {
+    await this.avatarInput.sendKeys(avatar);
+  }
+
+  async getAvatarInput(): Promise<string> {
+    return await this.avatarInput.getAttribute('value');
   }
 
   async usuarioSelectLastOption(): Promise<void> {

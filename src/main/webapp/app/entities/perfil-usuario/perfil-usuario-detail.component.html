@@ -33,6 +33,15 @@
                 <dd>
                     <span>{{perfilUsuario.skype}}</span>
                 </dd>
+                <dt><span jhiTranslate="informaApp.perfilUsuario.avatar">Avatar</span></dt>
+                <dd>
+                    <div *ngIf="perfilUsuario.avatar">
+                        <a (click)="openFile(perfilUsuario.avatarContentType!, perfilUsuario.avatar)">
+                            <img [src]="'data:' + perfilUsuario.avatarContentType + ';base64,' + perfilUsuario.avatar" style="max-width: 100%;" alt="perfilUsuario image"/>
+                        </a>
+                        {{perfilUsuario.avatarContentType}}, {{byteSize(perfilUsuario.avatar)}}
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="informaApp.perfilUsuario.usuario">Usuario</span></dt>
                 <dd>
                     {{perfilUsuario.usuarioId}}

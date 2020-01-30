@@ -77,6 +77,7 @@ class PerfilGrupoGatlingTest extends Simulation {
                 , "versao":null
                 , "favorito":null
                 , "notifica":null
+                , "moderador":null
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_perfilGrupo_url"))).exitHereIfFailed

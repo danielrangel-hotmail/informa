@@ -1,10 +1,90 @@
-<jhi-grupo-testa></jhi-grupo-testa>
-<div class="m-3">
-    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" >
-        <div class="d-flex justify-content-between mb-3">
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-grupo-heading" jhiTranslate="informaApp.grupo.home.createOrEditLabel">Create or edit a Grupo</h2>
             <div>
-                <h4 *ngIf="!editForm.get('id')!.value">Crie um novo grupo</h4>
-                <h4 *ngIf="editForm.get('id')!.value">Edite o seu grupo</h4>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.versao" for="field_versao">Versao</label>
+                    <input type="number" class="form-control" name="versao" id="field_versao"
+                           formControlName="versao"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.criacao" for="field_criacao">Criacao</label>
+                    <div class="d-flex">
+                        <input id="field_criacao" type="datetime-local" class="form-control" name="criacao" formControlName="criacao" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.ultimaEdicao" for="field_ultimaEdicao">Ultima Edicao</label>
+                    <div class="d-flex">
+                        <input id="field_ultimaEdicao" type="datetime-local" class="form-control" name="ultimaEdicao" formControlName="ultimaEdicao" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                           formControlName="nome"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.descricao" for="field_descricao">Descricao</label>
+                    <input type="text" class="form-control" name="descricao" id="field_descricao"
+                           formControlName="descricao"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.formal" for="field_formal">Formal</label>
+                    <input type="checkbox" class="form-control" name="formal" id="field_formal"
+                           formControlName="formal"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.opcional" for="field_opcional">Opcional</label>
+                    <input type="checkbox" class="form-control" name="opcional" id="field_opcional"
+                           formControlName="opcional"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.logo" for="field_logo">Logo</label>
+                    <div>
+                        <img [src]="'data:' + editForm.get('logoContentType')!.value + ';base64,' + editForm.get('logo')!.value" style="max-height: 100px;" *ngIf="editForm.get('logo')!.value" alt="grupo image"/>
+                        <div *ngIf="editForm.get('logo')!.value" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{editForm.get('logoContentType')!.value}}, {{byteSize(editForm.get('logo')!.value)}}</span>
+                            <button type="button" (click)="clearInputImage('logo', 'logoContentType', 'file_logo')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_logo" (change)="setFileData($event, 'logo', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="logo" id="field_logo"
+                           formControlName="logo"/>
+                    <input type="hidden" class="form-control" name="logoContentType" id="field_logoContentType"
+                           formControlName="logoContentType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.cabecalhoSuperiorCor" for="field_cabecalhoSuperiorCor">Cabecalho Superior Cor</label>
+                    <input type="text" class="form-control" name="cabecalhoSuperiorCor" id="field_cabecalhoSuperiorCor"
+                           formControlName="cabecalhoSuperiorCor"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.cabecalhoInferiorCor" for="field_cabecalhoInferiorCor">Cabecalho Inferior Cor</label>
+                    <input type="text" class="form-control" name="cabecalhoInferiorCor" id="field_cabecalhoInferiorCor"
+                           formControlName="cabecalhoInferiorCor"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="informaApp.grupo.logoFundoCor" for="field_logoFundoCor">Logo Fundo Cor</label>
+                    <input type="text" class="form-control" name="logoFundoCor" id="field_logoFundoCor"
+                           formControlName="logoFundoCor"/>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="informaApp.grupo.topicos" for="field_topicos">Topicos</label>
+                    <select class="form-control" id="field_topicos" multiple name="topicos" formControlName="topicos">
+                        <option [ngValue]="getSelected(editForm.get('topicos')!.value, topicoOption)" *ngFor="let topicoOption of topicos; trackBy: trackById">{{topicoOption.id}}</option>
+                    </select>
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
@@ -14,39 +94,6 @@
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
-        </div>
-        <hr>
-        <div class="row justify-content-center grupo-card">
-            <div class="col-12">
-                <div>
-                    <jhi-alert-error></jhi-alert-error>
-                    <div class="form-group" style="width: 30vh">
-                        <label class="form-control-label" jhiTranslate="informaApp.grupo.nome" for="field_nome">Nome</label>
-                        <input type="text" class="form-control" name="nome" id="field_nome"
-                               formControlName="nome"/>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-control-label" jhiTranslate="informaApp.grupo.descricao" for="field_descricao">Descricao</label>
-                        <input type="text" class="form-control" name="descricao" id="field_descricao"
-                               formControlName="descricao"/>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="formal" id="field_formal"
-                               formControlName="formal"/>
-                        <label class="form-check-label" jhiTranslate="informaApp.grupo.formal" for="field_formal">Formal</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" name="opcional" id="field_opcional"
-                               formControlName="opcional"/>
-                        <label class="form-check-label" jhiTranslate="informaApp.grupo.opcional" for="field_opcional">Opcional</label>
-                    </div>
-                    <div class="form-group mt-3">
-                        <div>Logo</div>
-                        <jhi-avatar-cropped></jhi-avatar-cropped>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-
+        </form>
+    </div>
 </div>

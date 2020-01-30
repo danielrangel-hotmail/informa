@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { Observable, of, EMPTY, observable } from 'rxjs';
-import { flatMap, map } from 'rxjs/operators';
+import { Observable, of, EMPTY } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IGrupo, Grupo } from 'app/shared/model/grupo.model';
+import { Grupo } from 'app/shared/model/grupo.model';
 import { GrupoService } from './grupo.service';
 import { GrupoComponent } from './grupo.component';
 import { GrupoDetailComponent } from './grupo-detail.component';
 import { GrupoUpdateComponent } from './grupo-update.component';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 
 export const resolveGrupo$ = (route: ActivatedRouteSnapshot, service: GrupoService): Observable<IGrupo | never>  => {

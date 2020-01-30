@@ -108,13 +108,6 @@ describe('Component Tests', () => {
 
     it('should calculate the sort attribute for a non-id attribute', () => {
       // INIT
-      comp.ngOnInit();
-
-      // WHEN
-      const result = comp.sort();
-
-      // THEN
-      expect(result).toEqual(['criacao,desc', 'id']);
     });
   });
 });

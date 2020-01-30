@@ -1,0 +1,78 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="humberto (generated)" id="1580426990236-3">
+        <createTable tableName="grupo_topicos">
+            <column name="grupo_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="topicos_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-4">
+        <createTable tableName="topico">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="topicoPK"/>
+            </column>
+            <column name="nome" type="VARCHAR(255)"/>
+            <column name="versao" type="BIGINT"/>
+            <column name="autor_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="substituto_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-5">
+        <addColumn tableName="perfil_usuario">
+            <column name="avatar" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-6">
+        <addColumn tableName="perfil_usuario">
+            <column name="avatar_content_type" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-7">
+        <addColumn tableName="grupo">
+            <column name="cabecalho_inferior_cor" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-8">
+        <addColumn tableName="grupo">
+            <column name="cabecalho_superior_cor" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-9">
+        <addColumn tableName="grupo">
+            <column name="logo" type="bytea"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-10">
+        <addColumn tableName="grupo">
+            <column name="logo_content_type" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-11">
+        <addColumn tableName="grupo">
+            <column name="logo_fundo_cor" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-12">
+        <addColumn tableName="perfil_grupo">
+            <column name="moderador" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-13">
+        <addForeignKeyConstraint baseColumnNames="grupo_id" baseTableName="grupo_topicos" constraintName="FK5nkulu4lostt4t9s51ul2ugm5" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="grupo" validate="true"/>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-14">
+        <addForeignKeyConstraint baseColumnNames="autor_id" baseTableName="topico" constraintName="FKfamryxkt09icht3ow97ej4en9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-15">
+        <addForeignKeyConstraint baseColumnNames="substituto_id" baseTableName="topico" constraintName="FKh8enix4hmmdvarym2lavdkcoo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="topico" validate="true"/>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1580426990236-16">
+        <addForeignKeyConstraint baseColumnNames="topicos_id" baseTableName="grupo_topicos" constraintName="FKpn6k3a3a1573na8xkmbuwogbe" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="topico" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

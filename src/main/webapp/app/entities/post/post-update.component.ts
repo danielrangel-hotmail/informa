@@ -12,9 +12,9 @@ import { IPost } from 'app/shared/model/post.interface';
 import { PostService } from '../shared-post/post.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
-import { IGrupo } from 'app/shared/model/grupo.model';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 type SelectableEntity = IUser | IGrupo;
 

@@ -33,6 +33,33 @@
                 <dd>
                     <span>{{grupo.opcional}}</span>
                 </dd>
+                <dt><span jhiTranslate="informaApp.grupo.logo">Logo</span></dt>
+                <dd>
+                    <div *ngIf="grupo.logo">
+                        <a (click)="openFile(grupo.logoContentType!, grupo.logo)">
+                            <img [src]="'data:' + grupo.logoContentType + ';base64,' + grupo.logo" style="max-width: 100%;" alt="grupo image"/>
+                        </a>
+                        {{grupo.logoContentType}}, {{byteSize(grupo.logo)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="informaApp.grupo.cabecalhoSuperiorCor">Cabecalho Superior Cor</span></dt>
+                <dd>
+                    <span>{{grupo.cabecalhoSuperiorCor}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.grupo.cabecalhoInferiorCor">Cabecalho Inferior Cor</span></dt>
+                <dd>
+                    <span>{{grupo.cabecalhoInferiorCor}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.grupo.logoFundoCor">Logo Fundo Cor</span></dt>
+                <dd>
+                    <span>{{grupo.logoFundoCor}}</span>
+                </dd>
+                <dt><span jhiTranslate="informaApp.grupo.topicos">Topicos</span></dt>
+                <dd>
+                    <span *ngFor="let topicos of grupo.topicos; let last = last">
+                        <a [routerLink]="['/topico', topicos?.id, 'view' ]">{{topicos.id}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
             </dl>
 
             <button type="submit"

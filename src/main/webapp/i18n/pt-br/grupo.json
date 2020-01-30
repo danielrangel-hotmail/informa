@@ -23,7 +23,12 @@
       "descricao": "Descricao",
       "formal": "Formal",
       "opcional": "Opcional",
-      "usuarios": "Usuarios"
+      "logo": "Logo",
+      "cabecalhoSuperiorCor": "Cabecalho Superior Cor",
+      "cabecalhoInferiorCor": "Cabecalho Inferior Cor",
+      "logoFundoCor": "Logo Fundo Cor",
+      "usuarios": "Usuarios",
+      "topicos": "Topicos"
     }
   }
 }

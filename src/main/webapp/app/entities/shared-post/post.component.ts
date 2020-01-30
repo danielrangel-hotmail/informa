@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, AfterViewInit } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -14,9 +14,9 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { PostPublicaDialogComponent } from './post-publica-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IGrupo } from 'app/shared/model/grupo.model';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 import { DRAFTS, GRUPO, INFORMAIS, MEUS_GRUPOS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 @Component({
   selector: 'jhi-post',

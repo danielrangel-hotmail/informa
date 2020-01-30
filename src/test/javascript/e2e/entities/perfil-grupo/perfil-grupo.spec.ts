@@ -68,6 +68,14 @@ describe('PerfilGrupo e2e test', () => {
             await perfilGrupoUpdatePage.getNotificaInput().click();
             expect(await perfilGrupoUpdatePage.getNotificaInput().isSelected(), 'Expected notifica to be selected').to.be.true;
         }
+        const selectedModerador = perfilGrupoUpdatePage.getModeradorInput();
+        if (await selectedModerador.isSelected()) {
+            await perfilGrupoUpdatePage.getModeradorInput().click();
+            expect(await perfilGrupoUpdatePage.getModeradorInput().isSelected(), 'Expected moderador not to be selected').to.be.false;
+        } else {
+            await perfilGrupoUpdatePage.getModeradorInput().click();
+            expect(await perfilGrupoUpdatePage.getModeradorInput().isSelected(), 'Expected moderador to be selected').to.be.true;
+        }
         await perfilGrupoUpdatePage.save();
         expect(await perfilGrupoUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

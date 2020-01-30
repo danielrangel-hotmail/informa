@@ -11,6 +11,8 @@ export interface IPerfilUsuario {
   saidaDaEmpresa?: Moment;
   nascimento?: Moment;
   skype?: string;
+  avatarContentType?: string;
+  avatar?: any;
   usuarioId?: number;
   subscriptions?: IPushSubscription[];
   grupos?: IPerfilGrupo[];
@@ -26,6 +28,8 @@ export class PerfilUsuario implements IPerfilUsuario {
     public saidaDaEmpresa?: Moment,
     public nascimento?: Moment,
     public skype?: string,
+    public avatarContentType?: string,
+    public avatar?: any,
     public usuarioId?: number,
     public subscriptions?: IPushSubscription[],
     public grupos?: IPerfilGrupo[]

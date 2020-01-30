@@ -79,6 +79,10 @@ class GrupoGatlingTest extends Simulation {
                 , "descricao":"SAMPLE_TEXT"
                 , "formal":null
                 , "opcional":null
+                , "logo":null
+                , "cabecalhoSuperiorCor":"SAMPLE_TEXT"
+                , "cabecalhoInferiorCor":"SAMPLE_TEXT"
+                , "logoFundoCor":"SAMPLE_TEXT"
                 }""")).asJson
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_grupo_url"))).exitHereIfFailed

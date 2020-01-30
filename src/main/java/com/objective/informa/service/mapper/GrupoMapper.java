@@ -9,11 +9,12 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Grupo} and its DTO {@link GrupoDTO}.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {TopicoMapper.class})
 public abstract class GrupoMapper implements EntityMapper<GrupoDTO, Grupo> {
 
     @Mapping(target = "usuarios", ignore = true)
     @Mapping(target = "removeUsuarios", ignore = true)
+    @Mapping(target = "removeTopicos", ignore = true)
     public abstract Grupo toEntity(GrupoDTO grupoDTO);
 
     public Grupo fromId(Long id) {

@@ -33,6 +33,11 @@ export class GrupoUpdatePage {
   descricaoInput = element(by.id('field_descricao'));
   formalInput = element(by.id('field_formal'));
   opcionalInput = element(by.id('field_opcional'));
+  logoInput = element(by.id('file_logo'));
+  cabecalhoSuperiorCorInput = element(by.id('field_cabecalhoSuperiorCor'));
+  cabecalhoInferiorCorInput = element(by.id('field_cabecalhoInferiorCor'));
+  logoFundoCorInput = element(by.id('field_logoFundoCor'));
+  topicosSelect = element(by.id('field_topicos'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
@@ -84,6 +89,57 @@ export class GrupoUpdatePage {
   getOpcionalInput(): ElementFinder {
     return this.opcionalInput;
   }
+  async setLogoInput(logo: string): Promise<void> {
+    await this.logoInput.sendKeys(logo);
+  }
+
+  async getLogoInput(): Promise<string> {
+    return await this.logoInput.getAttribute('value');
+  }
+
+  async setCabecalhoSuperiorCorInput(cabecalhoSuperiorCor: string): Promise<void> {
+    await this.cabecalhoSuperiorCorInput.sendKeys(cabecalhoSuperiorCor);
+  }
+
+  async getCabecalhoSuperiorCorInput(): Promise<string> {
+    return await this.cabecalhoSuperiorCorInput.getAttribute('value');
+  }
+
+  async setCabecalhoInferiorCorInput(cabecalhoInferiorCor: string): Promise<void> {
+    await this.cabecalhoInferiorCorInput.sendKeys(cabecalhoInferiorCor);
+  }
+
+  async getCabecalhoInferiorCorInput(): Promise<string> {
+    return await this.cabecalhoInferiorCorInput.getAttribute('value');
+  }
+
+  async setLogoFundoCorInput(logoFundoCor: string): Promise<void> {
+    await this.logoFundoCorInput.sendKeys(logoFundoCor);
+  }
+
+  async getLogoFundoCorInput(): Promise<string> {
+    return await this.logoFundoCorInput.getAttribute('value');
+  }
+
+  async topicosSelectLastOption(): Promise<void> {
+    await this.topicosSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+
+  async topicosSelectOption(option: string): Promise<void> {
+    await this.topicosSelect.sendKeys(option);
+  }
+
+  getTopicosSelect(): ElementFinder {
+    return this.topicosSelect;
+  }
+
+  async getTopicosSelectedOption(): Promise<string> {
+    return await this.topicosSelect.element(by.css('option:checked')).getText();
+  }
+
   async save(): Promise<void> {
     await this.saveButton.click();
   }

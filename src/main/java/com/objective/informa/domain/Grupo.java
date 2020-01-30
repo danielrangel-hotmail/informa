@@ -46,9 +46,32 @@ public class Grupo implements Serializable {
     @Column(name = "opcional")
     private Boolean opcional;
 
+    @Lob
+    @Column(name = "logo")
+    private byte[] logo;
+
+    @Column(name = "logo_content_type")
+    private String logoContentType;
+
+    @Column(name = "cabecalho_superior_cor")
+    private String cabecalhoSuperiorCor;
+
+    @Column(name = "cabecalho_inferior_cor")
+    private String cabecalhoInferiorCor;
+
+    @Column(name = "logo_fundo_cor")
+    private String logoFundoCor;
+
     @OneToMany(mappedBy = "grupo")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<PerfilGrupo> usuarios = new HashSet<>();
+
+    @ManyToMany
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @JoinTable(name = "grupo_topicos",
+               joinColumns = @JoinColumn(name = "grupo_id", referencedColumnName = "id"),
+               inverseJoinColumns = @JoinColumn(name = "topicos_id", referencedColumnName = "id"))
+    private Set<Topico> topicos = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -150,6 +173,71 @@ public class Grupo implements Serializable {
         this.opcional = opcional;
     }
 
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public Grupo logo(byte[] logo) {
+        this.logo = logo;
+        return this;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    public String getLogoContentType() {
+        return logoContentType;
+    }
+
+    public Grupo logoContentType(String logoContentType) {
+        this.logoContentType = logoContentType;
+        return this;
+    }
+
+    public void setLogoContentType(String logoContentType) {
+        this.logoContentType = logoContentType;
+    }
+
+    public String getCabecalhoSuperiorCor() {
+        return cabecalhoSuperiorCor;
+    }
+
+    public Grupo cabecalhoSuperiorCor(String cabecalhoSuperiorCor) {
+        this.cabecalhoSuperiorCor = cabecalhoSuperiorCor;
+        return this;
+    }
+
+    public void setCabecalhoSuperiorCor(String cabecalhoSuperiorCor) {
+        this.cabecalhoSuperiorCor = cabecalhoSuperiorCor;
+    }
+
+    public String getCabecalhoInferiorCor() {
+        return cabecalhoInferiorCor;
+    }
+
+    public Grupo cabecalhoInferiorCor(String cabecalhoInferiorCor) {
+        this.cabecalhoInferiorCor = cabecalhoInferiorCor;
+        return this;
+    }
+
+    public void setCabecalhoInferiorCor(String cabecalhoInferiorCor) {
+        this.cabecalhoInferiorCor = cabecalhoInferiorCor;
+    }
+
+    public String getLogoFundoCor() {
+        return logoFundoCor;
+    }
+
+    public Grupo logoFundoCor(String logoFundoCor) {
+        this.logoFundoCor = logoFundoCor;
+        return this;
+    }
+
+    public void setLogoFundoCor(String logoFundoCor) {
+        this.logoFundoCor = logoFundoCor;
+    }
+
     public Set<PerfilGrupo> getUsuarios() {
         return usuarios;
     }
@@ -173,6 +261,31 @@ public class Grupo implements Serializable {
 
     public void setUsuarios(Set<PerfilGrupo> perfilGrupos) {
         this.usuarios = perfilGrupos;
+    }
+
+    public Set<Topico> getTopicos() {
+        return topicos;
+    }
+
+    public Grupo topicos(Set<Topico> topicos) {
+        this.topicos = topicos;
+        return this;
+    }
+
+    public Grupo addTopicos(Topico topico) {
+        this.topicos.add(topico);
+        topico.getGrupos().add(this);
+        return this;
+    }
+
+    public Grupo removeTopicos(Topico topico) {
+        this.topicos.remove(topico);
+        topico.getGrupos().remove(this);
+        return this;
+    }
+
+    public void setTopicos(Set<Topico> topicos) {
+        this.topicos = topicos;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -203,6 +316,11 @@ public class Grupo implements Serializable {
             ", descricao='" + getDescricao() + "'" +
             ", formal='" + isFormal() + "'" +
             ", opcional='" + isOpcional() + "'" +
+            ", logo='" + getLogo() + "'" +
+            ", logoContentType='" + getLogoContentType() + "'" +
+            ", cabecalhoSuperiorCor='" + getCabecalhoSuperiorCor() + "'" +
+            ", cabecalhoInferiorCor='" + getCabecalhoInferiorCor() + "'" +
+            ", logoFundoCor='" + getLogoFundoCor() + "'" +
             "}";
     }
 }

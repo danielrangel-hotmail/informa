@@ -6,6 +6,7 @@ import {
   /* PerfilUsuarioDeleteDialog,
    */ PerfilUsuarioUpdatePage
 } from './perfil-usuario.page-object';
+import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -15,6 +16,9 @@ describe('PerfilUsuario e2e test', () => {
   let perfilUsuarioComponentsPage: PerfilUsuarioComponentsPage;
   let perfilUsuarioUpdatePage: PerfilUsuarioUpdatePage;
   /* let perfilUsuarioDeleteDialog: PerfilUsuarioDeleteDialog; */
+  const fileNameToUpload = 'logo-jhipster.png';
+  const fileToUpload = '../../../../../../src/main/webapp/content/images/' + fileNameToUpload;
+  const absolutePath = path.resolve(__dirname, fileToUpload);
 
   before(async () => {
     await browser.get('/');
@@ -50,6 +54,7 @@ describe('PerfilUsuario e2e test', () => {
             perfilUsuarioUpdatePage.setSaidaDaEmpresaInput('2000-12-31'),
             perfilUsuarioUpdatePage.setNascimentoInput('2000-12-31'),
             perfilUsuarioUpdatePage.setSkypeInput('skype'),
+            perfilUsuarioUpdatePage.setAvatarInput(absolutePath),
             perfilUsuarioUpdatePage.usuarioSelectLastOption(),
         ]);
         expect(await perfilUsuarioUpdatePage.getCriacaoInput()).to.contain('2001-01-01T02:30', 'Expected criacao value to be equals to 2000-12-31');
@@ -59,6 +64,7 @@ describe('PerfilUsuario e2e test', () => {
         expect(await perfilUsuarioUpdatePage.getSaidaDaEmpresaInput()).to.eq('2000-12-31', 'Expected saidaDaEmpresa value to be equals to 2000-12-31');
         expect(await perfilUsuarioUpdatePage.getNascimentoInput()).to.eq('2000-12-31', 'Expected nascimento value to be equals to 2000-12-31');
         expect(await perfilUsuarioUpdatePage.getSkypeInput()).to.eq('skype', 'Expected Skype value to be equals to skype');
+        expect(await perfilUsuarioUpdatePage.getAvatarInput()).to.endsWith(fileNameToUpload, 'Expected Avatar value to be end with ' + fileNameToUpload);
         await perfilUsuarioUpdatePage.save();
         expect(await perfilUsuarioUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
 

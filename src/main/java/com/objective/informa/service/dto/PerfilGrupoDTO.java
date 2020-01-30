@@ -21,6 +21,8 @@ public class PerfilGrupoDTO implements Serializable {
 
     private Boolean notifica;
 
+    private Boolean moderador;
+
 
     private Long perfilId;
 
@@ -74,6 +76,14 @@ public class PerfilGrupoDTO implements Serializable {
         this.notifica = notifica;
     }
 
+    public Boolean isModerador() {
+        return moderador;
+    }
+
+    public void setModerador(Boolean moderador) {
+        this.moderador = moderador;
+    }
+
     public Long getPerfilId() {
         return perfilId;
     }
@@ -120,6 +130,7 @@ public class PerfilGrupoDTO implements Serializable {
             ", versao=" + getVersao() +
             ", favorito='" + isFavorito() + "'" +
             ", notifica='" + isNotifica() + "'" +
+            ", moderador='" + isModerador() + "'" +
             ", perfilId=" + getPerfilId() +
             ", grupoId=" + getGrupo().getId() +
             "}";

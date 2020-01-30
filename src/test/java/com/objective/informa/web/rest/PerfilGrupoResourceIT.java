@@ -58,6 +58,9 @@ public class PerfilGrupoResourceIT {
     private static final Boolean DEFAULT_NOTIFICA = false;
     private static final Boolean UPDATED_NOTIFICA = true;
 
+    private static final Boolean DEFAULT_MODERADOR = false;
+    private static final Boolean UPDATED_MODERADOR = true;
+
     @Autowired
     private PerfilGrupoRepository perfilGrupoRepository;
 
@@ -110,7 +113,8 @@ public class PerfilGrupoResourceIT {
             .ultimaEdicao(DEFAULT_ULTIMA_EDICAO)
             .versao(DEFAULT_VERSAO)
             .favorito(DEFAULT_FAVORITO)
-            .notifica(DEFAULT_NOTIFICA);
+            .notifica(DEFAULT_NOTIFICA)
+            .moderador(DEFAULT_MODERADOR);
         // Add required entity
         PerfilUsuario perfilUsuario;
         if (TestUtil.findAll(em, PerfilUsuario.class).isEmpty()) {
@@ -145,7 +149,8 @@ public class PerfilGrupoResourceIT {
             .ultimaEdicao(UPDATED_ULTIMA_EDICAO)
             .versao(UPDATED_VERSAO)
             .favorito(UPDATED_FAVORITO)
-            .notifica(UPDATED_NOTIFICA);
+            .notifica(UPDATED_NOTIFICA)
+            .moderador(UPDATED_MODERADOR);
         // Add required entity
         PerfilUsuario perfilUsuario;
         if (TestUtil.findAll(em, PerfilUsuario.class).isEmpty()) {
@@ -195,6 +200,7 @@ public class PerfilGrupoResourceIT {
         assertThat(testPerfilGrupo.getVersao()).isEqualTo(DEFAULT_VERSAO);
         assertThat(testPerfilGrupo.isFavorito()).isEqualTo(DEFAULT_FAVORITO);
         assertThat(testPerfilGrupo.isNotifica()).isEqualTo(DEFAULT_NOTIFICA);
+        assertThat(testPerfilGrupo.isModerador()).isEqualTo(DEFAULT_MODERADOR);
     }
 
     @Test
@@ -233,7 +239,8 @@ public class PerfilGrupoResourceIT {
             .andExpect(jsonPath("$.[*].ultimaEdicao").value(hasItem(sameInstant(DEFAULT_ULTIMA_EDICAO))))
             .andExpect(jsonPath("$.[*].versao").value(hasItem(DEFAULT_VERSAO.intValue())))
             .andExpect(jsonPath("$.[*].favorito").value(hasItem(DEFAULT_FAVORITO.booleanValue())))
-            .andExpect(jsonPath("$.[*].notifica").value(hasItem(DEFAULT_NOTIFICA.booleanValue())));
+            .andExpect(jsonPath("$.[*].notifica").value(hasItem(DEFAULT_NOTIFICA.booleanValue())))
+            .andExpect(jsonPath("$.[*].moderador").value(hasItem(DEFAULT_MODERADOR.booleanValue())));
     }
     
     @Test
@@ -251,7 +258,8 @@ public class PerfilGrupoResourceIT {
             .andExpect(jsonPath("$.ultimaEdicao").value(sameInstant(DEFAULT_ULTIMA_EDICAO)))
             .andExpect(jsonPath("$.versao").value(DEFAULT_VERSAO.intValue()))
             .andExpect(jsonPath("$.favorito").value(DEFAULT_FAVORITO.booleanValue()))
-            .andExpect(jsonPath("$.notifica").value(DEFAULT_NOTIFICA.booleanValue()));
+            .andExpect(jsonPath("$.notifica").value(DEFAULT_NOTIFICA.booleanValue()))
+            .andExpect(jsonPath("$.moderador").value(DEFAULT_MODERADOR.booleanValue()));
     }
 
     @Test
@@ -279,7 +287,8 @@ public class PerfilGrupoResourceIT {
             .ultimaEdicao(UPDATED_ULTIMA_EDICAO)
             .versao(UPDATED_VERSAO)
             .favorito(UPDATED_FAVORITO)
-            .notifica(UPDATED_NOTIFICA);
+            .notifica(UPDATED_NOTIFICA)
+            .moderador(UPDATED_MODERADOR);
         PerfilGrupoDTO perfilGrupoDTO = perfilGrupoMapper.toDto(updatedPerfilGrupo);
 
         restPerfilGrupoMockMvc.perform(put("/api/perfil-grupos")
@@ -296,6 +305,7 @@ public class PerfilGrupoResourceIT {
         assertThat(testPerfilGrupo.getVersao()).isEqualTo(UPDATED_VERSAO);
         assertThat(testPerfilGrupo.isFavorito()).isEqualTo(UPDATED_FAVORITO);
         assertThat(testPerfilGrupo.isNotifica()).isEqualTo(UPDATED_NOTIFICA);
+        assertThat(testPerfilGrupo.isModerador()).isEqualTo(UPDATED_MODERADOR);
     }
 
     @Test

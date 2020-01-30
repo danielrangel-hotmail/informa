@@ -15,6 +15,7 @@
         "pushSubscription": "Push Subscription",
         "perfilUsuario": "Perfil Usuario",
         "perfilGrupo": "Perfil Grupo",
+        "topico": "Topico",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

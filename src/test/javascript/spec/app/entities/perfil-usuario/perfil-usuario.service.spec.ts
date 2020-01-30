@@ -24,7 +24,18 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new PerfilUsuario(0, currentDate, currentDate, 0, currentDate, currentDate, currentDate, 'AAAAAAA');
+      elemDefault = new PerfilUsuario(
+        0,
+        currentDate,
+        currentDate,
+        0,
+        currentDate,
+        currentDate,
+        currentDate,
+        'AAAAAAA',
+        'image/png',
+        'AAAAAAA'
+      );
     });
 
     describe('Service methods', () => {
@@ -89,7 +100,8 @@ describe('Service Tests', () => {
             entradaNaEmpresa: currentDate.format(DATE_FORMAT),
             saidaDaEmpresa: currentDate.format(DATE_FORMAT),
             nascimento: currentDate.format(DATE_FORMAT),
-            skype: 'BBBBBB'
+            skype: 'BBBBBB',
+            avatar: 'BBBBBB'
           },
           elemDefault
         );
@@ -122,7 +134,8 @@ describe('Service Tests', () => {
             entradaNaEmpresa: currentDate.format(DATE_FORMAT),
             saidaDaEmpresa: currentDate.format(DATE_FORMAT),
             nascimento: currentDate.format(DATE_FORMAT),
-            skype: 'BBBBBB'
+            skype: 'BBBBBB',
+            avatar: 'BBBBBB'
           },
           elemDefault
         );

@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Lob;
 
 /**
  * A DTO for the {@link com.objective.informa.domain.PerfilUsuario} entity.
@@ -26,6 +27,10 @@ public class PerfilUsuarioDTO implements Serializable {
 
     private String skype;
 
+    @Lob
+    private byte[] avatar;
+
+    private String avatarContentType;
 
     private Long usuarioId;
 
@@ -93,6 +98,22 @@ public class PerfilUsuarioDTO implements Serializable {
         this.skype = skype;
     }
 
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatarContentType() {
+        return avatarContentType;
+    }
+
+    public void setAvatarContentType(String avatarContentType) {
+        this.avatarContentType = avatarContentType;
+    }
+
     public Long getUsuarioId() {
         return usuarioId;
     }
@@ -133,6 +154,7 @@ public class PerfilUsuarioDTO implements Serializable {
             ", saidaDaEmpresa='" + getSaidaDaEmpresa() + "'" +
             ", nascimento='" + getNascimento() + "'" +
             ", skype='" + getSkype() + "'" +
+            ", avatar='" + getAvatar() + "'" +
             ", usuarioId=" + getUsuarioId() +
             "}";
     }

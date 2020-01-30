@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Dimensions, ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
+import { Component } from '@angular/core';
+import {  ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 
 @Component({
   selector: 'jhi-avatar-cropped',
@@ -32,7 +32,7 @@ export class AvatarCroppedComponent  {
     this.showCropper = true;
   }
 
-  cropperReady(sourceImageDimensions: Dimensions): void {
+  cropperReady(): void {
     // console.log('Cropper ready', sourceImageDimensions);
   }
 

@@ -31,6 +31,7 @@ export class PerfilGrupoUpdatePage {
   versaoInput = element(by.id('field_versao'));
   favoritoInput = element(by.id('field_favorito'));
   notificaInput = element(by.id('field_notifica'));
+  moderadorInput = element(by.id('field_moderador'));
   perfilSelect = element(by.id('field_perfil'));
   grupoSelect = element(by.id('field_grupo'));
 
@@ -67,6 +68,9 @@ export class PerfilGrupoUpdatePage {
   }
   getNotificaInput(): ElementFinder {
     return this.notificaInput;
+  }
+  getModeradorInput(): ElementFinder {
+    return this.moderadorInput;
   }
 
   async perfilSelectLastOption(): Promise<void> {

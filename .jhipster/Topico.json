@@ -1,0 +1,54 @@
+{
+    "name": "Topico",
+    "fields": [
+        {
+            "fieldName": "versao",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "nome",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "topico",
+            "otherEntityRelationshipName": "substituto",
+            "relationshipName": "substituidos"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "topico",
+            "relationshipValidateRules": "required",
+            "relationshipName": "autor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "topico",
+            "otherEntityRelationshipName": "substituidos",
+            "relationshipName": "substituto",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "grupo",
+            "otherEntityRelationshipName": "topicos",
+            "relationshipName": "grupos",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200130210727",
+    "entityTableName": "topico",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

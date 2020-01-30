@@ -20,6 +20,10 @@
         {
             "fieldName": "notifica",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "moderador",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [

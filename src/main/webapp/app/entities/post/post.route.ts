@@ -16,8 +16,9 @@ import { PostComponent } from 'app/entities/shared-post/post.component';
 import { DRAFTS, GRUPO, INFORMAIS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
-import { Grupo, IGrupo } from 'app/shared/model/grupo.model';
+import { Grupo} from 'app/shared/model/grupo.model';
 import { AccountService } from 'app/core/auth/account.service';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 
 const resolveGrupo$ = (id: number, service: GrupoService): Observable<IGrupo | never>  => {

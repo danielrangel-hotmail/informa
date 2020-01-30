@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IGrupo } from 'app/shared/model/grupo.model';
 import { GrupoService } from './grupo.service';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 @Component({
   templateUrl: './grupo-delete-dialog.component.html'

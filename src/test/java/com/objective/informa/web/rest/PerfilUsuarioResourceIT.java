@@ -20,6 +20,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -63,6 +64,11 @@ public class PerfilUsuarioResourceIT {
 
     private static final String DEFAULT_SKYPE = "AAAAAAAAAA";
     private static final String UPDATED_SKYPE = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_AVATAR = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_AVATAR = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_AVATAR_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_AVATAR_CONTENT_TYPE = "image/png";
 
     @Autowired
     private PerfilUsuarioRepository perfilUsuarioRepository;
@@ -118,7 +124,9 @@ public class PerfilUsuarioResourceIT {
             .entradaNaEmpresa(DEFAULT_ENTRADA_NA_EMPRESA)
             .saidaDaEmpresa(DEFAULT_SAIDA_DA_EMPRESA)
             .nascimento(DEFAULT_NASCIMENTO)
-            .skype(DEFAULT_SKYPE);
+            .skype(DEFAULT_SKYPE)
+            .avatar(DEFAULT_AVATAR)
+            .avatarContentType(DEFAULT_AVATAR_CONTENT_TYPE);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -140,7 +148,9 @@ public class PerfilUsuarioResourceIT {
             .entradaNaEmpresa(UPDATED_ENTRADA_NA_EMPRESA)
             .saidaDaEmpresa(UPDATED_SAIDA_DA_EMPRESA)
             .nascimento(UPDATED_NASCIMENTO)
-            .skype(UPDATED_SKYPE);
+            .skype(UPDATED_SKYPE)
+            .avatar(UPDATED_AVATAR)
+            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -177,6 +187,8 @@ public class PerfilUsuarioResourceIT {
         assertThat(testPerfilUsuario.getSaidaDaEmpresa()).isEqualTo(DEFAULT_SAIDA_DA_EMPRESA);
         assertThat(testPerfilUsuario.getNascimento()).isEqualTo(DEFAULT_NASCIMENTO);
         assertThat(testPerfilUsuario.getSkype()).isEqualTo(DEFAULT_SKYPE);
+        assertThat(testPerfilUsuario.getAvatar()).isEqualTo(DEFAULT_AVATAR);
+        assertThat(testPerfilUsuario.getAvatarContentType()).isEqualTo(DEFAULT_AVATAR_CONTENT_TYPE);
     }
 
     @Test
@@ -217,7 +229,9 @@ public class PerfilUsuarioResourceIT {
             .andExpect(jsonPath("$.[*].entradaNaEmpresa").value(hasItem(DEFAULT_ENTRADA_NA_EMPRESA.toString())))
             .andExpect(jsonPath("$.[*].saidaDaEmpresa").value(hasItem(DEFAULT_SAIDA_DA_EMPRESA.toString())))
             .andExpect(jsonPath("$.[*].nascimento").value(hasItem(DEFAULT_NASCIMENTO.toString())))
-            .andExpect(jsonPath("$.[*].skype").value(hasItem(DEFAULT_SKYPE)));
+            .andExpect(jsonPath("$.[*].skype").value(hasItem(DEFAULT_SKYPE)))
+            .andExpect(jsonPath("$.[*].avatarContentType").value(hasItem(DEFAULT_AVATAR_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].avatar").value(hasItem(Base64Utils.encodeToString(DEFAULT_AVATAR))));
     }
     
     @Test
@@ -237,7 +251,9 @@ public class PerfilUsuarioResourceIT {
             .andExpect(jsonPath("$.entradaNaEmpresa").value(DEFAULT_ENTRADA_NA_EMPRESA.toString()))
             .andExpect(jsonPath("$.saidaDaEmpresa").value(DEFAULT_SAIDA_DA_EMPRESA.toString()))
             .andExpect(jsonPath("$.nascimento").value(DEFAULT_NASCIMENTO.toString()))
-            .andExpect(jsonPath("$.skype").value(DEFAULT_SKYPE));
+            .andExpect(jsonPath("$.skype").value(DEFAULT_SKYPE))
+            .andExpect(jsonPath("$.avatarContentType").value(DEFAULT_AVATAR_CONTENT_TYPE))
+            .andExpect(jsonPath("$.avatar").value(Base64Utils.encodeToString(DEFAULT_AVATAR)));
     }
 
     @Test
@@ -267,7 +283,9 @@ public class PerfilUsuarioResourceIT {
             .entradaNaEmpresa(UPDATED_ENTRADA_NA_EMPRESA)
             .saidaDaEmpresa(UPDATED_SAIDA_DA_EMPRESA)
             .nascimento(UPDATED_NASCIMENTO)
-            .skype(UPDATED_SKYPE);
+            .skype(UPDATED_SKYPE)
+            .avatar(UPDATED_AVATAR)
+            .avatarContentType(UPDATED_AVATAR_CONTENT_TYPE);
         PerfilUsuarioDTO perfilUsuarioDTO = perfilUsuarioMapper.toDto(updatedPerfilUsuario);
 
         restPerfilUsuarioMockMvc.perform(put("/api/perfil-usuarios")
@@ -286,6 +304,8 @@ public class PerfilUsuarioResourceIT {
         assertThat(testPerfilUsuario.getSaidaDaEmpresa()).isEqualTo(UPDATED_SAIDA_DA_EMPRESA);
         assertThat(testPerfilUsuario.getNascimento()).isEqualTo(UPDATED_NASCIMENTO);
         assertThat(testPerfilUsuario.getSkype()).isEqualTo(UPDATED_SKYPE);
+        assertThat(testPerfilUsuario.getAvatar()).isEqualTo(UPDATED_AVATAR);
+        assertThat(testPerfilUsuario.getAvatarContentType()).isEqualTo(UPDATED_AVATAR_CONTENT_TYPE);
     }
 
     @Test

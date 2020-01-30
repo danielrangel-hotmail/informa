@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
@@ -7,9 +7,11 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { IPerfilUsuario, PerfilUsuario } from 'app/shared/model/perfil-usuario.model';
 import { PerfilUsuarioService } from './perfil-usuario.service';
+import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 
@@ -34,12 +36,17 @@ export class PerfilUsuarioUpdateComponent implements OnInit {
     saidaDaEmpresa: [],
     nascimento: [],
     skype: [],
+    avatar: [],
+    avatarContentType: [],
     usuarioId: [null, Validators.required]
   });
 
   constructor(
+    protected dataUtils: JhiDataUtils,
+    protected eventManager: JhiEventManager,
     protected perfilUsuarioService: PerfilUsuarioService,
     protected userService: UserService,
+    protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -69,8 +76,36 @@ export class PerfilUsuarioUpdateComponent implements OnInit {
       saidaDaEmpresa: perfilUsuario.saidaDaEmpresa,
       nascimento: perfilUsuario.nascimento,
       skype: perfilUsuario.skype,
+      avatar: perfilUsuario.avatar,
+      avatarContentType: perfilUsuario.avatarContentType,
       usuarioId: perfilUsuario.usuarioId
     });
+  }
+
+  byteSize(base64String: string): string {
+    return this.dataUtils.byteSize(base64String);
+  }
+
+  openFile(contentType: string, base64String: string): void {
+    this.dataUtils.openFile(contentType, base64String);
+  }
+
+  setFileData(event: Event, field: string, isImage: boolean): void {
+    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
+      this.eventManager.broadcast(
+        new JhiEventWithContent<AlertError>('informaApp.error', { ...err, key: 'error.file.' + err.key })
+      );
+    });
+  }
+
+  clearInputImage(field: string, fieldContentType: string, idInput: string): void {
+    this.editForm.patchValue({
+      [field]: null,
+      [fieldContentType]: null
+    });
+    if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
+      this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
+    }
   }
 
   previousState(): void {
@@ -101,6 +136,8 @@ export class PerfilUsuarioUpdateComponent implements OnInit {
       saidaDaEmpresa: this.editForm.get(['saidaDaEmpresa'])!.value,
       nascimento: this.editForm.get(['nascimento'])!.value,
       skype: this.editForm.get(['skype'])!.value,
+      avatarContentType: this.editForm.get(['avatarContentType'])!.value,
+      avatar: this.editForm.get(['avatar'])!.value,
       usuarioId: this.editForm.get(['usuarioId'])!.value
     };
   }

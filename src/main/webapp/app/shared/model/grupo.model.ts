@@ -1,17 +1,7 @@
 import { Moment } from 'moment';
 import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
-
-export interface IGrupo {
-  id?: number;
-  versao?: number;
-  criacao?: Moment;
-  ultimaEdicao?: Moment;
-  nome?: string;
-  descricao?: string;
-  formal?: boolean;
-  opcional?: boolean;
-  usuarios?: IPerfilGrupo[];
-}
+import { ITopico } from 'app/shared/model/topico.model';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 export class Grupo implements IGrupo {
   constructor(
@@ -23,7 +13,13 @@ export class Grupo implements IGrupo {
     public descricao?: string,
     public formal?: boolean,
     public opcional?: boolean,
-    public usuarios?: IPerfilGrupo[]
+    public logoContentType?: string,
+    public logo?: any,
+    public cabecalhoSuperiorCor?: string,
+    public cabecalhoInferiorCor?: string,
+    public logoFundoCor?: string,
+    public usuarios?: IPerfilGrupo[],
+    public topicos?: ITopico[]
   ) {
     this.formal = this.formal || false;
     this.opcional = this.opcional || false;

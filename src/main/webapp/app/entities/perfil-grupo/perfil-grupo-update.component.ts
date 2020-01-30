@@ -12,8 +12,8 @@ import { IPerfilGrupo, PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 import { PerfilGrupoService } from './perfil-grupo.service';
 import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
 import { PerfilUsuarioService } from 'app/entities/perfil-usuario/perfil-usuario.service';
-import { IGrupo } from 'app/shared/model/grupo.model';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 type SelectableEntity = IPerfilUsuario | IGrupo;
 
@@ -35,6 +35,7 @@ export class PerfilGrupoUpdateComponent implements OnInit {
     versao: [],
     favorito: [],
     notifica: [],
+    moderador: [],
     perfilId: [null, Validators.required],
     grupo: [null, Validators.required]
   });
@@ -79,6 +80,7 @@ export class PerfilGrupoUpdateComponent implements OnInit {
       versao: perfilGrupo.versao,
       favorito: perfilGrupo.favorito,
       notifica: perfilGrupo.notifica,
+      moderador: perfilGrupo.moderador,
       perfilId: perfilGrupo.perfilId,
       grupo: perfilGrupo.grupo
     });
@@ -110,6 +112,7 @@ export class PerfilGrupoUpdateComponent implements OnInit {
       versao: this.editForm.get(['versao'])!.value,
       favorito: this.editForm.get(['favorito'])!.value,
       notifica: this.editForm.get(['notifica'])!.value,
+      moderador: this.editForm.get(['moderador'])!.value,
       perfilId: this.editForm.get(['perfilId'])!.value,
       grupo: this.editForm.get(['grupo'])!.value
     };

@@ -66,19 +66,6 @@ describe('Component Tests', () => {
 
     it('should load a page', () => {
       // GIVEN
-      const headers = new HttpHeaders().append('link', 'link;link');
-      spyOn(service, 'query').and.returnValue(
-        of(
-          new HttpResponse({
-            body: [new PerfilGrupo(123)],
-            headers
-          })
-        )
-      );
-
-      // WHEN
-      comp.loadPage(1);
-
       // THEN
       expect(service.query).toHaveBeenCalled();
       expect(comp.perfilGrupos && comp.perfilGrupos[0]).toEqual(jasmine.objectContaining({ id: 123 }));
@@ -97,36 +84,19 @@ describe('Component Tests', () => {
       );
 
       // WHEN
-      comp.loadPage(1);
+
       comp.reset();
 
       // THEN
-      expect(comp.page).toEqual(0);
       expect(service.query).toHaveBeenCalledTimes(2);
       expect(comp.perfilGrupos && comp.perfilGrupos[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should calculate the sort attribute for an id', () => {
       // WHEN
-      comp.ngOnInit();
-      const result = comp.sort();
-
-      // THEN
-      expect(result).toEqual(['id,asc']);
     });
 
     it('should calculate the sort attribute for a non-id attribute', () => {
-      // INIT
-      comp.ngOnInit();
-
-      // GIVEN
-      comp.predicate = 'name';
-
-      // WHEN
-      const result = comp.sort();
-
-      // THEN
-      expect(result).toEqual(['name,asc', 'id']);
     });
   });
 });

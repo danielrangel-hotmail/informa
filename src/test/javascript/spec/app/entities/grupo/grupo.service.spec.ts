@@ -4,7 +4,8 @@ import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
-import { IGrupo, Grupo } from 'app/shared/model/grupo.model';
+import { Grupo } from 'app/shared/model/grupo.model';
+import { IGrupo } from 'app/shared/model/grupo.interface';
 
 describe('Service Tests', () => {
   describe('Grupo Service', () => {
@@ -24,7 +25,21 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Grupo(0, 0, currentDate, currentDate, 'AAAAAAA', 'AAAAAAA', false, false);
+      elemDefault = new Grupo(
+        0,
+        0,
+        currentDate,
+        currentDate,
+        'AAAAAAA',
+        'AAAAAAA',
+        false,
+        false,
+        'image/png',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA'
+      );
     });
 
     describe('Service methods', () => {
@@ -80,7 +95,11 @@ describe('Service Tests', () => {
             nome: 'BBBBBB',
             descricao: 'BBBBBB',
             formal: true,
-            opcional: true
+            opcional: true,
+            logo: 'BBBBBB',
+            cabecalhoSuperiorCor: 'BBBBBB',
+            cabecalhoInferiorCor: 'BBBBBB',
+            logoFundoCor: 'BBBBBB'
           },
           elemDefault
         );
@@ -110,7 +129,11 @@ describe('Service Tests', () => {
             nome: 'BBBBBB',
             descricao: 'BBBBBB',
             formal: true,
-            opcional: true
+            opcional: true,
+            logo: 'BBBBBB',
+            cabecalhoSuperiorCor: 'BBBBBB',
+            cabecalhoInferiorCor: 'BBBBBB',
+            logoFundoCor: 'BBBBBB'
           },
           elemDefault
         );

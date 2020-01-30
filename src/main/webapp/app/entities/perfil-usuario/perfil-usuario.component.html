@@ -26,6 +26,7 @@
             <th scope="col"  jhiSortBy="saidaDaEmpresa"><span jhiTranslate="informaApp.perfilUsuario.saidaDaEmpresa">Saida Da Empresa</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="nascimento"><span jhiTranslate="informaApp.perfilUsuario.nascimento">Nascimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="skype"><span jhiTranslate="informaApp.perfilUsuario.skype">Skype</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="avatar"><span jhiTranslate="informaApp.perfilUsuario.avatar">Avatar</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="usuarioId"><span jhiTranslate="informaApp.perfilUsuario.usuario">Usuario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"></th>
             </tr>
@@ -40,6 +41,12 @@
                 <td>{{perfilUsuario.saidaDaEmpresa | date:'mediumDate'}}</td>
                 <td>{{perfilUsuario.nascimento | date:'mediumDate'}}</td>
                 <td>{{perfilUsuario.skype}}</td>
+                <td>
+                    <a *ngIf="perfilUsuario.avatar" (click)="openFile(perfilUsuario.avatarContentType, perfilUsuario.avatar)">
+                        <img [src]="'data:' + perfilUsuario.avatarContentType + ';base64,' + perfilUsuario.avatar" style="max-height: 30px;" alt="perfilUsuario image"/>
+                    </a>
+                    <span *ngIf="perfilUsuario.avatar">{{perfilUsuario.avatarContentType}}, {{byteSize(perfilUsuario.avatar)}}</span>
+                </td>
                 <td>
                     {{perfilUsuario.usuarioId}}
                 </td>
