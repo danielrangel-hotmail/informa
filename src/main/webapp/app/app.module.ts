@@ -17,6 +17,8 @@ import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { PerfilGrupoViewComponent } from 'app/layouts/navbar/perfil-grupo-view.component';
 import { DEBUG_INFO_ENABLED } from 'app/app.constants';
+import { PerfilGrupoViewDetailComponent } from './layouts/navbar/perfil-grupo-view-detail/perfil-grupo-view-detail.component';
+import { GrupoNoRouteModule } from 'app/entities/grupo/grupo-no-route/grupo-no-route.module';
 
 @NgModule({
   imports: [
@@ -24,12 +26,13 @@ import { DEBUG_INFO_ENABLED } from 'app/app.constants';
     InformaSharedModule,
     InformaCoreModule,
     InformaHomeModule,
+    GrupoNoRouteModule,
     ServiceWorkerModule.register('/service-worker.js', { enabled: !DEBUG_INFO_ENABLED }),
     // jhipster-needle-angular-add-module JHipster will add new module here
     InformaEntityModule,
     InformaAppRoutingModule
   ],
-  declarations: [MainComponent, PerfilGrupoViewComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [MainComponent, PerfilGrupoViewComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent, PerfilGrupoViewDetailComponent],
   bootstrap: [MainComponent]
 })
 export class InformaAppModule {}

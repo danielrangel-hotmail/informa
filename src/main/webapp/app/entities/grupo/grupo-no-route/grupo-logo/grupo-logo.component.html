@@ -1,0 +1,3 @@
+<img [src]="'data:' + grupo.logoContentType + ';base64,' + grupo.logo" style = "border-radius: 100%;" *ngIf="grupo.logo" width="{{size}}" height="{{size}}"/>
+<img src="/content/images/logo-grupo-padrao.png" style = "border-radius: 100%;" *ngIf="!grupo.logo" width="{{size}}" height="{{size}}"/>
+

@@ -24,11 +24,11 @@
       "formal": "Formal",
       "opcional": "Opcional",
       "logo": "Logo",
-      "cabecalhoSuperiorCor": "Cabecalho Superior Cor",
-      "cabecalhoInferiorCor": "Cabecalho Inferior Cor",
-      "logoFundoCor": "Logo Fundo Cor",
+      "cabecalhoSuperiorCor": "Cor do 1o Cabeçalho",
+      "cabecalhoInferiorCor": "Cor do 2o Cabeçalho",
+      "logoFundoCor": "Cor de fundo do Logo",
       "usuarios": "Usuarios",
-      "topicos": "Topicos"
+      "topicos": "Tópicos"
     }
   }
 }

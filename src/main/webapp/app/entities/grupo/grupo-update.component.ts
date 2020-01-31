@@ -4,7 +4,7 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
@@ -16,6 +16,7 @@ import { ITopico } from 'app/shared/model/topico.model';
 import { TopicoService } from 'app/entities/topico/topico.service';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IImageCroped } from 'app/shared/avatar-cropped/avatar-cropped.component';
 
 @Component({
   selector: 'jhi-grupo-update',
@@ -26,6 +27,7 @@ import { IGrupo } from 'app/shared/model/grupo.interface';
 })
 export class GrupoUpdateComponent implements OnInit, AfterViewInit{
   isSaving = false;
+  grupo$!: Observable<IGrupo>;
 
   topicos: ITopico[] = [];
 
@@ -68,6 +70,10 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
           })
         )
         .subscribe((resBody: ITopico[]) => (this.topicos = resBody));
+      this.grupo$ = this.editForm.valueChanges.pipe(
+        map(() => this.createFromForm()),
+        startWith(grupo),
+      );
     });
   }
 
@@ -88,32 +94,6 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
       logoFundoCor: grupo.logoFundoCor,
       topicos: grupo.topicos
     });
-  }
-
-  byteSize(base64String: string): string {
-    return this.dataUtils.byteSize(base64String);
-  }
-
-  openFile(contentType: string, base64String: string): void {
-    this.dataUtils.openFile(contentType, base64String);
-  }
-
-  setFileData(event: Event, field: string, isImage: boolean): void {
-    this.dataUtils.loadFileToForm(event, this.editForm, field, isImage).subscribe(null, (err: JhiFileLoadError) => {
-      this.eventManager.broadcast(
-        new JhiEventWithContent<AlertError>('informaApp.error', { ...err, key: 'error.file.' + err.key })
-      );
-    });
-  }
-
-  clearInputImage(field: string, fieldContentType: string, idInput: string): void {
-    this.editForm.patchValue({
-      [field]: null,
-      [fieldContentType]: null
-    });
-    if (this.elementRef && idInput && this.elementRef.nativeElement.querySelector('#' + idInput)) {
-      this.elementRef.nativeElement.querySelector('#' + idInput).value = null;
-    }
   }
 
   previousState(): void {
@@ -175,6 +155,13 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
 
   trackById(index: number, item: ITopico): any {
     return item.id;
+  }
+
+  croppedLogoChanged($event: IImageCroped): void {
+    this.editForm.patchValue({
+      logo: $event.content,
+      logoContentType: $event.contentType,
+    });
   }
 
   getSelected(selectedVals: ITopico[], option: ITopico): ITopico {

@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 import { ITopico } from 'app/shared/model/topico.model';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 export interface IGrupo {
   id?: number;

@@ -1,17 +1,6 @@
 import { Moment } from 'moment';
 import { IGrupo } from 'app/shared/model/grupo.interface';
-
-export interface IPerfilGrupo {
-  id?: number;
-  criacao?: Moment;
-  ultimaEdicao?: Moment;
-  versao?: number;
-  favorito?: boolean;
-  notifica?: boolean;
-  moderador?: boolean;
-  perfilId?: number;
-  grupo?: IGrupo;
-}
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 export class PerfilGrupo implements IPerfilGrupo {
   constructor(

@@ -4,7 +4,8 @@ import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { PerfilGrupoService } from 'app/entities/perfil-grupo/perfil-grupo.service';
-import { IPerfilGrupo, PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
+import { PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 describe('Service Tests', () => {
   describe('PerfilGrupo Service', () => {

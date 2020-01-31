@@ -29,11 +29,11 @@
 <div class="small mb-2 mt-3 elemento">FAVORITOS</div>
 <div *ngFor="let perfilGrupo of perfilGruposFavoritos() ;trackBy: trackId" >
     <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }" *ngIf="filtroMatch(perfilGrupo.grupo.nome)">
-        <div [routerLink]="['/post', 'grupo', perfilGrupo.grupo.id]" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" class="d-flex align-items-start elemento" style="padding-top: 6px">
-            <h5 class="flex-grow-1">{{perfilGrupo.grupo.nome}}</h5>
-            <div (click)="toggleNotifica(perfilGrupo)" [ngStyle]="{ 'color': perfilGrupo.notifica ? 'blue' : 'lightgrey' }" class="bell"><fa-icon icon="bell"></fa-icon></div>
-            <div (click)="toggleFavorito(perfilGrupo)" [ngStyle]="{ 'color': perfilGrupo.favorito ? 'blue' : 'lightgrey' }"class="star"><fa-icon icon="star"></fa-icon></div>
-        </div>
+        <jhi-perfil-grupo-view-detail
+            (toggleFavorito)="toggleFavorito($event)"
+            (toggleNotifica)="toggleNotifica($event)"
+            [perfilGrupo]="perfilGrupo">
+        </jhi-perfil-grupo-view-detail>
     </jhi-hovered>
 </div>
 <div class="small mb-2 mt-3 d-flex justify-content-between elemento" routerLink="perfil-grupo">
@@ -43,11 +43,10 @@
 <ng-container *ngIf="perfilGrupos?.length > 0">
     <div *ngFor="let perfilGrupo of perfilGrupos ;trackBy: trackId" >
         <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }" *ngIf="filtroMatch(perfilGrupo.grupo.nome)">
-            <div [routerLink]="['/post', 'grupo', perfilGrupo.grupo.id]" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" class="d-flex align-items-start elemento" style="padding-top: 6px">
-                <h5 class="flex-grow-1">{{perfilGrupo.grupo.nome}}</h5>
-                <div (click)="toggleNotifica(perfilGrupo)" [ngStyle]="{ 'color': perfilGrupo.notifica ? 'blue' : 'lightgrey' }" class="bell"><fa-icon icon="bell"></fa-icon></div>
-                <div (click)="toggleFavorito(perfilGrupo)" [ngStyle]="{ 'color': perfilGrupo.favorito ? 'blue' : 'lightgrey' }"class="star"><fa-icon icon="star"></fa-icon></div>
-            </div>
+            <jhi-perfil-grupo-view-detail
+                (toggleFavorito)="toggleFavorito($event)"
+                (toggleNotifica)="toggleNotifica($event)"
+                [perfilGrupo]="perfilGrupo">
         </jhi-hovered>
     </div>
 </ng-container>

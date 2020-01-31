@@ -7,7 +7,7 @@ import { IGrupo } from 'app/shared/model/grupo.interface';
   styleUrls: ['./grupo-testa.component.scss']
 })
 export class GrupoTestaComponent implements OnInit {
-  @Input() grupo!: IGrupo;
+  @Input() grupo?: IGrupo;
 
   constructor() { }
 

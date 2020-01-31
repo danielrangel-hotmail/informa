@@ -10,6 +10,7 @@ import { MatomoModule } from 'ngx-matomo';
 import { DeviceDetectorModule } from 'ngx-device-detector';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     TranslateModule,
     MatomoModule,
     LayoutModule,
-    ImageCropperModule
+    ImageCropperModule,
+    ColorPickerModule
   ]
 })
 export class InformaSharedLibsModule {}

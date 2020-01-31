@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IPerfilGrupo, PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
+import { PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 
 import { PerfilGrupoService } from './perfil-grupo.service';
 import { PerfilGrupoDeleteDialogComponent } from './perfil-grupo-delete-dialog.component';
@@ -12,6 +12,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 @Component({
   selector: 'jhi-perfil-grupo',

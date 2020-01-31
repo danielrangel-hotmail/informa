@@ -8,12 +8,13 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
-import { IPerfilGrupo, PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
+import { PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 import { PerfilGrupoService } from './perfil-grupo.service';
 import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
 import { PerfilUsuarioService } from 'app/entities/perfil-usuario/perfil-usuario.service';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
 import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 type SelectableEntity = IPerfilUsuario | IGrupo;
 

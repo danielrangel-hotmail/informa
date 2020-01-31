@@ -4,13 +4,12 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
-
 import { PerfilGrupoService } from 'app/entities/perfil-grupo/perfil-grupo.service';
 import { AccountService } from 'app/core/auth/account.service';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 
 @Component({
@@ -78,7 +77,7 @@ export class PerfilGrupoViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  trackId(index: number, item: IPerfilGrupo): number {
+  trackId(index: number): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return index;
   }

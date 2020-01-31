@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
 import { ITopico } from 'app/shared/model/topico.model';
 import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 export class Grupo implements IGrupo {
   constructor(

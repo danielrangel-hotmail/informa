@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 type EntityResponseType = HttpResponse<IPerfilGrupo>;
 type EntityArrayResponseType = HttpResponse<IPerfilGrupo[]>;

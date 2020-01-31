@@ -1,13 +1,18 @@
-import { Component } from '@angular/core';
-import {  ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
+
+export interface IImageCroped {
+  contentType?: string;
+  content?: string;
+}
 
 @Component({
   selector: 'jhi-avatar-cropped',
   templateUrl: './avatar-cropped.component.html',
-  styleUrls: ['./avatar-cropped.component.scss']
+  styleUrls: ['./avatar-cropped.component.scss'],
 })
 export class AvatarCroppedComponent  {
-
+  @Output() croppedImageChanged: EventEmitter<IImageCroped> = new EventEmitter();
   imageChangedEvent: any = '';
   croppedImage: any = '';
   canvasRotation = 0;
@@ -17,7 +22,8 @@ export class AvatarCroppedComponent  {
   containWithinAspectRatio = false;
   transform: ImageTransform = {};
 
-  constructor() { }
+  constructor() {
+  }
 
 
   fileChangeEvent(event: any): void {
@@ -26,6 +32,18 @@ export class AvatarCroppedComponent  {
 
   imageCropped(event: ImageCroppedEvent): void {
     this.croppedImage = event.base64;
+    const cropped = this.croppedImage.split(";base64,");
+    if (cropped.length === 2) {
+      const contentFinal = {
+        contentType: cropped[0].split("data:")[1],
+          content: cropped[1]
+      };
+      // eslint-disable-next-line no-console
+      console.log('content');
+      // eslint-disable-next-line no-console
+      console.log(contentFinal);
+      this.croppedImageChanged.emit(contentFinal);
+    }
   }
 
   imageLoaded(): void {
@@ -95,17 +113,6 @@ export class AvatarCroppedComponent  {
     this.transform = {
       ...this.transform,
       scale: this.scale
-    };
-  }
-
-  toggleContainWithinAspectRatio(): void {
-    this.containWithinAspectRatio = !this.containWithinAspectRatio;
-  }
-
-  updateRotation(): void {
-    this.transform = {
-      ...this.transform,
-      rotate: this.rotation
     };
   }
 }

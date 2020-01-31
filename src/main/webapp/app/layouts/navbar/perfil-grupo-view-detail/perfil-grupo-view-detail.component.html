@@ -1,0 +1,7 @@
+<div [routerLink]="['/post', 'grupo', perfilGrupo.grupo.id]" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" class="d-flex align-items-start elemento" style="padding-top: 6px">
+    <jhi-grupo-logo [grupo]="perfilGrupo.grupo" [size]="16"></jhi-grupo-logo>
+    <h5 class="pl-2 flex-grow-1">{{perfilGrupo.grupo.nome}}</h5>
+    <div (click)="toggleNotificaEmit()" [ngStyle]="{ 'color': perfilGrupo.notifica ? 'blue' : 'lightgrey' }" class="bell"><fa-icon icon="bell"></fa-icon></div>
+    <div (click)="toggleFavoritoEmit()" [ngStyle]="{ 'color': perfilGrupo.favorito ? 'blue' : 'lightgrey' }"class="star"><fa-icon icon="star"></fa-icon></div>
+</div>
+

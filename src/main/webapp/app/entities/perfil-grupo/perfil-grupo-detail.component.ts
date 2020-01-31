@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.model';
+import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
 
 @Component({
   selector: 'jhi-perfil-grupo-detail',

@@ -11,9 +11,10 @@ import { PostLinkExternoVideoViewComponent } from './post-link-externo-video-vie
 import { EmbedVideo } from 'ngx-embed-video';
 import { GravatarModule } from  'ngx-gravatar';
 import { PostDeleteDialogComponent } from 'app/entities/shared-post/post-delete-dialog.component';
+import { GrupoNoRouteModule } from 'app/entities/grupo/grupo-no-route/grupo-no-route.module';
 
 @NgModule({
-  imports: [InformaSharedModule, RouterModule, QuillModule.forRoot(), NgxGalleryModule, EmbedVideo, GravatarModule ],
+  imports: [InformaSharedModule, RouterModule, QuillModule.forRoot(), NgxGalleryModule, EmbedVideo, GravatarModule, GrupoNoRouteModule],
   declarations: [PostComponent, PostPublicaDialogComponent, PostDeleteDialogComponent, PostSingleComponent, PostImageViewComponent, PostLinkExternoVideoViewComponent],
   exports: [PostComponent, PostSingleComponent],
   entryComponents: [PostPublicaDialogComponent, PostDeleteDialogComponent]
