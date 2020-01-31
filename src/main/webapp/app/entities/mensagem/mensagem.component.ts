@@ -9,6 +9,7 @@ import { MensagemService } from './mensagem.service';
 import { MensagemDeleteDialogComponent } from './mensagem-delete-dialog.component';
 import {IPost} from 'app/shared/model/post.interface';
 import {IMensagem} from 'app/shared/model/mensagem.interface';
+import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 
 @Component({
   selector: 'jhi-mensagem',
@@ -28,12 +29,14 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
   predicate: string;
   ascending: boolean;
   reseting = false;
+  DOCKED = DOCKED;
 
   constructor(
     protected mensagemService: MensagemService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
-    protected parseLinks: JhiParseLinks
+    protected parseLinks: JhiParseLinks,
+    protected perfilGrupoViewService: PerfilGrupoViewService
   ) {
     this.mensagems = [];
     this.itemsPerPage = 100;

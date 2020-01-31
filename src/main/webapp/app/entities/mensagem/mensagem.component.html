@@ -12,7 +12,9 @@
         </div>
     </div>
     <div class="footer-mensagem">
-        <div style="width: 260px"></div>
+        <ng-container *ngIf = "perfilGrupoViewService.status$ | async as breakpoint">
+            <div *ngIf = "breakpoint === DOCKED" style="width: 260px"></div>
+        </ng-container>
         <div class="footer-background max-width-main-view flex-grow-1 m-auto">
             <jhi-mensagem-update [post]="post"></jhi-mensagem-update>
         </div>
