@@ -7,11 +7,10 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import { JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 
 import { Grupo } from 'app/shared/model/grupo.model';
 import { GrupoService } from './grupo.service';
-import { AlertError } from 'app/shared/alert/alert-error.model';
 import { ITopico } from 'app/shared/model/topico.model';
 import { TopicoService } from 'app/entities/topico/topico.service';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
@@ -173,5 +172,12 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
       }
     }
     return option;
+  }
+
+  addTopico(nome: string): ITopico {
+    return {
+      id: undefined,
+      nome
+    }
   }
 }

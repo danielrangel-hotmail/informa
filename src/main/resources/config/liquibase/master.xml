@@ -30,5 +30,6 @@
     <include file="config/liquibase/changelog/20200123212230_added_entity_constraints_PerfilUsuario.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200125161558_added_entity_constraints_PerfilGrupo.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200125161558_added_entity_PerfilGrupo.xml" relativeToChangelogFile="false"/>
-	<include file="config/liquibase/changelog/20200130202945_added_entity_Topico_plus_moderador_e_outros_bichos.xml" relativeToChangelogFile="false"/>    
+	<include file="config/liquibase/changelog/20200130202945_added_entity_Topico_plus_moderador_e_outros_bichos.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200131185199_load_Topicos.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

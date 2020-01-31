@@ -1,7 +1,10 @@
 package com.objective.informa.service;
 
 import com.objective.informa.domain.Topico;
+import com.objective.informa.domain.User;
 import com.objective.informa.repository.TopicoRepository;
+import com.objective.informa.repository.UserRepository;
+import com.objective.informa.security.SecurityUtils;
 import com.objective.informa.service.dto.TopicoDTO;
 import com.objective.informa.service.mapper.TopicoMapper;
 import org.slf4j.Logger;
@@ -27,10 +30,13 @@ public class TopicoService {
     private final TopicoRepository topicoRepository;
 
     private final TopicoMapper topicoMapper;
+    
+    private final UserRepository userRepository;
 
-    public TopicoService(TopicoRepository topicoRepository, TopicoMapper topicoMapper) {
+    public TopicoService(TopicoRepository topicoRepository, TopicoMapper topicoMapper, UserRepository userRepository) {
         this.topicoRepository = topicoRepository;
         this.topicoMapper = topicoMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -42,7 +48,9 @@ public class TopicoService {
     public TopicoDTO save(TopicoDTO topicoDTO) {
         log.debug("Request to save Topico : {}", topicoDTO);
         Topico topico = topicoMapper.toEntity(topicoDTO);
-        topico = topicoRepository.save(topico);
+        final Optional<User> user = SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin);
+        topico.setAutor(user.get());
+        topico = topicoRepository.saveAndFlush(topico);
         return topicoMapper.toDto(topico);
     }
 

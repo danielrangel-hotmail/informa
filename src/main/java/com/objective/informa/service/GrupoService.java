@@ -1,8 +1,10 @@
 package com.objective.informa.service;
 
 import com.objective.informa.domain.Grupo;
+import com.objective.informa.domain.Topico;
 import com.objective.informa.repository.GrupoRepository;
 import com.objective.informa.service.dto.GrupoDTO;
+import com.objective.informa.service.dto.TopicoDTO;
 import com.objective.informa.service.mapper.GrupoMapper;
 import java.time.ZonedDateTime;
 import org.slf4j.Logger;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -28,12 +31,13 @@ public class GrupoService {
     private final Logger log = LoggerFactory.getLogger(GrupoService.class);
 
     private final GrupoRepository grupoRepository;
-
+    private final TopicoService topicoService;
     private final GrupoMapper grupoMapper;
 
-    public GrupoService(GrupoRepository grupoRepository, GrupoMapper grupoMapper) {
+    public GrupoService(GrupoRepository grupoRepository, GrupoMapper grupoMapper, TopicoService topicoService) {
         this.grupoRepository = grupoRepository;
         this.grupoMapper = grupoMapper;
+        this.topicoService = topicoService;
     }
 
     /**
@@ -43,7 +47,9 @@ public class GrupoService {
      * @return the persisted entity.
      */
     public GrupoDTO save(GrupoDTO grupoDTO) {
-        log.debug("Request to save Grupo : {}", grupoDTO);
+    	
+    	criaNovosTopicos(grupoDTO);
+    	log.debug("Request to save Grupo : {}", grupoDTO);
         Grupo grupo = grupoMapper.toEntity(grupoDTO);
         ZonedDateTime now = ZonedDateTime.now();
         if (grupo.getCriacao() == null) {
@@ -53,6 +59,21 @@ public class GrupoService {
         grupo = grupoRepository.save(grupo);
         return grupoMapper.toDto(grupo);
     }
+
+	private void criaNovosTopicos(GrupoDTO grupoDTO) {
+		HashSet<TopicoDTO> topicosParaRemover = new HashSet<TopicoDTO>();
+    	HashSet<TopicoDTO> topicosParaAdicionar = new HashSet<TopicoDTO>();
+    	grupoDTO.getTopicos()
+        	.stream()
+        	.filter(filtroDTO -> filtroDTO.getId() == null)
+        	.forEach(topicoDTO -> {
+        		TopicoDTO topicoNovoDTO = this.topicoService.save(topicoDTO);
+        		topicosParaRemover.add(topicoDTO);
+        		topicosParaAdicionar.add(topicoNovoDTO);
+        	});
+    	grupoDTO.getTopicos().removeAll(topicosParaRemover);
+    	grupoDTO.getTopicos().addAll(topicosParaAdicionar);
+	}
 
     /**
      * Get all the grupos.
