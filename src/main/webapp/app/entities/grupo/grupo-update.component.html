@@ -1,7 +1,7 @@
 <ng-container *ngIf="grupo$ | async as grupo">
     <jhi-grupo-testa [grupo]="grupo"></jhi-grupo-testa>
 </ng-container>
-<div class="m-3">
+<div class="mt-3 max-width-main-view">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" >
         <div class="d-flex justify-content-between mb-3">
             <div>
