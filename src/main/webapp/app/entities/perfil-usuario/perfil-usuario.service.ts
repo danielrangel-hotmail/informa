@@ -9,6 +9,7 @@ import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { ISimpleUser } from 'app/shared/model/simples-user.interface';
 
 type EntityResponseType = HttpResponse<IPerfilUsuario>;
 type EntityArrayResponseType = HttpResponse<IPerfilUsuario[]>;
@@ -37,6 +38,11 @@ export class PerfilUsuarioService {
     return this.http
       .get<IPerfilUsuario>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
+  search(text: string): Observable<HttpResponse<ISimpleUser[]>> {
+    return this.http
+      .get<IPerfilUsuario[]>(`${this.resourceUrl}/search/${text}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

@@ -19,7 +19,8 @@ public abstract class PerfilGrupoMapper implements EntityMapper<PerfilGrupoDTO, 
 
 	@Autowired
 	private GrupoRepository grupoRepository;
-	
+
+
     @Mapping(source = "perfil.id", target = "perfilId")
     public abstract PerfilGrupoDTO toDto(PerfilGrupo perfilGrupo);
 
@@ -31,7 +32,8 @@ public abstract class PerfilGrupoMapper implements EntityMapper<PerfilGrupoDTO, 
     public Grupo grupoFromGrupo(GrupoDTO grupoDTO) {
     	return grupoRepository.findById(grupoDTO.getId()).get();
     }
-    
+
+
     public PerfilGrupo fromId(Long id) {
         if (id == null) {
             return null;

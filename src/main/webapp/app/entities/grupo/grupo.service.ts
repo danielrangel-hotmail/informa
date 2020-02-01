@@ -39,6 +39,12 @@ export class GrupoService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findComUsuarios(id: number): Observable<EntityResponseType> {
+    return this.http
+      .get<IGrupo>(`${this.resourceUrl}-com-usuarios/${id}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

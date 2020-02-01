@@ -16,6 +16,9 @@ import { TopicoService } from 'app/entities/topico/topico.service';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 import { IGrupo } from 'app/shared/model/grupo.interface';
 import { IImageCroped } from 'app/shared/avatar-cropped/avatar-cropped.component';
+import { IUser } from 'app/core/user/user.model';
+import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { PerfilUsuarioService } from 'app/entities/perfil-usuario/perfil-usuario.service';
 
 @Component({
   selector: 'jhi-grupo-update',
@@ -29,6 +32,7 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
   grupo$!: Observable<IGrupo>;
 
   topicos: ITopico[] = [];
+  // usuarios: IPerfilUsuario = [];
 
   editForm = this.fb.group({
     id: [],
@@ -44,7 +48,8 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
     cabecalhoSuperiorCor: [],
     cabecalhoInferiorCor: [],
     logoFundoCor: [],
-    topicos: []
+    topicos: [],
+    moderadores: []
   });
 
   constructor(
@@ -52,6 +57,7 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
     protected eventManager: JhiEventManager,
     protected grupoService: GrupoService,
     protected topicoService: TopicoService,
+    protected perfilUsuarioService: PerfilUsuarioService,
     protected elementRef: ElementRef,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
@@ -59,21 +65,25 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ grupo }) => {
+      if (grupo === null) return;
       this.updateForm(grupo);
-
-      this.topicoService
-        .query()
-        .pipe(
-          map((res: HttpResponse<ITopico[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: ITopico[]) => (this.topicos = resBody));
+      this.carregaTopicos();
       this.grupo$ = this.editForm.valueChanges.pipe(
         map(() => this.createFromForm()),
         startWith(grupo),
       );
     });
+  }
+
+  private carregaTopicos(): void {
+    this.topicoService
+      .query()
+      .pipe(
+        map((res: HttpResponse<ITopico[]>) => {
+          return res.body ? res.body : [];
+        })
+      )
+      .subscribe((resBody: ITopico[]) => (this.topicos = resBody));
   }
 
   updateForm(grupo: IGrupo): void {
@@ -91,7 +101,8 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
       cabecalhoSuperiorCor: grupo.cabecalhoSuperiorCor,
       cabecalhoInferiorCor: grupo.cabecalhoInferiorCor,
       logoFundoCor: grupo.logoFundoCor,
-      topicos: grupo.topicos
+      topicos: grupo.topicos,
+      moderadores: grupo.moderadores
     });
   }
 
@@ -128,7 +139,8 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
       cabecalhoSuperiorCor: this.editForm.get(['cabecalhoSuperiorCor'])!.value,
       cabecalhoInferiorCor: this.editForm.get(['cabecalhoInferiorCor'])!.value,
       logoFundoCor: this.editForm.get(['logoFundoCor'])!.value,
-      topicos: this.editForm.get(['topicos'])!.value
+      topicos: this.editForm.get(['topicos'])!.value,
+      moderadores: this.editForm.get(['moderadores'])!.value
     };
   }
 

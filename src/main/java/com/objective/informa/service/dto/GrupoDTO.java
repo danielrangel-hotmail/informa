@@ -1,19 +1,27 @@
 package com.objective.informa.service.dto;
-import java.time.ZonedDateTime;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Lob;
 
 import org.springframework.data.annotation.ReadOnlyProperty;
+
+import com.objective.informa.domain.User;
 
 /**
  * A DTO for the {@link com.objective.informa.domain.Grupo} entity.
  */
 public class GrupoDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     @ReadOnlyProperty
     private Long versao;
@@ -36,6 +44,7 @@ public class GrupoDTO implements Serializable {
     private byte[] logo;
 
     private String logoContentType;
+    
     private String cabecalhoSuperiorCor;
 
     private String cabecalhoInferiorCor;
@@ -44,6 +53,8 @@ public class GrupoDTO implements Serializable {
 
 
     private Set<TopicoDTO> topicos = new HashSet<>();
+    
+    private Set<SimpleUserDTO> moderadores= new HashSet<>();
 
     public Long getId() {
         return id;
@@ -157,7 +168,15 @@ public class GrupoDTO implements Serializable {
         this.topicos = topicos;
     }
 
-    @Override
+	public Set<SimpleUserDTO> getModeradores() {
+		return moderadores;
+	}
+
+	public void setModeradores(Set<SimpleUserDTO> moderadores) {
+		this.moderadores = moderadores;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

@@ -1,6 +1,10 @@
-TODO: Formatar a página de grupos
-Incluir dono do grupo e avatar
-Admin pode mudar o dono do grupo
+TODO: Tópicos
+Filtro de tópicos na gestão
+
+TODO: Moderadores
+Inlcuir e remover moderadores de um grupo.
+Somente o moderador, admin e supervisor podem mexer nos moderadores.
+Não pode ficar sem moderadores
 
 TODO: Reações em posts e mensagens
 
@@ -20,12 +24,8 @@ TODO: Rever o esquema de criar um post
 Para não criar sempre do zero
 Quando tentar adicionar imagem ou vídeo, aí cria
 
-
 TODO: Melhorar os Emojis e Menções
 Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
-
-TODO: Fazer o bold funcionar de novo
-Algo quebrou o bold...
 
 TODO: Fazer o ENTER funcionar na mensagem como um SUBMIT
 E o SHIFT ENTER como ENTER
@@ -207,3 +207,4 @@ TODO: Extensão Check de Leitura feita
 
 TODO: Extensão NPS Nomeada e Anônima
 
+TODO: se der zica, fazer convite de moderação

@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { ITopico } from 'app/shared/model/topico.model';
 import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { ISimpleUser } from 'app/shared/model/simples-user.interface';
 
 export interface IGrupo {
   id?: number;
@@ -18,4 +19,5 @@ export interface IGrupo {
   logoFundoCor?: string;
   usuarios?: IPerfilGrupo[];
   topicos?: ITopico[];
+  moderadores?: ISimpleUser[];
 }

@@ -80,16 +80,34 @@ public class PerfilGrupoService {
         log.debug("Request to save PerfilGrupo : {}", perfilGrupoDTO);
         final PerfilGrupo perfilGrupo = perfilGrupoMapper.toEntity(perfilGrupoDTO);
         PerfilUsuario perfilUsuario = this.perfilUsuarioLogado();
-        if (perfilUsuario.getGrupos()
-        	.stream()
-        	.anyMatch(perfilGrupoExistente -> perfilGrupoExistente.getGrupo() == perfilGrupo.getGrupo())) {;
-        		throw new Exception("Usuário já está dentro do grupo");
-        	}
-        perfilUsuario.addGrupos(perfilGrupo);        
+        associaPerfilAGrupo(perfilGrupo, perfilUsuario);
         PerfilGrupo novoPerfilGrupo = perfilGrupoRepository.save(perfilGrupo);
         return perfilGrupoMapper.toDto(novoPerfilGrupo);
     }
 
+	private void associaPerfilAGrupo(final PerfilGrupo perfilGrupo, PerfilUsuario perfilUsuario)
+			throws Exception {
+		if (perfilUsuario.getGrupos()
+        	.stream()
+        	.anyMatch(perfilGrupoExistente -> perfilGrupoExistente.getGrupo() == perfilGrupo.getGrupo())) {;
+        		throw new Exception("Usuário já está dentro do grupo");
+        	}
+        perfilUsuario.addGrupos(perfilGrupo);
+        perfilGrupo.setPerfil(perfilUsuario);
+        perfilGrupo.getGrupo().addUsuarios(perfilGrupo);
+	}
+
+    public void criaPerfilModerador(Long idUsuario, Grupo grupo) throws Exception {
+    	PerfilUsuario perfilUsuario = this.perfillUsuarioRepository.getOne(idUsuario);
+    	final PerfilGrupo perfilGrupo = new PerfilGrupo();
+    	perfilGrupo.setGrupo(grupo);
+    	perfilGrupo.setModerador(true);
+    	this.associaPerfilAGrupo(perfilGrupo, perfilUsuario);
+        perfilGrupoRepository.save(perfilGrupo);    	
+    }
+
+    
+    
     /**
      * Get all the perfilGrupos.
      *

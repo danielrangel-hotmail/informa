@@ -3,16 +3,22 @@ package com.objective.informa.service;
 import com.objective.informa.domain.PerfilUsuario;
 import com.objective.informa.repository.PerfilUsuarioRepository;
 import com.objective.informa.service.dto.PerfilUsuarioDTO;
+import com.objective.informa.service.dto.SimpleUserDTO;
 import com.objective.informa.service.mapper.PerfilUsuarioMapper;
+import com.objective.informa.service.mapper.SimpleUserMapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link PerfilUsuario}.
@@ -26,10 +32,13 @@ public class PerfilUsuarioService {
     private final PerfilUsuarioRepository perfilUsuarioRepository;
 
     private final PerfilUsuarioMapper perfilUsuarioMapper;
+    
+    private final SimpleUserMapper simpleUserMapper;
 
-    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper) {
+    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper, SimpleUserMapper simpleUserMapper) {
         this.perfilUsuarioRepository = perfilUsuarioRepository;
         this.perfilUsuarioMapper = perfilUsuarioMapper;
+        this.simpleUserMapper = simpleUserMapper;
     }
 
     /**
@@ -81,4 +90,12 @@ public class PerfilUsuarioService {
         log.debug("Request to delete PerfilUsuario : {}", id);
         perfilUsuarioRepository.deleteById(id);
     }
+
+	public List<SimpleUserDTO> search(String text) {
+		// TODO Auto-generated method stub
+		return perfilUsuarioRepository.searchPerfil(text, Sort.by("usuario.firstName", "usuario.lastName"))
+				.stream()
+				.map(perfilUsuario -> simpleUserMapper.toDto(perfilUsuario.getUsuario()))
+				.collect(Collectors.toList());
+	}
 }

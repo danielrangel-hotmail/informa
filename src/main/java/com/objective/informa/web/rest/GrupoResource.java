@@ -104,6 +104,19 @@ public class GrupoResource {
     }
 
     /**
+     * {@code GET  /grupos/:id} : get the "id" grupo.
+     *
+     * @param id the id of the grupoDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the grupoDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/grupos-com-usuarios/{id}")
+    public ResponseEntity<GrupoDTO> getGrupoComUsuarios(@PathVariable Long id) {
+        log.debug("REST request to get Grupo : {}", id);
+        Optional<GrupoDTO> grupoDTO = grupoService.findOneComUsuarios(id);
+        return ResponseUtil.wrapOrNotFound(grupoDTO);
+    }
+
+    /**
      * {@code DELETE  /grupos/:id} : delete the "id" grupo.
      *
      * @param id the id of the grupoDTO to delete.

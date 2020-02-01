@@ -1,0 +1,13 @@
+<ng-select
+    [items]="users$ | async"
+    [minTermLength]="2"
+    [multiple]="multiple"
+    [hideSelected]="true"
+    bindLabel="fullName"
+    [trackByFn]="trackByFn"
+    [minTermLength]="2"
+    [loading]="usersLoading"
+    [typeahead]="usersInput$"
+    [(ngModel)]="selectedUsers"
+    (change)="onUsersChanged($event)">
+</ng-select>

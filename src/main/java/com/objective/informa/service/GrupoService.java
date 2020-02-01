@@ -1,25 +1,28 @@
 package com.objective.informa.service;
 
-import com.objective.informa.domain.Grupo;
-import com.objective.informa.domain.Topico;
-import com.objective.informa.repository.GrupoRepository;
-import com.objective.informa.service.dto.GrupoDTO;
-import com.objective.informa.service.dto.TopicoDTO;
-import com.objective.informa.service.mapper.GrupoMapper;
 import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import com.objective.informa.domain.Grupo;
+import com.objective.informa.repository.GrupoRepository;
+import com.objective.informa.repository.PerfilGrupoRepository;
+import com.objective.informa.service.dto.GrupoDTO;
+import com.objective.informa.service.dto.SimpleUserDTO;
+import com.objective.informa.service.dto.TopicoDTO;
+import com.objective.informa.service.mapper.GrupoMapper;
 
 /**
  * Service Implementation for managing {@link Grupo}.
@@ -32,12 +35,16 @@ public class GrupoService {
 
     private final GrupoRepository grupoRepository;
     private final TopicoService topicoService;
+    private final PerfilGrupoService perfilGrupoService;
+    private final PerfilGrupoRepository perfilGrupoRepository;
     private final GrupoMapper grupoMapper;
 
-    public GrupoService(GrupoRepository grupoRepository, GrupoMapper grupoMapper, TopicoService topicoService) {
+    public GrupoService(GrupoRepository grupoRepository, GrupoMapper grupoMapper, TopicoService topicoService, PerfilGrupoService perfilGrupoService, PerfilGrupoRepository perfilGrupoRepository) {
         this.grupoRepository = grupoRepository;
         this.grupoMapper = grupoMapper;
         this.topicoService = topicoService;
+        this.perfilGrupoService = perfilGrupoService;
+        this.perfilGrupoRepository = perfilGrupoRepository;
     }
 
     /**
@@ -50,12 +57,14 @@ public class GrupoService {
     	
     	criaNovosTopicos(grupoDTO);
     	log.debug("Request to save Grupo : {}", grupoDTO);
-        Grupo grupo = grupoMapper.toEntity(grupoDTO);
+    	Grupo grupo = grupoRepository.getOne(grupoDTO.getId());
+        grupoMapper.updateGrupoFromDto(grupoDTO, grupo);
         ZonedDateTime now = ZonedDateTime.now();
         if (grupo.getCriacao() == null) {
             grupo.setCriacao(now);
         }
         grupo.setUltimaEdicao(now);
+        this.acertaModeradores(grupo, grupoDTO.getModeradores());
         grupo = grupoRepository.save(grupo);
         return grupoMapper.toDto(grupo);
     }
@@ -73,6 +82,31 @@ public class GrupoService {
         	});
     	grupoDTO.getTopicos().removeAll(topicosParaRemover);
     	grupoDTO.getTopicos().addAll(topicosParaAdicionar);
+	}
+	
+	private void acertaModeradores(Grupo grupo, Set<SimpleUserDTO> moderadores) {
+		Map<Long, SimpleUserDTO> moderadoresById = moderadores.
+				stream().
+				collect(Collectors.toMap(SimpleUserDTO::getId, simpleUser -> simpleUser));
+		
+		grupo.getUsuarios().forEach(perfilGrupo -> {
+			if (moderadoresById.containsKey(perfilGrupo.getPerfil().getId())) {
+				perfilGrupo.setModerador(true);
+				moderadoresById.remove(perfilGrupo.getPerfil().getId());
+			} else {
+				perfilGrupo.setModerador(false);
+				this.perfilGrupoRepository.save(perfilGrupo);
+			}
+		});
+		
+		moderadoresById.values().forEach(simpleUser -> {
+			try {
+				this.perfilGrupoService.criaPerfilModerador(simpleUser.getId(), grupo);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
 
     /**
@@ -120,4 +154,9 @@ public class GrupoService {
         log.debug("Request to delete Grupo : {}", id);
         grupoRepository.deleteById(id);
     }
+
+	public Optional<GrupoDTO> findOneComUsuarios(Long id) {
+        return grupoRepository.findOneWithEagerRelationships(id)
+                .map(grupoMapper::toDto);
+	}
 }

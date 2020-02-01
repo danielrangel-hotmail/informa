@@ -16,7 +16,7 @@ import { IGrupo } from 'app/shared/model/grupo.interface';
 export const resolveGrupo$ = (route: ActivatedRouteSnapshot, service: GrupoService): Observable<IGrupo | never>  => {
   const id = route.params['id'];
   if (id) {
-    return service.find(id).pipe(
+    return service.findComUsuarios(id).pipe(
       flatMap((grupo: HttpResponse<Grupo>) => {
         if (grupo.body) {
           return of(grupo.body);
