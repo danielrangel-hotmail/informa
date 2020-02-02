@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
@@ -13,6 +13,7 @@ import { debounceTime } from 'rxjs/operators';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 import { IGrupo } from 'app/shared/model/grupo.interface';
 import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { ITopico } from 'app/shared/model/topico.model';
 
 @Component({
   selector: 'jhi-perfil-grupo',
@@ -27,7 +28,7 @@ export class PerfilGrupoComponent implements OnInit, OnDestroy, AfterViewInit {
   isSaving = false;
   filtro = new FormControl();
   filtroValue = '';
-
+  topicoFiltro?: ITopico;
 
   constructor(
     protected perfilGrupoService: PerfilGrupoService,
@@ -47,8 +48,27 @@ export class PerfilGrupoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  filtroMatch(valor: string): boolean {
-    return (this.filtroValue === '') || (RegExp(this.filtroValue).exec(valor) !== null);
+  filtroMachTexto(grupo: IGrupo): boolean {
+    if (this.filtroValue === '') return true;
+    const textao = grupo.nome + ' ' + (grupo.descricao ? grupo.descricao.toLocaleLowerCase() : ' ');
+    return RegExp(this.filtroValue).exec(textao) !== null;
+  }
+
+  filtroMatchTopico (grupo: IGrupo): boolean {
+    if (this.topicoFiltro === undefined) return true;
+    const topicoEncontrado = grupo.topicos!.find(topico => topico.id === this.topicoFiltro!.id);
+    // eslint-disable-next-line no-console
+    console.log(topicoEncontrado);
+    return topicoEncontrado !== undefined;
+  }
+  filtroMatch(grupo: IGrupo): boolean {
+    return this.filtroMachTexto(grupo) && this.filtroMatchTopico(grupo);
+  }
+
+  topicoSelecionado(topico: ITopico): void {
+    // eslint-disable-next-line no-console
+    console.log(topico);
+    this.topicoFiltro = topico;
   }
 
   loadAll(): void {

@@ -1,0 +1,21 @@
+<div class="topicos-header  mt-3" >
+    <h5>Tópicos</h5>
+</div>
+<div *ngIf = "topico$ | async as topicos" class = "topicos-card">
+        <div [ngClass]="{ 'selecionado': selecionado('todos')}" (click)="novaSelecao('todos')">
+            <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
+                <div class="topico">
+                    Todos
+                </div>
+            </jhi-hovered>
+        </div>
+        <div *ngFor="let topico of topicos ;trackBy: trackId"
+             [ngClass]="{ 'selecionado': selecionado(topico)}"
+             (click)="novaSelecao(topico)">
+            <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
+                <div class="topico">
+                    {{topico.nome}}
+                </div>
+            </jhi-hovered>
+        </div>
+</div>

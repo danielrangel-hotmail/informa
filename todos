@@ -1,8 +1,4 @@
 TODO: Hoje
-Somente o moderador e admin podem alterar um grupo.
-Filtro de tópicos na gestão de assinaturas
-Mudar a edição dos mais grupos para um esquema de adição
-Criar o botão de sair do grupo, na testa do grupo
 Moderador não pode sair do grupo
 Excluir um grupo
 Grupo opcional
@@ -134,6 +130,10 @@ partição de arquivado
 TODO: Facilitar o uso por outras empresas
 
 TODO: Fazer uma receita para implantar o sistema do ZERO!!!!
+
+TODO: Somente o moderador e admin podem alterar um grupo.
+Acertar o backend também
+
 ------------------------------------------------------------------------------
 TODO: Criar o conceito básico de Customer Success
 Para o pessoal que está entrando, haverá um wizard no sistema que conduzirá o colaborador, experimentar cada uma das features do sistema.
