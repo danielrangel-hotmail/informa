@@ -1,6 +1,4 @@
 TODO: Hoje
-Moderador não pode sair do grupo
-Excluir um grupo
 Grupo opcional
 
 
@@ -33,6 +31,8 @@ TODO: Fazer funcionar o básico das conversas
 TODO: Remoção de Posts
 
 TODO: Edição e Remoção de Mensagens
+
+TODO: Excluir um grupo
 
 TODO: Registrar o número de vezes que cada pessoa carregou os posts
 Aguardando o Renato voltar para configurar o Matomo na aws
@@ -80,6 +80,9 @@ TODO: Travar e-mails de fora da Objective.
 TODO: CSS => Resolver a lista do quill-editor de align. Está 3px para baixo o svg
 
 TODO: Sumir com o chosen file do logo do grupo e avatar do perfil
+
+TODO: Somente o moderador e admin podem alterar um grupo backend.
+Acertar o opcional
 
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
@@ -130,9 +133,6 @@ partição de arquivado
 TODO: Facilitar o uso por outras empresas
 
 TODO: Fazer uma receita para implantar o sistema do ZERO!!!!
-
-TODO: Somente o moderador e admin podem alterar um grupo.
-Acertar o backend também
 
 ------------------------------------------------------------------------------
 TODO: Criar o conceito básico de Customer Success

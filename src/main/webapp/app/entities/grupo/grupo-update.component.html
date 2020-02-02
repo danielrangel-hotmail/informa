@@ -56,7 +56,7 @@
                                formControlName="formal"/>
                         <label class="form-check-label" jhiTranslate="informaApp.grupo.formal" for="field_formal">Formal</label>
                     </div>
-                    <div class="form-check">
+                    <div *jhiHasAnyAuthority="'ROLE_ADMIN'" class="form-check">
                         <input type="checkbox" class="form-check-input" name="opcional" id="field_opcional"
                                formControlName="opcional"/>
                         <label class="form-check-label" jhiTranslate="informaApp.grupo.opcional" for="field_opcional">Opcional</label>
