@@ -132,7 +132,7 @@ public class PerfilGrupoDTO implements Serializable {
             ", notifica='" + isNotifica() + "'" +
             ", moderador='" + isModerador() + "'" +
             ", perfilId=" + getPerfilId() +
-            ", grupoId=" + getGrupo().getId() +
+            ", grupoId=" + (getGrupo() != null ? getGrupo().getId() : "") +
             "}";
     }
 }

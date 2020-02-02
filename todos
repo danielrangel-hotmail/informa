@@ -1,7 +1,3 @@
-TODO: Hoje
-Grupo opcional
-
-
 TODO: Reações em posts e mensagens
 
 TODO: Role do Supervisor
@@ -11,14 +7,10 @@ Somente admins e caras com post oficial podem postar desta forma
 
 TODO: Rever menus
 
-TODO: Remover imagens
-Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
-https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
-Tirar o router e fazer hide and show
-
 TODO: Rever o esquema de criar um post
 Para não criar sempre do zero
 Quando tentar adicionar imagem ou vídeo, aí cria
+Tirar o router e fazer hide and show
 
 TODO: Melhorar os Emojis e Menções
 Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
@@ -33,6 +25,10 @@ TODO: Remoção de Posts
 TODO: Edição e Remoção de Mensagens
 
 TODO: Excluir um grupo
+
+TODO: Remover imagens
+Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
+https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
 
 TODO: Registrar o número de vezes que cada pessoa carregou os posts
 Aguardando o Renato voltar para configurar o Matomo na aws

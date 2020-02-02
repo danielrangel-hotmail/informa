@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.PerfilGrupo;
 import com.objective.informa.domain.PerfilUsuario;
+import com.objective.informa.domain.Post;
 import com.objective.informa.repository.GrupoRepository;
 import com.objective.informa.service.dto.GrupoDTO;
 import com.objective.informa.service.dto.SimpleUserDTO;
@@ -49,7 +50,9 @@ public abstract class GrupoMapper implements EntityMapper<GrupoDTO, Grupo> {
         if (id == null) {
             return null;
         }
-        return grupoRepository.findById(id).get();
+        Grupo grupo = new Grupo();
+        grupo.setId(id);
+        return grupo;
     }
 
 }

@@ -7,6 +7,7 @@ import com.objective.informa.domain.User;
 import com.objective.informa.repository.AuthorityRepository;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.AuthoritiesConstants;
+import com.objective.informa.security.jwt.TokenProvider;
 import com.objective.informa.service.MailService;
 import com.objective.informa.service.UserService;
 import com.objective.informa.service.dto.PasswordChangeDTO;
@@ -14,6 +15,9 @@ import com.objective.informa.service.dto.UserDTO;
 import com.objective.informa.web.rest.errors.ExceptionTranslator;
 import com.objective.informa.web.rest.vm.KeyAndPasswordVM;
 import com.objective.informa.web.rest.vm.ManagedUserVM;
+
+import io.github.jhipster.config.JHipsterProperties;
+
 import org.apache.commons.lang3.RandomStringUtils;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -63,7 +67,7 @@ public class AccountResourceIT {
 
     @Autowired
     private ExceptionTranslator exceptionTranslator;
-
+    
     @Mock
     private UserService mockUserService;
 

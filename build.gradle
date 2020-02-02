@@ -334,10 +334,6 @@ if (project.hasProperty("nodeInstall")) {
         download = true
     }
 }
-tasks.register("hello") { 
-    doLast { 
-        println 'Hello, World!'
-    }
-}
+
 compileJava.dependsOn processResources
 processResources.dependsOn bootBuildInfo
