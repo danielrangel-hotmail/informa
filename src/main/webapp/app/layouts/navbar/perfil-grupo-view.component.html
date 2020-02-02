@@ -5,7 +5,6 @@
     <input type="text" class="form-control" style="width: 100%" name="filtro" placeholder="Filtre a lista" [formControl]="filtro"/>
 </div>
 
-<div class="small mb-2 elemento">FILTROS</div>
 <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
     <h5 class="elemento-filtros" routerLink="/" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" *ngIf="filtroMatch('meus grupos')">
         meus grupos
@@ -32,21 +31,39 @@
         <jhi-perfil-grupo-view-detail
             (toggleFavorito)="toggleFavorito($event)"
             (toggleNotifica)="toggleNotifica($event)"
+            (toggleModerador)="toggleModerador($event)"
             [perfilGrupo]="perfilGrupo">
         </jhi-perfil-grupo-view-detail>
     </jhi-hovered>
 </div>
-<div class="small mb-2 mt-3 d-flex justify-content-between elemento" routerLink="perfil-grupo">
-    <div>MEUS GRUPOS</div>
-    <div><fa-icon icon="pencil-alt"></fa-icon></div>
-</div>
+<div class="small mb-2 mt-3 elemento">MEUS GRUPOS</div>
+
 <ng-container *ngIf="perfilGrupos?.length > 0">
     <div *ngFor="let perfilGrupo of perfilGrupos ;trackBy: trackId" >
         <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }" *ngIf="filtroMatch(perfilGrupo.grupo.nome)">
             <jhi-perfil-grupo-view-detail
                 (toggleFavorito)="toggleFavorito($event)"
                 (toggleNotifica)="toggleNotifica($event)"
+                (toggleModerador)="toggleModerador($event)"
                 [perfilGrupo]="perfilGrupo">
+            </jhi-perfil-grupo-view-detail>
         </jhi-hovered>
     </div>
 </ng-container>
+<div class="small mb-2 mt-3 elemento">OUTROS</div>
+<jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
+    <div class="d-flex elemento-filtros-icon">
+        <div class="icon-elemento-filtro"><fa-icon icon="pencil-alt"></fa-icon></div>
+        <h5 class = "elemento-filtros-descricao" routerLink="/grupo/new" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" *ngIf="filtroMatch('crie um grupo novo')">
+            crie um grupo novo
+        </h5>
+    </div>
+</jhi-hovered>
+<jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
+    <div class="d-flex elemento-filtros-icon">
+        <div class="icon-elemento-filtro"><fa-icon icon="pencil-alt"></fa-icon></div>
+        <h5 class = "elemento-filtros-descricao" routerLink="perfil-grupo" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" *ngIf="filtroMatch('crie um grupo novo')">
+            entre em novos grupos
+        </h5>
+    </div>
+</jhi-hovered>

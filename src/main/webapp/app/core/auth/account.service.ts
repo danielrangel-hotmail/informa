@@ -4,12 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Observable, ReplaySubject, of } from 'rxjs';
-import { shareReplay, tap, catchError } from 'rxjs/operators';
+import { shareReplay, tap, catchError, map } from 'rxjs/operators';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { Account } from 'app/core/user/account.model';
 import { TrackerService } from '../tracker/tracker.service';
+import { ISimpleUser } from 'app/shared/model/simples-user.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -74,6 +75,20 @@ export class AccountService {
       );
     }
     return this.accountCache$;
+  }
+
+  identityAsSimpleUser$(): Observable<ISimpleUser | null> {
+    return this.identity(false).pipe(
+      map( account => (
+        account ? {
+          id: account.id,
+          login: account.login,
+          firstName: account.firstName,
+          lastName: account.lastName,
+          email: account.email
+        } : null
+      ))
+    );
   }
 
   isAuthenticated(): boolean {

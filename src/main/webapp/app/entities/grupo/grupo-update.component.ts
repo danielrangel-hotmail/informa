@@ -153,6 +153,7 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
 
   protected onSaveSuccess(): void {
     this.isSaving = false;
+    this.eventManager.broadcast('perfilGrupoListModification');
     this.previousState();
   }
 

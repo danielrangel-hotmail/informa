@@ -10,6 +10,7 @@ export class PerfilGrupoViewDetailComponent {
   @Input() perfilGrupo!: IPerfilGrupo;
   @Output() toggleNotifica: EventEmitter<IPerfilGrupo> = new EventEmitter();
   @Output() toggleFavorito: EventEmitter<IPerfilGrupo> = new EventEmitter();
+  @Output() toggleModerador: EventEmitter<IPerfilGrupo> = new EventEmitter();
 
   constructor() { }
 
@@ -19,6 +20,10 @@ export class PerfilGrupoViewDetailComponent {
 
   toggleFavoritoEmit(): void {
     this.toggleFavorito.emit(this.perfilGrupo);
+  }
+
+  toggleModeradorEmit(): void {
+    this.toggleModerador.emit(this.perfilGrupo);
   }
 
 }

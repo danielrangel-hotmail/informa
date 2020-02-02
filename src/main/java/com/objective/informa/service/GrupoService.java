@@ -57,13 +57,14 @@ public class GrupoService {
     	
     	criaNovosTopicos(grupoDTO);
     	log.debug("Request to save Grupo : {}", grupoDTO);
-    	Grupo grupo = grupoRepository.getOne(grupoDTO.getId());
+    	Grupo grupo = grupoDTO.getId() != null ? grupoRepository.getOne(grupoDTO.getId()) : new Grupo() ;
         grupoMapper.updateGrupoFromDto(grupoDTO, grupo);
         ZonedDateTime now = ZonedDateTime.now();
-        if (grupo.getCriacao() == null) {
-            grupo.setCriacao(now);
-        }
         grupo.setUltimaEdicao(now);
+        if (grupo.getCriacao() == null ) {
+            grupo.setCriacao(now);
+            grupo = grupoRepository.save(grupo);
+        }
         this.acertaModeradores(grupo, grupoDTO.getModeradores());
         grupo = grupoRepository.save(grupo);
         return grupoMapper.toDto(grupo);

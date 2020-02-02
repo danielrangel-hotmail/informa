@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class PerfilGrupoViewComponent implements OnInit, OnDestroy {
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
     protected accountService: AccountService,
+    protected router: Router,
     public perfilGrupoViewService: PerfilGrupoViewService
   ) {
     this.perfilGrupos = [];
@@ -112,7 +114,11 @@ export class PerfilGrupoViewComponent implements OnInit, OnDestroy {
     this.update(perfilGrupoUpdated);
   }
 
+  public toggleModerador(perfilGrupo: IPerfilGrupo): void {
+    this.router.navigateByUrl(`/grupo/${perfilGrupo.grupo!.id}/edit`);
+  }
+
   perfilGruposFavoritos(): IPerfilGrupo[] {
-    return this.perfilGrupos.filter(perfil => perfil.favorito);
+    return this.perfilGrupos.filter(perfil => perfil.favorito || perfil.moderador);
   }
 }
