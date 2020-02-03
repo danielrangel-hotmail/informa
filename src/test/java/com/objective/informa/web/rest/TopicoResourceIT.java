@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -125,6 +126,7 @@ public class TopicoResourceIT {
 
     @Test
     @Transactional
+    @WithMockUser()
     public void createTopico() throws Exception {
         int databaseSizeBeforeCreate = topicoRepository.findAll().size();
 
@@ -141,6 +143,8 @@ public class TopicoResourceIT {
         Topico testTopico = topicoList.get(topicoList.size() - 1);
         assertThat(testTopico.getVersao()).isEqualTo(DEFAULT_VERSAO);
         assertThat(testTopico.getNome()).isEqualTo(DEFAULT_NOME);
+        assertThat(testTopico.getAutor().getLogin()).isEqualTo("user");
+
     }
 
     @Test
@@ -204,6 +208,7 @@ public class TopicoResourceIT {
 
     @Test
     @Transactional
+    @WithMockUser()
     public void updateTopico() throws Exception {
         // Initialize the database
         topicoRepository.saveAndFlush(topico);

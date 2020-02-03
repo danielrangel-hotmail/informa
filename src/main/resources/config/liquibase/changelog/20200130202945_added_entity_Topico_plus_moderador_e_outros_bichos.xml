@@ -1,5 +1,8 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <property name="blob.type" value="bytea" dbms="postgres"/>
+    <property name="blob.type" value="blob" dbms="h2"/>
+    
     <changeSet author="humberto (generated)" id="1580426990236-3">
         <createTable tableName="grupo_topicos">
             <column name="grupo_id" type="BIGINT">
@@ -25,7 +28,7 @@
     </changeSet>
     <changeSet author="humberto (generated)" id="1580426990236-5">
         <addColumn tableName="perfil_usuario">
-            <column name="avatar" type="bytea"/>
+            <column name="avatar" type="${blob.type}"/>
         </addColumn>
     </changeSet>
     <changeSet author="humberto (generated)" id="1580426990236-6">
@@ -45,7 +48,7 @@
     </changeSet>
     <changeSet author="humberto (generated)" id="1580426990236-9">
         <addColumn tableName="grupo">
-            <column name="logo" type="bytea"/>
+            <column name="logo" type="${blob.type}"/>
         </addColumn>
     </changeSet>
     <changeSet author="humberto (generated)" id="1580426990236-10">
