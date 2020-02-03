@@ -1,19 +1,22 @@
 <div *ngIf="post">
     <div class="bg-secondary mb-3 border" [ngStyle] = "{ borderColor: '#ccc', borderRadius: '4px'}">
-        <div class="d-flex flex-row p-2">
+        <div class="d-flex flex-row pt-2 pl-2 pr-2">
             <div class="mr-1">
-                <img ngxGravatar [round]="false" [size]="50" [cornerRadius]="7" [email]="post.autorEmail">
+                <img ngxGravatar [round]="false" [size]="40" [cornerRadius]="7" [email]="post.autorEmail">
             </div>
             <div>
-                <div *ngIf="post.grupoId" class="small">
-                    <a [routerLink]="['/grupo', post.grupoId, 'view']">{{post.grupoNome}}</a>
+                <div class="d-flex">
+                    <div *ngIf="post.grupoId" class="small pr-1">
+                        <a [routerLink]="['/grupo', post.grupoId, 'view']">{{post.grupoNome}}</a>
+                    </div>
+                    <div class="small horario">
+                        {{tempoRelativo(post)}}
+                    </div>
                 </div>
                 <div>
                     {{post.autorNome}}
                 </div>
-                <div class="small">
-                    {{tempoRelativo(post)}}
-                </div>
+
             </div>
         </div>
         <div class="">
@@ -27,7 +30,7 @@
                 <jhi-post-link-externo-video-view [post]="post" ></jhi-post-link-externo-video-view>
             </div>
             <hr class="mt-0 mb-0">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-between" style="font-size: 12px">
                 <div class="d-flex align-items-center">
                     <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao">
                         <div class="p-1 d-none d-sm-block">

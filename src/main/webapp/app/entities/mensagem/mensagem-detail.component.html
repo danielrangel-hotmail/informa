@@ -3,7 +3,7 @@
         <jhi-hovered [hoverStyle]="{background: 'rgb(249,249,249)' }">
             <div class="d-flex pt-1 pb-1">
                 <div class="avatar" *ngIf = "!mensagem.conversaContinuada">
-                    <img ngxGravatar [round]="false" [size]="33" [cornerRadius]="7" [email]="mensagem.autorEmail" >
+                    <img ngxGravatar [round]="false" [size]="36" [cornerRadius]="7" [email]="mensagem.autorEmail" >
                 </div>
                 <div class = "horario" *ngIf = "mensagem.conversaContinuada">
                     <div class = "small" style="width: 33px">{{mensagem.criacao!.format("HH:mm")}}</div>

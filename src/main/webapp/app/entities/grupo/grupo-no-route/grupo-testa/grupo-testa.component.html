@@ -4,9 +4,9 @@
     <div class="testa2 d-flex flex-column" [ngStyle]="{ 'background': grupo.cabecalhoInferiorCor ? grupo.cabecalhoInferiorCor : 'white'}">
         <div class="logo-descricao d-flex max-width-main-view">
             <jhi-grupo-logo [grupo]="grupo" [size]="64"></jhi-grupo-logo>
-            <div class="descricao">
-                <h3>{{grupo.nome}}</h3>
-                <h6>{{grupo.descricao}}</h6>
+            <div class="descricao-container">
+                <h4 class="nome">{{grupo.nome}}</h4>
+                <div>{{grupo.descricao}}</div>
             </div>
         </div>
     </div>
