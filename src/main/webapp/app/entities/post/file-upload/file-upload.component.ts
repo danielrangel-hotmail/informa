@@ -6,8 +6,7 @@ import {Arquivo} from 'app/shared/model/arquivo.model';
 import {IPost} from 'app/shared/model/post.interface';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-// const URL = '/api/';
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+const URL = 'https://nao_usado';
 
 @Component({
   selector: 'jhi-file-upload',

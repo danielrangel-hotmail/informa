@@ -48,7 +48,17 @@
     <changeSet id="20200123212229-1-relations" author="jhipster">
 
     </changeSet>
+    <changeSet id="20200123212229-2-load-data" author="jhipster">
+        <loadData
+                  file="config/liquibase/data/perfil_usuario.csv"
+                  separator=";"
+                  tableName="perfil_usuario">
+            <column name="id" type="numeric"/>
+            <column name="usuario_id" type="numeric"/>
+        </loadData>
+	</changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
+    
 
 </databaseChangeLog>

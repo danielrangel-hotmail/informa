@@ -1,6 +1,18 @@
+TODO: Incluir o S3ver como parte do projeto
+fase 1 usá-lo para desenvolvimento
+fase 2 usá-lo para rodar cenários
+
+TODO: Incluir camanda de insistência e environments
+criar a camada de insistência com savepoints
+criar o modelo de environments
+conseguir executar testes de SpringBootTest com environment
+conseguir executar testes do protractor com environment
+
+TODO: Nova tentativa de incluir o Storybook como parte do projeto
+
 TODO: Reações em posts e mensagens
 
-TODO: Role do Supervisor
+TODO: Role do Gestor
 Um post pode ser marcado como oficial da empresa
 O post sairá em nome da empresa by o criador somente para admins e outros supervisores
 Somente admins e caras com post oficial podem postar desta forma
@@ -24,7 +36,7 @@ TODO: Remoção de Posts
 
 TODO: Edição e Remoção de Mensagens
 
-TODO: Excluir um grupo
+TODO: Excluir e arquivar um grupo
 
 TODO: Remover imagens
 Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
@@ -82,6 +94,68 @@ Acertar o opcional
 
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
+
+Testes para serem feitos:
+
+Usuario:
+    E-mails de fora da objective não são aceitos no cadastro
+    Ao se cadastrar, o usuário já entra com os grupos obrigatórios
+    Usuário novo entra com o role ROLE_USUARIO
+    Gravatar vs avatar customizado
+
+Grupo:
+1 - Ao criar um novo grupo, ele já começa com alguns dados padrão, cores e o próprio usuário como moderador
+    Os dados vão atualizando na testa.
+
+2 - Exclusão de grupo
+    Um grupo pode ser excluido, sem posts, pode ser feita por admin, moderadores ou diretor
+    Um grupo com posts só pode ser excluido por admin ou diretor. Deve ser escolhido um novo grupo para os posts
+    Um grupo pode ser arquivado. Somente admin e moderadores poderão acessar um grupo arquivado
+
+3 - Arquivamento de grupo
+    Um admin pode arquivar um grupo. Para todos os outros usuários, é como se o grupo estivesse excluído.
+
+4 - Segurança
+    1 - Ao criar/editar um grupo, não vê campo de Opcional
+    2 - Um usuário comum não consegue editar/excluir um grupo que não é moderador
+    3 - Um moderador consegue editar/excluir um grupo, sem ver campo de Opcional
+    4 - Um administrador consegue editar/excluir um grupo
+    5 - Um diretor consegue editar/excluir um grupo
+
+Assinaturas
+
+    1 - Usuário assina novos grupos, coloca alguns em favorito e seleciona
+        Meus Grupos
+        Todos Grupos
+        Oficiais
+        Favoritos
+        Grupos específicos
+
+    2 - Seleção por tópicos e filtro funciona
+
+Posts - Publicação
+
+    1 - Publicar post só com texto em grupo livre
+    2 - Publicar post com menção, clicar na menção abre o perfil do mencionado
+    3 - Publicar post com emoji, aparece emoji
+    4 - Publicar post com foto, aparece a foto
+    5 - Pulbicar post com video, aparece o vídeo
+    6 - Funciona o paginamento de posts
+    7 - Publicação de post oficial
+
+Posts - Notificação
+    Ver que as notificações oficiais funcionam
+    Ver que as notificação por grupo funcionam
+
+Posts - Draft
+    1 - Ver que funciona o esquema de draft
+
+Posts - Exclusão
+
+Posts - Reação
+
+Mensagens
+
 
 TODO: Facilitar a entrada de novos desenvolvedores
 Fazer os testes atuais funcionarem

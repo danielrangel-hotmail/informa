@@ -26,6 +26,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -79,15 +81,27 @@ public class ArquivoResource {
         }
         arquivoDTO.setLink(UUID.randomUUID().toString()+arquivoDTO.getNome());
         ArquivoDTO result = arquivoService.create(arquivoDTO);
-        PresignedPutObjectRequest presignedPutObjectRequest = presigner.presignPutObject(z ->
+        
+        if (true) {
+        	try {
+				URL url = new URL("http://localhost:4568/"+bucketName+"/"+result.getLink());
+				result.setS3PresignedURL(url.toString());
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
+        } else {
+            PresignedPutObjectRequest presignedPutObjectRequest = presigner.presignPutObject(z ->
             z.signatureDuration(Duration.ofMinutes(10))
                 .putObjectRequest(por -> por
                     .bucket(bucketName)
                     .key(result.getLink())
                     .contentType(result.getTipo())
                 ));
-        URL url = presignedPutObjectRequest.url();
-        result.setS3PresignedURL(url.toString());
+            URL url = presignedPutObjectRequest.url();
+            result.setS3PresignedURL(url.toString());
+        }
         return ResponseEntity.created(new URI("/api/arquivos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
