@@ -1,12 +1,11 @@
-TODO: Incluir o S3ver como parte do projeto
-fase 1 usá-lo para desenvolvimento
-fase 2 usá-lo para rodar cenários
-
 TODO: Incluir camanda de insistência e environments
 criar a camada de insistência com savepoints
 criar o modelo de environments
 conseguir executar testes de SpringBootTest com environment
 conseguir executar testes do protractor com environment
+
+TODO: Incluir o S3rver como parte do projeto
+fase 2 usá-lo para rodar cenários
 
 TODO: Nova tentativa de incluir o Storybook como parte do projeto
 
