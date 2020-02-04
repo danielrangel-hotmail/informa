@@ -1,19 +1,13 @@
 package com.objective.informa.web.rest;
 
-import com.objective.informa.service.ArquivoService;
-import com.objective.informa.service.post.PostException;
-import com.objective.informa.service.post.PostNonAuthorizedException;
-import com.objective.informa.web.rest.errors.BadRequestAlertException;
-import com.objective.informa.service.dto.ArquivoDTO;
-
-import io.github.jhipster.web.util.HeaderUtil;
-import io.github.jhipster.web.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
-import java.net.URL;
-import java.time.Duration;
-import java.time.ZonedDateTime;
-import java.util.HashMap;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,23 +15,27 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
+import com.objective.informa.service.ArquivoService;
+import com.objective.informa.service.dto.ArquivoDTO;
+import com.objective.informa.service.post.PostException;
+import com.objective.informa.service.post.PostNonAuthorizedException;
+import com.objective.informa.service.signers.AWSS3Signer;
+import com.objective.informa.web.rest.errors.BadRequestAlertException;
 
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import java.util.List;
-import java.util.Optional;
-import software.amazon.awssdk.services.s3.model.ObjectAlreadyInActiveTierErrorException;
-import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.presigner.S3Presigner;
-import software.amazon.awssdk.services.s3.presigner.model.PresignedPutObjectRequest;
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing {@link com.objective.informa.domain.Arquivo}.
@@ -53,17 +51,14 @@ public class ArquivoResource {
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
-    @Value("${aws.s3.bucket.name}")
-    private String bucketName;
-
     private final ArquivoService arquivoService;
+    
+    private final AWSS3Signer awsS3Signer;
 
-    private final S3Presigner presigner;
-
-    public ArquivoResource(ArquivoService arquivoService) {
+    public ArquivoResource(ArquivoService arquivoService, AWSS3Signer awsS3Signer) {
 
         this.arquivoService = arquivoService;
-        this.presigner = S3Presigner.create();
+        this.awsS3Signer = awsS3Signer; 
     }
 
     /**
@@ -81,27 +76,7 @@ public class ArquivoResource {
         }
         arquivoDTO.setLink(UUID.randomUUID().toString()+arquivoDTO.getNome());
         ArquivoDTO result = arquivoService.create(arquivoDTO);
-        
-        if (true) {
-        	try {
-				URL url = new URL("http://localhost:4568/"+bucketName+"/"+result.getLink());
-				result.setS3PresignedURL(url.toString());
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	
-        } else {
-            PresignedPutObjectRequest presignedPutObjectRequest = presigner.presignPutObject(z ->
-            z.signatureDuration(Duration.ofMinutes(10))
-                .putObjectRequest(por -> por
-                    .bucket(bucketName)
-                    .key(result.getLink())
-                    .contentType(result.getTipo())
-                ));
-            URL url = presignedPutObjectRequest.url();
-            result.setS3PresignedURL(url.toString());
-        }
+        this.awsS3Signer.sign(result);
         return ResponseEntity.created(new URI("/api/arquivos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -145,6 +120,18 @@ public class ArquivoResource {
     }
 
     /**
+     * {@code GET  /arquivos/bucket-url} : get the "id" arquivo.
+     *
+     * @param id the id of the arquivoDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the arquivoDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/arquivos/bucket-url")
+    public ResponseEntity<BucketUrl> getArquivosURL() {
+        return ResponseEntity.ok().body(new BucketUrl(this.awsS3Signer.getArquivosURL())); 
+    }
+
+    
+    /**
      * {@code GET  /arquivos/:id} : get the "id" arquivo.
      *
      * @param id the id of the arquivoDTO to retrieve.
@@ -174,5 +161,12 @@ public class ArquivoResource {
             throw new BadRequestAlertException(e.getMessage(), ENTITY_NAME, id.toString());
         }
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+    
+    private class BucketUrl {
+    	public String url;
+    	public BucketUrl(String url) {
+    		this.url = url;
+    	}
     }
 }

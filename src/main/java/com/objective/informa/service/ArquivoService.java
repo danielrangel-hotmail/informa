@@ -1,5 +1,16 @@
 package com.objective.informa.service;
 
+import java.time.ZonedDateTime;
+import java.util.Optional;
+import java.util.function.Function;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.objective.informa.domain.Arquivo;
 import com.objective.informa.domain.Post;
 import com.objective.informa.domain.User;
@@ -11,17 +22,6 @@ import com.objective.informa.service.mapper.ArquivoMapper;
 import com.objective.informa.service.post.PostNonAuthorizedException;
 import com.objective.informa.service.post.PostService;
 import com.objective.informa.service.post.PostUpdateNullException;
-import java.time.ZonedDateTime;
-import java.util.function.Function;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link Arquivo}.
@@ -33,17 +33,14 @@ public class ArquivoService {
     private final Logger log = LoggerFactory.getLogger(ArquivoService.class);
 
     private final PostService postService;
-    private final MensagemService mensagemService;
     private final ArquivoRepository arquivoRepository;
     private final ArquivoMapper arquivoMapper;
     private final UserRepository userRepository;
 
     public ArquivoService(PostService postService,
-        MensagemService mensagemService,
         ArquivoRepository arquivoRepository, ArquivoMapper arquivoMapper,
         UserRepository userRepository) {
         this.postService = postService;
-        this.mensagemService = mensagemService;
         this.arquivoRepository = arquivoRepository;
         this.arquivoMapper = arquivoMapper;
         this.userRepository = userRepository;

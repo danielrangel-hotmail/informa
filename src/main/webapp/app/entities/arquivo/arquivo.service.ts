@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 import * as moment from 'moment';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -12,12 +12,27 @@ import { IArquivo } from 'app/shared/model/arquivo.model';
 
 type EntityResponseType = HttpResponse<IArquivo>;
 type EntityArrayResponseType = HttpResponse<IArquivo[]>;
+interface IBucketURL {
+  url?: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class ArquivoService {
   public resourceUrl = SERVER_API_URL + 'api/arquivos';
+  public arquivosURL = "";
+  public bucketUrl$: Observable<string>;
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient) {
+    this.bucketUrl$ = this.getBucketUrl$();
+  }
+
+  getBucketUrl$(): Observable<string> {
+    return this.http
+      .get<IBucketURL>(`${this.resourceUrl}/bucket-url`, { observe: 'response' })
+      .pipe(
+        map((res: HttpResponse<IBucketURL>) => res.body ? res.body.url! : ""),
+        shareReplay());
+  }
 
   create(arquivo: IArquivo): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(arquivo);

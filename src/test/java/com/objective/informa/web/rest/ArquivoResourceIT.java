@@ -97,7 +97,7 @@ public class ArquivoResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ArquivoResource arquivoResource = new ArquivoResource(arquivoService);
+        final ArquivoResource arquivoResource = new ArquivoResource(arquivoService, null);
         this.restArquivoMockMvc = MockMvcBuilders.standaloneSetup(arquivoResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

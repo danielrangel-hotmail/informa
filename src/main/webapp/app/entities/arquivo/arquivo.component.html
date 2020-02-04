@@ -1,4 +1,4 @@
-<div>
+<div *ngIf = "arquivoService.bucketUrl$ |  async as bucketURL">
     <h2 id="page-heading">
         <span jhiTranslate="informaApp.arquivo.home.title">Arquivos</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-arquivo" [routerLink]="['/arquivo/new']">
