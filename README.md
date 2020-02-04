@@ -1,5 +1,8 @@
 # informa
 
+ATENÇÃO: ESTAMOS CONSTRUINDO O COOKBOOK DO DESENVOLVEDOR!!!!
+Estas são as instruções geradas automaticamente pelo JHIpster
+
 This application was generated using JHipster 6.6.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.6.0](https://www.jhipster.tech/documentation-archive/v6.6.0).
 
 ## Development
