@@ -19,7 +19,7 @@ spring:
   application:
     name: informa
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
+    type: com.objective.insistence.layer.jdbc.InsistenceLayerHikariDataSource
     url: jdbc:h2:mem:informa;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     name:
     username:

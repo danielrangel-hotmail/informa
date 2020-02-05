@@ -37,7 +37,7 @@ spring:
     serialization:
       indent-output: true
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
+    type: com.objective.insistence.layer.jdbc.InsistenceLayerHikariDataSource
     url: jdbc:postgresql://localhost:5432/informa
     username: informa
     password:
