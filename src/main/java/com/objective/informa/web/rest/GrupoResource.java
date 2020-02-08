@@ -53,7 +53,7 @@ public class GrupoResource {
         }
         GrupoDTO result = grupoService.save(grupoDTO);
         return ResponseEntity.created(new URI("/api/grupos/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(null)
             .body(result);
     }
 
@@ -74,7 +74,7 @@ public class GrupoResource {
         }
         GrupoDTO result = grupoService.save(grupoDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, grupoDTO.getId().toString()))
+            .headers(null)
             .body(result);
     }
 

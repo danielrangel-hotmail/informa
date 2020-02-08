@@ -4,6 +4,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
 import { LoginService } from 'app/core/login/login.service';
+import { DEBUG_INFO_ENABLED } from 'app/app.constants';
+import { IInsistenceEnvironment } from '../insistence-environment/insistence.environment.interface';
+import { InsistenceEnvironmentService } from '../insistence-environment/insistence-environment.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-login-modal',
@@ -12,8 +16,9 @@ import { LoginService } from 'app/core/login/login.service';
 export class LoginModalComponent implements AfterViewInit {
   @ViewChild('username', { static: false })
   username?: ElementRef;
-
+  DEBUG_INFO_ENABLED = DEBUG_INFO_ENABLED;
   authenticationError = false;
+  environmentToRun?: IInsistenceEnvironment;
 
   loginForm = this.fb.group({
     username: [''],
@@ -26,7 +31,8 @@ export class LoginModalComponent implements AfterViewInit {
     private renderer: Renderer,
     private router: Router,
     public activeModal: NgbActiveModal,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private environmentService: InsistenceEnvironmentService
   ) {}
 
   ngAfterViewInit(): void {
@@ -45,13 +51,16 @@ export class LoginModalComponent implements AfterViewInit {
   }
 
   login(): void {
-    this.loginService
-      .login({
-        username: this.loginForm.get('username')!.value,
-        password: this.loginForm.get('password')!.value,
-        rememberMe: this.loginForm.get('rememberMe')!.value
-      })
-      .subscribe(
+    this.environmentService.setEnvironment(this.environmentToRun).pipe(
+      switchMap(
+        () => this.loginService
+          .login({
+            username: this.loginForm.get('username')!.value,
+            password: this.loginForm.get('password')!.value,
+            rememberMe: this.loginForm.get('rememberMe')!.value
+          })
+      )
+    ).subscribe(
         () => {
           this.authenticationError = false;
           this.activeModal.close();
@@ -63,7 +72,9 @@ export class LoginModalComponent implements AfterViewInit {
             this.router.navigate(['']);
           }
         },
-        () => (this.authenticationError = true)
+        (val) => (
+          this.authenticationError = true
+        )
       );
   }
 
@@ -75,5 +86,9 @@ export class LoginModalComponent implements AfterViewInit {
   requestResetPassword(): void {
     this.activeModal.dismiss('to state requestReset');
     this.router.navigate(['/account/reset', 'request']);
+  }
+
+  selectedEnvironment(env: IInsistenceEnvironment): void {
+    this.environmentToRun = env;
   }
 }

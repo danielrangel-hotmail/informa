@@ -1,8 +1,6 @@
 TODO: Incluir camanda de insistência e environments
-criar a camada de insistência com savepoints
-criar o modelo de environments
 conseguir executar testes de SpringBootTest com environment
-conseguir executar testes do protractor com environment
+
 
 TODO: Incluir o S3rver como parte do projeto
 fase 2 usá-lo para rodar cenários
@@ -104,7 +102,11 @@ Usuario:
 
 Grupo:
 1 - Ao criar um novo grupo, ele já começa com alguns dados padrão, cores e o próprio usuário como moderador
-    Os dados vão atualizando na testa.
+    Os dados vão atualizando na testa. ok
+    Não testamos o logo
+    => Teste com o protractor. Environment vazio
+
+
 
 2 - Exclusão de grupo
     Um grupo pode ser excluido, sem posts, pode ser feita por admin, moderadores ou diretor

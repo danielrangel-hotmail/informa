@@ -1,111 +1,139 @@
-import { browser, ExpectedConditions as ec, protractor, promise } from 'protractor';
-import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
+import { browser, ExpectedConditions as ec } from 'protractor';
+import { NavBarGrupos, NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { GrupoComponentsPage, GrupoDeleteDialog, GrupoUpdatePage } from './grupo.page-object';
+import { GrupoCabecalhoPage, GrupoComponentsPage, GrupoDeleteDialog, GrupoUpdatePage } from './grupo.page-object';
 import * as path from 'path';
 
 const expect = chai.expect;
 
+
+const expectNavBarGrupos = async (grupoCabecalhoPage: GrupoCabecalhoPage, corTesta1: string, corTesta2: string, nome: string, descricao: string, logoSource: string ) => {
+  grupoCabecalhoPage = new GrupoCabecalhoPage();
+  expect( await grupoCabecalhoPage.getCorTesta1()).to.containIgnoreSpaces(corTesta1);
+  expect( await grupoCabecalhoPage.getCorTesta2()).to.containIgnoreSpaces(corTesta2);
+  expect( await grupoCabecalhoPage.getNome()).to.eq(nome);
+  expect( await grupoCabecalhoPage.getDescricao()).to.eq(descricao);
+  expect( await grupoCabecalhoPage.getLogoSource()).to.containIgnoreSpaces(logoSource);
+}
+
+const expectGrupoUpdatePage = async (grupoUpdatePage: GrupoUpdatePage, title: string, nome: string, descricao: string, moderadores: string[], corTesta1: string, corTesta2: string, formal: boolean, opcional: boolean) => {
+  expect( await grupoUpdatePage.getPageTitle(), 'titulo').to.eq(title);
+  expect( await grupoUpdatePage.getNomeInput(), 'nome').to.eq(nome);
+  expect( await grupoUpdatePage.getDescricaoInput(), 'descricao').to.eq(descricao);
+  expect( await grupoUpdatePage.getModeradores(), 'moderadores').to.be.ofSize(moderadores.length);
+  expect( await grupoUpdatePage.getModeradores(), 'moderadores').to.be.containingAllOf(moderadores);
+  expect( await grupoUpdatePage.getCabecalhoSuperiorCorInput(), 'cor superior').to.containIgnoreSpaces(corTesta1);
+  expect( await grupoUpdatePage.getCabecalhoInferiorCorInput(), 'cor inferior').to.containIgnoreSpaces(corTesta2);
+  expect( await grupoUpdatePage.getFormalInput().isSelected(), 'Expected formal to be not selected').to.be.eq(formal);
+  expect( await grupoUpdatePage.getOpcionalInput().isSelected(), 'Expected formal to be selected').to.be.eq(opcional);
+}
+
+
 describe('Grupo e2e test', () => {
   let navBarPage: NavBarPage;
+  let navBarGrupos: NavBarGrupos;
   let signInPage: SignInPage;
+  let resignInPage: SignInPage;
   let grupoComponentsPage: GrupoComponentsPage;
   let grupoUpdatePage: GrupoUpdatePage;
+  let grupoCabecalhoPage: GrupoCabecalhoPage;
   let grupoDeleteDialog: GrupoDeleteDialog;
   const fileNameToUpload = 'logo-jhipster.png';
   const fileToUpload = '../../../../../../src/main/webapp/content/images/' + fileNameToUpload;
   const absolutePath = path.resolve(__dirname, fileToUpload);
 
-  before(async () => {
+  beforeEach(async () => {
     await browser.get('/');
     navBarPage = new NavBarPage();
     signInPage = await navBarPage.getSignInPage();
-    await signInPage.autoSignInUsing('admin', 'admin');
+  });
+
+  it('should carregar a página de criação do grupo, com valores default', async () => {
+    await signInPage.autoSignInEnvironment('admin', 'admin', 'Zerado');
     await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
-  });
-
-  it('should load Grupos', async () => {
-    await navBarPage.goToEntity('grupo');
-    grupoComponentsPage = new GrupoComponentsPage();
-    await browser.wait(ec.visibilityOf(grupoComponentsPage.title), 5000);
-    expect(await grupoComponentsPage.getTitle()).to.eq('informaApp.grupo.home.title');
-  });
-
-  it('should load create Grupo page', async () => {
-    await grupoComponentsPage.clickOnCreateButton();
+    navBarGrupos = new NavBarGrupos();
+    await navBarGrupos.clickOnCrieNovoGrupo();
+    grupoCabecalhoPage = new GrupoCabecalhoPage();
+    await expectNavBarGrupos(
+      grupoCabecalhoPage,
+      "rgb(255, 165, 0)",
+      "rgb(255, 255, 255)",
+      "",
+      "",
+      "logo-grupo-padrao.png");
     grupoUpdatePage = new GrupoUpdatePage();
-    expect(await grupoUpdatePage.getPageTitle()).to.eq('informaApp.grupo.home.createOrEditLabel');
+    await expectGrupoUpdatePage(
+      grupoUpdatePage,
+      "Crie um novo grupo",
+      "",
+      "",
+      ['Administrator Administrator'],
+      "rgb(255, 165, 0)",
+      "rgb(255, 255, 255)",
+      false,
+      true
+    )
     await grupoUpdatePage.cancel();
   });
 
   it('should create and save Grupos', async () => {
-    const nbButtonsBeforeCreate = await grupoComponentsPage.countDeleteButtons();
-
-    await grupoComponentsPage.clickOnCreateButton();
-    await promise.all([
-      grupoUpdatePage.setVersaoInput('5'),
-      grupoUpdatePage.setCriacaoInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      grupoUpdatePage.setUltimaEdicaoInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
-      grupoUpdatePage.setNomeInput('nome'),
-      grupoUpdatePage.setDescricaoInput('descricao'),
-      grupoUpdatePage.setLogoInput(absolutePath),
-      grupoUpdatePage.setCabecalhoSuperiorCorInput('cabecalhoSuperiorCor'),
-      grupoUpdatePage.setCabecalhoInferiorCorInput('cabecalhoInferiorCor'),
-      grupoUpdatePage.setLogoFundoCorInput('logoFundoCor')
-      // grupoUpdatePage.topicosSelectLastOption(),
-    ]);
-    expect(await grupoUpdatePage.getVersaoInput()).to.eq('5', 'Expected versao value to be equals to 5');
-    expect(await grupoUpdatePage.getCriacaoInput()).to.contain('2001-01-01T02:30', 'Expected criacao value to be equals to 2000-12-31');
-    expect(await grupoUpdatePage.getUltimaEdicaoInput()).to.contain(
-      '2001-01-01T02:30',
-      'Expected ultimaEdicao value to be equals to 2000-12-31'
-    );
-    expect(await grupoUpdatePage.getNomeInput()).to.eq('nome', 'Expected Nome value to be equals to nome');
-    expect(await grupoUpdatePage.getDescricaoInput()).to.eq('descricao', 'Expected Descricao value to be equals to descricao');
-    const selectedFormal = grupoUpdatePage.getFormalInput();
-    if (await selectedFormal.isSelected()) {
-      await grupoUpdatePage.getFormalInput().click();
-      expect(await grupoUpdatePage.getFormalInput().isSelected(), 'Expected formal not to be selected').to.be.false;
-    } else {
-      await grupoUpdatePage.getFormalInput().click();
-      expect(await grupoUpdatePage.getFormalInput().isSelected(), 'Expected formal to be selected').to.be.true;
-    }
-    const selectedOpcional = grupoUpdatePage.getOpcionalInput();
-    if (await selectedOpcional.isSelected()) {
-      await grupoUpdatePage.getOpcionalInput().click();
-      expect(await grupoUpdatePage.getOpcionalInput().isSelected(), 'Expected opcional not to be selected').to.be.false;
-    } else {
-      await grupoUpdatePage.getOpcionalInput().click();
-      expect(await grupoUpdatePage.getOpcionalInput().isSelected(), 'Expected opcional to be selected').to.be.true;
-    }
-    expect(await grupoUpdatePage.getLogoInput()).to.endsWith(fileNameToUpload, 'Expected Logo value to be end with ' + fileNameToUpload);
-    expect(await grupoUpdatePage.getCabecalhoSuperiorCorInput()).to.eq(
-      'cabecalhoSuperiorCor',
-      'Expected CabecalhoSuperiorCor value to be equals to cabecalhoSuperiorCor'
-    );
-    expect(await grupoUpdatePage.getCabecalhoInferiorCorInput()).to.eq(
-      'cabecalhoInferiorCor',
-      'Expected CabecalhoInferiorCor value to be equals to cabecalhoInferiorCor'
-    );
-    expect(await grupoUpdatePage.getLogoFundoCorInput()).to.eq('logoFundoCor', 'Expected LogoFundoCor value to be equals to logoFundoCor');
+    await signInPage.autoSignInEnvironment('admin', 'admin', 'Zerado');
+    await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
+    navBarGrupos = new NavBarGrupos();
+    await navBarGrupos.clickOnCrieNovoGrupo();
+    grupoUpdatePage = new GrupoUpdatePage();
+    grupoCabecalhoPage = new GrupoCabecalhoPage();
+    // eslint-disable-next-line no-console
+    await grupoUpdatePage.setNomeInput('nome');
+    await grupoUpdatePage.setDescricaoInput('descricao');
+    await grupoUpdatePage.addModerador('User');
+    await grupoUpdatePage.addTopico('Esporte');
+    await grupoUpdatePage.setCabecalhoSuperiorCorInput('#aafafa');
+    await grupoUpdatePage.nomeInput.click();
+    await grupoUpdatePage.setCabecalhoInferiorCorInput('#0afafa');
+    await grupoUpdatePage.nomeInput.click();
     await grupoUpdatePage.save();
-    expect(await grupoUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;
+    await navBarGrupos.grupos.first().click();
+    await browser.sleep(5000);
+    await expectNavBarGrupos(
+        grupoCabecalhoPage,
+        "rgb(170, 250, 250)",
+        "rgb(10, 250, 250)",
+        "nome",
+        "descricao",
+        "logo-grupo-padrao.png");
 
-    expect(await grupoComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeCreate + 1, 'Expected one more entry in the table');
-  });
-
-  it('should delete last Grupo', async () => {
-    const nbButtonsBeforeDelete = await grupoComponentsPage.countDeleteButtons();
-    await grupoComponentsPage.clickOnLastDeleteButton();
-
-    grupoDeleteDialog = new GrupoDeleteDialog();
-    expect(await grupoDeleteDialog.getDialogTitle()).to.eq('informaApp.grupo.delete.question');
-    await grupoDeleteDialog.clickOnConfirmButton();
-
-    expect(await grupoComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
-  });
-
-  after(async () => {
+    //Reloga para verificar que ficou tudo salvo mesmo
     await navBarPage.autoSignOut();
+    resignInPage = await navBarPage.getSignInPage();
+    await resignInPage.autoSignInUsing('admin', 'admin');
+    await browser.wait(ec.visibilityOf(navBarPage.entityMenu), 5000);
+    await navBarGrupos.editGrupo("nome");
+    await expectGrupoUpdatePage(
+      grupoUpdatePage,
+      "Edite o seu grupo",
+      "nome",
+      "descricao",
+      ['Administrator Administrator', 'User User'],
+      "rgb(170, 250, 250)",
+      "rgb(10, 250, 250)",
+      false,
+      true
+    )
+  });
+
+  // it('should delete last Grupo', async () => {
+  //   const nbButtonsBeforeDelete = await grupoComponentsPage.countDeleteButtons();
+  //   await grupoComponentsPage.clickOnLastDeleteButton();
+  //
+  //   grupoDeleteDialog = new GrupoDeleteDialog();
+  //   expect(await grupoDeleteDialog.getDialogTitle()).to.eq('informaApp.grupo.delete.question');
+  //   await grupoDeleteDialog.clickOnConfirmButton();
+  //
+  //   expect(await grupoComponentsPage.countDeleteButtons()).to.eq(nbButtonsBeforeDelete - 1);
+  // });
+
+  afterEach(async () => {
+    await navBarPage.autoSignOutResetEnvironment();
   });
 });

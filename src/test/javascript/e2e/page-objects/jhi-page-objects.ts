@@ -1,4 +1,4 @@
-import { element, by, ElementFinder } from 'protractor';
+import { $, $$, element, by, ElementFinder } from 'protractor';
 
 /* eslint @typescript-eslint/no-use-before-define: 0 */
 export class NavBarPage {
@@ -8,8 +8,10 @@ export class NavBarPage {
   signIn = element(by.id('login'));
   register = element(by.css('[routerLink="account/register"]'));
   signOut = element(by.id('logout'));
+  signOutResetEnvironment= element(by.id('logout-reset-environment'));
   passwordMenu = element(by.css('[routerLink="account/password"]'));
   settingsMenu = element(by.css('[routerLink="account/settings"]'));
+  navegacao = element(by.id('navegacao'));
 
   constructor(asAdmin?: Boolean) {
     if (asAdmin) {
@@ -39,6 +41,10 @@ export class NavBarPage {
 
   async clickOnSignOut(): Promise<void> {
     await this.signOut.click();
+  }
+
+  async clickOnSignOutResetEnvironment(): Promise<void> {
+    await this.signOutResetEnvironment.click();
   }
 
   async clickOnPasswordMenu(): Promise<void> {
@@ -93,11 +99,39 @@ export class NavBarPage {
     await this.clickOnAccountMenu();
     await this.clickOnSignOut();
   }
+
+  async autoSignOutResetEnvironment(): Promise<void> {
+    await this.clickOnAccountMenu();
+    await this.clickOnSignOutResetEnvironment();
+  }
+
+}
+
+export class NavBarGrupos {
+  pageForm = $('.perfil-grupo-list');
+  grupos = this.pageForm.$$('jhi-perfil-grupo-view-detail');
+  entreNovosGruposButton = element(by.id("entre-novos-grupos"));
+  crieNovoGrupoButton = element(by.id("crie-novo-grupo"));
+
+  async clickOnCrieNovoGrupo(): Promise<void> {
+    await this.crieNovoGrupoButton.click();
+  }
+
+  async editGrupo(grupo: string): Promise<void> {
+    await this.grupos.filter((grupoDetail) => {
+      return grupoDetail.$('h6').getText().then(
+        (text) => text === grupo
+      );})
+      .first()
+      .$('.pencil')
+      .click();
+  }
 }
 
 export class SignInPage {
   username = element(by.id('username'));
   password = element(by.id('password'));
+  environment = element(by.id('environment'));
   loginButton = element(by.css('button[type=submit]'));
 
   async setUserName(username: string): Promise<void> {
@@ -124,9 +158,24 @@ export class SignInPage {
     await this.password.clear();
   }
 
+  async setEnvironment(environment: string): Promise<void> {
+    await this.environment.click();
+    await this.environment
+      .all(by.cssContainingText('.ng-option-label', environment))
+      .first()
+      .click();
+  }
+
   async autoSignInUsing(username: string, password: string): Promise<void> {
     await this.setUserName(username);
     await this.setPassword(password);
+    await this.login();
+  }
+
+  async autoSignInEnvironment(username: string, password: string, environment: string): Promise<void> {
+    await this.setUserName(username);
+    await this.setPassword(password);
+    await this.setEnvironment(environment);
     await this.login();
   }
 

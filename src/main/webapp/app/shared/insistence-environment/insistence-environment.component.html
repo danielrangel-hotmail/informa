@@ -1,0 +1,7 @@
+<ng-container *ngIf="environments$ | async as environments">
+    <ng-select [items]="environments"
+               bindLabel="name"
+               bindValue="name"
+               (change)="onChange($event)">
+    </ng-select>
+</ng-container>

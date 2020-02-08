@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 
-import { VERSION } from 'app/app.constants';
+import { DEBUG_INFO_ENABLED, VERSION } from 'app/app.constants';
 import { LANGUAGES } from 'app/core/language/language.constants';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
@@ -16,6 +16,8 @@ import {
   UNDOCKABLE,
   UNDOCKED
 } from 'app/layouts/navbar/perfil-grupo-view.service';
+import { InsistenceEnvironmentService } from 'app/shared/insistence-environment/insistence-environment.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'jhi-navbar',
@@ -33,6 +35,7 @@ export class NavbarComponent implements OnInit {
   UNDOCKABLE = UNDOCKABLE;
   MOBILE = MOBILE;
   perfilGrupoOpened = false;
+  DEBUG_INFO_ENABLED = DEBUG_INFO_ENABLED;
 
   constructor(
     private loginService: LoginService,
@@ -42,7 +45,8 @@ export class NavbarComponent implements OnInit {
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
     private router: Router,
-    protected perfilGrupoViewService: PerfilGrupoViewService
+    protected perfilGrupoViewService: PerfilGrupoViewService,
+    private environmentService: InsistenceEnvironmentService,
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';
   }
@@ -91,6 +95,12 @@ export class NavbarComponent implements OnInit {
     this.collapseNavbar();
     this.loginService.logout();
     this.router.navigate(['']);
+  }
+
+  logoutResetEnvironment(): void {
+    this.environmentService.resetEnvironments().subscribe(() => {
+      this.logout();
+    });
   }
 
   toggleNavbar(): void {

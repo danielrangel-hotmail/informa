@@ -2,9 +2,10 @@ exports.config = {
     allScriptsTimeout: 20000,
 
     specs: [
-        './e2e/account/**/*.spec.ts',
-        './e2e/admin/**/*.spec.ts',
-        './e2e/entities/**/*.spec.ts',
+        //'./e2e/account/**/*.spec.ts',
+        // './e2e/admin/**/*.spec.ts',
+        // './e2e/entities/**/*.spec.ts',
+        './e2e/entities/grupo/*.spec.ts'
         /* jhipster-needle-add-protractor-tests - JHipster will add protractors tests here */
     ],
 
@@ -19,7 +20,7 @@ exports.config = {
 
     directConnect: true,
 
-    baseUrl: 'http://localhost:8080/',
+    baseUrl: 'http://localhost:9000/',
 
     framework: 'mocha',
 
@@ -34,7 +35,8 @@ exports.config = {
 
     beforeLaunch: function() {
         require('ts-node').register({
-            project: 'tsconfig.e2e.json'
+            // project: 'tsconfig.e2e.json'
+            project: '../../../tsconfig.e2e.json'
         });
     },
 
@@ -43,11 +45,16 @@ exports.config = {
         // Disable animations
         // @ts-ignore
         browser.executeScript('document.body.className += " notransition";');
+        browser.waitForAngularEnabled(true);
+        browser.ignoreSynchronization = false;
         const chai = require('chai');
         const chaiAsPromised = require('chai-as-promised');
         chai.use(chaiAsPromised);
         const chaiString = require('chai-string');
         chai.use(chaiString);
+        const assertArrays = require('chai-arrays');
+        console.log(assertArrays);
+        chai.use(assertArrays);
         // @ts-ignore
         global.chai = chai;
     },

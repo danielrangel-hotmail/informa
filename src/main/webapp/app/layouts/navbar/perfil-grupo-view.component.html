@@ -54,7 +54,7 @@
 <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
     <div class="d-flex elemento-filtros-icon">
         <div class="icon-elemento-filtro" style = "font-size: 14px"><fa-icon icon="pencil-alt"></fa-icon></div>
-        <h6 class = "elemento-filtros-descricao" routerLink="/grupo/new" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" *ngIf="filtroMatch('crie um grupo novo')">
+        <h6 id="crie-novo-grupo" class = "elemento-filtros-descricao" routerLink="/grupo/new" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" *ngIf="filtroMatch('crie um grupo novo')">
             crie um grupo novo
         </h6>
     </div>
@@ -62,7 +62,7 @@
 <jhi-hovered [hoverStyle]="{background: 'rgb(245,245,245)' }">
     <div class="d-flex elemento-filtros-icon">
         <div class="icon-elemento-filtro" style = "font-size: 14px"><fa-icon icon="pencil-alt"></fa-icon></div>
-        <h6 class = "elemento-filtros-descricao" routerLink="perfil-grupo" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" *ngIf="filtroMatch('crie um grupo novo')">
+        <h6 id="entre-novos-grupos" class = "elemento-filtros-descricao" routerLink="perfil-grupo" routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" *ngIf="filtroMatch('crie um grupo novo')">
             entre em novos grupos
         </h6>
     </div>

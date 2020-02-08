@@ -12,10 +12,11 @@ import { JhiInputUserComponent } from 'app/shared/input-user/input-user.componen
 import { HoveredToggleComponent } from 'app/shared/hovered-toggle/hovered-toggle/hovered-toggle.component';
 import { AvatarCroppedComponent } from './avatar-cropped/avatar-cropped.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { InsistenceEnvironmentComponent } from './insistence-environment/insistence-environment.component';
 
 @NgModule({
   imports: [InformaSharedLibsModule, QuillModule.forRoot() ],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, JhiInputUserComponent, HoveredToggleComponent, AvatarCroppedComponent, ColorPickerComponent],
+  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, JhiInputUserComponent, HoveredToggleComponent, AvatarCroppedComponent, ColorPickerComponent, InsistenceEnvironmentComponent],
   entryComponents: [LoginModalComponent],
   exports: [
     InformaSharedLibsModule,

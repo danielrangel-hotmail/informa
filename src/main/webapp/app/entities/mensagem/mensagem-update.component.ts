@@ -12,7 +12,7 @@ import { IUser } from 'app/core/user/user.model';
 import { IPost } from 'app/shared/model/post.interface';
 import {IMensagem} from 'app/shared/model/mensagem.interface';
 import { JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
-import { MatomoTracker } from 'ngx-matomo';
+// import { MatomoTracker } from 'ngx-matomo';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 
@@ -41,7 +41,7 @@ export class MensagemUpdateComponent implements OnInit {
     protected mensagemService: MensagemService,
     protected eventManager: JhiEventManager,
     private fb: FormBuilder,
-    protected matomoTracker: MatomoTracker
+    // protected matomoTracker: MatomoTracker
   ) {}
 
   ngOnInit(): void {
@@ -133,7 +133,7 @@ export class MensagemUpdateComponent implements OnInit {
   }
 
   analyticsEvent(): void {
-    this.matomoTracker.trackEvent('Mensagem', 'envioMensagem', this.post!.grupoId!.toString(), this.post!.id);
+    // this.matomoTracker.trackEvent('Mensagem', 'envioMensagem', this.post!.grupoId!.toString(), this.post!.id);
 
   }
 

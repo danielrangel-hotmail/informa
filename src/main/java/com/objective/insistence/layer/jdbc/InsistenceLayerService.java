@@ -1,17 +1,13 @@
 package com.objective.insistence.layer.jdbc;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import javax.sql.DataSource;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
@@ -24,9 +20,6 @@ public class InsistenceLayerService {
 	
 	private Stack<Savepoint> savePointStack = new Stack<Savepoint>();
 	
-	@Autowired
-	private DataSource dataSource;
-
 	private final Logger log = LoggerFactory.getLogger(InsistenceLayerService.class);
 	
 
@@ -85,8 +78,6 @@ public class InsistenceLayerService {
 
 			} catch (Exception e) {
 				throw new RuntimeException(e);
-			} finally {
-				if (savePointStack.isEmpty()) closeMasterConnection();
 			}
 		}
 	}
@@ -94,9 +85,7 @@ public class InsistenceLayerService {
 
 	public void removeAllSavepoints() {
 		synchronized (this) {
-			if (savePointStack.isEmpty())
-				throw new RuntimeException("no save point was found");
-
+			if (savePointStack.isEmpty()) return;
 			try {
 				masterConnection.forceRollback();
 				savePointStack.clear();
@@ -106,20 +95,9 @@ public class InsistenceLayerService {
 
 			} catch (Exception e) {
 				throw new RuntimeException(e);
-			} finally {
-				if (savePointStack.isEmpty()) closeMasterConnection();
-			}
+			} 
 		}
 	}
-
-	private void closeMasterConnection() {
-		try {
-			masterConnection.forceClose();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		};
-	}
-
 
 	public Stack<Savepoint> getSavePointStack() {
 		return savePointStack;

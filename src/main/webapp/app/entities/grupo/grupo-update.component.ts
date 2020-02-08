@@ -4,7 +4,7 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, tap } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiDataUtils, JhiEventManager } from 'ng-jhipster';
@@ -70,6 +70,8 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
       this.carregaTopicos();
       this.grupo$ = this.editForm.valueChanges.pipe(
         map(() => this.createFromForm()),
+        // eslint-disable-next-line no-console
+        tap(() => { console.log("form changed") }),
         startWith(grupo),
       );
     });
@@ -162,7 +164,7 @@ export class GrupoUpdateComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.perfilGrupoViewService.navega(this.editForm.get(['id'])!.value ? "editando grupo" : "criando grupo");
+    // this.perfilGrupoViewService.navega(this.editForm.get(['id'])!.value ? "editando grupo" : "criando grupo");
   }
 
   trackById(index: number, item: ITopico): any {

@@ -1,4 +1,5 @@
-import { element, by, ElementFinder } from 'protractor';
+import { browser, by, element, ElementFinder } from 'protractor';
+import { addElementNgSelect } from '../../util/util';
 
 export class GrupoComponentsPage {
   createButton = element(by.id('jh-create-entity'));
@@ -22,49 +23,65 @@ export class GrupoComponentsPage {
   }
 }
 
+export class GrupoCabecalhoPage {
+  testa1 = element(by.className("testa1"));
+  testa2 = element(by.className("testa2"));
+  nome = element(by.className("nome"));
+  descricao = element(by.id("descricao"));
+  logo = element(by.tagName("img"));
+
+  async getCorTesta1(): Promise<string> {
+    return this.testa1.getCssValue("background");
+  }
+
+  async getCorTesta2(): Promise<string> {
+    return this.testa2.getCssValue("background");
+  }
+
+  async getNome(): Promise<string> {
+    return this.nome.getText();
+  }
+
+  async getDescricao(): Promise<string> {
+    return this.descricao.getText();
+  }
+
+  async getLogoSource(): Promise<string> {
+    return this.logo.getAttribute("src");
+  }
+}
+
 export class GrupoUpdatePage {
-  pageTitle = element(by.id('jhi-grupo-heading'));
-  saveButton = element(by.id('save-entity'));
-  cancelButton = element(by.id('cancel-save'));
-  versaoInput = element(by.id('field_versao'));
-  criacaoInput = element(by.id('field_criacao'));
-  ultimaEdicaoInput = element(by.id('field_ultimaEdicao'));
-  nomeInput = element(by.id('field_nome'));
-  descricaoInput = element(by.id('field_descricao'));
-  formalInput = element(by.id('field_formal'));
-  opcionalInput = element(by.id('field_opcional'));
-  logoInput = element(by.id('file_logo'));
-  cabecalhoSuperiorCorInput = element(by.id('field_cabecalhoSuperiorCor'));
-  cabecalhoInferiorCorInput = element(by.id('field_cabecalhoInferiorCor'));
+  editForm = element(by.name('editForm'));
+  pageTitle = this.editForm.element(by.tagName('h4'));
+  saveButton = this.editForm.element(by.id('save-entity'));
+  cancelButton = this.editForm.element(by.id('cancel-save'));
+  nomeInput = this.editForm.element(by.id('field_nome'));
+  descricaoInput = this.editForm.element(by.id('field_descricao'));
+  formalInput = this.editForm.element(by.id('field_formal'));
+  opcionalInput = this.editForm.element(by.id('field_opcional'));
+  logoInput = this.editForm.element(by.id('file_logo'));
+  cabecalhoSuperiorCorInput = this.editForm.element(by.id('field_cabecalhoSuperiorCor'));
+  cabecalhoInferiorCorInput = this.editForm.element(by.id('field_cabecalhoInferiorCor'));
   logoFundoCorInput = element(by.id('field_logoFundoCor'));
-  topicosSelect = element(by.id('field_topicos'));
+  topicosSelect = this.editForm.element(by.id('field_topicos'));
+  moderadores = this.editForm.element(by.id('field_moderadores'));
 
   async getPageTitle(): Promise<string> {
-    return this.pageTitle.getAttribute('jhiTranslate');
+    return this.pageTitle.getText();
   }
 
-  async setVersaoInput(versao: string): Promise<void> {
-    await this.versaoInput.sendKeys(versao);
+  async getModeradores(): Promise<string[]> {
+    return this.moderadores.all(by.className('ng-value-label'))
+      .map<string>((label: any) => label.getText());
   }
 
-  async getVersaoInput(): Promise<string> {
-    return await this.versaoInput.getAttribute('value');
+  async addModerador(moderador: string): Promise<void> {
+      await addElementNgSelect(this.moderadores, moderador);
   }
 
-  async setCriacaoInput(criacao: string): Promise<void> {
-    await this.criacaoInput.sendKeys(criacao);
-  }
-
-  async getCriacaoInput(): Promise<string> {
-    return await this.criacaoInput.getAttribute('value');
-  }
-
-  async setUltimaEdicaoInput(ultimaEdicao: string): Promise<void> {
-    await this.ultimaEdicaoInput.sendKeys(ultimaEdicao);
-  }
-
-  async getUltimaEdicaoInput(): Promise<string> {
-    return await this.ultimaEdicaoInput.getAttribute('value');
+  async addTopico(topico: string): Promise<void> {
+    await addElementNgSelect(this.topicosSelect, topico);
   }
 
   async setNomeInput(nome: string): Promise<void> {
@@ -98,19 +115,30 @@ export class GrupoUpdatePage {
   }
 
   async setCabecalhoSuperiorCorInput(cabecalhoSuperiorCor: string): Promise<void> {
-    await this.cabecalhoSuperiorCorInput.sendKeys(cabecalhoSuperiorCor);
+    await this.cabecalhoSuperiorCorInput.click();
+    const input = this.cabecalhoSuperiorCorInput
+      .$('.hex-text')
+      .element(by.tagName('input'));
+    await input.clear();
+    await input.sendKeys(cabecalhoSuperiorCor);
   }
 
   async getCabecalhoSuperiorCorInput(): Promise<string> {
-    return await this.cabecalhoSuperiorCorInput.getAttribute('value');
+    return await this.cabecalhoSuperiorCorInput.element(by.tagName("input")).getCssValue("background");
   }
 
   async setCabecalhoInferiorCorInput(cabecalhoInferiorCor: string): Promise<void> {
-    await this.cabecalhoInferiorCorInput.sendKeys(cabecalhoInferiorCor);
+    await this.cabecalhoInferiorCorInput.click();
+    const input = this.cabecalhoInferiorCorInput
+      .$('.hex-text')
+      .element(by.tagName('input'));
+    await input.clear();
+    await input.sendKeys(cabecalhoInferiorCor);
+    await browser.sleep(1000);
   }
 
   async getCabecalhoInferiorCorInput(): Promise<string> {
-    return await this.cabecalhoInferiorCorInput.getAttribute('value');
+    return await this.cabecalhoInferiorCorInput.element(by.tagName("input")).getCssValue("background");
   }
 
   async setLogoFundoCorInput(logoFundoCor: string): Promise<void> {

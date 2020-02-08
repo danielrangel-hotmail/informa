@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from 'app/core/auth/account.service';
 import { MatomoTracker } from 'ngx-matomo';
 import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
+import { DEBUG_INFO_ENABLED } from 'app/app.constants';
 
 @Component({
   selector: 'jhi-main',
@@ -20,7 +21,7 @@ export class MainComponent implements OnInit {
     private translateService: TranslateService,
     private titleService: Title,
     private router: Router,
-    private matomoTracker: MatomoTracker,
+    // private matomoTracker: MatomoTracker,
     protected perfilGrupoViewService: PerfilGrupoViewService
   ) { }
 
@@ -46,13 +47,13 @@ export class MainComponent implements OnInit {
         this.lastUrl = event.url;
         this.updateTitle();
         if (this.accountService.isAuthenticated()) {
-          this.matomoTracker.setCustomUrl(event.url);
+          // this.matomoTracker.setCustomUrl(event.url);
         } else {
-          this.matomoTracker.setCustomUrl(event.url+'/non-authenticated');
+          // this.matomoTracker.setCustomUrl(event.url+'/non-authenticated');
         }
         // eslint-disable-next-line no-console
         console.log(`matomo trackPageView ${event.url}`);
-        this.matomoTracker.trackPageView();
+        // this.matomoTracker.trackPageView();
       }
       if (event instanceof NavigationError && event.error.status === 404) {
         this.router.navigate(['/404']);
@@ -76,7 +77,7 @@ export class MainComponent implements OnInit {
       pageTitle = 'global.title';
     }
     this.translateService.get(pageTitle).subscribe(title => {
-      this.matomoTracker.setDocumentTitle(title);
+      // this.matomoTracker.setDocumentTitle(title);
       this.titleService.setTitle(title)
     });
   }

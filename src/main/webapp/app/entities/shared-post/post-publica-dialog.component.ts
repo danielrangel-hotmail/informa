@@ -4,7 +4,7 @@ import { JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
 import { IPost } from 'app/shared/model/post.interface';
 import { PostService } from '../shared-post/post.service';
-import { MatomoTracker } from 'ngx-matomo';
+// import { MatomoTracker } from 'ngx-matomo';
 
 @Component({
   templateUrl: './post-publica-dialog.component.html'
@@ -15,7 +15,8 @@ export class PostPublicaDialogComponent {
   constructor(protected postService: PostService,
               public activeModal: NgbActiveModal,
               protected eventManager: JhiEventManager,
-              protected matomoTracker: MatomoTracker) {}
+              // protected matomoTracker: MatomoTracker
+  ) {}
 
   clear(): void {
     this.activeModal.dismiss();
@@ -35,7 +36,7 @@ export class PostPublicaDialogComponent {
     let action = 'publicacao'
     if (this.post!.arquivos!.length > 0) action = action + '_foto';
     if (this.post!.linksExternos!.length > 0) action = action + '_video';
-    this.matomoTracker.trackEvent('Post', action, this.post!.grupoId!.toString(), this.post!.id);
+    // this.matomoTracker.trackEvent('Post', action, this.post!.grupoId!.toString(), this.post!.id);
 
   }
 }
