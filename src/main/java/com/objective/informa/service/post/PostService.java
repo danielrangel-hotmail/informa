@@ -68,7 +68,8 @@ public class PostService {
         ZonedDateTime now = ZonedDateTime.now();
         post.setCriacao(now);
         post.setUltimaEdicao(now);
-        final Optional<User> user = SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByLogin);
+        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+		final Optional<User> user = currentUserLogin.flatMap(userRepository::findOneByLogin);
         post.setAutor(user.get());
         post = postRepository.save(post);
         return postMapper.toDto(post);

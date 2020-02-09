@@ -36,9 +36,6 @@
             <column name="skype" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="usuario_id" type="bigint">
-                <constraints unique="true" nullable="false" uniqueConstraintName="ux_perfil_usuario_usuario_id" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="perfil_usuario" columnName="criacao" columnDataType="datetime"/>

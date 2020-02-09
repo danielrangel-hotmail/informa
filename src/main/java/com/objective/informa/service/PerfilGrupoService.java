@@ -22,6 +22,7 @@ import com.objective.informa.repository.PerfilUsuarioRepository;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.SecurityUtils;
 import com.objective.informa.service.dto.PerfilGrupoDTO;
+import com.objective.informa.service.dto.PerfilUsuarioDTO;
 import com.objective.informa.service.mapper.GrupoMapper;
 import com.objective.informa.service.mapper.PerfilGrupoMapper;
 
@@ -177,5 +178,25 @@ public class PerfilGrupoService {
 	private PerfilUsuario perfilUsuarioLogado() {
 		PerfilUsuario perfilUsuario = this.userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get().getPerfilUsuario();
 		return perfilUsuario;
+	}
+
+	public void criaPerfilObrigatorio(PerfilUsuario criado) {
+		this.grupoRepository.findAll()
+			.stream()
+			.filter(Grupo::isAutomatico)
+			.forEach(grupo -> {
+				PerfilGrupo pf = new PerfilGrupo();
+				pf.setPerfil(criado);
+				pf.setGrupo(grupo);
+				pf.setFavorito(false);
+				pf.setModerador(false);
+				try {
+					this.associaPerfilAGrupo(pf, criado);
+				} catch (Exception e) {
+					// Não tem como rolar, já que o perfil acabou de ser criado...
+					e.printStackTrace();
+				}
+				perfilGrupoRepository.save(pf);    	
+			});
 	}
 }

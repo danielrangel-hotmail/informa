@@ -7,6 +7,8 @@ import com.objective.insistence.layer.environment.InsistenceEnvironment;
 @Service
 public class ZeradoEnvironment implements InsistenceEnvironment{
 
+	public static String ZERADO =  "Zerado";
+	
 	@Override
 	public void execute() {
 		// Não faz nada mesmo
@@ -14,7 +16,7 @@ public class ZeradoEnvironment implements InsistenceEnvironment{
 
 	@Override
 	public String getName() {
-		return "Zerado";
+		return ZERADO;
 	}
 
 }

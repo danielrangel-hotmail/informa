@@ -24,6 +24,7 @@ import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +43,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.isEmptyOrNullString;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -109,6 +111,7 @@ public class PostResourceIT {
         MockitoAnnotations.initMocks(this);
         final PostResource postResource = new PostResource(postService);
         this.restPostMockMvc = MockMvcBuilders.standaloneSetup(postResource)
+        	.addFilter(new SecurityContextPersistenceFilter())
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
             .setConversionService(createFormattingConversionService())
@@ -145,10 +148,10 @@ public class PostResourceIT {
 
     @Test
     @Transactional
-    @WithMockUser()
     public void createPost() throws Exception {
         int databaseSizeBeforeCreate = postRepository.findAll().size();
         restPostMockMvc.perform(post("/api/posts")
+    		.with(user("user"))
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(postDTO)))
             .andExpect(status().isCreated());
@@ -198,7 +201,7 @@ public class PostResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(content().string("[]"));
 
-        PostDTO postDTOPublicado = postService.publica(new SimplePostDTO(postDTOCriado.getId(), postDTOCriado.getVersao()+1));
+        PostDTO postDTOPublicado = postService.publica(new SimplePostDTO(postDTOCriado.getId(), postDTOCriado.getVersao()));
         restPostMockMvc.perform(get("/api/posts?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
@@ -210,103 +213,4 @@ public class PostResourceIT {
             .andExpect(jsonPath("$.[*].publicacao").value(notNullValue()));
 
     }
-//
-//    @Test
-//    @Transactional
-//    public void getPost() throws Exception {
-//        // Initialize the database
-//        postRepository.saveAndFlush(post);
-//
-//        // Get the post
-//        restPostMockMvc.perform(get("/api/posts/{id}", post.getId()))
-//            .andExpect(status().isOk())
-//            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-//            .andExpect(jsonPath("$.id").value(post.getId().intValue()))
-//            .andExpect(jsonPath("$.versao").value(DEFAULT_VERSAO.intValue()))
-//            .andExpect(jsonPath("$.criacao").value(sameInstant(DEFAULT_CRIACAO)))
-//            .andExpect(jsonPath("$.ultimaEdicao").value(sameInstant(DEFAULT_ULTIMA_EDICAO)))
-//            .andExpect(jsonPath("$.conteudo").value(DEFAULT_CONTEUDO))
-//            .andExpect(jsonPath("$.publicacao").value(sameInstant(DEFAULT_PUBLICACAO)));
-//    }
-//
-//    @Test
-//    @Transactional
-//    public void getNonExistingPost() throws Exception {
-//        // Get the post
-//        restPostMockMvc.perform(get("/api/posts/{id}", Long.MAX_VALUE))
-//            .andExpect(status().isNotFound());
-//    }
-//
-//    @Test
-//    @Transactional
-//    public void updatePost() throws Exception {
-//        // Initialize the database
-//        postRepository.saveAndFlush(post);
-//
-//        int databaseSizeBeforeUpdate = postRepository.findAll().size();
-//
-//        // Update the post
-//        Post updatedPost = postRepository.findById(post.getId()).get();
-//        // Disconnect from session so that the updates on updatedPost are not directly saved in db
-//        em.detach(updatedPost);
-//        updatedPost
-//            .versao(UPDATED_VERSAO)
-//            .criacao(UPDATED_CRIACAO)
-//            .ultimaEdicao(UPDATED_ULTIMA_EDICAO)
-//            .conteudo(UPDATED_CONTEUDO)
-//            .publicacao(UPDATED_PUBLICACAO);
-//        PostDTO postDTO = postMapper.toDto(updatedPost);
-//
-//        restPostMockMvc.perform(put("/api/posts")
-//            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-//            .content(TestUtil.convertObjectToJsonBytes(postDTO)))
-//            .andExpect(status().isOk());
-//
-//        // Validate the Post in the database
-//        List<Post> postList = postRepository.findAll();
-//        assertThat(postList).hasSize(databaseSizeBeforeUpdate);
-//        Post testPost = postList.get(postList.size() - 1);
-//        assertThat(testPost.getVersao()).isEqualTo(UPDATED_VERSAO);
-//        assertThat(testPost.getCriacao()).isEqualTo(UPDATED_CRIACAO);
-//        assertThat(testPost.getUltimaEdicao()).isEqualTo(UPDATED_ULTIMA_EDICAO);
-//        assertThat(testPost.getConteudo()).isEqualTo(UPDATED_CONTEUDO);
-//        assertThat(testPost.getPublicacao()).isEqualTo(UPDATED_PUBLICACAO);
-//    }
-//
-//    @Test
-//    @Transactional
-//    public void updateNonExistingPost() throws Exception {
-//        int databaseSizeBeforeUpdate = postRepository.findAll().size();
-//
-//        // Create the Post
-//        PostDTO postDTO = postMapper.toDto(post);
-//
-//        // If the entity doesn't have an ID, it will throw BadRequestAlertException
-//        restPostMockMvc.perform(put("/api/posts")
-//            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-//            .content(TestUtil.convertObjectToJsonBytes(postDTO)))
-//            .andExpect(status().isBadRequest());
-//
-//        // Validate the Post in the database
-//        List<Post> postList = postRepository.findAll();
-//        assertThat(postList).hasSize(databaseSizeBeforeUpdate);
-//    }
-//
-//    @Test
-//    @Transactional
-//    public void deletePost() throws Exception {
-//        // Initialize the database
-//        postRepository.saveAndFlush(post);
-//
-//        int databaseSizeBeforeDelete = postRepository.findAll().size();
-//
-//        // Delete the post
-//        restPostMockMvc.perform(delete("/api/posts/{id}", post.getId())
-//            .accept(TestUtil.APPLICATION_JSON_UTF8))
-//            .andExpect(status().isNoContent());
-//
-//        // Validate the database contains one less item
-//        List<Post> postList = postRepository.findAll();
-//        assertThat(postList).hasSize(databaseSizeBeforeDelete - 1);
-//    }
 }

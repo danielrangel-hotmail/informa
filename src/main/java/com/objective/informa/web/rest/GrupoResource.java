@@ -51,7 +51,7 @@ public class GrupoResource {
         if (grupoDTO.getId() != null) {
             throw new BadRequestAlertException("A new grupo cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        GrupoDTO result = grupoService.save(grupoDTO);
+        GrupoDTO result = grupoService.create(grupoDTO);
         return ResponseEntity.created(new URI("/api/grupos/" + result.getId()))
             .headers(null)
             .body(result);

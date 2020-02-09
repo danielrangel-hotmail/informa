@@ -1,11 +1,7 @@
 TODO: Incluir camanda de insistência e environments
 conseguir executar testes de SpringBootTest com environment
 
-
-TODO: Incluir o S3rver como parte do projeto
-fase 2 usá-lo para rodar cenários
-
-TODO: Nova tentativa de incluir o Storybook como parte do projeto
+TODO: Limpeza de banco e deploy na AWS
 
 TODO: Reações em posts e mensagens
 
@@ -13,6 +9,8 @@ TODO: Role do Gestor
 Um post pode ser marcado como oficial da empresa
 O post sairá em nome da empresa by o criador somente para admins e outros supervisores
 Somente admins e caras com post oficial podem postar desta forma
+
+TODO: Nova tentativa de incluir o Storybook como parte do projeto
 
 TODO: Rever menus
 
@@ -67,7 +65,7 @@ Evitar o shift de ir de um filtro sem scroll para um filtro com scroll?
 ------------------------------------------------------------------------------
 Miscelâneas: pequenas coisinhas
 
-TODO: Garantir o formato do nome dos grupos
+TODO: Garantir o formato do nome dos grupos e tópicos
 
 TODO: Garantir o tamanho máximo do conteúdo
 
@@ -89,6 +87,8 @@ TODO: Sumir com o chosen file do logo do grupo e avatar do perfil
 TODO: Somente o moderador e admin podem alterar um grupo backend.
 Acertar o opcional
 
+TODO: Nome único para grupos e tópicos
+
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
 
@@ -104,9 +104,7 @@ Grupo:
 1 - Ao criar um novo grupo, ele já começa com alguns dados padrão, cores e o próprio usuário como moderador
     Os dados vão atualizando na testa. ok
     Não testamos o logo
-    => Teste com o protractor. Environment vazio
-
-
+    Teste com o protractor. Environment vazio ok
 
 2 - Exclusão de grupo
     Um grupo pode ser excluido, sem posts, pode ser feita por admin, moderadores ou diretor
@@ -122,6 +120,7 @@ Grupo:
     3 - Um moderador consegue editar/excluir um grupo, sem ver campo de Opcional
     4 - Um administrador consegue editar/excluir um grupo
     5 - Um diretor consegue editar/excluir um grupo
+    6 - Um usuário só consegue publicar um post próprio
 
 Assinaturas
 
@@ -157,17 +156,14 @@ Posts - Reação
 
 Mensagens
 
+TODO: Incluir o S3rver como parte do projeto
+fase 2 usá-lo para rodar cenários
 
 TODO: Facilitar a entrada de novos desenvolvedores
-Fazer os testes atuais funcionarem
-Melhorar alguns testes
 Criar projeto no Jira
-Usar a IDE padrão dos desenvolvedores para o projeto
-Configurar o GitHub para funcionar => Continuous Integration & Deploy
-Criar uma S3 de desenvolvimento
-- Políticas para o usuário, somente usar a S3
 Branches
 Preparar um mob programing
+Configurar o GitHub para funcionar => Continuous Integration & Deploy
 
 TODO: Entender porque unauthorized está desconectando o usuário, e decidir se este é o melhor comportamento
 
@@ -181,7 +177,7 @@ Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delet
 
 TODO: Continuous Integration
 
-TODO: Debugar o erro que está rolando na edição
+TODO: Debugar o erro que está rolando na edição do post
 
 TODO: Aumentar Robustez do Upload de Imagens e Vídeos
 Creio que se para no meio, o upload de imagens vai dar pau

@@ -34,11 +34,28 @@ public class PerfilUsuarioService {
     private final PerfilUsuarioMapper perfilUsuarioMapper;
     
     private final SimpleUserMapper simpleUserMapper;
+    
+    private final PerfilGrupoService perfilGrupoService;
 
-    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper, SimpleUserMapper simpleUserMapper) {
-        this.perfilUsuarioRepository = perfilUsuarioRepository;
+    public PerfilUsuarioService(PerfilUsuarioRepository perfilUsuarioRepository, PerfilUsuarioMapper perfilUsuarioMapper, SimpleUserMapper simpleUserMapper, PerfilGrupoService perfilGrupoService) {
+        this.perfilGrupoService = perfilGrupoService;
+		this.perfilUsuarioRepository = perfilUsuarioRepository;
         this.perfilUsuarioMapper = perfilUsuarioMapper;
         this.simpleUserMapper = simpleUserMapper;
+    }
+
+    /**
+     * Save a perfilUsuario.
+     *
+     * @param perfilUsuarioDTO the entity to save.
+     * @return the persisted entity.
+     */
+    public PerfilUsuarioDTO create(PerfilUsuarioDTO perfilUsuarioDTO) {
+        log.debug("Request to create PerfilUsuario : {}", perfilUsuarioDTO);
+        PerfilUsuario criado = perfilUsuarioMapper.toEntity(perfilUsuarioDTO);
+        criado = perfilUsuarioRepository.save(criado);
+        this.perfilGrupoService.criaPerfilObrigatorio(criado);
+        return perfilUsuarioMapper.toDto(criado);   
     }
 
     /**

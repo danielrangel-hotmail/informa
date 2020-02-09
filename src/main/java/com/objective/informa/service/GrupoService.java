@@ -13,12 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.objective.informa.domain.Grupo;
 import com.objective.informa.repository.GrupoRepository;
 import com.objective.informa.repository.PerfilGrupoRepository;
+import com.objective.informa.security.AuthoritiesConstants;
+import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.dto.GrupoDTO;
 import com.objective.informa.service.dto.SimpleUserDTO;
 import com.objective.informa.service.dto.TopicoDTO;
@@ -38,26 +41,51 @@ public class GrupoService {
     private final PerfilGrupoService perfilGrupoService;
     private final PerfilGrupoRepository perfilGrupoRepository;
     private final GrupoMapper grupoMapper;
+    private final SecurityFacade securityFacade;
 
-    public GrupoService(GrupoRepository grupoRepository, GrupoMapper grupoMapper, TopicoService topicoService, PerfilGrupoService perfilGrupoService, PerfilGrupoRepository perfilGrupoRepository) {
-        this.grupoRepository = grupoRepository;
-        this.grupoMapper = grupoMapper;
-        this.topicoService = topicoService;
-        this.perfilGrupoService = perfilGrupoService;
-        this.perfilGrupoRepository = perfilGrupoRepository;
+
+    public GrupoService(GrupoRepository grupoRepository, TopicoService topicoService,
+			PerfilGrupoService perfilGrupoService, PerfilGrupoRepository perfilGrupoRepository, GrupoMapper grupoMapper,
+			SecurityFacade securityFacade) {
+		super();
+		this.grupoRepository = grupoRepository;
+		this.topicoService = topicoService;
+		this.perfilGrupoService = perfilGrupoService;
+		this.perfilGrupoRepository = perfilGrupoRepository;
+		this.grupoMapper = grupoMapper;
+		this.securityFacade = securityFacade;
+	}
+
+    
+    public GrupoDTO create(GrupoDTO grupoDTO) {
+    	return this.save(grupoDTO, new Grupo());
+    }
+    
+    public GrupoDTO save(GrupoDTO grupoDTO) {
+    	Grupo grupo = grupoRepository.getOne(grupoDTO.getId());
+
+    	if (!this.securityFacade.isCurrentUserInRole(AuthoritiesConstants.ADMIN) && !logadoEModeradorDoGrupo(grupo)) {
+    		throw new AccessDeniedException("Grupo só pode ser alterado por admins ou moderadores");
+    	}
+    	return this.save(grupoDTO, grupo);
     }
 
-    /**
+
+	private boolean logadoEModeradorDoGrupo(Grupo grupo) {
+    	String currentUserLogin = this.securityFacade.getCurrentUserLogin().get();
+		return grupo.getUsuarios().stream()
+    		.anyMatch(perfilGrupo -> perfilGrupo.isModerador() && perfilGrupo.getPerfil().getUsuario().getLogin().equals(currentUserLogin));
+	}
+    
+	/**
      * Save a grupo.
      *
      * @param grupoDTO the entity to save.
      * @return the persisted entity.
      */
-    public GrupoDTO save(GrupoDTO grupoDTO) {
-    	
+    private GrupoDTO save(GrupoDTO grupoDTO, Grupo grupo) {
     	criaNovosTopicos(grupoDTO);
     	log.debug("Request to save Grupo : {}", grupoDTO);
-    	Grupo grupo = grupoDTO.getId() != null ? grupoRepository.getOne(grupoDTO.getId()) : new Grupo() ;
         grupoMapper.updateGrupoFromDto(grupoDTO, grupo);
         ZonedDateTime now = ZonedDateTime.now();
         grupo.setUltimaEdicao(now);

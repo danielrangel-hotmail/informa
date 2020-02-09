@@ -163,6 +163,10 @@ public class Grupo implements Serializable {
     public Boolean isOpcional() {
         return opcional;
     }
+    
+    public Boolean isAutomatico() {
+    	return !isOpcional();
+    }
 
     public Grupo opcional(Boolean opcional) {
         this.opcional = opcional;
