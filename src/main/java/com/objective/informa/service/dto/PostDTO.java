@@ -1,13 +1,10 @@
 package com.objective.informa.service.dto;
-import com.objective.informa.domain.Arquivo;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.util.Objects;
+
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 /**
@@ -15,7 +12,12 @@ import org.springframework.data.annotation.ReadOnlyProperty;
  */
 public class PostDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     @ReadOnlyProperty
     private Long versao;

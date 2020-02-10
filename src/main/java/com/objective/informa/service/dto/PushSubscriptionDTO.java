@@ -1,7 +1,6 @@
 package com.objective.informa.service.dto;
-import java.time.ZonedDateTime;
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -9,7 +8,12 @@ import java.util.Objects;
  */
 public class PushSubscriptionDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private Long versao;
 

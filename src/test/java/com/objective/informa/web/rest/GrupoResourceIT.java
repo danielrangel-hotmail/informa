@@ -1,16 +1,15 @@
 package com.objective.informa.web.rest;
 
-import com.objective.informa.InformaApp;
-import com.objective.informa.domain.Grupo;
-import com.objective.informa.repository.GrupoRepository;
-import com.objective.informa.security.AuthoritiesConstants;
-import com.objective.informa.service.GrupoService;
-import com.objective.informa.service.dto.GrupoDTO;
-import com.objective.informa.service.environments.GruposEUsuariosEnvironment;
-import com.objective.informa.service.environments.ZeradoEnvironment;
-import com.objective.informa.service.mapper.GrupoMapper;
-import com.objective.informa.web.rest.errors.ExceptionTranslator;
-import com.objective.insistence.layer.environment.InsistenceEnvironmentService;
+import static com.objective.informa.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +18,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,29 +25,21 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
-import java.util.List;
-
-import static com.objective.informa.web.rest.TestUtil.sameInstant;
-import static com.objective.informa.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.objective.informa.InformaApp;
+import com.objective.informa.domain.Grupo;
+import com.objective.informa.repository.GrupoRepository;
+import com.objective.informa.service.GrupoService;
+import com.objective.informa.service.dto.GrupoDTO;
+import com.objective.informa.service.environments.GruposEUsuariosEnvironment;
+import com.objective.informa.service.environments.ZeradoEnvironment;
+import com.objective.informa.web.rest.errors.ExceptionTranslator;
+import com.objective.insistence.layer.environment.InsistenceEnvironmentService;
 
 /**
  * Integration tests for the {@link GrupoResource} REST controller.
  */
 @SpringBootTest(classes = InformaApp.class)
 public class GrupoResourceIT {
-
-    private static final Long DEFAULT_VERSAO = 0L;
-    private static final Long UPDATED_VERSAO = 1L;
 
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
     private static final String UPDATED_NOME = "BBBBBBBBBB";
@@ -67,9 +57,6 @@ public class GrupoResourceIT {
     private GrupoRepository grupoRepository;
 
     @Autowired
-    private GrupoMapper grupoMapper;
-
-    @Autowired
     private GrupoService grupoService;
 
     @Autowired
@@ -82,17 +69,12 @@ public class GrupoResourceIT {
     private ExceptionTranslator exceptionTranslator;
 
     @Autowired
-    private EntityManager em;
-
-    @Autowired
     private Validator validator;
     
     @Autowired
     private InsistenceEnvironmentService insistenceEnvironmentService; 
 
     private MockMvc restGrupoMockMvc;
-
-    private Grupo grupo;
 
     @BeforeEach
     public void setup() {

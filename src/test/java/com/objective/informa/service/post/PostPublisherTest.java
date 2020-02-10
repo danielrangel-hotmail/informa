@@ -1,14 +1,15 @@
 package com.objective.informa.service.post;
 
-import akka.Done;
-import akka.actor.ActorSystem;
-import akka.stream.OverflowStrategy;
-import akka.stream.QueueOfferResult;
-import akka.stream.javadsl.Flow;
-import akka.stream.javadsl.Keep;
-import akka.stream.javadsl.Sink;
-import akka.stream.javadsl.Source;
-import akka.stream.javadsl.SourceQueueWithComplete;
+import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+
 import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.PerfilUsuario;
 import com.objective.informa.domain.Post;
@@ -16,19 +17,6 @@ import com.objective.informa.domain.PushSubscription;
 import com.objective.informa.domain.User;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.service.PushSubscriptionService;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PostPublisherTest {

@@ -1,19 +1,20 @@
 package com.objective.informa.web.rest;
 
-/* TODO Precisa acertar os outros testes, e entender porque diabos a versão se comportou no método getAllPosts()
- */
+import static com.objective.informa.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.objective.informa.InformaApp;
-import com.objective.informa.domain.Post;
-import com.objective.informa.domain.User;
-import com.objective.informa.domain.Grupo;
-import com.objective.informa.repository.PostRepository;
-import com.objective.informa.repository.UserRepository;
-import com.objective.informa.service.dto.SimplePostDTO;
-import com.objective.informa.service.post.PostService;
-import com.objective.informa.service.dto.PostDTO;
-import com.objective.informa.service.mapper.PostMapper;
-import com.objective.informa.web.rest.errors.ExceptionTranslator;
+import java.time.ZonedDateTime;
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,22 +31,19 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
-import java.util.List;
+/* TODO Precisa acertar os outros testes, e entender porque diabos a versão se comportou no método getAllPosts()
+ */
 
-import static com.objective.informa.web.rest.TestUtil.sameInstant;
-import static com.objective.informa.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.isEmptyOrNullString;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.objective.informa.InformaApp;
+import com.objective.informa.domain.Grupo;
+import com.objective.informa.domain.Post;
+import com.objective.informa.domain.User;
+import com.objective.informa.repository.PostRepository;
+import com.objective.informa.repository.UserRepository;
+import com.objective.informa.service.dto.PostDTO;
+import com.objective.informa.service.dto.SimplePostDTO;
+import com.objective.informa.service.post.PostService;
+import com.objective.informa.web.rest.errors.ExceptionTranslator;
 
 /**
  * Integration tests for the {@link PostResource} REST controller.
@@ -54,28 +52,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PostResourceIT {
 
     private static final Long DEFAULT_VERSAO = 0L;
-    private static final Long UPDATED_VERSAO = 1L;
-
-    private static final ZonedDateTime DEFAULT_CRIACAO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_CRIACAO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
-    private static final ZonedDateTime DEFAULT_ULTIMA_EDICAO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_ULTIMA_EDICAO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final String DEFAULT_CONTEUDO = "AAAAAAAAAA";
-    private static final String UPDATED_CONTEUDO = "BBBBBBBBBB";
-
-    private static final ZonedDateTime DEFAULT_PUBLICACAO = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_PUBLICACAO = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private PostRepository postRepository;
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private PostMapper postMapper;
 
     @Autowired
     private PostService postService;

@@ -22,7 +22,6 @@ import com.objective.informa.repository.PerfilUsuarioRepository;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.SecurityUtils;
 import com.objective.informa.service.dto.PerfilGrupoDTO;
-import com.objective.informa.service.dto.PerfilUsuarioDTO;
 import com.objective.informa.service.mapper.GrupoMapper;
 import com.objective.informa.service.mapper.PerfilGrupoMapper;
 

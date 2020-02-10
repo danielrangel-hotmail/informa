@@ -1,8 +1,3 @@
-TODO: Incluir camanda de insistência e environments
-conseguir executar testes de SpringBootTest com environment
-
-TODO: Limpeza de banco e deploy na AWS
-
 TODO: Reações em posts e mensagens
 
 TODO: Role do Gestor
@@ -21,6 +16,8 @@ Tirar o router e fazer hide and show
 
 TODO: Melhorar os Emojis e Menções
 Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
+
+TODO: Criar uma página bacana do perfil do usuário
 
 TODO: Fazer o ENTER funcionar na mensagem como um SUBMIT
 E o SHIFT ENTER como ENTER
@@ -43,6 +40,8 @@ Aguardando o Renato voltar para configurar o Matomo na aws
 TODO: Ver a responsividade para o restante do app
 
 TODO: Add to Home
+
+TODO: Rever notificações
 
 TODO: Adicionar subscrição ao Perfil ao criar
 Também ver se faz sentido excluir subscrições
@@ -101,10 +100,12 @@ Usuario:
     Gravatar vs avatar customizado
 
 Grupo:
-1 - Ao criar um novo grupo, ele já começa com alguns dados padrão, cores e o próprio usuário como moderador
+1 - Ao criar um novo grupo, ele já começa com alguns dados padrão, cores e o próprio usuário como moderador ok
     Os dados vão atualizando na testa. ok
-    Não testamos o logo
+        ===> Não testamos o logo
     Teste com o protractor. Environment vazio ok
+    Um grupo só pode ser alterado pelo moderador ou admin => backend ok
+
 
 2 - Exclusão de grupo
     Um grupo pode ser excluido, sem posts, pode ser feita por admin, moderadores ou diretor

@@ -1,5 +1,4 @@
 package com.objective.informa.service.dto;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -8,7 +7,12 @@ import java.util.Objects;
  */
 public class TopicoDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private Long versao;
 

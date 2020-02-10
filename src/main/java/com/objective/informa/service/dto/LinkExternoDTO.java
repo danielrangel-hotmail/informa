@@ -1,8 +1,8 @@
 package com.objective.informa.service.dto;
-import java.time.ZonedDateTime;
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
+
 import com.objective.informa.domain.enumeration.LinkTipo;
 
 /**
@@ -10,7 +10,12 @@ import com.objective.informa.domain.enumeration.LinkTipo;
  */
 public class LinkExternoDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private Long versao;
 

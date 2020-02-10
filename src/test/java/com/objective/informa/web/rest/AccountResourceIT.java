@@ -1,25 +1,22 @@
 package com.objective.informa.web.rest;
 
-import com.objective.informa.InformaApp;
-import com.objective.informa.config.Constants;
-import com.objective.informa.domain.Authority;
-import com.objective.informa.domain.User;
-import com.objective.informa.repository.AuthorityRepository;
-import com.objective.informa.repository.UserRepository;
-import com.objective.informa.security.AuthoritiesConstants;
-import com.objective.informa.security.jwt.TokenProvider;
-import com.objective.informa.service.MailService;
-import com.objective.informa.service.UserService;
-import com.objective.informa.service.dto.PasswordChangeDTO;
-import com.objective.informa.service.dto.UserDTO;
-import com.objective.informa.web.rest.errors.ExceptionTranslator;
-import com.objective.informa.web.rest.vm.KeyAndPasswordVM;
-import com.objective.informa.web.rest.vm.ManagedUserVM;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import io.github.jhipster.config.JHipsterProperties;
+import java.time.Instant;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 import org.apache.commons.lang3.RandomStringUtils;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -34,15 +31,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.util.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.objective.informa.InformaApp;
+import com.objective.informa.config.Constants;
+import com.objective.informa.domain.Authority;
+import com.objective.informa.domain.User;
+import com.objective.informa.repository.AuthorityRepository;
+import com.objective.informa.repository.UserRepository;
+import com.objective.informa.security.AuthoritiesConstants;
+import com.objective.informa.service.MailService;
+import com.objective.informa.service.UserService;
+import com.objective.informa.service.dto.PasswordChangeDTO;
+import com.objective.informa.service.dto.UserDTO;
+import com.objective.informa.web.rest.errors.ExceptionTranslator;
+import com.objective.informa.web.rest.vm.KeyAndPasswordVM;
+import com.objective.informa.web.rest.vm.ManagedUserVM;
 
 /**
  * Integration tests for the {@link AccountResource} REST controller.

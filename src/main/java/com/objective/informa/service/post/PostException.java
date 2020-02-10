@@ -4,7 +4,12 @@ import com.objective.informa.service.dto.SimplePostDTO;
 
 public class PostException extends Exception {
 
-  public PostException(SimplePostDTO postDTO, String message) {
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+public PostException(SimplePostDTO postDTO, String message) {
     super("message");
     this.postDTO = postDTO;
   }

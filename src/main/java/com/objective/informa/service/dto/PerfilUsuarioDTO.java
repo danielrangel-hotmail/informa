@@ -1,9 +1,9 @@
 package com.objective.informa.service.dto;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.util.Objects;
+
 import javax.persistence.Lob;
 
 /**
@@ -11,7 +11,12 @@ import javax.persistence.Lob;
  */
 public class PerfilUsuarioDTO implements Serializable {
 
-    private Long id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
 
     private ZonedDateTime criacao;
 

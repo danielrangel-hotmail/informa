@@ -1,6 +1,23 @@
 package com.objective.informa.web.rest;
 
 
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.objective.informa.domain.User;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.SecurityUtils;
@@ -8,19 +25,12 @@ import com.objective.informa.service.MailService;
 import com.objective.informa.service.UserService;
 import com.objective.informa.service.dto.PasswordChangeDTO;
 import com.objective.informa.service.dto.UserDTO;
-import com.objective.informa.web.rest.errors.*;
+import com.objective.informa.web.rest.errors.EmailAlreadyUsedException;
+import com.objective.informa.web.rest.errors.EmailNotFoundException;
+import com.objective.informa.web.rest.errors.InvalidPasswordException;
+import com.objective.informa.web.rest.errors.LoginAlreadyUsedException;
 import com.objective.informa.web.rest.vm.KeyAndPasswordVM;
 import com.objective.informa.web.rest.vm.ManagedUserVM;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.*;
 
 /**
  * REST controller for managing the current user's account.
@@ -30,7 +40,12 @@ import java.util.*;
 public class AccountResource {
 
     private static class AccountResourceException extends RuntimeException {
-        private AccountResourceException(String message) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		private AccountResourceException(String message) {
             super(message);
         }
     }

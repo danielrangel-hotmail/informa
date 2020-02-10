@@ -4,7 +4,12 @@ import com.objective.informa.service.dto.SimplePostDTO;
 
 public class PostUpdateNullException extends PostException {
 
-    public PostUpdateNullException(SimplePostDTO postDTO) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public PostUpdateNullException(SimplePostDTO postDTO) {
         super(postDTO, "Post não encontrado");
 
     }

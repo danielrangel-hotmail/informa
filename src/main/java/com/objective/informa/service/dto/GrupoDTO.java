@@ -9,8 +9,6 @@ import javax.persistence.Lob;
 
 import org.springframework.data.annotation.ReadOnlyProperty;
 
-import com.objective.informa.domain.User;
-
 /**
  * A DTO for the {@link com.objective.informa.domain.Grupo} entity.
  */

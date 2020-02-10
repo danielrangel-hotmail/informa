@@ -2,7 +2,12 @@ package com.objective.informa.service;
 
 public class InvalidPasswordException extends RuntimeException {
 
-    public InvalidPasswordException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public InvalidPasswordException() {
         super("Incorrect password");
     }
 

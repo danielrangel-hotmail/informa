@@ -2,7 +2,12 @@ package com.objective.informa.service;
 
 public class UsernameAlreadyUsedException extends RuntimeException {
 
-    public UsernameAlreadyUsedException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UsernameAlreadyUsedException() {
         super("Login name already used!");
     }
 

@@ -1,26 +1,26 @@
 package com.objective.informa.service.post;
 
-import akka.NotUsed;
-import akka.actor.ActorSystem;
-import akka.stream.OverflowStrategy;
-import akka.stream.QueueOfferResult;
-import akka.stream.javadsl.Flow;
-import akka.stream.javadsl.Sink;
-import akka.stream.javadsl.Source;
-import akka.stream.javadsl.SourceQueueWithComplete;
-import com.objective.informa.domain.Post;
-import com.objective.informa.domain.User;
-import com.objective.informa.repository.UserRepository;
-import com.objective.informa.service.PushSubscriptionService;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 
-import nl.martijndwars.webpush.Notification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.objective.informa.domain.Post;
+import com.objective.informa.domain.User;
+import com.objective.informa.repository.UserRepository;
+import com.objective.informa.service.PushSubscriptionService;
+
+import akka.actor.ActorSystem;
+import akka.stream.OverflowStrategy;
+import akka.stream.QueueOfferResult;
+import akka.stream.javadsl.Sink;
+import akka.stream.javadsl.Source;
+import akka.stream.javadsl.SourceQueueWithComplete;
+import nl.martijndwars.webpush.Notification;
 
 @Service
 @Transactional

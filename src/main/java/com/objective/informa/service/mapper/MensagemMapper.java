@@ -1,14 +1,17 @@
 package com.objective.informa.service.mapper;
 
-import com.objective.informa.domain.*;
-import com.objective.informa.repository.GrupoRepository;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.objective.informa.domain.Mensagem;
+import com.objective.informa.domain.Post;
+import com.objective.informa.domain.User;
 import com.objective.informa.repository.MensagemRepository;
 import com.objective.informa.repository.PostRepository;
 import com.objective.informa.repository.UserRepository;
 import com.objective.informa.service.dto.MensagemDTO;
-
-import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Mapper for the entity {@link Mensagem} and its DTO {@link MensagemDTO}.

@@ -15,8 +15,6 @@ import com.objective.insistence.layer.environment.InsistenceEnvironmentDTO;
 import com.objective.insistence.layer.environment.InsistenceEnvironmentService;
 import com.objective.insistence.layer.web.rest.InsistenceLayerResource;
 
-import io.github.jhipster.web.util.ResponseUtil;
-
 @RestController
 @RequestMapping("/api")
 @Profile("dev")

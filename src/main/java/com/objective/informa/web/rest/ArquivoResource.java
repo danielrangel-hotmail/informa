@@ -164,7 +164,8 @@ public class ArquivoResource {
     }
     
     private class BucketUrl {
-    	public String url;
+    	@SuppressWarnings("unused")
+		public String url;
     	public BucketUrl(String url) {
     		this.url = url;
     	}

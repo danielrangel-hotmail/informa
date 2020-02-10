@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.PerfilGrupo;
 import com.objective.informa.domain.PerfilUsuario;
-import com.objective.informa.domain.Post;
 import com.objective.informa.repository.GrupoRepository;
 import com.objective.informa.service.dto.GrupoDTO;
 import com.objective.informa.service.dto.SimpleUserDTO;
