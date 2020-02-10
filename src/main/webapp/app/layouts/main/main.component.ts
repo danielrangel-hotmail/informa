@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
     private titleService: Title,
     private router: Router,
     // private matomoTracker: MatomoTracker,
-    protected perfilGrupoViewService: PerfilGrupoViewService
+    public perfilGrupoViewService: PerfilGrupoViewService
   ) { }
 
   ngOnInit(): void {

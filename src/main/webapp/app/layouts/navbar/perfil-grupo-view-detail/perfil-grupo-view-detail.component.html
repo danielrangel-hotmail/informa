@@ -1,7 +1,7 @@
 <div  routerLinkActive="link-active" [routerLinkActiveOptions]="{exact: true}" class="d-flex align-items-start elemento" style="padding-top: 6px">
-    <div class="d-flex sem-outline flex-grow-1" [routerLink]="['/post', 'grupo', perfilGrupo.grupo.id]">
+    <div class="d-flex sem-outline flex-grow-1" [routerLink]="['/post', 'grupo', perfilGrupo.grupo!.id]">
         <jhi-grupo-logo [grupo]="perfilGrupo.grupo" [size]="16"></jhi-grupo-logo>
-        <h6 class="pl-2 flex-grow-1 elemento-filtros">{{perfilGrupo.grupo.nome}}</h6>
+        <h6 class="pl-2 flex-grow-1 elemento-filtros">{{perfilGrupo.grupo!.nome}}</h6>
     </div>
     <div (click)="toggleNotificaEmit()" [ngStyle]="{ 'color': perfilGrupo.notifica ? 'blue' : 'lightgrey' }" class="bell"><fa-icon icon="bell"></fa-icon></div>
     <div *ngIf="perfilGrupo.moderador" (click)="toggleModeradorEmit()" style="color: blue" class="pencil"><fa-icon icon="pencil-alt"></fa-icon></div>

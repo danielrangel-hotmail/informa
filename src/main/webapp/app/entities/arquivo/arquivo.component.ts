@@ -24,7 +24,7 @@ export class ArquivoComponent implements OnInit, OnDestroy {
   ascending: boolean;
 
   constructor(
-    protected arquivoService: ArquivoService,
+    public arquivoService: ArquivoService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks

@@ -45,7 +45,7 @@ export class NavbarComponent implements OnInit {
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
     private router: Router,
-    protected perfilGrupoViewService: PerfilGrupoViewService,
+    public perfilGrupoViewService: PerfilGrupoViewService,
     private environmentService: InsistenceEnvironmentService,
   ) {
     this.version = VERSION ? (VERSION.toLowerCase().startsWith('v') ? VERSION : 'v' + VERSION) : '';

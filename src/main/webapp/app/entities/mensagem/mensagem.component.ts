@@ -36,7 +36,7 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
-    protected perfilGrupoViewService: PerfilGrupoViewService
+    public perfilGrupoViewService: PerfilGrupoViewService
   ) {
     this.mensagems = [];
     this.itemsPerPage = 100;

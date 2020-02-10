@@ -37,8 +37,8 @@
                 </dd>
                 <dt><span jhiTranslate="informaApp.perfilGrupo.grupo">Grupo</span></dt>
                 <dd>
-                    <div *ngIf="perfilGrupo.grupoId">
-                        <a [routerLink]="['/grupo', perfilGrupo.grupoId, 'view']">{{perfilGrupo.grupoId}}</a>
+                    <div *ngIf="perfilGrupo.grupo!.id">
+                        <a [routerLink]="['/grupo', perfilGrupo.grupo!.id, 'view']">{{perfilGrupo.grupo!.id}}</a>
                     </div>
                 </dd>
             </dl>

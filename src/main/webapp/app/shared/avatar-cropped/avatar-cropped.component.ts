@@ -50,7 +50,7 @@ export class AvatarCroppedComponent  {
     this.showCropper = true;
   }
 
-  cropperReady(): void {
+  cropperReady(event: any): void {
     // console.log('Cropper ready', sourceImageDimensions);
   }
 

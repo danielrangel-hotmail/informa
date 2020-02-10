@@ -15,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class ColorPickerComponent implements ControlValueAccessor {
-  private color = '';
+  color = '';
 
   constructor() { }
 
