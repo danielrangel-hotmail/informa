@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { GrupoService } from './grupo.service';
 import { GrupoDeleteDialogComponent } from './grupo-delete-dialog.component';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 
 @Component({
   selector: 'jhi-grupo',

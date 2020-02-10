@@ -1,23 +1,21 @@
 import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, startWith, tap } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
 import { JhiDataUtils, JhiEventManager } from 'ng-jhipster';
 
-import { Grupo } from 'app/shared/model/grupo.model';
+import { Grupo } from '../../shared/model/grupo.model';
 import { GrupoService } from './grupo.service';
-import { ITopico } from 'app/shared/model/topico.model';
+import { ITopico } from '../../shared/model/topico.model';
 import { TopicoService } from 'app/entities/topico/topico.service';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 import { IImageCroped } from 'app/shared/avatar-cropped/avatar-cropped.component';
-import { IUser } from 'app/core/user/user.model';
-import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
 import { PerfilUsuarioService } from 'app/entities/perfil-usuario/perfil-usuario.service';
 
 @Component({

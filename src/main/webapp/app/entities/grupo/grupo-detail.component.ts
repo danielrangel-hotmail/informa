@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 
 @Component({
   selector: 'jhi-grupo-detail',

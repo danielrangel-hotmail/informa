@@ -5,7 +5,7 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IPerfilUsuario, PerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { IPerfilUsuario, PerfilUsuario } from '../../shared/model/perfil-usuario.model';
 import { PerfilUsuarioService } from './perfil-usuario.service';
 import { PerfilUsuarioComponent } from './perfil-usuario.component';
 import { PerfilUsuarioDetailComponent } from './perfil-usuario-detail.component';

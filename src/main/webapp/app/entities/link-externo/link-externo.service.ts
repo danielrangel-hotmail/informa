@@ -5,10 +5,10 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from '../../shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { ILinkExterno } from 'app/shared/model/link-externo.model';
+import { ILinkExterno } from '../../shared/model/link-externo.model';
 
 type EntityResponseType = HttpResponse<ILinkExterno>;
 type EntityArrayResponseType = HttpResponse<ILinkExterno[]>;

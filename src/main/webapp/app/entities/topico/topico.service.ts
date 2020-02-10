@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { ITopico } from 'app/shared/model/topico.model';
+import { ITopico } from '../../shared/model/topico.model';
 
 type EntityResponseType = HttpResponse<ITopico>;
 type EntityArrayResponseType = HttpResponse<ITopico[]>;

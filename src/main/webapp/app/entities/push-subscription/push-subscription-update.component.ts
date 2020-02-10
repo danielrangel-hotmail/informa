@@ -6,11 +6,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
 
-import { IPushSubscription, PushSubscription } from 'app/shared/model/push-subscription.model';
+import { IPushSubscription, PushSubscription } from '../../shared/model/push-subscription.model';
 import { PushSubscriptionService } from './push-subscription.service';
-import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { IPerfilUsuario } from '../../shared/model/perfil-usuario.model';
 import { PerfilUsuarioService } from 'app/entities/perfil-usuario/perfil-usuario.service';
 
 @Component({

@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ITopico, Topico } from 'app/shared/model/topico.model';
+import { ITopico, Topico } from '../../shared/model/topico.model';
 import { TopicoService } from './topico.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';

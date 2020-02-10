@@ -5,10 +5,10 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from '../../shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { IPerfilGrupo } from '../../shared/model/perfil-grupo.interface';
 
 type EntityResponseType = HttpResponse<IPerfilGrupo>;
 type EntityArrayResponseType = HttpResponse<IPerfilGrupo[]>;

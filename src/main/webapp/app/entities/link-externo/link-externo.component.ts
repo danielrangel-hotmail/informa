@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ILinkExterno } from 'app/shared/model/link-externo.model';
+import { ILinkExterno } from '../../shared/model/link-externo.model';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { LinkExternoService } from './link-externo.service';
 import { LinkExternoDeleteDialogComponent } from './link-externo-delete-dialog.component';
 

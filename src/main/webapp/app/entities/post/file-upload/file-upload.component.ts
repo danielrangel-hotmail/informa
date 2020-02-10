@@ -2,8 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FileUploader, FileItem } from 'ng2-file-upload';
 import { HttpResponse } from '@angular/common/http';
 import {ArquivoService} from 'app/entities/arquivo/arquivo.service';
-import {Arquivo} from 'app/shared/model/arquivo.model';
-import {IPost} from 'app/shared/model/post.interface';
+import {Arquivo} from '../../../shared/model/arquivo.model';
+import {IPost} from '../../../shared/model/post.interface';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 const URL = 'https://nao_usado';

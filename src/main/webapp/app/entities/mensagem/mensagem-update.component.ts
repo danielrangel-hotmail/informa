@@ -1,17 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
 
-import { Mensagem } from 'app/shared/model/mensagem.model';
+import { Mensagem } from '../../shared/model/mensagem.model';
 import { MensagemService } from './mensagem.service';
 import { IUser } from 'app/core/user/user.model';
-import { IPost } from 'app/shared/model/post.interface';
-import {IMensagem} from 'app/shared/model/mensagem.interface';
-import { JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import { IPost } from '../../shared/model/post.interface';
+import { IMensagem } from '../../shared/model/mensagem.interface';
+import { JhiEventManager } from 'ng-jhipster';
 // import { MatomoTracker } from 'ngx-matomo';
 
 type SelectableEntity = IUser | IPost | IMensagem;

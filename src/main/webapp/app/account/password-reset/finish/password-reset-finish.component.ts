@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, Renderer, ElementRef, ViewChild } fro
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { LoginModalService } from 'app/core/login/login-modal.service';
+import { LoginModalService } from '../../../core/login/login-modal.service';
 import { PasswordResetFinishService } from './password-reset-finish.service';
 
 @Component({

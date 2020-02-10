@@ -2,7 +2,7 @@ import { Component, AfterViewInit, Renderer, ElementRef, ViewChild } from '@angu
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { EMAIL_NOT_FOUND_TYPE } from 'app/shared/constants/error.constants';
+import { EMAIL_NOT_FOUND_TYPE } from '../../../shared/constants/error.constants';
 import { PasswordResetInitService } from './password-reset-init.service';
 
 @Component({

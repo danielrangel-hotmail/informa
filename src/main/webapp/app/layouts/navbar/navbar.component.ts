@@ -3,21 +3,20 @@ import { NavigationEnd, Router } from '@angular/router';
 import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 
-import { DEBUG_INFO_ENABLED, VERSION } from 'app/app.constants';
-import { LANGUAGES } from 'app/core/language/language.constants';
-import { AccountService } from 'app/core/auth/account.service';
-import { LoginModalService } from 'app/core/login/login-modal.service';
-import { LoginService } from 'app/core/login/login.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { DEBUG_INFO_ENABLED, VERSION } from '../../app.constants';
+import { LANGUAGES } from '../../core/language/language.constants';
+import { AccountService } from '../../core/auth/account.service';
+import { LoginModalService } from '../../core/login/login-modal.service';
+import { LoginService } from '../../core/login/login.service';
+import { ProfileService } from '../../layouts/profiles/profile.service';
 import {
   DOCKED,
   MOBILE,
   PerfilGrupoViewService,
   UNDOCKABLE,
   UNDOCKED
-} from 'app/layouts/navbar/perfil-grupo-view.service';
-import { InsistenceEnvironmentService } from 'app/shared/insistence-environment/insistence-environment.service';
-import { tap } from 'rxjs/operators';
+} from '../../layouts/navbar/perfil-grupo-view.service';
+import { InsistenceEnvironmentService } from '../../shared/insistence-environment/insistence-environment.service';
 
 @Component({
   selector: 'jhi-navbar',

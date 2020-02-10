@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IArquivo } from 'app/shared/model/arquivo.model';
+import { IArquivo } from '../../shared/model/arquivo.model';
 
 @Component({
   selector: 'jhi-arquivo-detail',

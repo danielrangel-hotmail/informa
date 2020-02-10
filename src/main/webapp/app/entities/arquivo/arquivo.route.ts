@@ -5,7 +5,7 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IArquivo, Arquivo } from 'app/shared/model/arquivo.model';
+import { IArquivo, Arquivo } from '../../shared/model/arquivo.model';
 import { ArquivoService } from './arquivo.service';
 import { ArquivoComponent } from './arquivo.component';
 import { ArquivoDetailComponent } from './arquivo-detail.component';

@@ -1,6 +1,6 @@
 import {Moment} from 'moment';
-import {IArquivo} from 'app/shared/model/arquivo.model';
-import {ILinkExterno} from 'app/shared/model/link-externo.model';
+import {IArquivo} from '../../shared/model/arquivo.model';
+import {ILinkExterno} from '../../shared/model/link-externo.model';
 
 export interface IMensagem {
   id?: number;

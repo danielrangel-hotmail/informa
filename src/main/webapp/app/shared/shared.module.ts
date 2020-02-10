@@ -8,15 +8,14 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { QuillEditorCustomComponent } from './quill/quill-editor-custom.component';
 import { QuillModule } from 'ngx-quill';
 import { HoveredComponent } from './hovered/hovered.component';
-import { JhiInputUserComponent } from 'app/shared/input-user/input-user.component';
-import { HoveredToggleComponent } from 'app/shared/hovered-toggle/hovered-toggle/hovered-toggle.component';
+import { HoveredToggleComponent } from './hovered-toggle/hovered-toggle.component';
 import { AvatarCroppedComponent } from './avatar-cropped/avatar-cropped.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { InsistenceEnvironmentComponent } from './insistence-environment/insistence-environment.component';
 
 @NgModule({
   imports: [InformaSharedLibsModule, QuillModule.forRoot() ],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, JhiInputUserComponent, HoveredToggleComponent, AvatarCroppedComponent, ColorPickerComponent, InsistenceEnvironmentComponent],
+  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, HoveredToggleComponent, AvatarCroppedComponent, ColorPickerComponent, InsistenceEnvironmentComponent],
   entryComponents: [LoginModalComponent],
   exports: [
     InformaSharedLibsModule,
@@ -28,7 +27,6 @@ import { InsistenceEnvironmentComponent } from './insistence-environment/insiste
     QuillEditorCustomComponent,
     HoveredComponent,
     HoveredToggleComponent,
-    JhiInputUserComponent,
     AvatarCroppedComponent,
     ColorPickerComponent
   ]

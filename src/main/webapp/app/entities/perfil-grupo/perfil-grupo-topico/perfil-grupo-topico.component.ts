@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITopico } from 'app/shared/model/topico.model';
+import { ITopico } from '../../../shared/model/topico.model';
 import { TopicoService } from 'app/entities/topico/topico.service';
 import { map } from 'rxjs/operators';
 

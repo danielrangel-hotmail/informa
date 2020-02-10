@@ -4,16 +4,16 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
 
-import { IArquivo, Arquivo } from 'app/shared/model/arquivo.model';
+import { IArquivo, Arquivo } from '../../shared/model/arquivo.model';
 import { ArquivoService } from './arquivo.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
-import { IPost } from 'app/shared/model/post.interface';
+import { IPost } from '../../shared/model/post.interface';
 import { PostService } from 'app/entities/shared-post/post.service';
 import { MensagemService } from 'app/entities/mensagem/mensagem.service';
-import {IMensagem} from 'app/shared/model/mensagem.interface';
+import {IMensagem} from '../../shared/model/mensagem.interface';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 

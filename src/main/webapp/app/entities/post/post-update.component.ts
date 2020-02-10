@@ -6,15 +6,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { Post } from 'app/shared/model/post.model';
-import { IPost } from 'app/shared/model/post.interface';
+import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
+import { Post } from '../../shared/model/post.model';
+import { IPost } from '../../shared/model/post.interface';
 import { PostService } from '../shared-post/post.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 
 type SelectableEntity = IUser | IGrupo;
 

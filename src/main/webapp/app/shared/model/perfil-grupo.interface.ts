@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 
 export interface IPerfilGrupo {
   id?: number;

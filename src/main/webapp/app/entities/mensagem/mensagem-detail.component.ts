@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
-import {IMensagem} from 'app/shared/model/mensagem.interface';
+import {IMensagem} from '../../shared/model/mensagem.interface';
 
 @Component({
   selector: 'jhi-mensagem-detail',

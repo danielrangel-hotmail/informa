@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { InsistenceEnvironmentService } from 'app/shared/insistence-environment/insistence-environment.service';
+import { InsistenceEnvironmentService } from '../../shared/insistence-environment/insistence-environment.service';
 import { Observable } from 'rxjs';
 import { IInsistenceEnvironment } from './insistence.environment.interface';
 

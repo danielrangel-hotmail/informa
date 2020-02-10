@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks, JhiDataUtils } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { IPerfilUsuario } from '../../shared/model/perfil-usuario.model';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { PerfilUsuarioService } from './perfil-usuario.service';
 import { PerfilUsuarioDeleteDialogComponent } from './perfil-usuario-delete-dialog.component';
 

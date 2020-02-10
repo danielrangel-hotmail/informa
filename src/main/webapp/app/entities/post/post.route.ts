@@ -5,8 +5,8 @@ import { Observable, of, EMPTY, forkJoin } from 'rxjs';
 import { flatMap, map, switchMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { Post } from 'app/shared/model/post.model';
-import { IPost } from 'app/shared/model/post.interface';
+import { Post } from '../../shared/model/post.model';
+import { IPost } from '../../shared/model/post.interface';
 import { PostService } from '../shared-post/post.service';
 import { PostDetailComponent } from './post-detail.component';
 import { PostUpdateComponent } from './post-update.component';
@@ -14,11 +14,11 @@ import {PostImageComponent} from 'app/entities/post/post-image/post-image.compon
 import {PostVideoLinkComponent} from 'app/entities/post/post-video-link/post-video-link.component';
 import { PostComponent } from 'app/entities/shared-post/post.component';
 import { DRAFTS, GRUPO, INFORMAIS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { GrupoService } from 'app/entities/grupo/grupo.service';
-import { Grupo} from 'app/shared/model/grupo.model';
+import { Grupo} from '../../shared/model/grupo.model';
 import { AccountService } from 'app/core/auth/account.service';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 
 
 const resolveGrupo$ = (id: number, service: GrupoService): Observable<IGrupo | never>  => {

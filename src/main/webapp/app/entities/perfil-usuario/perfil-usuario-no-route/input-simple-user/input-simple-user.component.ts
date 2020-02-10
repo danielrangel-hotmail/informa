@@ -1,6 +1,6 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { concat, Observable, of, Subject } from 'rxjs';
-import { ISimpleUser } from 'app/shared/model/simples-user.interface';
+import { ISimpleUser } from '../../../../shared/model/simples-user.interface';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { PerfilUsuarioService } from 'app/entities/perfil-usuario/perfil-usuario.service';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -86,6 +86,8 @@ export class InputSimpleUserComponent implements OnInit, ControlValueAccessor {
   registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   registerOnTouched(fn: any): void {
   }
 

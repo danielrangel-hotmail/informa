@@ -1,20 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {HttpResponse} from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, filter} from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { debounceTime, filter } from 'rxjs/operators';
 import * as moment from 'moment';
-import {DATE_TIME_FORMAT} from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
 
-import {ILinkExterno, LinkExterno} from 'app/shared/model/link-externo.model';
-import {LinkExternoService} from '../link-externo/link-externo.service';
-import {IUser} from 'app/core/user/user.model';
-import {IPost} from 'app/shared/model/post.interface';
-import {EmbedVideoService} from 'ngx-embed-video';
-import {LinkTipo} from 'app/shared/model/enumerations/link-tipo.model';
-import {IMensagem} from 'app/shared/model/mensagem.interface';
+import { ILinkExterno, LinkExterno } from '../../shared/model/link-externo.model';
+import { LinkExternoService } from '../link-externo/link-externo.service';
+import { IUser } from 'app/core/user/user.model';
+import { IPost } from '../../shared/model/post.interface';
+import { EmbedVideoService } from 'ngx-embed-video';
+import { LinkTipo } from '../../shared/model/enumerations/link-tipo.model';
+import { IMensagem } from '../../shared/model/mensagem.interface';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 
@@ -172,7 +172,7 @@ export class LinkExternoSharedComponent implements OnInit {
 
   protected subscribeToDelete(result: Observable<HttpResponse<any>>): void {
     result.subscribe(
-      (httpResponse) => this.onDeleteSuccess(),
+      () => this.onDeleteSuccess(),
       () => this.onSaveError()
     );
   }

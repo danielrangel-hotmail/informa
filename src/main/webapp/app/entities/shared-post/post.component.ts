@@ -4,10 +4,10 @@ import { Subscription, Observable } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import {IPost} from 'app/shared/model/post.interface';
-import {Post} from 'app/shared/model/post.model';
+import {IPost} from '../../shared/model/post.interface';
+import {Post} from '../../shared/model/post.model';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { PostService } from './post.service';
 import { PostDeleteDialogComponent } from './post-delete-dialog.component';
 import { AccountService } from 'app/core/auth/account.service';
@@ -16,7 +16,7 @@ import { PostPublicaDialogComponent } from './post-publica-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 import { DRAFTS, GRUPO, INFORMAIS, MEUS_GRUPOS, TODOS, TRABALHO } from 'app/entities/shared-post/post.constants';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 
 @Component({
   selector: 'jhi-post',

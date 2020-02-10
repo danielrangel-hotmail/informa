@@ -5,7 +5,7 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { ILinkExterno, LinkExterno } from 'app/shared/model/link-externo.model';
+import { ILinkExterno, LinkExterno } from '../../shared/model/link-externo.model';
 import { LinkExternoService } from './link-externo.service';
 import { LinkExternoComponent } from './link-externo.component';
 import { LinkExternoDetailComponent } from './link-externo-detail.component';

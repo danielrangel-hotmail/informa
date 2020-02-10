@@ -6,10 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
 import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
 
-import { IPerfilUsuario, PerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { IPerfilUsuario, PerfilUsuario } from '../../shared/model/perfil-usuario.model';
 import { PerfilUsuarioService } from './perfil-usuario.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { IUser } from 'app/core/user/user.model';

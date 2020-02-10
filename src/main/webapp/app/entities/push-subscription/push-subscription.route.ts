@@ -5,7 +5,7 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IPushSubscription, PushSubscription } from 'app/shared/model/push-subscription.model';
+import { IPushSubscription, PushSubscription } from '../../shared/model/push-subscription.model';
 import { PushSubscriptionService } from './push-subscription.service';
 import { PushSubscriptionComponent } from './push-subscription.component';
 import { PushSubscriptionDetailComponent } from './push-subscription-detail.component';

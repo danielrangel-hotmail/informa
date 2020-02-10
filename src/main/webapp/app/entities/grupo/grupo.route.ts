@@ -5,12 +5,12 @@ import { Observable, of, EMPTY, forkJoin } from 'rxjs';
 import { flatMap, map } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { Grupo } from 'app/shared/model/grupo.model';
+import { Grupo } from '../../shared/model/grupo.model';
 import { GrupoService } from './grupo.service';
 import { GrupoComponent } from './grupo.component';
 import { GrupoDetailComponent } from './grupo-detail.component';
 import { GrupoUpdateComponent } from './grupo-update.component';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 import { AccountService } from 'app/core/auth/account.service';
 
 

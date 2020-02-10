@@ -5,11 +5,11 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import {IMensagem} from 'app/shared/model/mensagem.interface';
+import {IMensagem} from '../../shared/model/mensagem.interface';
 import {MensagemPostComponent} from 'app/entities/mensagem/mensagem-post/mensagem-post.component';
 import {PostService} from 'app/entities/shared-post/post.service';
-import {IPost} from 'app/shared/model/post.interface';
-import {Post} from 'app/shared/model/post.model';
+import {IPost} from '../../shared/model/post.interface';
+import {Post} from '../../shared/model/post.model';
 
 @Injectable({ providedIn: 'root' })
 export class PostResolve implements Resolve<IMensagem> {

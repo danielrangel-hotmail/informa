@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {IPost} from 'app/shared/model/post.interface';
+import {IPost} from '../../../shared/model/post.interface';
 import { EmbedVideoService } from 'ngx-embed-video';
 
 @Component({

@@ -1,4 +1,4 @@
-import { ISimpleUser } from 'app/shared/model/simples-user.interface';
+import { ISimpleUser } from '../../shared/model/simples-user.interface';
 
 export class SimpleUser implements ISimpleUser {
   constructor(

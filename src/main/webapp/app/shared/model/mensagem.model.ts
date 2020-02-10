@@ -1,7 +1,7 @@
 import {Moment} from 'moment';
-import {IArquivo} from 'app/shared/model/arquivo.model';
-import {ILinkExterno} from 'app/shared/model/link-externo.model';
-import {IMensagem} from 'app/shared/model/mensagem.interface';
+import {IArquivo} from '../../shared/model/arquivo.model';
+import {ILinkExterno} from '../../shared/model/link-externo.model';
+import {IMensagem} from '../../shared/model/mensagem.interface';
 
 export class Mensagem implements IMensagem {
   constructor(

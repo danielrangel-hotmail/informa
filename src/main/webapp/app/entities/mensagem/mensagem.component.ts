@@ -4,11 +4,11 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-// import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+// import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { MensagemService } from './mensagem.service';
 import { MensagemDeleteDialogComponent } from './mensagem-delete-dialog.component';
-import {IPost} from 'app/shared/model/post.interface';
-import {IMensagem} from 'app/shared/model/mensagem.interface';
+import {IPost} from '../../shared/model/post.interface';
+import {IMensagem} from '../../shared/model/mensagem.interface';
 import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
 
 @Component({

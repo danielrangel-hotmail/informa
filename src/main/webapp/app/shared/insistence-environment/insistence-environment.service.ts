@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { EMPTY, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IInsistenceEnvironment } from './insistence.environment.interface';
-import { SERVER_API_URL } from 'app/app.constants';
-import { IInsistenceEnvironmentStatus } from 'app/shared/insistence-environment/insistence-environment-status.interface';
+import { SERVER_API_URL } from '../../app.constants';
+import { IInsistenceEnvironmentStatus } from '../../shared/insistence-environment/insistence-environment-status.interface';
 
 type EntityResponseType = HttpResponse<IInsistenceEnvironment>;
 type EntityArrayResponseType = HttpResponse<IInsistenceEnvironment[]>;

@@ -5,7 +5,7 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { ITopico, Topico } from 'app/shared/model/topico.model';
+import { ITopico, Topico } from '../../shared/model/topico.model';
 import { TopicoService } from './topico.service';
 import { TopicoComponent } from './topico.component';
 import { TopicoDetailComponent } from './topico-detail.component';

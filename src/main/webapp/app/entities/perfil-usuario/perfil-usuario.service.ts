@@ -5,11 +5,11 @@ import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from '../../shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
-import { ISimpleUser } from 'app/shared/model/simples-user.interface';
+import { IPerfilUsuario } from '../../shared/model/perfil-usuario.model';
+import { ISimpleUser } from '../../shared/model/simples-user.interface';
 
 type EntityResponseType = HttpResponse<IPerfilUsuario>;
 type EntityArrayResponseType = HttpResponse<IPerfilUsuario[]>;

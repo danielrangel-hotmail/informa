@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {IPost} from 'app/shared/model/post.interface';
+import {IPost} from '../../../shared/model/post.interface';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

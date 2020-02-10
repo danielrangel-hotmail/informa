@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { IPerfilGrupo } from '../../../shared/model/perfil-grupo.interface';
 
 @Component({
   selector: 'jhi-perfil-grupo-view-detail',

@@ -5,12 +5,12 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
+import { PerfilGrupo } from '../../shared/model/perfil-grupo.model';
 import { PerfilGrupoService } from './perfil-grupo.service';
 import { PerfilGrupoComponent } from './perfil-grupo.component';
 import { PerfilGrupoDetailComponent } from './perfil-grupo-detail.component';
 import { PerfilGrupoUpdateComponent } from './perfil-grupo-update.component';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { IPerfilGrupo } from '../../shared/model/perfil-grupo.interface';
 
 @Injectable({ providedIn: 'root' })
 export class PerfilGrupoResolve implements Resolve<IPerfilGrupo> {

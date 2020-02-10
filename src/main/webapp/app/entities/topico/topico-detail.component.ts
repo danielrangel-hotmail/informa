@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ITopico } from 'app/shared/model/topico.model';
+import { ITopico } from '../../shared/model/topico.model';
 
 @Component({
   selector: 'jhi-topico-detail',

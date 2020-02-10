@@ -4,16 +4,16 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { PerfilGrupo } from 'app/shared/model/perfil-grupo.model';
+import { PerfilGrupo } from '../../shared/model/perfil-grupo.model';
 
 import { PerfilGrupoService } from './perfil-grupo.service';
 import { PerfilGrupoDeleteDialogComponent } from './perfil-grupo-delete-dialog.component';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 import { PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
-import { IGrupo } from 'app/shared/model/grupo.interface';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
-import { ITopico } from 'app/shared/model/topico.model';
+import { IGrupo } from '../../shared/model/grupo.interface';
+import { IPerfilGrupo } from '../../shared/model/perfil-grupo.interface';
+import { ITopico } from '../../shared/model/topico.model';
 
 @Component({
   selector: 'jhi-perfil-grupo',

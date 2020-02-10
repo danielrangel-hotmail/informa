@@ -1,10 +1,10 @@
-import { Component, AfterViewInit, Renderer, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Renderer, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
-import { LoginService } from 'app/core/login/login.service';
-import { DEBUG_INFO_ENABLED } from 'app/app.constants';
+import { LoginService } from '../../core/login/login.service';
+import { DEBUG_INFO_ENABLED } from '../../app.constants';
 import { IInsistenceEnvironment } from '../insistence-environment/insistence.environment.interface';
 import { InsistenceEnvironmentService } from '../insistence-environment/insistence-environment.service';
 import { switchMap } from 'rxjs/operators';
@@ -72,7 +72,7 @@ export class LoginModalComponent implements AfterViewInit {
             this.router.navigate(['']);
           }
         },
-        (val) => (
+        () => (
           this.authenticationError = true
         )
       );

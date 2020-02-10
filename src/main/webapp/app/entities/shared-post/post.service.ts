@@ -7,11 +7,11 @@ import * as moment from 'moment';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { IPost } from 'app/shared/model/post.interface';
-import { IEntity } from 'app/shared/model/entity.model';
+import { IPost } from '../../shared/model/post.interface';
+import { IEntity } from '../../shared/model/entity.model';
 import {LinkExternoService} from 'app/entities/link-externo/link-externo.service';
 import {ArquivoService} from 'app/entities/arquivo/arquivo.service';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
 
 type EntityResponseType = HttpResponse<IPost>;
 type EntityArrayResponseType = HttpResponse<IPost[]>;

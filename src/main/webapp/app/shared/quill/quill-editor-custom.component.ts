@@ -1,11 +1,11 @@
 import { Component, forwardRef, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill'
-import { UserService } from 'app/core/user/user.service';
+import { UserService } from '../../core/user/user.service';
 import 'quill-emoji/dist/quill-emoji.js';
 import 'quill-mention';
 import Quill from 'quill';
-import {User} from 'app/core/user/user.model';
+import {User} from '../../core/user/user.model';
 import { HttpResponse } from '@angular/common/http';
 
 @Component({

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IPushSubscription } from 'app/shared/model/push-subscription.model';
+import { IPushSubscription } from '../../shared/model/push-subscription.model';
 import { PushSubscriptionService } from './push-subscription.service';
 
 @Component({

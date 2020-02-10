@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ILinkExterno } from 'app/shared/model/link-externo.model';
+import { ILinkExterno } from '../../shared/model/link-externo.model';
 
 @Component({
   selector: 'jhi-link-externo-detail',

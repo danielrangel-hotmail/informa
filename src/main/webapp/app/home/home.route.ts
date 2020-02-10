@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
 
 import { HomeComponent } from './home.component';
-import {PostComponent} from 'app/entities/shared-post/post.component';
-import { MEUS_GRUPOS } from 'app/entities/shared-post/post.constants';
-import { PostsGrupoResolve } from 'app/entities/post/post.route';
+import {PostComponent} from '../entities/shared-post/post.component';
+import { MEUS_GRUPOS } from '../entities/shared-post/post.constants';
+import { PostsGrupoResolve } from '../entities/post/post.route';
 
 export const HOME_ROUTE: Route = {
   path: '',

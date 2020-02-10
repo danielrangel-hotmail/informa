@@ -3,10 +3,10 @@ import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRouteSnapshot, NavigationEnd, NavigationError } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { AccountService } from 'app/core/auth/account.service';
-import { MatomoTracker } from 'ngx-matomo';
-import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
-import { DEBUG_INFO_ENABLED } from 'app/app.constants';
+import { AccountService } from '../../core/auth/account.service';
+// import { MatomoTracker } from 'ngx-matomo';
+import { DOCKED, PerfilGrupoViewService } from '../../layouts/navbar/perfil-grupo-view.service';
+// import { DEBUG_INFO_ENABLED } from '../../app.constants';
 
 @Component({
   selector: 'jhi-main',

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
+import { JhiEventManager } from 'ng-jhipster';
 
-import { IPost } from 'app/shared/model/post.interface';
+import { IPost } from '../../shared/model/post.interface';
 import { PostService } from '../shared-post/post.service';
 // import { MatomoTracker } from 'ngx-matomo';
 
@@ -33,9 +33,9 @@ export class PostPublicaDialogComponent {
   }
 
   analyticsEvent(): void {
-    let action = 'publicacao'
-    if (this.post!.arquivos!.length > 0) action = action + '_foto';
-    if (this.post!.linksExternos!.length > 0) action = action + '_video';
+    // let action = 'publicacao'
+    // if (this.post!.arquivos!.length > 0) action = action + '_foto';
+    // if (this.post!.linksExternos!.length > 0) action = action + '_video';
     // this.matomoTracker.trackEvent('Post', action, this.post!.grupoId!.toString(), this.post!.id);
 
   }

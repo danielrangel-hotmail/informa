@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IPost } from 'app/shared/model/post.interface';
+import { IPost } from '../../shared/model/post.interface';
 import { PostService } from './post.service';
 
 @Component({

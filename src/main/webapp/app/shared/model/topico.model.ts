@@ -1,5 +1,5 @@
-import { ITopico } from 'app/shared/model/topico.model';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { ITopico } from '../../shared/model/topico.model';
+import { IGrupo } from '../../shared/model/grupo.interface';
 
 export interface ITopico {
   id?: number;

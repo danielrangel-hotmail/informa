@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
-import { IGrupo } from 'app/shared/model/grupo.interface';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { IGrupo } from '../../shared/model/grupo.interface';
+import { IPerfilGrupo } from '../../shared/model/perfil-grupo.interface';
 
 export class PerfilGrupo implements IPerfilGrupo {
   constructor(

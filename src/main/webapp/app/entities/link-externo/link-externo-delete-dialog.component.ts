@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { ILinkExterno } from 'app/shared/model/link-externo.model';
+import { ILinkExterno } from '../../shared/model/link-externo.model';
 import { LinkExternoService } from './link-externo.service';
 
 @Component({

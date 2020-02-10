@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JhiDataUtils } from 'ng-jhipster';
 
-import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { IPerfilUsuario } from '../../shared/model/perfil-usuario.model';
 
 @Component({
   selector: 'jhi-perfil-usuario-detail',

@@ -4,9 +4,9 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IArquivo } from 'app/shared/model/arquivo.model';
+import { IArquivo } from '../../shared/model/arquivo.model';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
+import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { ArquivoService } from './arquivo.service';
 import { ArquivoDeleteDialogComponent } from './arquivo-delete-dialog.component';
 

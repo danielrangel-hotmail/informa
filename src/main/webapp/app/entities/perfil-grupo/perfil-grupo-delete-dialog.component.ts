@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
 import { PerfilGrupoService } from './perfil-grupo.service';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { IPerfilGrupo } from '../../shared/model/perfil-grupo.interface';
 
 @Component({
   templateUrl: './perfil-grupo-delete-dialog.component.html'

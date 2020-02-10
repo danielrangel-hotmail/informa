@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { ITopico } from 'app/shared/model/topico.model';
+import { ITopico } from '../../shared/model/topico.model';
 import { TopicoService } from './topico.service';
 
 @Component({

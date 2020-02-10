@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
-import { IPushSubscription } from 'app/shared/model/push-subscription.model';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
+import { IPushSubscription } from '../../shared/model/push-subscription.model';
+import { IPerfilGrupo } from '../../shared/model/perfil-grupo.interface';
 
 export interface IPerfilUsuario {
   id?: number;

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { ITopico } from 'app/shared/model/topico.model';
+import { ITopico } from '../../shared/model/topico.model';
 import { TopicoService } from './topico.service';
 import { TopicoDeleteDialogComponent } from './topico-delete-dialog.component';
 

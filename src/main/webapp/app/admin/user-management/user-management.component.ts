@@ -6,11 +6,11 @@ import { flatMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { AccountService } from 'app/core/auth/account.service';
-import { Account } from 'app/core/user/account.model';
-import { UserService } from 'app/core/user/user.service';
-import { User } from 'app/core/user/user.model';
+import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
+import { AccountService } from '../../core/auth/account.service';
+import { Account } from '../../core/user/account.model';
+import { UserService } from '../../core/user/user.service';
+import { User } from '../../core/user/user.model';
 import { UserManagementDeleteDialogComponent } from './user-management-delete-dialog.component';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { TrackerService } from 'app/core/tracker/tracker.service';
-import { TrackerActivity } from 'app/core/tracker/tracker-activity.model';
+import { TrackerService } from '../../core/tracker/tracker.service';
+import { TrackerActivity } from '../../core/tracker/tracker-activity.model';
 
 @Component({
   selector: 'jhi-tracker',

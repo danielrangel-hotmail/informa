@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IGrupo } from 'app/shared/model/grupo.interface';
+import { IGrupo } from '../../../../shared/model/grupo.interface';
 
 @Component({
   selector: 'jhi-grupo-testa',

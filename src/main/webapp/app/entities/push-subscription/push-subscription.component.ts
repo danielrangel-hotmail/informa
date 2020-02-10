@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IPushSubscription } from 'app/shared/model/push-subscription.model';
+import { IPushSubscription } from '../../shared/model/push-subscription.model';
 import { PushSubscriptionService } from './push-subscription.service';
 import { PushSubscriptionDeleteDialogComponent } from './push-subscription-delete-dialog.component';
 

@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import './vendor';
-import { InformaSharedModule } from 'app/shared/shared.module';
-import { InformaCoreModule } from 'app/core/core.module';
+import { InformaSharedModule } from './shared/shared.module';
+import { InformaCoreModule } from './core/core.module';
 import { InformaAppRoutingModule } from './app-routing.module';
 import { InformaHomeModule } from './home/home.module';
 import { InformaEntityModule } from './entities/entity.module';

@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
-import { ITopico } from 'app/shared/model/topico.model';
-import { IPerfilGrupo } from 'app/shared/model/perfil-grupo.interface';
-import { ISimpleUser } from 'app/shared/model/simples-user.interface';
+import { ITopico } from '../../shared/model/topico.model';
+import { IPerfilGrupo } from '../../shared/model/perfil-grupo.interface';
+import { ISimpleUser } from '../../shared/model/simples-user.interface';
 
 export interface IGrupo {
   id?: number;

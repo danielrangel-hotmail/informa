@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IPost } from 'app/shared/model/post.interface';
+import { IPost } from '../../shared/model/post.interface';
 
 @Component({
   selector: 'jhi-post-detail',

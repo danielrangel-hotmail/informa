@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { LinkTipo } from 'app/shared/model/enumerations/link-tipo.model';
+import { LinkTipo } from '../../shared/model/enumerations/link-tipo.model';
 
 export interface ILinkExterno {
   id?: number;

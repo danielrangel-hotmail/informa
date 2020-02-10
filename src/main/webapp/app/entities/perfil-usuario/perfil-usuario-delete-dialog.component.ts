@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { IPerfilUsuario } from 'app/shared/model/perfil-usuario.model';
+import { IPerfilUsuario } from '../../shared/model/perfil-usuario.model';
 import { PerfilUsuarioService } from './perfil-usuario.service';
 
 @Component({

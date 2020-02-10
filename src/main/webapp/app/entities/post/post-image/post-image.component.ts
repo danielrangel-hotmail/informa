@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPost } from 'app/shared/model/post.interface';
-import { combineLatest, forkJoin, Observable } from 'rxjs';
+import { IPost } from '../../../shared/model/post.interface';
+import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {IArquivo} from 'app/shared/model/arquivo.model';
 import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ArquivoService } from 'app/entities/arquivo/arquivo.service';
@@ -38,7 +37,7 @@ export class PostImageComponent implements OnInit {
 
   deleteImage(image: any, i: any): void {
     // eslint-disable-next-line no-console
-    // console.log(this.arquivosDoPost ? this.arquivosDoPost[i] : "nada");
+    console.log(`delete ${image} ${i}`);
   }
 
   ngOnInit(): void {

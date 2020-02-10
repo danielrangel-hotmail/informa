@@ -4,18 +4,17 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_TIME_FORMAT } from '../../shared/constants/input.constants';
 
-import { ILinkExterno, LinkExterno } from 'app/shared/model/link-externo.model';
+import { ILinkExterno, LinkExterno } from '../../shared/model/link-externo.model';
 import { LinkExternoService } from './link-externo.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
-import { IPost } from 'app/shared/model/post.interface';
+import { IPost } from '../../shared/model/post.interface';
 import { MensagemService } from 'app/entities/mensagem/mensagem.service';
-import {PostService} from 'app/entities/shared-post/post.service';
-import {IMensagem} from 'app/shared/model/mensagem.interface';
+import { PostService } from 'app/entities/shared-post/post.service';
+import { IMensagem } from '../../shared/model/mensagem.interface';
 
 type SelectableEntity = IUser | IPost | IMensagem;
 

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-import { AccountService } from 'app/core/auth/account.service';
-import { Account } from 'app/core/user/account.model';
+import { AccountService } from '../../core/auth/account.service';
+import { Account } from '../../core/user/account.model';
 import { PasswordService } from './password.service';
 
 @Component({
