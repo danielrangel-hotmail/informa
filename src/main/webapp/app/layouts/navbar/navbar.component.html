@@ -6,7 +6,7 @@
     <ng-container *ngIf = "perfilGrupoViewService.status$ | async as dockingState">
         <div class="form-inline mr-auto position-relative" *ngIf="isAuthenticated() && dockingState !== MOBILE">
             <div class="d-flex align-items-center" [ngClass]="{ 'navegacao-undocked' : (dockingState === UNDOCKED || dockingState === UNDOCKABLE), 'navegacao' : dockingState === DOCKED }">
-                <h6 id="navegacao" (click)="toggleOpened(dockingState)" class="flex-grow-1 mb-0" *ngIf = "perfilGrupoViewService.navegacao$ | async as navegacao">{{navegacao}}</h6>
+                <h5 id="navegacao" (click)="toggleOpened(dockingState)" class="flex-grow-1 mb-0" *ngIf = "perfilGrupoViewService.navegacao$ | async as navegacao">{{navegacao}}</h5>
                 <div *ngIf = "(dockingState === UNDOCKED || dockingState === UNDOCKABLE)" class="pr-2">
                     <fa-icon class="pr-2" icon="caret-square-left" (click)="dock()" *ngIf = "perfilGrupoOpened && (dockingState === UNDOCKED)"></fa-icon>
                     <fa-icon icon="caret-down" (click)="toggleOpened(dockingState)"></fa-icon>
