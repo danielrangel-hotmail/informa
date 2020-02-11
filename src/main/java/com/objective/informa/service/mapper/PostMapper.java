@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Mapper for the entity {@link Post} and its DTO {@link PostDTO}.
  */
-@Mapper(componentModel = "spring", uses = {ArquivoMapper.class, LinkExternoMapper.class})
+@Mapper(componentModel = "spring", uses = {ArquivoMapper.class, LinkExternoMapper.class, PostReacaoMapper.class})
 public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
 
     @Autowired private GrupoRepository grupoRepository;
@@ -31,6 +31,8 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Mapping(target = "removeArquivos", ignore = true)
     @Mapping(target = "linksExternos", ignore = true)
     @Mapping(target = "removeLinksExternos", ignore = true)
+    @Mapping(target = "reacoes", ignore = true)
+    @Mapping(target = "removeReacoes", ignore = true)
     @Mapping(source = "autorId", target = "autor")
     @Mapping(source = "grupoId", target = "grupo")
     public abstract Post toEntity(PostDTO postDTO);

@@ -33,6 +33,9 @@ public abstract class GrupoMapper implements EntityMapper<GrupoDTO, Grupo> {
     @Mapping(source = "usuarios", target = "moderadores", qualifiedByName = "moderadores")
     public abstract GrupoDTO toDto(Grupo grupo);
 
+    @Mapping(target = "usuarios", ignore = true)
+    @Mapping(target = "removeUsuarios", ignore = true)
+    @Mapping(target = "removeTopicos", ignore = true)
     public abstract void updateGrupoFromDto(GrupoDTO grupoDto, @MappingTarget Grupo grupo);
     
     @Named("moderadores")

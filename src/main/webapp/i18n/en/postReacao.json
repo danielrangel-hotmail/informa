@@ -1,0 +1,27 @@
+{
+  "informaApp": {
+    "postReacao": {
+      "home": {
+        "title": "Post Reacaos",
+        "createLabel": "Create a new Post Reacao",
+        "createOrEditLabel": "Create or edit a Post Reacao",
+        "notFound": "No Post Reacaos found"
+      },
+      "created": "A new Post Reacao is created with identifier {{ param }}",
+      "updated": "A Post Reacao is updated with identifier {{ param }}",
+      "deleted": "A Post Reacao is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Post Reacao {{ id }}?"
+      },
+      "detail": {
+        "title": "Post Reacao"
+      },
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "versao": "Versao",
+      "reacao": "Reacao",
+      "perfil": "Perfil",
+      "post": "Post"
+    }
+  }
+}

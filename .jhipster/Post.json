@@ -40,6 +40,12 @@
             "relationshipName": "linksExternos"
         },
         {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "postReacao",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "reacoes"
+        },
+        {
             "relationshipType": "many-to-one",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "post",

@@ -173,4 +173,21 @@ relationship OneToMany {
 	Grupo{usuarios} to PerfilGrupo{grupo required}
 }
 
+@dto(mapstruct)
+@service(serviceClass)
+entity PostReacao {
+	id UUID,
+    criacao ZonedDateTime,
+    ultimaEdicao ZonedDateTime,
+    versao Long,
+	reacao String
+}
+
+relationship ManyToOne {
+	PostReacao{perfil required} to PerfilUsuario 
+}
+
+relationship OneToMany {
+	Post{reacoes} to PostReacao{post required}
+}
 

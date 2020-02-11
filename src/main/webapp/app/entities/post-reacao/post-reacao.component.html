@@ -1,0 +1,73 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="informaApp.postReacao.home.title">Post Reacaos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-post-reacao" [routerLink]="['/post-reacao/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="informaApp.postReacao.home.createLabel">
+            Create a new Post Reacao
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="postReacaos?.length === 0">
+        <span jhiTranslate="informaApp.postReacao.home.notFound">No postReacaos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="postReacaos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr>
+            <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+            <th scope="col" ><span jhiTranslate="informaApp.postReacao.criacao">Criacao</span></th>
+            <th scope="col" ><span jhiTranslate="informaApp.postReacao.ultimaEdicao">Ultima Edicao</span></th>
+            <th scope="col" ><span jhiTranslate="informaApp.postReacao.versao">Versao</span></th>
+            <th scope="col" ><span jhiTranslate="informaApp.postReacao.reacao">Reacao</span></th>
+            <th scope="col" ><span jhiTranslate="informaApp.postReacao.perfil">Perfil</span></th>
+            <th scope="col" ><span jhiTranslate="informaApp.postReacao.post">Post</span></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let postReacao of postReacaos ;trackBy: trackId">
+                <td><a [routerLink]="['/post-reacao', postReacao.id, 'view' ]">{{postReacao.id}}</a></td>
+                <td>{{postReacao.criacao | date:'medium'}}</td>
+                <td>{{postReacao.ultimaEdicao | date:'medium'}}</td>
+                <td>{{postReacao.versao}}</td>
+                <td>{{postReacao.reacao}}</td>
+                <td>
+                    <div *ngIf="postReacao.perfilId">
+                        <a [routerLink]="['/perfil-usuario', postReacao.perfilId , 'view' ]" >{{postReacao.perfilId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="postReacao.postId">
+                        <a [routerLink]="['/post', postReacao.postId , 'view' ]" >{{postReacao.postId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/post-reacao', postReacao.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/post-reacao', postReacao.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(postReacao)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

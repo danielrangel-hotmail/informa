@@ -1,0 +1,27 @@
+{
+  "informaApp": {
+    "postReacao": {
+      "home": {
+        "title": "Post Reacaos",
+        "createLabel": "Criar novo Post Reacao",
+        "createOrEditLabel": "Criar ou editar Post Reacao",
+        "notFound": "Nenhum Post Reacao encontrado"
+      },
+      "created": "Um novo Post Reacao foi criado com o identificador {{ param }}",
+      "updated": "Um Post Reacao foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Post Reacao foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Post Reacao {{ id }}?"
+      },
+      "detail": {
+        "title": "Post Reacao"
+      },
+      "criacao": "Criacao",
+      "ultimaEdicao": "Ultima Edicao",
+      "versao": "Versao",
+      "reacao": "Reacao",
+      "perfil": "Perfil",
+      "post": "Post"
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { IArquivo } from '../../shared/model/arquivo.model';
 import { ILinkExterno } from '../../shared/model/link-externo.model';
 import {IPost} from '../../shared/model/post.interface';
+import { IPostReacao } from 'app/shared/model/post-reacao.model';
 
 
 export class Post implements IPost {
@@ -15,6 +16,7 @@ export class Post implements IPost {
     public publicacao?: Moment,
     public arquivos?: IArquivo[],
     public linksExternos?: ILinkExterno[],
+    public reacoes?: IPostReacao[],
     public autorId?: number,
     public numeroDeMensagens?: number,
     public autorNome?: string,
