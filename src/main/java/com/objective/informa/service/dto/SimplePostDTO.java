@@ -33,6 +33,10 @@ public class SimplePostDTO implements Serializable {
         this.versao = versao;
     }
 
+    public SimplePostDTO() {
+    	
+    }
+    
     public SimplePostDTO(Long id, Long versao) {
         this.id = id;
         this.versao = versao;
@@ -66,4 +70,6 @@ public class SimplePostDTO implements Serializable {
             ", versao=" + versao +
             '}';
     }
+   
+    
 }

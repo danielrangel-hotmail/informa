@@ -26,6 +26,7 @@ public class Post implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @Version
     @Column(name = "versao")
     private Long versao;
 

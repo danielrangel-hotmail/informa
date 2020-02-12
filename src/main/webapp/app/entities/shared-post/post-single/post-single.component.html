@@ -30,19 +30,25 @@
                 <jhi-post-link-externo-video-view [post]="post" ></jhi-post-link-externo-video-view>
             </div>
             <hr class="mt-0 mb-0">
-            <div class="d-flex justify-content-between" style="font-size: 12px">
+            <div class="d-flex justify-content-between position-relative" style="font-size: 12px">
                 <div class="d-flex align-items-center">
-                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao">
+                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao" >
                         <div class="p-1 d-none d-sm-block">
-                            <fa-icon icon="thumbs-up"></fa-icon>
+                            <fa-icon icon="thumbs-up" (click)="toggleMostraReacoesPicker()"></fa-icon>
                             <span>Sem reações</span>
                         </div>
                         <div class="p-1 d-block d-sm-none">
-                            <fa-icon icon="thumbs-up"></fa-icon>
+                            <fa-icon icon="thumbs-up" (click)="toggleMostraReacoesPicker()"></fa-icon>
                             <span>0</span>
                         </div>
-
                     </jhi-hovered>
+                    <jhi-emoji-list-picker
+                        (cancel)="fechaEmojiListPicker($event)"
+                        [emojiList]="emojiList"
+                        [chosen]="chosen"
+                        (picked)="emojiReaction($event)"
+                        class = "emoji-list-picker"
+                        *ngIf="mostraReacoesPicker"></jhi-emoji-list-picker>
                     <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao" [routerLink]="['/mensagem/post/', post.id]">
                         <div class="p-1 d-none d-sm-block">
                             <fa-icon icon="comment"></fa-icon>

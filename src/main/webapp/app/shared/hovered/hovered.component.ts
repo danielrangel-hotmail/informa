@@ -3,13 +3,15 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 @Component({
   selector: 'jhi-hovered',
   template: `
-      <div [ngStyle]="isHovered ? hoverStyle : null">
+      <div
+        [ngStyle]="isHovered ? hoverStyle : null"
+      >
         <ng-content></ng-content>
       </div>
       `
 })
 export class HoveredComponent implements OnInit {
-@Input() hoverStyle: any;
+@Input() hoverStyle?: any;
 isHovered = false;
 
   constructor() { }

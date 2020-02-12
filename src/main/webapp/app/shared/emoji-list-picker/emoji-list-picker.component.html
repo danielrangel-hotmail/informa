@@ -1,0 +1,14 @@
+<div class="emoji-list-container d-flex" (clickOutside) = clickout() >
+    <ng-container *ngFor="let emoji of emojiList">
+        <jhi-hovered-toggle [alwaysIn]="(chosen !== null) && (emoji.emoji === chosen.emoji)" (click)="emojiPicked(emoji)" >
+            <span class="ap emoji" [ngClass]="'ap-'+emoji.emoji"></span>
+            <div class="hovered-in"></div>
+            <div class="hovered-out"></div>
+        </jhi-hovered-toggle>
+    </ng-container>
+    <jhi-hovered-toggle (click)="emojiPicked(null)">
+        <span class="ap emoji ap-x"></span>
+        <div class="hovered-in"></div>
+        <div class="hovered-out"></div>
+    </jhi-hovered-toggle>
+</div>

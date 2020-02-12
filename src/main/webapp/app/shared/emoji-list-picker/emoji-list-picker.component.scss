@@ -1,0 +1,30 @@
+.emoji-list-container{
+  background-color: black;
+  border-radius: 5px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+
+.emoji {
+  margin: 9px 7px -2px 7px;
+}
+
+.emoji-hovered {
+  background: #0d5aa7;
+}
+
+.hovered-in {
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: orange;
+  height: 5px;
+  margin-bottom: 5px;
+}
+
+.hovered-out {
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: black;
+  height: 5px;
+  margin-bottom: 5px;
+}

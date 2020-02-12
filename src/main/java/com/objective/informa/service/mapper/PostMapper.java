@@ -1,13 +1,21 @@
 package com.objective.informa.service.mapper;
 
-import com.objective.informa.domain.*;
+import java.util.Set;
+
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.objective.informa.domain.Grupo;
+import com.objective.informa.domain.Post;
+import com.objective.informa.domain.PostReacao;
+import com.objective.informa.domain.User;
 import com.objective.informa.repository.GrupoRepository;
 import com.objective.informa.repository.MensagemRepository;
 import com.objective.informa.repository.UserRepository;
+import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.dto.PostDTO;
-
-import org.mapstruct.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Mapper for the entity {@link Post} and its DTO {@link PostDTO}.
@@ -18,6 +26,8 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Autowired private GrupoRepository grupoRepository;
     @Autowired private UserRepository userRepository;
     @Autowired private MensagemRepository mensagemRepository;
+    @Autowired private SecurityFacade securityFacade;
+   
 
     @Mapping(source = "autor.id", target = "autorId")
     @Mapping(source = "autor.firstName", target = "autorNome")
@@ -25,6 +35,7 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Mapping(source = "grupo.id", target = "grupoId")
     @Mapping(source = "grupo.nome", target = "grupoNome")
     @Mapping(source = "id", target = "numeroDeMensagens", qualifiedByName = "numeroDeMensagens")
+    @Mapping(source = "reacoes", target = "reacaoLogado", qualifiedByName = "reacaoLogado")
     public abstract PostDTO toDto(Post post);
 
     @Mapping(target = "arquivos", ignore = true)
@@ -40,6 +51,15 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Named("numeroDeMensagens")
     public Long numeroDeMensagensFromId(Long id) {
         return this.mensagemRepository.countByPostId(id);
+    }
+
+    @Named("reacaoLogado")
+    public PostReacao reacaoLogadoFromReacoes(Set<PostReacao> reacoes) {
+    	String userLogin = securityFacade.getCurrentUserLogin().get();
+        return reacoes.stream()
+        		.filter(r -> r.getPerfil().getUsuario().getLogin().equals(userLogin))
+        		.findAny()
+        		.orElse(null);
     }
 
     public User autorFromId(Long id) {

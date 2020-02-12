@@ -12,6 +12,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ClickOutsideModule } from 'ng-click-outside';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     LayoutModule,
     ImageCropperModule,
     ColorPickerModule,
-    NgSelectModule
+    NgSelectModule,
+    ClickOutsideModule
   ]
 })
 export class InformaSharedLibsModule {}

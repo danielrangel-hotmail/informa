@@ -45,6 +45,8 @@ public class PostDTO implements Serializable {
     private Boolean oficial;
 
     private Long numeroDeMensagens;
+    
+    private PostReacaoDTO reacaoLogado;
 
     private List<ArquivoDTO> arquivos = new ArrayList<ArquivoDTO>();
 
@@ -179,6 +181,14 @@ public class PostDTO implements Serializable {
 
 	public void setReacoes(List<PostReacaoDTO> reacoes) {
 		this.reacoes = reacoes;
+	}
+
+	public PostReacaoDTO getReacaoLogado() {
+		return reacaoLogado;
+	}
+
+	public void setReacaoLogado(PostReacaoDTO reacaoLogado) {
+		this.reacaoLogado = reacaoLogado;
 	}
 
 	@Override

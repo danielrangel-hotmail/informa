@@ -12,10 +12,11 @@ import { HoveredToggleComponent } from './hovered-toggle/hovered-toggle.componen
 import { AvatarCroppedComponent } from './avatar-cropped/avatar-cropped.component';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { InsistenceEnvironmentComponent } from './insistence-environment/insistence-environment.component';
+import { EmojiListPickerComponent } from './emoji-list-picker/emoji-list-picker.component';
 
 @NgModule({
   imports: [InformaSharedLibsModule, QuillModule.forRoot() ],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, HoveredToggleComponent, AvatarCroppedComponent, ColorPickerComponent, InsistenceEnvironmentComponent],
+  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective, QuillEditorCustomComponent, HoveredComponent, HoveredToggleComponent, AvatarCroppedComponent, ColorPickerComponent, InsistenceEnvironmentComponent, EmojiListPickerComponent],
   entryComponents: [LoginModalComponent],
   exports: [
     InformaSharedLibsModule,
@@ -28,7 +29,8 @@ import { InsistenceEnvironmentComponent } from './insistence-environment/insiste
     HoveredComponent,
     HoveredToggleComponent,
     AvatarCroppedComponent,
-    ColorPickerComponent
+    ColorPickerComponent,
+    EmojiListPickerComponent
   ]
 })
 export class InformaSharedModule {}

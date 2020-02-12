@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'jhi-hovered-toggle',
@@ -6,10 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hovered-toggle.component.scss']
 })
 export class HoveredToggleComponent implements OnInit {
-  estouIn = false;
+
+  @Input() alwaysIn = false;
+
+  isHovered = false;
 
   constructor() { }
 
+  @HostListener('mouseenter')
+  onMouseEnter(): void {
+    this.isHovered = true;
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave(): void {
+    this.isHovered = false;
+  }
   ngOnInit(): void {
   }
 

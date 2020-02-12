@@ -1,11 +1,59 @@
+BACKEND E FRONTEND:
+===================
+TODO: Criar uma página bacana do perfil do usuário
+Se for fácil, criar um esquema de skills
+
+TODO: Fazer funcionar o básico das conversas
+Esquema estilo slack
+
+TODO: Remoção de Posts
+Se o post não foi publicado, tudo bem ele ser removido
+Se o post já foi publicado, então ele será marcado como removido.
+    - Não poderá ser editado
+    - Não mostrará nehum conteúdo e terá alguma informação de que foi removido
+
+TODO: Edição de Mensagens
+Fazer o esquema de edição usando um menu ou seta para cima
+
+TODO: Remoção de Mensagens
+A mensagem enviada continuará aparecendo sem conteúdo e marcada como excluída.
+
+TODO: Excluir um grupo
+Um grupo sem posts pode ser excluído pelo moderador ou admin.
+Um grupo com posts
+
+TODO: Remover imagens
+Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
+https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
+
+TODO: Cologar a ngx-gallery dentro do projeto.
+Resolvemos o problema do erro besta do hammer.
+Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delete
+
+TODO: Registrar o número de vezes que cada pessoa carregou os posts
+Aguardando o Renato voltar para configurar o Matomo na aws
+
+TODO: Rever notificações e service worker
+
+TODO: Add to Home
+
+TODO: Segurança AWS
+Problemas com o CORS, e ALC da S3
+
+TODO: Websockets para mensagens
+
+TODO: Partições
+Criar partições para todas as tabelas
+partição de arquivado
+
+FRONTEND:
+=========
 TODO: Reações em posts e mensagens
 
 TODO: Role do Gestor
 Um post pode ser marcado como oficial da empresa
 O post sairá em nome da empresa by o criador somente para admins e outros supervisores
 Somente admins e caras com post oficial podem postar desta forma
-
-TODO: Nova tentativa de incluir o Storybook como parte do projeto
 
 TODO: Rever menus
 
@@ -17,39 +65,10 @@ Tirar o router e fazer hide and show
 TODO: Melhorar os Emojis e Menções
 Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
 
-TODO: Criar uma página bacana do perfil do usuário
-
 TODO: Fazer o ENTER funcionar na mensagem como um SUBMIT
 E o SHIFT ENTER como ENTER
 
-TODO: Fazer funcionar o básico das conversas
-
-TODO: Remoção de Posts
-
-TODO: Edição e Remoção de Mensagens
-
-TODO: Excluir e arquivar um grupo
-
-TODO: Remover imagens
-Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
-https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
-
-TODO: Registrar o número de vezes que cada pessoa carregou os posts
-Aguardando o Renato voltar para configurar o Matomo na aws
-
 TODO: Ver a responsividade para o restante do app
-
-TODO: Add to Home
-
-TODO: Rever notificações
-
-TODO: Adicionar subscrição ao Perfil ao criar
-Também ver se faz sentido excluir subscrições
-Evitar duplicatas!!!!
-
-TODO: Segurança AWS
-
-TODO: Websockets para mensagens
 
 TODO: Share https://web.dev/web-share-target/
 
@@ -57,12 +76,9 @@ TODO: Implementar alteraçÕes e mudanças sugeridas pelo time de UX
 
 TODO: Repassar as subscriptions... tem um monte que precisam ser fechadas...
 
-TODO: Resolver parada do scroll
-Scroll só dentro da área de posts e mensagens?
-Evitar o shift de ir de um filtro sem scroll para um filtro com scroll?
-
 ------------------------------------------------------------------------------
 Miscelâneas: pequenas coisinhas
+TODO: Travar e-mails de fora da Objective.
 
 TODO: Garantir o formato do nome dos grupos e tópicos
 
@@ -73,11 +89,10 @@ TODO: Menu para a Intranet
 TODO: Confidencialidade
 
 TODO: Melhorar a home para não logados
-Forçar a home também estar logado e já abrir o login?
+Colocar o Login na home, sem ser modal
+Tentei colocar o modal e deu uma zica gigantesca
 
 TODO: Melhorar o texto dos e-mails de ativação, criação e senha
-
-TODO: Travar e-mails de fora da Objective.
 
 TODO: CSS => Resolver a lista do quill-editor de align. Está 3px para baixo o svg
 
@@ -157,24 +172,20 @@ Posts - Reação
 
 Mensagens
 
+TODO: Resolver parada do scroll
+Scroll só dentro da área de posts e mensagens?
+Evitar o shift de ir de um filtro sem scroll para um filtro com scroll?
+
 TODO: Incluir o S3rver como parte do projeto
 fase 2 usá-lo para rodar cenários
 
-TODO: Facilitar a entrada de novos desenvolvedores
-Criar projeto no Jira
-Branches
-Preparar um mob programing
-Configurar o GitHub para funcionar => Continuous Integration & Deploy
+TODO: Configurar o GitHub para funcionar => Continuous Integration & Deploy
 
 TODO: Entender porque unauthorized está desconectando o usuário, e decidir se este é o melhor comportamento
 
 TODO: Fazer refactoring dos DTOs para serem mais restritivos nos campos que deixam rolar alteração
 
 TODO: Entender o esquema de tratamento de erros do JHIpster
-
-TODO: Cologar a ngx-gallery dentro do projeto.
-Resolvemos o problema do erro besta do hammer.
-Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delete
 
 TODO: Continuous Integration
 
@@ -193,11 +204,6 @@ Principalemente quando pulamos de imagem para video
 
 TODO: Mudar de PAGE para SLICE
 
-TODO: Partições
-Criar partições para todas as tabelas
-partição de removido
-partição de arquivado
-
 TODO: Facilitar o uso por outras empresas
 
 TODO: Fazer uma receita para implantar o sistema do ZERO!!!!
@@ -209,6 +215,8 @@ PAra o pessoal já velho, para novas features, ou alteração de features existe
 No profile ficará registrado quais features o colaborador experimentou, assim, ele pode saber das novidades
 Deve ser fácil experimentar o onboarding, para verificarmos como está a experiência de um novo colaborador.
 
+TODO: Histórico da mensagem e post
+Se o cara edita hoje, perdemos o conteúdo anterior. Será bom mantermos no histórico
 
 TODO: Aplicar o esquema de carregamento nas routes para todos os objetos
 Verificar o comportamento do EMPTY no forkJoin
@@ -220,8 +228,6 @@ TODO: Banner da Ligia
 TODO: Controle de leitura de posts e mensagens
 
 TODO: Autenticação por LDAP ou Social Login no Google
-
-TODO: Avatar para o grupo
 
 TODO: Mostrar o post só quando tudo for carregado.
 
