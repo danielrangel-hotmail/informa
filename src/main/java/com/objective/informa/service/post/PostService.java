@@ -1,5 +1,22 @@
 package com.objective.informa.service.post;
 
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import javax.persistence.OptimisticLockException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.LinkExterno;
 import com.objective.informa.domain.PerfilUsuario;
@@ -7,27 +24,10 @@ import com.objective.informa.domain.Post;
 import com.objective.informa.domain.User;
 import com.objective.informa.repository.PostRepository;
 import com.objective.informa.repository.UserRepository;
-import com.objective.informa.security.SecurityUtils;
+import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.dto.PostDTO;
 import com.objective.informa.service.dto.SimplePostDTO;
 import com.objective.informa.service.mapper.PostMapper;
-import java.time.ZonedDateTime;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import javax.persistence.OptimisticLockException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Service Implementation for managing {@link Post}.
@@ -46,10 +46,13 @@ public class PostService {
     private final UserRepository userRepository;
 
     private final PostPublisher postPublisher;
+    
+    private final SecurityFacade securityFacade;
 
     public PostService(PostRepository postRepository, PostMapper postMapper,
         UserRepository userRepository,
-        PostPublisher postPublisher) {
+        PostPublisher postPublisher, SecurityFacade securityFacade) {
+    	this.securityFacade = securityFacade;
         this.postRepository = postRepository;
         this.postMapper = postMapper;
         this.userRepository = userRepository;
@@ -68,7 +71,7 @@ public class PostService {
         ZonedDateTime now = ZonedDateTime.now();
         post.setCriacao(now);
         post.setUltimaEdicao(now);
-        Optional<String> currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<String> currentUserLogin = securityFacade.getCurrentUserLogin();
 		final Optional<User> user = currentUserLogin.flatMap(userRepository::findOneByLogin);
         post.setAutor(user.get());
         post = postRepository.save(post);
@@ -101,7 +104,7 @@ public class PostService {
         if (!postAntigo.isPresent()) {
             throw new PostUpdateNullException(new SimplePostDTO(id, versao));
         }
-        if (!postAntigo.get().getAutor().getLogin().equals(SecurityUtils.getCurrentUserLogin().get())) {
+        if (!postAntigo.get().getAutor().getLogin().equals(securityFacade.getCurrentUserLogin().get())) {
             throw new PostNonAuthorizedException(new SimplePostDTO(id, versao));
         }
 
@@ -243,7 +246,7 @@ public class PostService {
 	}
 	
 	private PerfilUsuario perfilUsuarioLogado() {
-		PerfilUsuario perfilUsuario = this.userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin().get()).get().getPerfilUsuario();
+		PerfilUsuario perfilUsuario = this.userRepository.findOneByLogin(securityFacade.getCurrentUserLogin().get()).get().getPerfilUsuario();
 		return perfilUsuario;
 	}
 

@@ -21,7 +21,8 @@ export class Post implements IPost {
     public numeroDeMensagens?: number,
     public autorNome?: string,
     public autorEmail?: string,
-    public grupoId?: number
+    public grupoId?: number,
+    public reacaoLogado?: IPostReacao
   ) {
     this.oficial = this.oficial || false;
   }

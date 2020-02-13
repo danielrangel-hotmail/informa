@@ -6,6 +6,7 @@ import java.util.HashSet;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.User;
 import com.objective.informa.service.GrupoService;
 import com.objective.informa.service.UserService;
@@ -23,7 +24,12 @@ public class GruposEUsuariosEnvironment  implements InsistenceEnvironment {
 	private final UserService userService;
 	private final GrupoService grupoService;
 	private final SimpleUserMapper simpleUserMapper;
-
+	private GrupoDTO grupoObjective;
+	private GrupoDTO grupoPapoLivre;
+	private User userNormal;
+	private User moderador;
+	
+	
 	public GruposEUsuariosEnvironment(UserService userService, GrupoService grupoService,
 			SimpleUserMapper simpleUserMapper) {
 		super();
@@ -35,11 +41,11 @@ public class GruposEUsuariosEnvironment  implements InsistenceEnvironment {
 
 	@Override
 	public void execute() {
-		criaGrupo("objective", true, false);
+		grupoObjective = criaGrupo("objective", true, false);
 		this.criaUser("diretor", "Diretor", "Ocupado", "ROLE_USER");
 		User moderador = this.criaUser("moderador", "Moderador", "Serio", "ROLE_USER");
-		this.criaUser("normal", "Normal", "Engajado", "ROLE_USER");
-		criaGrupo("papo-livre", false, true, moderador);
+		userNormal = this.criaUser("normal", "Normal", "Engajado", "ROLE_USER");
+		grupoPapoLivre = criaGrupo("papo-livre", false, true, moderador);
 	}
 
 	
@@ -64,9 +70,30 @@ public class GruposEUsuariosEnvironment  implements InsistenceEnvironment {
 		return this.grupoService.create(grupoDTO);
 	}
 	
+	
 	@Override
 	public String getName() {
 		return GRUPOS_E_USUARIOS;
+	}
+
+
+	public GrupoDTO getGrupoObjective() {
+		return grupoObjective;
+	}
+
+
+	public GrupoDTO getGrupoPapoLivre() {
+		return grupoPapoLivre;
+	}
+
+
+	public User getUserNormal() {
+		return userNormal;
+	}
+
+
+	public User getModerador() {
+		return moderador;
 	}
 
 }

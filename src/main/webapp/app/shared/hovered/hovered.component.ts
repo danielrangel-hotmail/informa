@@ -3,7 +3,7 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 @Component({
   selector: 'jhi-hovered',
   template: `
-      <div
+      <div class = "div-hovered"
         [ngStyle]="isHovered ? hoverStyle : null"
       >
         <ng-content></ng-content>

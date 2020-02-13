@@ -1,0 +1,16 @@
+.emoji-list-picker {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+}
+
+:host ::ng-deep jhi-hovered div {
+  display: flex;
+  padding-left: 3px;
+}
+
+.emoji-grey {
+  margin-top: 0px;
+  color:grey;
+  filter: grayscale(100%)
+}

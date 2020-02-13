@@ -14,17 +14,6 @@ import { IEmojiItem } from 'app/shared/emoji-list-picker/emoji-item.interface';
 export class PostSingleComponent {
 @Input() post?: IPost;
 @Input() account?: Account;
-  protected emojiList: IEmojiItem[] = [
-    { emoji: 'thumbsup' },
-    { emoji: 'facepunch' },
-    { emoji: 'heart' },
-    { emoji: 'grinning' },
-    { emoji: 'cry' },
-    { emoji: 'flushed' },
-    { emoji: 'thumbsdown'}
-  ];
-  protected mostraReacoesPicker = false;
-  protected chosen: IEmojiItem = { emoji: 'thumbsup'};
 
   constructor(protected modalService: NgbModal) { }
   publica(post: IPost): void {
@@ -54,19 +43,6 @@ export class PostSingleComponent {
     const duration: moment.Duration = moment.duration(ultimaDataRelevante!.diff(moment()));
     if (duration.asDays() > 1) return ultimaDataRelevante!.fromNow();
     return ultimaDataRelevante!.calendar();
-  }
-
-  toggleMostraReacoesPicker() : void {
-    this.mostraReacoesPicker = ! this.mostraReacoesPicker;
-  }
-
-  fechaEmojiListPicker(event: string) : void {
-    this.mostraReacoesPicker = false;
-  }
-
-  emojiReaction(emoji: IEmojiItem): void {
-    this.chosen = emoji;
-    this.mostraReacoesPicker = false;
   }
 
   numeroDeMensagens(): string {

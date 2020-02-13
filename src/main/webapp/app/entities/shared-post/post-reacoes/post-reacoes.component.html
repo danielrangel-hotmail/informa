@@ -1,0 +1,12 @@
+<jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" *ngIf="post.publicacao" >
+    <span *ngIf="chosen() === null" class="ap emoji-grey ap-thumbsup" (click)="toggleMostraReacoesPicker()" ></span>
+    <span *ngIf="chosen() !== null" [ngStyle]="{'margin-top': chosen().emoji === 'thumbsup' ? '0px' : '3px'}" class="ap emoji " [ngClass]="'ap-'+chosen().emoji"(click)="toggleMostraReacoesPicker()" ></span>
+    <span class = "p-1" >Sem reações</span>
+</jhi-hovered>
+<jhi-emoji-list-picker
+    (cancel)="fechaEmojiListPicker($event)"
+    [emojiList]="emojiList"
+    [chosen]="chosen()"
+    (picked)="emojiReaction($event)"
+    class = "emoji-list-picker"
+    *ngIf="mostraReacoesPicker"></jhi-emoji-list-picker>

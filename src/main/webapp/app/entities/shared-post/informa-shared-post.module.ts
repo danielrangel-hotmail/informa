@@ -12,10 +12,11 @@ import { EmbedVideo } from 'ngx-embed-video';
 import { GravatarModule } from  'ngx-gravatar';
 import { PostDeleteDialogComponent } from 'app/entities/shared-post/post-delete-dialog.component';
 import { GrupoNoRouteModule } from 'app/entities/grupo/grupo-no-route/grupo-no-route.module';
+import { PostReacoesComponent } from './post-reacoes/post-reacoes.component';
 
 @NgModule({
   imports: [InformaSharedModule, RouterModule, QuillModule.forRoot(), NgxGalleryModule, EmbedVideo, GravatarModule, GrupoNoRouteModule],
-  declarations: [PostComponent, PostPublicaDialogComponent, PostDeleteDialogComponent, PostSingleComponent, PostImageViewComponent, PostLinkExternoVideoViewComponent],
+  declarations: [PostComponent, PostPublicaDialogComponent, PostDeleteDialogComponent, PostSingleComponent, PostImageViewComponent, PostLinkExternoVideoViewComponent, PostReacoesComponent],
   exports: [PostComponent, PostSingleComponent],
   entryComponents: [PostPublicaDialogComponent, PostDeleteDialogComponent]
 })

@@ -11,6 +11,9 @@ import { postReacaoRoute } from './post-reacao.route';
 @NgModule({
   imports: [InformaSharedModule, RouterModule.forChild(postReacaoRoute)],
   declarations: [PostReacaoComponent, PostReacaoDetailComponent, PostReacaoUpdateComponent, PostReacaoDeleteDialogComponent],
+  exports: [
+    PostReacaoComponent
+  ],
   entryComponents: [PostReacaoDeleteDialogComponent]
 })
 export class InformaPostReacaoModule {}
