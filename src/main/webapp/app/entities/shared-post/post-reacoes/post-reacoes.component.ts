@@ -27,8 +27,8 @@ export class PostReacoesComponent implements OnInit {
   }
 
   chosen(): IEmojiItem | null {
-    if (this.post.reacaoLogado ===  null) return null;
-    return { emoji: this.post.reacaoLogado!.reacao}
+    if (!this.post.reacaoLogado) return null;
+    return { emoji: this.post.reacaoLogado.reacao}
   }
 
   toggleMostraReacoesPicker() : void {
@@ -40,12 +40,17 @@ export class PostReacoesComponent implements OnInit {
   }
 
   emojiReaction(emoji: IEmojiItem): void {
-    if (this.post.reacaoLogado === null) {
+    this.mostraReacoesPicker = false;
+    if (!this.post.reacaoLogado) {
+      if (!emoji) return;
       this.post.reacaoLogado = { reacao: emoji.emoji}
     } else {
-      this.post.reacaoLogado!.reacao  = emoji.emoji;
+      if (!emoji) {
+        this.post.reacaoLogado = undefined;
+        return;
+      }
+      this.post.reacaoLogado.reacao  = emoji.emoji;
     }
-    this.mostraReacoesPicker = false;
   }
 
 
