@@ -24,8 +24,10 @@ import com.objective.informa.repository.GrupoRepository;
 import com.objective.informa.repository.MensagemRepository;
 import com.objective.informa.repository.PostRepository;
 import com.objective.informa.repository.UserRepository;
+import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.dto.PostDTO;
 import com.objective.informa.service.mapper.PostMapperImpl;
+import com.objective.informa.service.mapper.PostReacaoMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration
@@ -39,20 +41,23 @@ public class PostServiceTest {
     @Mock private UserRepository userRepository;
     @Mock private PostPublisher postPublisher;
     @Mock private MensagemRepository mensagemRepository;
+    @Mock private SecurityFacade securityFacade;
+    @Mock private PostReacaoMapper postReacaoMapper;
     private Grupo grupo;
     private User user;
-    
+
     @InjectMocks PostMapperImpl postMapper;
     PostService postService;
     
     @Test
-    @WithMockUser("user")
+    @WithMockUser
 	public void testCriacao() {
     	grupo = new Grupo();
     	grupo.setId(1L);
     	user = new User();
     	user.setFirstName("user");
     	MockitoAnnotations.initMocks(this);
+    	doReturn(Optional.of("user")).when(securityFacade).getCurrentUserLogin();
         doReturn(Optional.of(grupo)).when(grupoRepository).findById(1L);
         doReturn(Optional.of(user)).when(userRepository).findOneByLogin("user");
         doReturn(0L).when(mensagemRepository).countByPostId(2L);
@@ -61,7 +66,7 @@ public class PostServiceTest {
         	post.setId(2L);
         	return post;
         });
-    	this.postService = new PostService(postRepository, postMapper, userRepository, postPublisher);
+    	this.postService = new PostService(postRepository, postMapper, userRepository, postPublisher, securityFacade);
 		PostDTO postDTO = new PostDTO();
 		postDTO.setConteudo(CONTEUDO1);
 		postDTO.setGrupoId(1L);
