@@ -1,16 +1,21 @@
-BACKEND E FRONTEND:
-===================
-TODO: Criar uma página bacana do perfil do usuário
-Se for fácil, criar um esquema de skills
+VERSÃO 1.0:
+=======================
+TODO: Reações em posts
 
-TODO: Fazer funcionar o básico das conversas
-Esquema estilo slack
+TODO: Role do Gestor
+Um post pode ser marcado como oficial da empresa
+O post sairá em nome da empresa
+Somente admins e outros supervisores verão o criador
+Somente admins e caras com post oficial podem postar desta forma
 
 TODO: Remoção de Posts
 Se o post não foi publicado, tudo bem ele ser removido
 Se o post já foi publicado, então ele será marcado como removido.
     - Não poderá ser editado
-    - Não mostrará nehum conteúdo e terá alguma informação de que foi removido
+    - Não mostrará nehum conteúdo próprio e terá alguma informação de que foi removido
+    - As reações não serão mostradas
+    - As mensagens continuam
+    - Continuará aparecendo normalmente nos filtros
 
 TODO: Edição de Mensagens
 Fazer o esquema de edição usando um menu ou seta para cima
@@ -22,7 +27,15 @@ TODO: Excluir um grupo
 Um grupo sem posts pode ser excluído pelo moderador ou admin.
 Um grupo com posts
 
-TODO: Remover imagens
+TODO: Rever menus
+
+TODO: Melhorar os Emojis e Menções
+Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
+
+TODO: Fazer o ENTER funcionar na mensagem como um SUBMIT
+E o SHIFT ENTER como ENTER
+
+TODO: Remover imagens de um post
 Resolver o problema de adição de imagem no mobile que não está atualizando na hora.
 https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/
 
@@ -33,51 +46,15 @@ Fazemos melhorias com botões em vez de ícones para ficar mais evidente o delet
 TODO: Registrar o número de vezes que cada pessoa carregou os posts
 Aguardando o Renato voltar para configurar o Matomo na aws
 
-TODO: Rever notificações e service worker
-
-TODO: Add to Home
-
-TODO: Segurança AWS
-Problemas com o CORS, e ALC da S3
-
-TODO: Websockets para mensagens
-
-TODO: Partições
-Criar partições para todas as tabelas
-partição de arquivado
-
-FRONTEND:
-=========
-TODO: Reações em posts e mensagens
-
-TODO: Role do Gestor
-Um post pode ser marcado como oficial da empresa
-O post sairá em nome da empresa by o criador somente para admins e outros supervisores
-Somente admins e caras com post oficial podem postar desta forma
-
-TODO: Rever menus
-
-TODO: Rever o esquema de criar um post
-Para não criar sempre do zero
-Quando tentar adicionar imagem ou vídeo, aí cria
-Tirar o router e fazer hide and show
-
-TODO: Melhorar os Emojis e Menções
-Se fizer depois da 1a versão teremos que fazer migração massiva de texto... não to afim
-
-TODO: Fazer o ENTER funcionar na mensagem como um SUBMIT
-E o SHIFT ENTER como ENTER
+TODO: Criar uma página bacana do perfil do usuário
+Se for fácil, criar um esquema de skills
 
 TODO: Ver a responsividade para o restante do app
 
-TODO: Share https://web.dev/web-share-target/
+TODO: Arquivar um Post/Grupo com Partições
+Criar partições para todas as tabelas
+partição de arquivado
 
-TODO: Implementar alteraçÕes e mudanças sugeridas pelo time de UX
-
-TODO: Repassar as subscriptions... tem um monte que precisam ser fechadas...
-
-------------------------------------------------------------------------------
-Miscelâneas: pequenas coisinhas
 TODO: Travar e-mails de fora da Objective.
 
 TODO: Garantir o formato do nome dos grupos e tópicos
@@ -102,6 +79,43 @@ TODO: Somente o moderador e admin podem alterar um grupo backend.
 Acertar o opcional
 
 TODO: Nome único para grupos e tópicos
+
+TODO: Colocar uma licença no GitHub. MIT?
+
+TODO: Rever notificações e service worker
+
+TODO: Segurança AWS
+Problemas com o CORS, e ALC da S3
+
+VERSÃO 1.1:
+=======================
+
+TODO: Fazer funcionar o básico das conversas
+Esquema estilo slack
+
+TODO: Reações em mensagens
+
+TODO: Websockets para mensagens
+
+TODO: Add to Home
+
+TODO: Rever o esquema de criar um post
+Para não criar sempre do zero
+Quando tentar adicionar imagem ou vídeo, aí cria
+Tirar o router e fazer hide and show
+
+TODO: Share https://web.dev/web-share-target/
+
+TODO: Implementar alteraçÕes e mudanças sugeridas pelo time de UX
+
+Versão 1.2
+==========
+TODO: Criar o conceito básico de Customer Success
+Para o pessoal que está entrando, haverá um wizard no sistema que conduzirá o colaborador, experimentar cada uma das features do sistema.
+PAra o pessoal já velho, para novas features, ou alteração de features existenes, haverá um wizar no sistema para explicar a nova feature ou versão
+No profile ficará registrado quais features o colaborador experimentou, assim, ele pode saber das novidades
+Deve ser fácil experimentar o onboarding, para verificarmos como está a experiência de um novo colaborador.
+
 
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
@@ -154,7 +168,7 @@ Posts - Publicação
     1 - Publicar post só com texto em grupo livre
     2 - Publicar post com menção, clicar na menção abre o perfil do mencionado
     3 - Publicar post com emoji, aparece emoji
-    4 - Publicar post com foto, aparece a foto
+    4 - Publicar post com foto, aparece a foto <desafi
     5 - Pulbicar post com video, aparece o vídeo
     6 - Funciona o paginamento de posts
     7 - Publicação de post oficial
@@ -172,12 +186,11 @@ Posts - Reação
 
 Mensagens
 
+TODO: Repassar as subscriptions de Observables... tem um monte que precisam ser fechadas...
+
 TODO: Resolver parada do scroll
 Scroll só dentro da área de posts e mensagens?
 Evitar o shift de ir de um filtro sem scroll para um filtro com scroll?
-
-TODO: Incluir o S3rver como parte do projeto
-fase 2 usá-lo para rodar cenários
 
 TODO: Configurar o GitHub para funcionar => Continuous Integration & Deploy
 
@@ -208,13 +221,9 @@ TODO: Facilitar o uso por outras empresas
 
 TODO: Fazer uma receita para implantar o sistema do ZERO!!!!
 
-------------------------------------------------------------------------------
-TODO: Criar o conceito básico de Customer Success
-Para o pessoal que está entrando, haverá um wizard no sistema que conduzirá o colaborador, experimentar cada uma das features do sistema.
-PAra o pessoal já velho, para novas features, ou alteração de features existenes, haverá um wizar no sistema para explicar a nova feature ou versão
-No profile ficará registrado quais features o colaborador experimentou, assim, ele pode saber das novidades
-Deve ser fácil experimentar o onboarding, para verificarmos como está a experiência de um novo colaborador.
+TODO: Deixar Arquivo independente de POST e MENSAGEM?
 
+------------------------------------------------------------------------------
 TODO: Histórico da mensagem e post
 Se o cara edita hoje, perdemos o conteúdo anterior. Será bom mantermos no histórico
 
