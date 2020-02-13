@@ -35,7 +35,7 @@ export class PostReacoesComponent implements OnInit {
     this.mostraReacoesPicker = ! this.mostraReacoesPicker;
   }
 
-  fechaEmojiListPicker(event: string) : void {
+  fechaEmojiListPicker() : void {
     this.mostraReacoesPicker = false;
   }
 

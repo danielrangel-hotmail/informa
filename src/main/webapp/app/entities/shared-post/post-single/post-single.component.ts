@@ -4,7 +4,6 @@ import {PostPublicaDialogComponent} from 'app/entities/shared-post/post-publica-
 import {PostDeleteDialogComponent} from 'app/entities/shared-post/post-delete-dialog.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
-import { IEmojiItem } from 'app/shared/emoji-list-picker/emoji-item.interface';
 
 @Component({
   selector: 'jhi-post-single',
