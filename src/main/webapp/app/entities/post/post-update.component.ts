@@ -36,6 +36,7 @@ export class PostUpdateComponent implements OnInit, AfterViewInit {
     ultimaEdicao: [],
     conteudo: [],
     publicacao: [],
+    oficial: [],
     autorId: [null],
     grupoId: [null]
   });
@@ -81,6 +82,7 @@ export class PostUpdateComponent implements OnInit, AfterViewInit {
       criacao: post.criacao != null ? post.criacao.format(DATE_TIME_FORMAT) : null,
       ultimaEdicao: post.ultimaEdicao != null ? post.ultimaEdicao.format(DATE_TIME_FORMAT) : null,
       conteudo: post.conteudo,
+      oficial: post.oficial,
       publicacao: post.publicacao != null ? post.publicacao.format(DATE_TIME_FORMAT) : null,
       autorId: post.autorId,
       grupoId: post.grupoId
@@ -114,6 +116,7 @@ export class PostUpdateComponent implements OnInit, AfterViewInit {
           ? moment(this.editForm.get(['ultimaEdicao'])!.value, DATE_TIME_FORMAT)
           : undefined,
       conteudo: this.editForm.get(['conteudo'])!.value,
+      oficial: this.editForm.get(['oficial'])!.value,
       publicacao:
         this.editForm.get(['publicacao'])!.value != null ? moment(this.editForm.get(['publicacao'])!.value, DATE_TIME_FORMAT) : undefined,
       autorId: this.editForm.get(['autorId'])!.value,

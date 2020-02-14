@@ -4,7 +4,6 @@ import { Post } from 'app/shared/model/post.model';
 import { PostReacaoService } from 'app/entities/post-reacao/post-reacao.service';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import { IPostReacao, PostReacao } from 'app/shared/model/post-reacao.model';
 import { IPostReacoes } from 'app/shared/model/post-reacoes.interface';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IPost } from '../../../shared/model/post.interface';
-import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import {IArquivo} from '../../../shared/model/arquivo.model';
 import { ArquivoService } from 'app/entities/arquivo/arquivo.service';
+import { NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 
 const GALLERY_SIZE = '100%';
 

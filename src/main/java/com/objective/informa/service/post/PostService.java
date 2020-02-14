@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ import com.objective.informa.domain.Post;
 import com.objective.informa.domain.User;
 import com.objective.informa.repository.PostRepository;
 import com.objective.informa.repository.UserRepository;
+import com.objective.informa.security.AuthoritiesConstants;
 import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.dto.PostDTO;
 import com.objective.informa.service.dto.SimplePostDTO;
@@ -68,6 +70,7 @@ public class PostService {
     public PostDTO create(PostDTO postDTO) {
         log.debug("Request to create Post : {}", postDTO);
         Post post = postMapper.toEntity(postDTO);
+        this.validateOifical(postDTO);
         ZonedDateTime now = ZonedDateTime.now();
         post.setCriacao(now);
         post.setUltimaEdicao(now);
@@ -78,6 +81,14 @@ public class PostService {
         return postMapper.toDto(post);
     }
 
+    private void validateOifical(PostDTO postDTO) {
+    	if (postDTO.isOficial()) {
+    		if ((!securityFacade.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) && (!securityFacade.isCurrentUserInRole(AuthoritiesConstants.GESTOR))) {
+    			throw new AccessDeniedException("Post oficial só pode ser criado por admins ou gestores");
+    		}
+    	}
+    }
+    
     /**
      * Update a post.
      *
@@ -86,6 +97,7 @@ public class PostService {
      */
     public PostDTO update(PostDTO postDTO)
         throws PostUpdateNullException, PostNonAuthorizedException {
+    	validateOifical(postDTO);
         postPrepareUpdate(postDTO.getId(), postDTO.getVersao());
         Post post = postMapper.toEntity(postDTO);
         return postPosUpdate(post);

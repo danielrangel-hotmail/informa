@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { IPost } from '../../../shared/model/post.interface';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ArquivoService } from 'app/entities/arquivo/arquivo.service';
+import { NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 
 
 @Component({

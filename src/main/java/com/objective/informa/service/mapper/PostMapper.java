@@ -1,7 +1,9 @@
 package com.objective.informa.service.mapper;
 
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +13,8 @@ import com.objective.informa.domain.User;
 import com.objective.informa.repository.GrupoRepository;
 import com.objective.informa.repository.MensagemRepository;
 import com.objective.informa.repository.UserRepository;
+import com.objective.informa.security.AuthoritiesConstants;
+import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.PostReacaoService;
 import com.objective.informa.service.dto.PostDTO;
 import com.objective.informa.service.dto.PostReacoesDTO;
@@ -25,11 +29,12 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Autowired private UserRepository userRepository;
     @Autowired private MensagemRepository mensagemRepository;
     @Autowired private PostReacaoService postReacaoService;
+    @Autowired private SecurityFacade securityFacade;
    
 
-    @Mapping(source = "autor.id", target = "autorId")
-    @Mapping(source = "autor.firstName", target = "autorNome")
-    @Mapping(source = "autor.email", target = "autorEmail")
+    @Mapping(target = "autorId", ignore = true)
+    @Mapping(target = "autorNome", ignore = true)
+    @Mapping(target = "autorEmail", ignore = true)
     @Mapping(source = "grupo.id", target = "grupoId")
     @Mapping(source = "grupo.nome", target = "grupoNome")
     @Mapping(source = "id", target = "numeroDeMensagens", qualifiedByName = "numeroDeMensagens")
@@ -54,6 +59,15 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     	return this.postReacaoService.postReacoesDTOFromPostId(id);
     }
 
+    @AfterMapping
+    public void preencheDadosAutor(@MappingTarget PostDTO postDTO, Post post) {
+    	if (!post.isOficial() || securityFacade.isCurrentUserInRole(AuthoritiesConstants.ADMIN) || securityFacade.isCurrentUserInRole(AuthoritiesConstants.GESTOR)) {
+    		postDTO.setAutorNome(post.getAutor().getFirstName() +  " " + post.getAutor().getLastName());
+    		postDTO.setAutorId(post.getAutor().getId());
+    		postDTO.setAutorEmail(post.getAutor().getEmail());
+    	}
+    }
+    
     public User autorFromId(Long id) {
         if (id == null) {
             return null;
