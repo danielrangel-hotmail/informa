@@ -90,9 +90,9 @@ export class PostReacaoUpdateComponent implements OnInit {
     this.isSaving = true;
     const postReacao = this.createFromForm();
     if (postReacao.id !== undefined) {
-      this.subscribeToSaveResponse(this.postReacaoService.update(postReacao));
+      // this.subscribeToSaveResponse(this.postReacaoService.update(postReacao));
     } else {
-      this.subscribeToSaveResponse(this.postReacaoService.create(postReacao));
+      // this.subscribeToSaveResponse(this.postReacaoService.create(postReacao));
     }
   }
 

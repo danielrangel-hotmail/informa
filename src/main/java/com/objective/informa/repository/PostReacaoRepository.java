@@ -1,8 +1,11 @@
 package com.objective.informa.repository;
 
-import com.objective.informa.domain.PostReacao;
-import org.springframework.data.jpa.repository.*;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.objective.informa.domain.PostReacao;
 
 
 /**
@@ -11,5 +14,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface PostReacaoRepository extends JpaRepository<PostReacao, Long> {
-
+	
+	public List<PostReacao> findByPostId(Long id);
+	
 }

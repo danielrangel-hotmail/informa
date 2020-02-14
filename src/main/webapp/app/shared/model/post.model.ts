@@ -1,8 +1,8 @@
 import { Moment } from 'moment';
 import { IArquivo } from '../../shared/model/arquivo.model';
 import { ILinkExterno } from '../../shared/model/link-externo.model';
-import {IPost} from '../../shared/model/post.interface';
-import { IPostReacao } from 'app/shared/model/post-reacao.model';
+import { IPost } from '../../shared/model/post.interface';
+import { IPostReacoes } from 'app/shared/model/post-reacoes.interface';
 
 
 export class Post implements IPost {
@@ -16,13 +16,12 @@ export class Post implements IPost {
     public publicacao?: Moment,
     public arquivos?: IArquivo[],
     public linksExternos?: ILinkExterno[],
-    public reacoes?: IPostReacao[],
     public autorId?: number,
     public numeroDeMensagens?: number,
     public autorNome?: string,
     public autorEmail?: string,
     public grupoId?: number,
-    public reacaoLogado?: IPostReacao
+    public reacoes?: IPostReacoes
   ) {
     this.oficial = this.oficial || false;
   }

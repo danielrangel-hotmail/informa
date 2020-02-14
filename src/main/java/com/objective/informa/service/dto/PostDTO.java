@@ -46,14 +46,12 @@ public class PostDTO implements Serializable {
 
     private Long numeroDeMensagens;
     
-    private PostReacaoDTO reacaoLogado;
+    private PostReacoesDTO reacoes;
 
     private List<ArquivoDTO> arquivos = new ArrayList<ArquivoDTO>();
 
     private List<LinkExternoDTO> linksExternos = new ArrayList<LinkExternoDTO>();
     
-    private List<PostReacaoDTO> reacoes = new ArrayList<PostReacaoDTO>();
-
     public Long getId() {
         return id;
     }
@@ -174,21 +172,15 @@ public class PostDTO implements Serializable {
     public void setNumeroDeMensagens(Long numeroDeMensagens) {
         this.numeroDeMensagens = numeroDeMensagens;
     }
+
     
-    public List<PostReacaoDTO> getReacoes() {
+
+	public PostReacoesDTO getReacoes() {
 		return reacoes;
 	}
 
-	public void setReacoes(List<PostReacaoDTO> reacoes) {
+	public void setReacoes(PostReacoesDTO reacoes) {
 		this.reacoes = reacoes;
-	}
-
-	public PostReacaoDTO getReacaoLogado() {
-		return reacaoLogado;
-	}
-
-	public void setReacaoLogado(PostReacaoDTO reacaoLogado) {
-		this.reacaoLogado = reacaoLogado;
 	}
 
 	@Override

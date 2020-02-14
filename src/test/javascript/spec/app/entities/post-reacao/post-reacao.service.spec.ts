@@ -62,10 +62,10 @@ describe('Service Tests', () => {
           },
           returnedFromService
         );
-        service
-          .create(new PostReacao())
-          .pipe(take(1))
-          .subscribe(resp => (expectedResult = resp.body));
+        // service
+        //   .create(new PostReacao())
+        //   .pipe(take(1))
+        //   .subscribe(resp => (expectedResult = resp.body));
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
         expect(expectedResult).toMatchObject(expected);
@@ -89,10 +89,10 @@ describe('Service Tests', () => {
           },
           returnedFromService
         );
-        service
-          .update(expected)
-          .pipe(take(1))
-          .subscribe(resp => (expectedResult = resp.body));
+        // service
+        //   .update(expected)
+        //   .pipe(take(1))
+        //   .subscribe(resp => (expectedResult = resp.body));
         const req = httpMock.expectOne({ method: 'PUT' });
         req.flush(returnedFromService);
         expect(expectedResult).toMatchObject(expected);

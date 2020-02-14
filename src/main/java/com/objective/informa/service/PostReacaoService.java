@@ -1,19 +1,26 @@
 package com.objective.informa.service;
 
-import com.objective.informa.domain.PostReacao;
-import com.objective.informa.repository.PostReacaoRepository;
-import com.objective.informa.service.dto.PostReacaoDTO;
-import com.objective.informa.service.mapper.PostReacaoMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.objective.informa.domain.PerfilUsuario;
+import com.objective.informa.domain.PostReacao;
+import com.objective.informa.repository.PerfilUsuarioRepository;
+import com.objective.informa.repository.PostReacaoRepository;
+import com.objective.informa.security.SecurityFacade;
+import com.objective.informa.service.dto.PostReacaoDTO;
+import com.objective.informa.service.dto.PostReacoesDTO;
+import com.objective.informa.service.mapper.PostReacaoMapper;
+import com.objective.informa.service.post.PostNonAuthorizedException;
+import com.objective.informa.service.post.PostUpdateNullException;
 
 /**
  * Service Implementation for managing {@link PostReacao}.
@@ -27,10 +34,16 @@ public class PostReacaoService {
     private final PostReacaoRepository postReacaoRepository;
 
     private final PostReacaoMapper postReacaoMapper;
+    
+    private final PerfilUsuarioRepository perfilUsuarioRepository;
+    
+    private final SecurityFacade securityFacade;
 
-    public PostReacaoService(PostReacaoRepository postReacaoRepository, PostReacaoMapper postReacaoMapper) {
+    public PostReacaoService(PostReacaoRepository postReacaoRepository, PostReacaoMapper postReacaoMapper, SecurityFacade securityFacade, PerfilUsuarioRepository perfilUsuarioRepository) {
+    	this.securityFacade = securityFacade;
         this.postReacaoRepository = postReacaoRepository;
         this.postReacaoMapper = postReacaoMapper;
+        this.perfilUsuarioRepository = perfilUsuarioRepository;
     }
 
     /**
@@ -38,12 +51,32 @@ public class PostReacaoService {
      *
      * @param postReacaoDTO the entity to save.
      * @return the persisted entity.
+     * @throws PostNonAuthorizedException 
+     * @throws PostUpdateNullException 
      */
-    public PostReacaoDTO save(PostReacaoDTO postReacaoDTO) {
+    public PostReacoesDTO create(PostReacaoDTO postReacaoDTO) {
+        log.debug("Request to save PostReacao : {}", postReacaoDTO);
+        final PostReacao postReacao = postReacaoMapper.toEntity(postReacaoDTO);
+        ZonedDateTime now = ZonedDateTime.now();
+        postReacao.setCriacao(now);
+        postReacao.setUltimaEdicao(now);
+        final Optional<PerfilUsuario> perfilUsuario = this.securityFacade.getCurrentUserLogin().flatMap(perfilUsuarioRepository::findOneByLogin);
+        postReacao.setPerfil(perfilUsuario.get());
+        postReacaoRepository.saveAndFlush(postReacao);
+        return this.postReacoesDTOFromPostId(postReacaoDTO.getPostId());
+    }
+    
+    /**
+     * Save a postReacao.
+     *
+     * @param postReacaoDTO the entity to save.
+     * @return the persisted entity.
+     */
+    public PostReacoesDTO save(PostReacaoDTO postReacaoDTO) {
         log.debug("Request to save PostReacao : {}", postReacaoDTO);
         PostReacao postReacao = postReacaoMapper.toEntity(postReacaoDTO);
-        postReacao = postReacaoRepository.save(postReacao);
-        return postReacaoMapper.toDto(postReacao);
+        postReacao = postReacaoRepository.saveAndFlush(postReacao);
+        return this.postReacoesDTOFromPostId(postReacaoDTO.getPostId());
     }
 
     /**
@@ -78,8 +111,28 @@ public class PostReacaoService {
      *
      * @param id the id of the entity.
      */
-    public void delete(Long id) {
+    public PostReacoesDTO delete(Long id) {
         log.debug("Request to delete PostReacao : {}", id);
-        postReacaoRepository.deleteById(id);
+        Optional<PostReacaoDTO> findOne = this.findOne(id);
+		if (findOne.isPresent()) {
+			Long postId = findOne.get().getPostId();
+			postReacaoRepository.deleteById(id);
+			return postReacoesDTOFromPostId(postId);
+		}
+		return null;
+    }
+    
+    public PostReacoesDTO postReacoesDTOFromPostId(Long id) {
+    	String userLogin = securityFacade.getCurrentUserLogin().get();
+    	List<PostReacao> reacoes = this.postReacaoRepository.findByPostId(id);
+        PostReacao reacaoLogado = reacoes.stream()
+        		.filter(r -> r.getPerfil().getUsuario().getLogin().equals(userLogin))
+        		.findAny()
+        		.orElse(null);
+        List<PostReacaoDTO> reacoesDTO = reacoes.stream()
+                .map(postReacaoMapper::toDto)
+                .collect(Collectors.toList());
+        PostReacaoDTO reacaoLogadoDTO = postReacaoMapper.toDto(reacaoLogado);
+    	return new PostReacoesDTO(reacoesDTO, reacaoLogadoDTO);
     }
 }

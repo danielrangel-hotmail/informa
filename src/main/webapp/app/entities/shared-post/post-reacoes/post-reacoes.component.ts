@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IEmojiItem } from 'app/shared/emoji-list-picker/emoji-item.interface';
 import { Post } from 'app/shared/model/post.model';
+import { PostReacaoService } from 'app/entities/post-reacao/post-reacao.service';
+import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { IPostReacao, PostReacao } from 'app/shared/model/post-reacao.model';
+import { IPostReacoes } from 'app/shared/model/post-reacoes.interface';
 
 @Component({
   selector: 'jhi-post-reacoes',
@@ -21,14 +26,14 @@ export class PostReacoesComponent implements OnInit {
   ];
   protected mostraReacoesPicker = false;
 
-  constructor() { }
+  constructor(protected postReacaoService: PostReacaoService) { }
 
   ngOnInit(): void {
   }
 
   chosen(): IEmojiItem | null {
-    if (!this.post.reacaoLogado) return null;
-    return { emoji: this.post.reacaoLogado.reacao}
+    if (!this.post.reacoes!.reacaoLogado) return null;
+    return { emoji: this.post.reacoes!.reacaoLogado.reacao}
   }
 
   toggleMostraReacoesPicker() : void {
@@ -41,17 +46,31 @@ export class PostReacoesComponent implements OnInit {
 
   emojiReaction(emoji: IEmojiItem): void {
     this.mostraReacoesPicker = false;
-    if (!this.post.reacaoLogado) {
+    if (!this.post.reacoes!.reacaoLogado) {
       if (!emoji) return;
-      this.post.reacaoLogado = { reacao: emoji.emoji}
+      const criaReacao = {
+        reacao: emoji.emoji,
+        postId: this.post.id
+      };
+      this.subscribeToSaveResponse(this.postReacaoService.create(criaReacao));
     } else {
       if (!emoji) {
-        this.post.reacaoLogado = undefined;
+        this.subscribeToSaveResponse(this.postReacaoService.delete(this.post.reacoes!.reacaoLogado.id!));
         return;
       }
-      this.post.reacaoLogado.reacao  = emoji.emoji;
+      const reacaoAlterada  = { ... this.post.reacoes!.reacaoLogado, reacao: emoji.emoji };
+      this.subscribeToSaveResponse(this.postReacaoService.update(reacaoAlterada))
     }
   }
+
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IPostReacoes>>): void {
+    result.subscribe(
+      (postReacaoResponse) => this.post.reacoes = postReacaoResponse.body !== null ? postReacaoResponse.body : undefined
+    );
+  }
+
+
+
 
 
 }

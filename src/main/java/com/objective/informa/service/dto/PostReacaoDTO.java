@@ -1,7 +1,6 @@
 package com.objective.informa.service.dto;
-import java.time.ZonedDateTime;
-import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -24,8 +23,9 @@ public class PostReacaoDTO implements Serializable {
 
     private String reacao;
 
-
     private Long perfilId;
+    
+    private String perfilNome;
 
     private Long postId;
 
@@ -85,7 +85,16 @@ public class PostReacaoDTO implements Serializable {
         this.postId = postId;
     }
 
-    @Override
+    
+    public String getPerfilNome() {
+		return perfilNome;
+	}
+
+	public void setPerfilNome(String perfilNome) {
+		this.perfilNome = perfilNome;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -115,7 +124,9 @@ public class PostReacaoDTO implements Serializable {
             ", versao=" + getVersao() +
             ", reacao='" + getReacao() + "'" +
             ", perfilId=" + getPerfilId() +
+            ", perfilNome=" + getPerfilNome() +
             ", postId=" + getPostId() +
+            
             "}";
     }
 }

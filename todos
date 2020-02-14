@@ -89,6 +89,7 @@ Problemas com o CORS, e ALC da S3
 
 VERSÃO 1.1:
 =======================
+TODO: Garantir apenas uma reação por post/perfil
 
 TODO: Fazer funcionar o básico das conversas
 Esquema estilo slack
@@ -119,6 +120,10 @@ Deve ser fácil experimentar o onboarding, para verificarmos como está a experi
 
 ------------------------------------------------------------------------------
 Débito Técnico e Não Funcional
+
+
+Deu pau na mensagem
+E um optimist lock no post
 
 Testes para serem feitos:
 
@@ -238,29 +243,15 @@ TODO: Controle de leitura de posts e mensagens
 
 TODO: Autenticação por LDAP ou Social Login no Google
 
-TODO: Mostrar o post só quando tudo for carregado.
-
 TODO: Férias
 
 TODO: Aniversários
-
-TODO: Menção poder abrir uma página do cara...
-
-TODO: Execução dos Testes
-
-TODO: Camada de Insistência
-
-TODO: Moderador
-
-TODO: Image header para grupos
 
 TODO: Pesquisa full text do Postgres
 
 TODO: Post ver mais
 
 TODO: Preview de link externo
-
-TODO: Comportamento diferenciado para o primeiro login
 
 TODO: Upload de vídeo
 

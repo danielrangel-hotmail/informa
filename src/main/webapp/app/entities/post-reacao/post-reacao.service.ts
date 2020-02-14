@@ -9,6 +9,7 @@ import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IPostReacao } from 'app/shared/model/post-reacao.model';
+import { IPostReacoes } from 'app/shared/model/post-reacoes.interface';
 
 type EntityResponseType = HttpResponse<IPostReacao>;
 type EntityArrayResponseType = HttpResponse<IPostReacao[]>;
@@ -19,18 +20,18 @@ export class PostReacaoService {
 
   constructor(protected http: HttpClient) {}
 
-  create(postReacao: IPostReacao): Observable<EntityResponseType> {
+  create(postReacao: IPostReacao): Observable<HttpResponse<IPostReacoes>> {
     const copy = this.convertDateFromClient(postReacao);
     return this.http
-      .post<IPostReacao>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+      .post<IPostReacoes>(this.resourceUrl, copy, { observe: 'response' })
+      .pipe(map((res: HttpResponse<IPostReacoes>) => this.convertDateFromServerReacoes(res)));
   }
 
-  update(postReacao: IPostReacao): Observable<EntityResponseType> {
+  update(postReacao: IPostReacao): Observable<HttpResponse<IPostReacoes>> {
     const copy = this.convertDateFromClient(postReacao);
     return this.http
-      .put<IPostReacao>(this.resourceUrl, copy, { observe: 'response' })
-      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+      .put<IPostReacoes>(this.resourceUrl, copy, { observe: 'response' })
+      .pipe(map((res: HttpResponse<IPostReacoes>) => this.convertDateFromServerReacoes(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
@@ -46,8 +47,9 @@ export class PostReacaoService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
-    return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  delete(id: number): Observable<HttpResponse<IPostReacoes>> {
+    return this.http.delete<IPostReacoes>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .pipe(map((res: HttpResponse<IPostReacoes>) => this.convertDateFromServerReacoes(res)));
   }
 
   protected convertDateFromClient(postReacao: IPostReacao): IPostReacao {
@@ -60,8 +62,23 @@ export class PostReacaoService {
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.criacao = res.body.criacao ? moment(res.body.criacao) : undefined;
-      res.body.ultimaEdicao = res.body.ultimaEdicao ? moment(res.body.ultimaEdicao) : undefined;
+      this.convertDateFromServerPostReacao(res.body);
+    }
+    return res;
+  }
+
+  protected convertDateFromServerReacoes(res: HttpResponse<IPostReacoes>): HttpResponse<IPostReacoes> {
+    if (res.body) {
+      if (res.body.reacaoLogado) this.convertDateFromServerPostReacao(res.body.reacaoLogado);
+      res.body.reacoes!.forEach((reacao) => this.convertDateFromServerPostReacao(reacao));
+    }
+    return res;
+  }
+
+  public convertDateFromServerPostReacao(res: IPostReacao): IPostReacao {
+    if (res) {
+      res.criacao = res.criacao ? moment(res.criacao) : undefined;
+      res.ultimaEdicao = res.ultimaEdicao ? moment(res.ultimaEdicao) : undefined;
     }
     return res;
   }
@@ -69,8 +86,7 @@ export class PostReacaoService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((postReacao: IPostReacao) => {
-        postReacao.criacao = postReacao.criacao ? moment(postReacao.criacao) : undefined;
-        postReacao.ultimaEdicao = postReacao.ultimaEdicao ? moment(postReacao.ultimaEdicao) : undefined;
+        this.convertDateFromServerPostReacao(postReacao);
       });
     }
     return res;

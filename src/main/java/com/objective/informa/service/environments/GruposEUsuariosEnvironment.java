@@ -6,7 +6,6 @@ import java.util.HashSet;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.User;
 import com.objective.informa.service.GrupoService;
 import com.objective.informa.service.UserService;

@@ -53,10 +53,6 @@ public class Post implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<LinkExterno> linksExternos = new HashSet<>();
 
-    @OneToMany(mappedBy = "post")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<PostReacao> reacoes = new HashSet<>();
-
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties("posts")
@@ -201,31 +197,6 @@ public class Post implements Serializable {
 
     public void setLinksExternos(Set<LinkExterno> linkExternos) {
         this.linksExternos = linkExternos;
-    }
-
-    public Set<PostReacao> getReacoes() {
-        return reacoes;
-    }
-
-    public Post reacoes(Set<PostReacao> postReacaos) {
-        this.reacoes = postReacaos;
-        return this;
-    }
-
-    public Post addReacoes(PostReacao postReacao) {
-        this.reacoes.add(postReacao);
-        postReacao.setPost(this);
-        return this;
-    }
-
-    public Post removeReacoes(PostReacao postReacao) {
-        this.reacoes.remove(postReacao);
-        postReacao.setPost(null);
-        return this;
-    }
-
-    public void setReacoes(Set<PostReacao> postReacaos) {
-        this.reacoes = postReacaos;
     }
 
     public User getAutor() {

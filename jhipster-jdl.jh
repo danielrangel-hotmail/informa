@@ -184,10 +184,10 @@ entity PostReacao {
 }
 
 relationship ManyToOne {
-	PostReacao{perfil required} to PerfilUsuario 
+	PostReacao{perfil required} to PerfilUsuario
 }
 
-relationship OneToMany {
-	Post{reacoes} to PostReacao{post required}
+relationship ManyToOne {
+	PostReacao{post required} to Post
 }
 

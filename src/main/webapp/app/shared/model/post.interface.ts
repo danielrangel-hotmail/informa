@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
-import {IArquivo} from '../../shared/model/arquivo.model';
-import {ILinkExterno} from '../../shared/model/link-externo.model';
-import { IPostReacao } from 'app/shared/model/post-reacao.model';
+import { IArquivo } from '../../shared/model/arquivo.model';
+import { ILinkExterno } from '../../shared/model/link-externo.model';
+import { IPostReacoes } from 'app/shared/model/post-reacoes.interface';
 
 export interface IPost {
   id?: number;
@@ -19,5 +19,5 @@ export interface IPost {
   autorNome?: string;
   autorEmail?: string;
   grupoNome?: string;
-  reacaoLogado?: IPostReacao;
+  reacoes?: IPostReacoes;
 }
