@@ -1,7 +1,5 @@
 VERSÃO 1.0:
 =======================
-TODO: Reações em posts
-
 TODO: Role do Gestor
 Um post pode ser marcado como oficial da empresa
 O post sairá em nome da empresa
@@ -83,6 +81,10 @@ TODO: Nome único para grupos e tópicos
 TODO: Colocar uma licença no GitHub. MIT?
 
 TODO: Rever notificações e service worker
+
+TODO: Reações
+Lista das reações com os nomes das pessoas
+Só mostrar reações negativas para o poster, admin e gestores
 
 TODO: Segurança AWS
 Problemas com o CORS, e ALC da S3
