@@ -4,16 +4,17 @@ package com.objective.informa.service.post;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,14 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.Post;
 import com.objective.informa.domain.User;
-import com.objective.informa.repository.GrupoRepository;
-import com.objective.informa.repository.MensagemRepository;
-import com.objective.informa.repository.PostRepository;
-import com.objective.informa.repository.UserRepository;
-import com.objective.informa.security.SecurityFacade;
-import com.objective.informa.service.PostReacaoService;
 import com.objective.informa.service.dto.PostDTO;
-import com.objective.informa.service.mapper.PostMapperImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class) 
 @ContextConfiguration
@@ -39,21 +33,14 @@ public class PostServiceTest {
 	private static final String CONTEUDO2 = "CONTEUDO 2";
 	
 	
-    @Mock private PostRepository postRepository;
-    @Mock private GrupoRepository grupoRepository;
-    @Mock private UserRepository userRepository;
-    @Mock private PostPublisher postPublisher;
-    @Mock private MensagemRepository mensagemRepository;
-    @Mock private PostReacaoService postReacaoService;
-    private Grupo grupo;
-    private User user;
-    private Post post;
+    private PostServiceTestData data = new PostServiceTestData();
 
-    @Spy
-    private SecurityFacade securityFacade;
-    
-    @InjectMocks PostMapperImpl postMapper;
-    PostService postService;
+
+	@Before
+    public void setUp() {
+    	this.data.setup();
+        this.data.postService = new PostService(data.postRepository, data.postMapper, data.postPublisher, data.securityFacade, data.linkExternoRepository, data.arquivoRepository);
+    }
     
     @Test
     @WithMockUser
@@ -63,7 +50,7 @@ public class PostServiceTest {
 		postDTO.setConteudo(CONTEUDO1);
 		postDTO.setGrupoId(1L);
 		postDTO.setOficial(false);
-		PostDTO postRetorno = this.postService.create(postDTO);
+		PostDTO postRetorno = this.data.postService.create(postDTO);
 		assertPostCriado(postRetorno, "user");
 	}
 
@@ -74,21 +61,19 @@ public class PostServiceTest {
 	}
 
 	private void prepareCriacaoDePost(String username) {
-		grupo = new Grupo();
-    	grupo.setId(1L);
-    	user = new User();
-    	user.setFirstName(username);
+		data.grupo = new Grupo();
+    	data.grupo.setId(1L);
+    	data.user = new User();
+    	data.user.setFirstName(username);
     	MockitoAnnotations.initMocks(this);
-    	doReturn(Optional.of(username)).when(securityFacade).getCurrentUserLogin();
-        doReturn(Optional.of(grupo)).when(grupoRepository).findById(1L);
-        doReturn(Optional.of(user)).when(userRepository).findOneByLogin(username);
-        doReturn(0L).when(mensagemRepository).countByPostId(2L);
-        when(postRepository.save(any(Post.class))).thenAnswer(i -> {
+        doReturn(Optional.of(data.grupo)).when(data.grupoRepository).findById(1L);
+        doReturn(Optional.of(data.user)).when(data.userRepository).findOneByLogin(username);
+        doReturn(0L).when(data.mensagemRepository).countByPostId(2L);
+        when(data.postRepository.save(any(Post.class))).thenAnswer(i -> {
         	Post post = (Post)i.getArgument(0);
         	post.setId(2L);
         	return post;
         });
-    	this.postService = new PostService(postRepository, postMapper, userRepository, postPublisher, securityFacade);
 	}
     
     @Test(expected = AccessDeniedException.class)
@@ -99,7 +84,7 @@ public class PostServiceTest {
 		postDTO.setConteudo(CONTEUDO1);
 		postDTO.setGrupoId(1L);
 		postDTO.setOficial(true);
-		this.postService.create(postDTO);
+		this.data.postService.create(postDTO);
     }
 
     @Test
@@ -110,7 +95,7 @@ public class PostServiceTest {
 		postDTO.setConteudo(CONTEUDO1);
 		postDTO.setGrupoId(1L);
 		postDTO.setOficial(true);
-		PostDTO postRetorno = this.postService.create(postDTO);
+		PostDTO postRetorno = this.data.postService.create(postDTO);
 		assertPostCriado(postRetorno, "admin");
     }
 
@@ -122,40 +107,23 @@ public class PostServiceTest {
 		postDTO.setConteudo(CONTEUDO1);
 		postDTO.setGrupoId(1L);
 		postDTO.setOficial(true);
-		PostDTO postRetorno = this.postService.create(postDTO);
+		PostDTO postRetorno = this.data.postService.create(postDTO);
 		assertPostCriado(postRetorno, "gestor");
 		
     }
 
 	private void assertPostAlterado(PostDTO postRetorno) {
-		assertThat(postRetorno.getConteudo()).isEqualTo(CONTEUDO2);
+		assertThat(data.post.getConteudo()).isEqualTo(CONTEUDO2);
 	}
 
 	private void prepareUpdateDePost(String username) {
-		grupo = new Grupo();
-    	grupo.setId(1L);
-    	user = new User();
-    	user.setFirstName(username);
-    	user.setLogin(username);
-    	MockitoAnnotations.initMocks(this);
-    	post = new Post();
-    	post.setId(1L);
-    	post.setGrupo(grupo);
-    	post.setAutor(user);
-    	post.setConteudo(CONTEUDO1);
-    	post.setVersao(0L);
-    	doReturn(Optional.of(post)).when(postRepository).findById(1L);
-    	doReturn(Optional.of(grupo)).when(grupoRepository).findById(1L);
-//    	doReturn(Optional.of(username)).when(securityFacade).getCurrentUserLogin();
-//        doReturn(Optional.of(grupo)).when(grupoRepository).findById(1L);
-//        doReturn(Optional.of(user)).when(userRepository).findOneByLogin(username);
-        doReturn(0L).when(mensagemRepository).countByPostId(2L);
-        when(postRepository.save(any(Post.class))).thenAnswer(i -> {
+		data.setupPostNovo(username);
+        doReturn(0L).when(data.mensagemRepository).countByPostId(2L);
+        when(data.postRepository.save(any(Post.class))).thenAnswer(i -> {
         	Post post = (Post)i.getArgument(0);
         	post.setId(2L);
         	return post;
         });
-    	this.postService = new PostService(postRepository, postMapper, userRepository, postPublisher, securityFacade);
 	}
 
     @Test
@@ -168,7 +136,7 @@ public class PostServiceTest {
 		postDTO.setConteudo(CONTEUDO2);
 		postDTO.setGrupoId(1L);
 		postDTO.setOficial(false);
-		PostDTO postRetorno = this.postService.update(postDTO);
+		PostDTO postRetorno = this.data.postService.update(postDTO);
 		assertPostAlterado(postRetorno);
 	}
 
@@ -198,8 +166,54 @@ public class PostServiceTest {
 		postDTO.setConteudo(CONTEUDO2);
 		postDTO.setGrupoId(1L);
 		postDTO.setOficial(true);
-		PostDTO postRetorno = this.postService.update(postDTO);
+		PostDTO postRetorno = this.data.postService.update(postDTO);
 		assertPostAlterado(postRetorno);
 	}
+
+	
+	private void prepareExclusaoDePost(String username) {
+		data.setupPostNovo(username);
+	}
+
+    @Test
+    @WithMockUser
+	public void testExclusao() {
+    	prepareExclusaoDePost("user");
+    	this.data.postService.delete(1L);
+    	verify(data.postRepository).deleteById(1L);
+    	
+    }
+
+    @Test
+    @WithMockUser
+	public void testExclusaoComArquivoELinkExterno() {
+    	prepareExclusaoDePost("user");
+    	this.data.adicionaArquivoELink();
+    	this.data.postService.delete(1L);
+    	verify(data.postRepository).deleteById(1L);
+    	verify(data.arquivoRepository).deleteById(2L);
+    	verify(data.linkExternoRepository).deleteById(3L);
+    }
+
+    @Test(expected = AccessDeniedException.class)
+    @WithMockUser(username = "normal")
+	public void testExclusaoOutroUser() {
+    	prepareExclusaoDePost("user");
+    	this.data.postService.delete(1L);
+    	verify(data.postRepository).deleteById(1L);
+    	
+    }
+
+    @Test
+    @WithMockUser
+	public void testExclusaoAposPublicacao() {
+    	prepareExclusaoDePost("user");
+    	data.post.setPublicacao(ZonedDateTime.now());
+    	this.data.postService.delete(1L);
+    	verify(data.postRepository, never()).deleteById(1L);
+    	assertThat(data.post.getRemovido()).isTrue().as("post precisa estar removido");
+    	assertThat(data.post.getMomentoRemocao()).isNotNull().as("post precisa ter momento de remocao");
+    	assertThat(data.post.getRemovedor()).isEqualTo(data.user).as("post precisa ter removedor");
+    }
 
 }

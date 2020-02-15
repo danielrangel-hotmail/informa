@@ -1,5 +1,7 @@
 package com.objective.informa.service.mapper;
 
+import java.util.ArrayList;
+
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -16,7 +18,8 @@ import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.AuthoritiesConstants;
 import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.PostReacaoService;
-import com.objective.informa.service.dto.GrupoDTO;
+import com.objective.informa.service.dto.ArquivoDTO;
+import com.objective.informa.service.dto.LinkExternoDTO;
 import com.objective.informa.service.dto.PostDTO;
 import com.objective.informa.service.dto.PostReacoesDTO;
 
@@ -31,9 +34,8 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Autowired private MensagemRepository mensagemRepository;
     @Autowired private PostReacaoService postReacaoService;
     @Autowired private SecurityFacade securityFacade;
-   
-
-    @Mapping(target = "autorId", ignore = true)
+    
+	@Mapping(target = "autorId", ignore = true)
     @Mapping(target = "autorNome", ignore = true)
     @Mapping(target = "autorEmail", ignore = true)
     @Mapping(source = "arquivador.id", target = "arquivadorId")
@@ -60,6 +62,8 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Mapping(target = "removeArquivos", ignore = true)
     @Mapping(target = "linksExternos", ignore = true)
     @Mapping(target = "removeLinksExternos", ignore = true)
+    @Mapping(target = "removido", ignore = true)
+    @Mapping(target = "arquivado", ignore = true)
     @Mapping(target = "removedor", ignore = true)
     @Mapping(target = "arquivador", ignore = true)
     @Mapping(target = "momentoRemocao", ignore = true)
@@ -87,6 +91,15 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     		postDTO.setAutorEmail(post.getAutor().getEmail());
     	}
     }
+
+    @AfterMapping
+    public void limpaInfoSeRemovido(@MappingTarget PostDTO postDTO) {
+    	if (postDTO.getRemovido()) {
+    		postDTO.setConteudo("");
+    		postDTO.setArquivos(new ArrayList<ArquivoDTO>());
+    		postDTO.setLinksExternos(new ArrayList<LinkExternoDTO>());
+    	}
+    }	
     
     public User autorFromId(Long id) {
         if (id == null) {

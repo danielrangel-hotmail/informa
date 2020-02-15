@@ -11,13 +11,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import com.objective.informa.domain.User;
+import com.objective.informa.repository.UserRepository;
+
 @Service
 public class SecurityFacade {
 
 	private String forceCurrentUserLogin;
 	private String[] forceCurrentUserAuthorities;
 	
+	private final UserRepository userRepository;
 	
+	public SecurityFacade(UserRepository userRepository) {
+		super();
+		this.userRepository = userRepository;
+	}
+
 	public void user(String user, String...authorities) {
 		this.forceCurrentUserLogin = user;
 		this.forceCurrentUserAuthorities = authorities;
@@ -99,4 +108,8 @@ public class SecurityFacade {
             .map(GrantedAuthority::getAuthority);
     }
 
+    public Optional<User> getCurrentUser() {
+        Optional<String> currentUserLogin = this.getCurrentUserLogin();
+		return currentUserLogin.flatMap(userRepository::findOneByLogin);
+    }
 }

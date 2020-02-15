@@ -27,6 +27,7 @@ public class PostPublicadoEnvironment implements InsistenceEnvironment {
 			PostDTO postDTO = new PostDTO();
 			postDTO.setConteudo("qualquer coisa");
 			postDTO.setGrupoId(gruposEUsuariosEnvironment.getGrupoObjective().getId());
+			postDTO.setOficial(false);
 			PostDTO postCriado = postService.create(postDTO);
 			postService.publica(new SimplePostDTO(postCriado.getId(), postCriado.getVersao()));
 		} catch (PostException e) {

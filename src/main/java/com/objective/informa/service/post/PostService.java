@@ -22,9 +22,9 @@ import com.objective.informa.domain.Grupo;
 import com.objective.informa.domain.LinkExterno;
 import com.objective.informa.domain.PerfilUsuario;
 import com.objective.informa.domain.Post;
-import com.objective.informa.domain.User;
+import com.objective.informa.repository.ArquivoRepository;
+import com.objective.informa.repository.LinkExternoRepository;
 import com.objective.informa.repository.PostRepository;
-import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.AuthoritiesConstants;
 import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.dto.PostDTO;
@@ -40,25 +40,21 @@ public class PostService {
 
 
     private final Logger log = LoggerFactory.getLogger(PostService.class);
-
     private final PostRepository postRepository;
-
     private final PostMapper postMapper;
-
-    private final UserRepository userRepository;
-
     private final PostPublisher postPublisher;
-    
     private final SecurityFacade securityFacade;
+    private final ArquivoRepository arquivoRepository;
+    private final LinkExternoRepository linkExternoRepository;
 
     public PostService(PostRepository postRepository, PostMapper postMapper,
-        UserRepository userRepository,
-        PostPublisher postPublisher, SecurityFacade securityFacade) {
+        PostPublisher postPublisher, SecurityFacade securityFacade, LinkExternoRepository linkExternoRepository, ArquivoRepository arquivoRepository) {
     	this.securityFacade = securityFacade;
         this.postRepository = postRepository;
         this.postMapper = postMapper;
-        this.userRepository = userRepository;
         this.postPublisher = postPublisher;
+        this.arquivoRepository = arquivoRepository;
+        this.linkExternoRepository = linkExternoRepository;
     }
 
     /**
@@ -70,13 +66,13 @@ public class PostService {
     public PostDTO create(PostDTO postDTO) {
         log.debug("Request to create Post : {}", postDTO);
         Post post = postMapper.toEntity(postDTO);
+        post.setRemovido(false);
+        post.setArquivado(false);
         this.validateOifical(postDTO);
         ZonedDateTime now = ZonedDateTime.now();
         post.setCriacao(now);
         post.setUltimaEdicao(now);
-        Optional<String> currentUserLogin = securityFacade.getCurrentUserLogin();
-		final Optional<User> user = currentUserLogin.flatMap(userRepository::findOneByLogin);
-        post.setAutor(user.get());
+        post.setAutor(securityFacade.getCurrentUser().get());
         post = postRepository.save(post);
         return postMapper.toDto(post);
     }
@@ -116,14 +112,18 @@ public class PostService {
         if (!postAntigo.isPresent()) {
             throw new PostUpdateNullException(new SimplePostDTO(id, versao));
         }
-        if (!postAntigo.get().getAutor().getLogin().equals(securityFacade.getCurrentUserLogin().get())) {
-            throw new AccessDeniedException("Post só pode ser alterado pelo autor");
-        }
+        validaPostEDoUsuarioLogado(postAntigo, "Post só pode ser alterado pelo autor");
         if (!postAntigo.get().getVersao().equals(versao)) {
             throw new OptimisticLockException(postAntigo);
         }
         return postAntigo.get();
     }
+
+	private void validaPostEDoUsuarioLogado(Optional<Post> postAntigo, String msg) {
+		if (!postAntigo.get().getAutor().getLogin().equals(securityFacade.getCurrentUserLogin().get())) {
+            throw new AccessDeniedException(msg);
+        }
+	}
 
     public PostDTO publica(SimplePostDTO simplePostDTO)
         throws PostException {
@@ -234,7 +234,19 @@ public class PostService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Post : {}", id);
-        postRepository.deleteById(id);
+    	Optional<Post> toBeDeletedOptional = postRepository.findById(id);
+    	validaPostEDoUsuarioLogado(toBeDeletedOptional, "Post só pode ser excluido pelo autor");
+    	Post toBeDeleted = toBeDeletedOptional.get();
+    	if (toBeDeleted.getPublicacao() != null) {
+    		toBeDeleted.setRemovido(true);
+    		toBeDeleted.setMomentoRemocao(ZonedDateTime.now());
+    		toBeDeleted.setRemovedor(securityFacade.getCurrentUser().get());
+    		postRepository.save(toBeDeleted);
+    	} else {
+    		toBeDeleted.getArquivos().forEach(arquivo -> arquivoRepository.deleteById(arquivo.getId()));
+    		toBeDeleted.getLinksExternos().forEach(link -> linkExternoRepository.deleteById(link.getId()));
+            postRepository.deleteById(id);    		
+    	}
     }
 
 	public Page<PostDTO> findAllPublicadosMeusGrupos(Pageable pageable) {
@@ -257,7 +269,7 @@ public class PostService {
 	}
 	
 	private PerfilUsuario perfilUsuarioLogado() {
-		PerfilUsuario perfilUsuario = this.userRepository.findOneByLogin(securityFacade.getCurrentUserLogin().get()).get().getPerfilUsuario();
+		PerfilUsuario perfilUsuario = securityFacade.getCurrentUser().get().getPerfilUsuario();
 		return perfilUsuario;
 	}
 

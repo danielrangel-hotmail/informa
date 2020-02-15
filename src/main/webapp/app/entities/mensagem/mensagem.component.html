@@ -11,7 +11,7 @@
             <div class="last-div"></div>
         </div>
     </div>
-    <div class="footer-mensagem">
+    <div class="footer-mensagem" *ngIf="!post.removido">
         <ng-container *ngIf = "perfilGrupoViewService.status$ | async as breakpoint">
             <div *ngIf = "breakpoint === DOCKED" style="width: 260px"></div>
         </ng-container>

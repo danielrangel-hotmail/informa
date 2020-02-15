@@ -22,7 +22,7 @@
         </div>
         <div class="">
             <div class = "mb-1">
-                <quill-view [content]="post.conteudo" format="json" theme="snow"></quill-view>
+                <quill-view [content]="post.removido ? '<< Post removido >>' : post.conteudo" format="json" theme="snow"></quill-view>
             </div>
             <div class = "mb-1">
                 <jhi-post-image-view [post]="post" ></jhi-post-image-view>
@@ -33,7 +33,7 @@
             <hr class="mt-0 mb-0">
             <div class="d-flex justify-content-between position-relative" style="font-size: 12px">
                 <div class="d-flex">
-                    <jhi-post-reacoes class="footer-button" [post]="post"></jhi-post-reacoes>
+                    <jhi-post-reacoes *ngIf="!post.removido" class="footer-button" [post]="post"></jhi-post-reacoes>
                     <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="post.publicacao" [routerLink]="['/mensagem/post/', post.id]">
                         <div class="p-1 d-none d-sm-block">
                             <fa-icon icon="comment"></fa-icon>
@@ -47,20 +47,20 @@
                     </jhi-hovered>
                 </div>
                 <div class="d-flex align-items-center">
-                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser()" [routerLink]="['/post', post.id, 'edit']">
+                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser() && !post.removido" [routerLink]="['/post', post.id, 'edit']">
                         <div class="p-1">
                             <fa-icon icon="pencil-alt"></fa-icon>
                             <span>Editar</span>
                         </div>
                     </jhi-hovered>
-                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser()" (click)="delete(post)">
+                    <jhi-hovered [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser() && !post.removido" (click)="delete(post)">
                         <div class="p-1">
                             <fa-icon icon="trash"></fa-icon>
                             <span>Excluir</span>
                         </div>
                     </jhi-hovered>
                     <jhi-hovered
-                        [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser() && !post.publicacao" (click)="publica(post)">
+                        [hoverStyle]="{background: 'rgb(232,232,232)'}" class="footer-button" *ngIf="autorEUser() && !post.publicacao && !post.removido" (click)="publica(post)">
                         <div class="p-1">
                             <fa-icon icon="plane"></fa-icon>
                             <span>Publicar</span>
