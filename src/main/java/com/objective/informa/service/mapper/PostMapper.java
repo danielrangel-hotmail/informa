@@ -16,6 +16,7 @@ import com.objective.informa.repository.UserRepository;
 import com.objective.informa.security.AuthoritiesConstants;
 import com.objective.informa.security.SecurityFacade;
 import com.objective.informa.service.PostReacaoService;
+import com.objective.informa.service.dto.GrupoDTO;
 import com.objective.informa.service.dto.PostDTO;
 import com.objective.informa.service.dto.PostReacoesDTO;
 
@@ -35,6 +36,8 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Mapping(target = "autorId", ignore = true)
     @Mapping(target = "autorNome", ignore = true)
     @Mapping(target = "autorEmail", ignore = true)
+    @Mapping(source = "arquivador.id", target = "arquivadorId")
+    @Mapping(source = "removedor.id", target = "removedorId")
     @Mapping(source = "grupo.id", target = "grupoId")
     @Mapping(source = "grupo.nome", target = "grupoNome")
     @Mapping(source = "id", target = "numeroDeMensagens", qualifiedByName = "numeroDeMensagens")
@@ -45,10 +48,27 @@ public abstract class PostMapper implements EntityMapper<PostDTO, Post> {
     @Mapping(target = "removeArquivos", ignore = true)
     @Mapping(target = "linksExternos", ignore = true)
     @Mapping(target = "removeLinksExternos", ignore = true)
-    @Mapping(source = "autorId", target = "autor")
+    @Mapping(target = "removedor", ignore = true)
+    @Mapping(target = "momentoRemocao", ignore = true)
+    @Mapping(target = "momentoArquivado", ignore = true)
+    @Mapping(target = "arquivador", ignore = true)
+    @Mapping(target = "autor", ignore = true)
     @Mapping(source = "grupoId", target = "grupo")
     public abstract Post toEntity(PostDTO postDTO);
 
+    @Mapping(target = "arquivos", ignore = true)
+    @Mapping(target = "removeArquivos", ignore = true)
+    @Mapping(target = "linksExternos", ignore = true)
+    @Mapping(target = "removeLinksExternos", ignore = true)
+    @Mapping(target = "removedor", ignore = true)
+    @Mapping(target = "arquivador", ignore = true)
+    @Mapping(target = "momentoRemocao", ignore = true)
+    @Mapping(target = "momentoArquivado", ignore = true)
+    @Mapping(target = "autor", ignore = true)
+    @Mapping(source = "grupoId", target = "grupo")
+    public abstract void updatePostFromDto(PostDTO postDto, @MappingTarget Post post);
+    
+    
     @Named("numeroDeMensagens")
     public Long numeroDeMensagensFromId(Long id) {
         return this.mensagemRepository.countByPostId(id);

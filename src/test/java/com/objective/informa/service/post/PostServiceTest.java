@@ -70,7 +70,7 @@ public class PostServiceTest {
 	private void assertPostCriado(PostDTO postRetorno, String user) {
 		assertThat(postRetorno.getConteudo()).isEqualTo(CONTEUDO1);
 		assertThat(postRetorno.getGrupoId()).isEqualTo(1L);
-		assertThat(postRetorno.getAutorNome()).isEqualTo(user);
+		assertThat(postRetorno.getAutorNome()).isEqualTo(user + " null");
 	}
 
 	private void prepareCriacaoDePost(String username) {

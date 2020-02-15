@@ -12,10 +12,10 @@ import { GravatarModule } from  'ngx-gravatar';
 import { PostDeleteDialogComponent } from 'app/entities/shared-post/post-delete-dialog.component';
 import { GrupoNoRouteModule } from 'app/entities/grupo/grupo-no-route/grupo-no-route.module';
 import { PostReacoesComponent } from './post-reacoes/post-reacoes.component';
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { NgxGalleryModule } from 'app/ngx-gallery';
 
 @NgModule({
-  imports: [InformaSharedModule, RouterModule, QuillModule.forRoot(), NgxGalleryModule, EmbedVideo, GravatarModule, GrupoNoRouteModule],
+  imports: [InformaSharedModule, RouterModule, QuillModule.forRoot(), EmbedVideo, GravatarModule, GrupoNoRouteModule, NgxGalleryModule],
   declarations: [PostComponent, PostPublicaDialogComponent, PostDeleteDialogComponent, PostSingleComponent, PostImageViewComponent, PostLinkExternoVideoViewComponent, PostReacoesComponent],
   exports: [PostComponent, PostSingleComponent],
   entryComponents: [PostPublicaDialogComponent, PostDeleteDialogComponent]

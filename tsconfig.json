@@ -23,5 +23,5 @@
     "allowJs": true
   },
   "include": ["src/main/webapp/app", "src/test/javascript/"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/main/webapp/app/ngx-gallery"]
 }

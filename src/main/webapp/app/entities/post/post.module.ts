@@ -12,12 +12,11 @@ import { FileUploadModule } from 'ng2-file-upload';
 import {FileUploadComponent} from 'app/entities/post/file-upload/file-upload.component';
 import { EmbedVideo } from 'ngx-embed-video';
 import { LinkExternoSharedModule} from 'app/entities/link-externo-shared/link-externo-shared.module';
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
-
+import { NgxGalleryModule } from 'app/ngx-gallery';
 
 
 @NgModule({
-  imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(postRoute), FileUploadModule, NgxGalleryModule, EmbedVideo, LinkExternoSharedModule],
+  imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(postRoute), FileUploadModule, EmbedVideo, LinkExternoSharedModule, NgxGalleryModule],
   declarations: [PostDetailComponent, PostUpdateComponent, PostVideoLinkComponent, PostImageComponent, FileUploadComponent]
 })
 export class InformaPostModule {}

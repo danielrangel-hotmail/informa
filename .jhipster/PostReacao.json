@@ -30,7 +30,7 @@
         {
             "relationshipType": "many-to-one",
             "otherEntityName": "post",
-            "otherEntityRelationshipName": "reacoes",
+            "otherEntityRelationshipName": "postReacao",
             "relationshipValidateRules": "required",
             "relationshipName": "post",
             "otherEntityField": "id"

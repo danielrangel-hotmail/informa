@@ -24,6 +24,22 @@
         {
             "fieldName": "publicacao",
             "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "removido",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "momentoRemocao",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "arquivado",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "momentoArquivado",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "relationships": [
@@ -40,17 +56,25 @@
             "relationshipName": "linksExternos"
         },
         {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "postReacao",
-            "otherEntityRelationshipName": "post",
-            "relationshipName": "reacoes"
-        },
-        {
             "relationshipType": "many-to-one",
             "otherEntityName": "user",
             "otherEntityRelationshipName": "post",
             "relationshipValidateRules": "required",
             "relationshipName": "autor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "removedor",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "post",
+            "relationshipName": "arquivador",
             "otherEntityField": "id"
         },
         {

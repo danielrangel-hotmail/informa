@@ -44,6 +44,18 @@ public class PostDTO implements Serializable {
 
     private Boolean oficial;
 
+    private Boolean removido;
+
+    private Boolean arquivado;
+
+    private ZonedDateTime momentoRemocao;
+
+    private ZonedDateTime momentoArquivado;
+
+    private Long removedorId;
+
+    private Long arquivadorId;
+
     private Long numeroDeMensagens;
     
     private PostReacoesDTO reacoes;
@@ -183,6 +195,59 @@ public class PostDTO implements Serializable {
 		this.reacoes = reacoes;
 	}
 
+	
+	public Boolean getRemovido() {
+		return removido;
+	}
+
+	public void setRemovido(Boolean removido) {
+		this.removido = removido;
+	}
+
+	public Boolean getArquivado() {
+		return arquivado;
+	}
+
+	public void setArquivado(Boolean arquivado) {
+		this.arquivado = arquivado;
+	}
+
+	public ZonedDateTime getMomentoRemocao() {
+		return momentoRemocao;
+	}
+
+	public void setMomentoRemocao(ZonedDateTime momentoRemocao) {
+		this.momentoRemocao = momentoRemocao;
+	}
+
+	public ZonedDateTime getMomentoArquivado() {
+		return momentoArquivado;
+	}
+
+	public void setMomentoArquivado(ZonedDateTime momentoArquivado) {
+		this.momentoArquivado = momentoArquivado;
+	}
+
+	public Long getRemovedorId() {
+		return removedorId;
+	}
+
+	public void setRemovedorId(Long removedorId) {
+		this.removedorId = removedorId;
+	}
+
+	public Long getArquivadorId() {
+		return arquivadorId;
+	}
+
+	public void setArquivadorId(Long arquivadorId) {
+		this.arquivadorId = arquivadorId;
+	}
+
+	public Boolean getOficial() {
+		return oficial;
+	}
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -204,19 +269,17 @@ public class PostDTO implements Serializable {
         return Objects.hashCode(getId());
     }
 
-    @Override
-    public String toString() {
-        return "PostDTO{" +
-            "id=" + getId() +
-            ", versao=" + getVersao() +
-            ", criacao='" + getCriacao() + "'" +
-            ", ultimaEdicao='" + getUltimaEdicao() + "'" +
-            ", conteudo='" + getConteudo() + "'" +
-            ", publicacao='" + getPublicacao() + "'" +
-            ", autorId=" + getAutorId() +
-            ", grupoId=" + getGrupoId() +
-            ", oficial=" + isOficial() +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "PostDTO [id=" + id + ", versao=" + versao + ", criacao=" + criacao + ", ultimaEdicao=" + ultimaEdicao
+				+ ", conteudo=" + conteudo + ", publicacao=" + publicacao + ", autorId=" + autorId + ", grupoId="
+				+ grupoId + ", autorNome=" + autorNome + ", autorEmail=" + autorEmail + ", grupoNome=" + grupoNome
+				+ ", oficial=" + oficial + ", removido=" + removido + ", arquivado=" + arquivado + ", momentoRemocao="
+				+ momentoRemocao + ", momentoArquivado=" + momentoArquivado + ", removedorId=" + removedorId
+				+ ", arquivadorId=" + arquivadorId + ", numeroDeMensagens=" + numeroDeMensagens + ", reacoes=" + reacoes
+				+ ", arquivos=" + arquivos + ", linksExternos=" + linksExternos + "]";
+	}
+
+
 }
 

@@ -21,8 +21,18 @@ export class Post implements IPost {
     public autorNome?: string,
     public autorEmail?: string,
     public grupoId?: number,
-    public reacoes?: IPostReacoes
-  ) {
+    public reacoes?: IPostReacoes,
+    public removido?: boolean,
+    public removedorId?: number,
+    public arquivado?: boolean,
+    public arquivadorId?: number,
+    public momentoRemocao?: Moment,
+    public momentoArquivado?: Moment,
+
+) {
+    this.oficial = this.oficial || false;
+    this.removido = this.removido || false;
+    this.arquivado = this.arquivado || false;
     this.oficial = this.oficial || false;
   }
 }

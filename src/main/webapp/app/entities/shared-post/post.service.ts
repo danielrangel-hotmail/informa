@@ -120,23 +120,29 @@ export class PostService {
 
   public convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.criacao = res.body.criacao ? moment(res.body.criacao) : undefined;
-      res.body.ultimaEdicao = res.body.ultimaEdicao ? moment(res.body.ultimaEdicao) : undefined;
-      res.body.publicacao = res.body.publicacao ? moment(res.body.publicacao) : undefined;
-      res.body.linksExternos!.forEach((link) => this.linkExternoService.convertDateFromServerLinkExterno(link));
+      this.convertDateFromServerEntity(res.body);
     }
     return res;
+  }
+
+  public convertDateFromServerEntity(post: IPost): IPost {
+    if (post) {
+      post.criacao = post.criacao ? moment(post.criacao) : undefined;
+      post.ultimaEdicao = post.ultimaEdicao ? moment(post.ultimaEdicao) : undefined;
+      post.publicacao = post.publicacao ? moment(post.publicacao) : undefined;
+      post.momentoArquivado = post.momentoArquivado ? moment(post.momentoArquivado) : undefined;
+      post.momentoRemocao = post.momentoRemocao ? moment(post.momentoRemocao) : undefined;
+      post.linksExternos!.forEach((link) => this.linkExternoService.convertDateFromServerLinkExterno(link));
+      if (post.reacoes!.reacaoLogado) this.postReacaoService.convertDateFromServerPostReacao(post.reacoes!.reacaoLogado);
+      post.reacoes!.reacoes!.forEach((reacao) => this.postReacaoService.convertDateFromServerPostReacao(reacao));
+    }
+    return post;
   }
 
   public convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((post: IPost) => {
-        post.criacao = post.criacao ? moment(post.criacao) : undefined;
-        post.ultimaEdicao = post.ultimaEdicao ? moment(post.ultimaEdicao) : undefined;
-        post.publicacao = post.publicacao ? moment(post.publicacao) : undefined;
-        post.linksExternos!.forEach((link) => this.linkExternoService.convertDateFromServerLinkExterno(link));
-        if (post.reacoes!.reacaoLogado) this.postReacaoService.convertDateFromServerPostReacao(post.reacoes!.reacaoLogado);
-        post.reacoes!.reacoes!.forEach((reacao) => this.postReacaoService.convertDateFromServerPostReacao(reacao));
+        this.convertDateFromServerEntity(post);
       });
     }
     return res;

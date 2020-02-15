@@ -32,13 +32,9 @@ export class PostUpdateComponent implements OnInit, AfterViewInit {
   editForm = this.fb.group({
     id: [],
     versao: [],
-    criacao: [],
-    ultimaEdicao: [],
     conteudo: [],
-    publicacao: [],
     oficial: [],
-    autorId: [null],
-    grupoId: [null]
+    grupoId: [null],
   });
 
   constructor(
@@ -79,12 +75,8 @@ export class PostUpdateComponent implements OnInit, AfterViewInit {
     this.editForm.patchValue({
       id: post.id,
       versao: post.versao,
-      criacao: post.criacao != null ? post.criacao.format(DATE_TIME_FORMAT) : null,
-      ultimaEdicao: post.ultimaEdicao != null ? post.ultimaEdicao.format(DATE_TIME_FORMAT) : null,
       conteudo: post.conteudo,
       oficial: post.oficial,
-      publicacao: post.publicacao != null ? post.publicacao.format(DATE_TIME_FORMAT) : null,
-      autorId: post.autorId,
       grupoId: post.grupoId
     });
   }
@@ -110,16 +102,8 @@ export class PostUpdateComponent implements OnInit, AfterViewInit {
       ...new Post(),
       id: this.editForm.get(['id'])!.value,
       versao: this.editForm.get(['versao'])!.value,
-      criacao: this.editForm.get(['criacao'])!.value != null ? moment(this.editForm.get(['criacao'])!.value, DATE_TIME_FORMAT) : undefined,
-      ultimaEdicao:
-        this.editForm.get(['ultimaEdicao'])!.value != null
-          ? moment(this.editForm.get(['ultimaEdicao'])!.value, DATE_TIME_FORMAT)
-          : undefined,
       conteudo: this.editForm.get(['conteudo'])!.value,
       oficial: this.editForm.get(['oficial'])!.value,
-      publicacao:
-        this.editForm.get(['publicacao'])!.value != null ? moment(this.editForm.get(['publicacao'])!.value, DATE_TIME_FORMAT) : undefined,
-      autorId: this.editForm.get(['autorId'])!.value,
       grupoId: this.editForm.get(['grupoId'])!.value
     };
   }

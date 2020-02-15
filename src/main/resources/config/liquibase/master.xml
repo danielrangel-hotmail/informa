@@ -35,4 +35,5 @@
     <include file="config/liquibase/changelog/20200211221840_added_entity_PostReacao.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200211221840_added_entity_constraints_PostReacao.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/202002141915000_insert_ROLE_GESTOR.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200214212439_Post_remocao_e_arquivamento.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

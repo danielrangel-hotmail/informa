@@ -98,8 +98,8 @@ public class PostService {
     public PostDTO update(PostDTO postDTO)
         throws PostUpdateNullException, PostNonAuthorizedException {
     	validateOifical(postDTO);
-        postPrepareUpdate(postDTO.getId(), postDTO.getVersao());
-        Post post = postMapper.toEntity(postDTO);
+    	Post post = postPrepareUpdate(postDTO.getId(), postDTO.getVersao());
+        postMapper.updatePostFromDto(postDTO, post);
         return postPosUpdate(post);
     }
 
@@ -117,9 +117,8 @@ public class PostService {
             throw new PostUpdateNullException(new SimplePostDTO(id, versao));
         }
         if (!postAntigo.get().getAutor().getLogin().equals(securityFacade.getCurrentUserLogin().get())) {
-            throw new PostNonAuthorizedException(new SimplePostDTO(id, versao));
+            throw new AccessDeniedException("Post só pode ser alterado pelo autor");
         }
-
         if (!postAntigo.get().getVersao().equals(versao)) {
             throw new OptimisticLockException(postAntigo);
         }

@@ -42,8 +42,20 @@ public class Post implements Serializable {
     @Column(name = "oficial")
     private Boolean oficial;
 
+    @Column(name = "removido")
+    private Boolean removido;
+
+    @Column(name = "arquivado")
+    private Boolean arquivado;
+
     @Column(name = "publicacao")
     private ZonedDateTime publicacao;
+
+    @Column(name = "momento_remocao")
+    private ZonedDateTime momentoRemocao;
+
+    @Column(name = "momento_arquivado")
+    private ZonedDateTime momentoArquivado;
 
     @OneToMany(mappedBy = "post")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -57,6 +69,14 @@ public class Post implements Serializable {
     @NotNull
     @JsonIgnoreProperties("posts")
     private User autor;
+
+    @ManyToOne(optional = true)
+    @JsonIgnoreProperties("posts")
+    private User removedor;
+
+    @ManyToOne(optional = true)
+    @JsonIgnoreProperties("posts")
+    private User arquivador;
 
     @ManyToOne
     @JsonIgnoreProperties("posts")
@@ -237,21 +257,69 @@ public class Post implements Serializable {
         return id != null && id.equals(((Post) o).id);
     }
 
-    @Override
+    
+    public Boolean getRemovido() {
+		return removido;
+	}
+
+	public void setRemovido(Boolean removido) {
+		this.removido = removido;
+	}
+
+	public Boolean getArquivado() {
+		return arquivado;
+	}
+
+	public void setArquivado(Boolean arquivado) {
+		this.arquivado = arquivado;
+	}
+
+	public ZonedDateTime getMomentoRemocao() {
+		return momentoRemocao;
+	}
+
+	public void setMomentoRemocao(ZonedDateTime momentoRemocao) {
+		this.momentoRemocao = momentoRemocao;
+	}
+
+	public ZonedDateTime getMomentoArquivado() {
+		return momentoArquivado;
+	}
+
+	public void setMomentoArquivado(ZonedDateTime momentoArquivado) {
+		this.momentoArquivado = momentoArquivado;
+	}
+
+	public User getRemovedor() {
+		return removedor;
+	}
+
+	public void setRemovedor(User removedor) {
+		this.removedor = removedor;
+	}
+
+	public User getArquivador() {
+		return arquivador;
+	}
+
+	public void setArquivador(User arquivador) {
+		this.arquivador = arquivador;
+	}
+
+	@Override
     public int hashCode() {
         return 31;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-            "id=" + getId() +
-            ", versao=" + getVersao() +
-            ", criacao='" + getCriacao() + "'" +
-            ", ultimaEdicao='" + getUltimaEdicao() + "'" +
-            ", conteudo='" + getConteudo() + "'" +
-            ", oficial='" + isOficial() + "'" +
-            ", publicacao='" + getPublicacao() + "'" +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "Post [id=" + id + ", versao=" + versao + ", criacao=" + criacao + ", ultimaEdicao=" + ultimaEdicao
+				+ ", conteudo=" + conteudo + ", oficial=" + oficial + ", removido=" + removido + ", arquivado="
+				+ arquivado + ", publicacao=" + publicacao + ", momentoRemocao=" + momentoRemocao
+				+ ", momentoArquivado=" + momentoArquivado + ", autor=" + autor + ", removedor=" + removedor + ", arquivador=" + arquivador
+				+ ", grupo=" + grupo + "]";
+	}
+
+    
+    
 }

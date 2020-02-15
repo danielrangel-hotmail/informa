@@ -1,0 +1,41 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="humberto (generated)" id="1581726284726-3">
+        <addColumn tableName="post">
+            <column name="arquivado" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1581726284726-4">
+        <addColumn tableName="post">
+            <column name="arquivador_id" type="int8">
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1581726284726-5">
+        <addColumn tableName="post">
+            <column name="momento_arquivado" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1581726284726-6">
+        <addColumn tableName="post">
+            <column name="momento_remocao" type="timestamp"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1581726284726-7">
+        <addColumn tableName="post">
+            <column name="removedor_id" type="int8">
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1581726284726-8">
+        <addColumn tableName="post">
+            <column name="removido" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1581726284726-9">
+        <addForeignKeyConstraint baseColumnNames="removedor_id" baseTableName="post" constraintName="FK1j8qbago38t97gqrjvads9gpl" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+    <changeSet author="humberto (generated)" id="1581726284726-10">
+        <addForeignKeyConstraint baseColumnNames="arquivador_id" baseTableName="post" constraintName="FK1s2h8t5tr0m402lccuxevfs5u" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_user" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

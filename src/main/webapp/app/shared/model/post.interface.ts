@@ -20,4 +20,12 @@ export interface IPost {
   autorEmail?: string;
   grupoNome?: string;
   reacoes?: IPostReacoes;
+  removido?: boolean;
+  removedorId?: number;
+  arquivado?: boolean;
+  arquivadorId?: number;
+  momentoRemocao?: Moment;
+  momentoArquivado?: Moment;
+
+
 }

@@ -5,7 +5,7 @@ import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ArquivoService } from 'app/entities/arquivo/arquivo.service';
-import { NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
+import { NgxGalleryImage, NgxGalleryOptions } from '../../../ngx-gallery';
 
 
 @Component({

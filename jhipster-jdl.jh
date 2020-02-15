@@ -44,11 +44,17 @@ entity Post {
     ultimaEdicao ZonedDateTime,
     conteudo String,
     oficial Boolean,
-    publicacao ZonedDateTime
+    publicacao ZonedDateTime,
+    removido Boolean,
+    momentoRemocao ZonedDateTime,
+    arquivado Boolean,
+    momentoArquivado ZonedDateTime
 }
 
 relationship ManyToOne {
 	Post{autor required} to User,
+    Post{removedor} to User,
+    Post{arquivador} to User,
     Post{grupo} to Grupo
 }
 
