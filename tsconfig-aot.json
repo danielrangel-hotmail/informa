@@ -19,8 +19,7 @@
     "paths": {
       "app/*": ["src/main/webapp/app/*"]
     },
-    "importHelpers": true,
-    "exclude": ["src/main/webapp/app/ngx-gallery"]
+    "importHelpers": true
   },
   "angularCompilerOptions": {
     "genDir": "build/resources/main/aot",

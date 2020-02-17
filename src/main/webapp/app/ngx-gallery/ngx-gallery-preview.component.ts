@@ -33,7 +33,7 @@ import { NgxGalleryHelperService } from './ngx-gallery-helper.service';
                 <ngx-gallery-action *ngIf="zoom" [icon]="zoomInIcon" [disabled]="!canZoomIn()" (onClick)="zoomIn()"></ngx-gallery-action>
                 <ngx-gallery-action *ngIf="rotate" [icon]="rotateLeftIcon" (onClick)="rotateLeft()"></ngx-gallery-action>
                 <ngx-gallery-action *ngIf="rotate" [icon]="rotateRightIcon" (onClick)="rotateRight()"></ngx-gallery-action>
-                <ngx-gallery-action *ngIf="fullscreen" [icon]="'ngx-gallery-fullscreen ' + fullscreenIcon" (onClick)="manageFullscreen()"></ngx-gallery-action>
+                <ngx-gallery-action *ngIf="fullscreen" [icon]="'ngx-gallery-fullscreen ' + fullscreenIcon!" (onClick)="manageFullscreen()"></ngx-gallery-action>
                 <ngx-gallery-action [icon]="'ngx-gallery-close ' + closeIcon" (onClick)="close()"></ngx-gallery-action>
             </div>
         </div>
@@ -63,40 +63,40 @@ export class NgxGalleryPreviewComponent implements OnInit, OnChanges, OnDestroy 
     rotateValue = 0;
     index = 0;
 
-    @Input() images?: string[] | SafeResourceUrl[];
-    @Input() descriptions?: string[];
-    @Input() showDescription?: boolean;
-    @Input() arrows?: boolean;
-    @Input() arrowsAutoHide?: boolean;
-    @Input() swipe?: boolean;
-    @Input() fullscreen?: boolean;
-    @Input() forceFullscreen?: boolean;
-    @Input() closeOnClick?: boolean;
-    @Input() closeOnEsc?: boolean;
-    @Input() keyboardNavigation?: boolean;
-    @Input() arrowPrevIcon?: string;
-    @Input() arrowNextIcon?: string;
-    @Input() closeIcon?: string;
-    @Input() fullscreenIcon?: string;
-    @Input() spinnerIcon?: string;
-    @Input() autoPlay?: boolean;
-    @Input() autoPlayInterval?: number;
-    @Input() autoPlayPauseOnHover?: boolean;
-    @Input() infinityMove?: boolean;
+    @Input() images!: string[] | SafeResourceUrl[];
+    @Input() descriptions!: string[];
+    @Input() showDescription!: boolean;
+    @Input() arrows!: boolean;
+    @Input() arrowsAutoHide!: boolean;
+    @Input() swipe!: boolean;
+    @Input() fullscreen!: boolean;
+    @Input() forceFullscreen!: boolean;
+    @Input() closeOnClick!: boolean;
+    @Input() closeOnEsc!: boolean;
+    @Input() keyboardNavigation!: boolean;
+    @Input() arrowPrevIcon!: string;
+    @Input() arrowNextIcon!: string;
+    @Input() closeIcon!: string;
+    @Input() fullscreenIcon!: string;
+    @Input() spinnerIcon!: string;
+    @Input() autoPlay!: boolean;
+    @Input() autoPlayInterval!: number;
+    @Input() autoPlayPauseOnHover!: boolean;
+    @Input() infinityMove!: boolean;
     @Input() zoom!: boolean;
-    @Input() zoomStep?: number;
-    @Input() zoomMax?: number;
-    @Input() zoomMin?: number;
-    @Input() zoomInIcon?: string;
-    @Input() zoomOutIcon?: string;
-    @Input() animation?: boolean;
-    @Input() actions?: NgxGalleryAction[];
-    @Input() rotate?: boolean;
-    @Input() rotateLeftIcon?: string;
-    @Input() rotateRightIcon?: string;
-    @Input() download?: boolean;
-    @Input() downloadIcon?: string;
-    @Input() bullets?: string;
+    @Input() zoomStep!: number;
+    @Input() zoomMax!: number;
+    @Input() zoomMin!: number;
+    @Input() zoomInIcon!: string;
+    @Input() zoomOutIcon!: string;
+    @Input() animation!: boolean;
+    @Input() actions!: NgxGalleryAction[];
+    @Input() rotate!: boolean;
+    @Input() rotateLeftIcon!: string;
+    @Input() rotateRightIcon!: string;
+    @Input() download!: boolean;
+    @Input() downloadIcon!: string;
+    @Input() bullets!: string;
 
     @Output() onOpen = new EventEmitter();
     @Output() onClose = new EventEmitter();

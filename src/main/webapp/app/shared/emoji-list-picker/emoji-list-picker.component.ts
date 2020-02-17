@@ -32,4 +32,9 @@ export class EmojiListPickerComponent implements OnInit {
   emojiPicked(emoji: IEmojiItem): void {
     this.picked.emit(emoji);
   }
+
+  emojiPickedRemoved(): void {
+    this.picked.emit(undefined);
+  }
+
 }

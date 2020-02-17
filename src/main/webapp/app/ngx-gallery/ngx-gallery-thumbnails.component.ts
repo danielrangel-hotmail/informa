@@ -34,26 +34,26 @@ export class NgxGalleryThumbnailsComponent implements OnChanges {
 
     minStopIndex = 0;
 
-    @Input() images?: string[] | SafeResourceUrl[];
-    @Input() links?: string[];
-    @Input() labels?: string[];
-    @Input() linkTarget?: string;
+    @Input() images!: string[] | SafeResourceUrl[];
+    @Input() links!: string[];
+    @Input() labels!: string[];
+    @Input() linkTarget!: string;
     @Input() columns!: number;
     @Input() rows!: number;
-    @Input() arrows?: boolean;
-    @Input() arrowsAutoHide?: boolean;
-    @Input() margin?: number;
-    @Input() selectedIndex?: number;
-    @Input() clickable?: boolean;
-    @Input() swipe?: boolean;
-    @Input() size?: string;
-    @Input() arrowPrevIcon?: string;
-    @Input() arrowNextIcon?: string;
-    @Input() moveSize?: number;
-    @Input() order?: number;
-    @Input() remainingCount?: boolean;
-    @Input() lazyLoading?: boolean;
-    @Input() actions?: NgxGalleryAction[];
+    @Input() arrows!: boolean;
+    @Input() arrowsAutoHide!: boolean;
+    @Input() margin!: number;
+    @Input() selectedIndex!: number;
+    @Input() clickable!: boolean;
+    @Input() swipe!: boolean;
+    @Input() size!: string;
+    @Input() arrowPrevIcon!: string;
+    @Input() arrowNextIcon!: string;
+    @Input() moveSize!: number;
+    @Input() order!: number;
+    @Input() remainingCount!: boolean;
+    @Input() lazyLoading!: boolean;
+    @Input() actions!: NgxGalleryAction[];
 
     @Output() onActiveChange = new EventEmitter();
 

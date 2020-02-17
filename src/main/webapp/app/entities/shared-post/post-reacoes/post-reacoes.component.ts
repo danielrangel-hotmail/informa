@@ -14,7 +14,7 @@ import { IPostReacoes } from 'app/shared/model/post-reacoes.interface';
 export class PostReacoesComponent implements OnInit {
   @Input() post!: Post;
 
-  protected emojiList: IEmojiItem[] = [
+  emojiList: IEmojiItem[] = [
     { emoji: 'thumbsup' },
     { emoji: 'facepunch' },
     { emoji: 'heart' },
@@ -23,7 +23,7 @@ export class PostReacoesComponent implements OnInit {
     { emoji: 'flushed' },
     { emoji: 'thumbsdown'}
   ];
-  protected mostraReacoesPicker = false;
+  mostraReacoesPicker = false;
 
   constructor(protected postReacaoService: PostReacaoService) { }
 

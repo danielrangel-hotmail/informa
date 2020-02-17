@@ -24,25 +24,25 @@ import { NgxGalleryAction } from './ngx-gallery-action.model';
     styleUrls: ['./ngx-gallery-image.component.scss']
 })
 export class NgxGalleryImageComponent implements OnInit, OnChanges {
-    @Input() images?: NgxGalleryOrderedImage[];
-    @Input() clickable?: boolean;
-    @Input() selectedIndex?: number;
-    @Input() arrows?: boolean;
-    @Input() arrowsAutoHide?: boolean;
-    @Input() swipe?: boolean;
-    @Input() animation?: string;
-    @Input() size?: string;
-    @Input() arrowPrevIcon?: string;
-    @Input() arrowNextIcon?: string;
-    @Input() autoPlay?: boolean;
+    @Input() images!: NgxGalleryOrderedImage[];
+    @Input() clickable!: boolean;
+    @Input() selectedIndex!: number;
+    @Input() arrows!: boolean;
+    @Input() arrowsAutoHide!: boolean;
+    @Input() swipe!: boolean;
+    @Input() animation!: string;
+    @Input() size!: string;
+    @Input() arrowPrevIcon!: string;
+    @Input() arrowNextIcon!: string;
+    @Input() autoPlay!: boolean;
     @Input() autoPlayInterval?: number;
-    @Input() autoPlayPauseOnHover?: boolean;
-    @Input() infinityMove?: boolean;
-    @Input() lazyLoading?: boolean;
-    @Input() actions?: NgxGalleryAction[];
-    @Input() descriptions?: string[];
-    @Input() showDescription?: boolean;
-    @Input() bullets?: boolean;
+    @Input() autoPlayPauseOnHover!: boolean;
+    @Input() infinityMove!: boolean;
+    @Input() lazyLoading!: boolean;
+    @Input() actions!: NgxGalleryAction[];
+    @Input() descriptions!: string[];
+    @Input() showDescription!: boolean;
+    @Input() bullets!: boolean;
 
     @Output() onClick = new EventEmitter();
     @Output() onActiveChange = new EventEmitter();
@@ -101,7 +101,7 @@ export class NgxGalleryImageComponent implements OnInit, OnChanges {
 
         if (this.lazyLoading) {
             let indexes = [this.selectedIndex];
-            let prevIndex = this.selectedIndex! - 1;
+            let prevIndex = (this.selectedIndex ? this.selectedIndex : 0) - 1;
 
             if (prevIndex === -1 && this.infinityMove) {
                 indexes.push(this.images.length - 1)
