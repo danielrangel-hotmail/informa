@@ -1,15 +1,27 @@
-import { Component, OnInit, OnDestroy, Input, ViewChild, ViewChildren, ElementRef, QueryList, AfterViewInit } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { JhiEventManager, JhiParseLinks } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 // import { ITEMS_PER_PAGE } from '../../shared/constants/pagination.constants';
 import { MensagemService } from './mensagem.service';
 import { MensagemDeleteDialogComponent } from './mensagem-delete-dialog.component';
-import {IPost} from '../../shared/model/post.interface';
-import {IMensagem} from '../../shared/model/mensagem.interface';
+import { IPost } from '../../shared/model/post.interface';
+import { IMensagem } from '../../shared/model/mensagem.interface';
 import { DOCKED, PerfilGrupoViewService } from 'app/layouts/navbar/perfil-grupo-view.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-mensagem',
@@ -22,6 +34,7 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
   private scrollContainer: any;
   @Input() post!: IPost;
   mensagems: IMensagem[];
+  mensagemEditada: IMensagem | null = null;
   eventSubscriber?: Subscription;
   itemsPerPage: number;
   links: any;
@@ -30,14 +43,18 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
   ascending: boolean;
   reseting = false;
   DOCKED = DOCKED;
+  account$?: Observable<Account | null>;
 
   constructor(
+    private ref: ChangeDetectorRef,
+    protected accountService: AccountService,
     protected mensagemService: MensagemService,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal,
     protected parseLinks: JhiParseLinks,
     public perfilGrupoViewService: PerfilGrupoViewService
   ) {
+    this.account$ = this.accountService.identity();
     this.mensagems = [];
     this.itemsPerPage = 100;
     this.page = 0;
@@ -99,7 +116,6 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   trackId(index: number, item: IMensagem): number {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;
   }
 
@@ -120,6 +136,10 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
     return result;
   }
 
+  editClicked(mensagem: IMensagem): void {
+    this.mensagemEditada = mensagem;
+  }
+
   protected paginateMensagems(data: IMensagem[] | null, headers: HttpHeaders): void {
     if (this.reseting) {
       this.mensagems = [];
@@ -138,6 +158,18 @@ export class MensagemComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         this.mensagems.push(data[i]);
       }
+    }
+    this.ref.detectChanges();
+  }
+
+  setaParaCimaClicked(account: Account): void {
+    // eslint-disable-next-line no-console
+    console.log("seta para cima");
+    if (this.mensagems.length === 0) return;
+    const ultimaMensagem = this.mensagems[this.mensagems.length - 1];
+    if (account.id.toString() === ultimaMensagem.autorId!.toString()) {
+      this.mensagemEditada = ultimaMensagem;
+      this.ref.detectChanges();
     }
   }
 }

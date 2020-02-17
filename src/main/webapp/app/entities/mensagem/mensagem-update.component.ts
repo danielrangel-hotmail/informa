@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder } from '@angular/forms';
@@ -12,6 +12,8 @@ import { IUser } from 'app/core/user/user.model';
 import { IPost } from '../../shared/model/post.interface';
 import { IMensagem } from '../../shared/model/mensagem.interface';
 import { JhiEventManager } from 'ng-jhipster';
+import { QuillEditorCustomComponent } from 'app/shared/quill/quill-editor-custom.component';
+import { DOCUMENT } from '@angular/common';
 // import { MatomoTracker } from 'ngx-matomo';
 
 type SelectableEntity = IUser | IPost | IMensagem;
@@ -22,8 +24,9 @@ type SelectableEntity = IUser | IPost | IMensagem;
 })
 export class MensagemUpdateComponent implements OnInit {
   isSaving = false;
-  @Input() mensagem?: IMensagem;
+  _mensagem?: IMensagem;
   @Input() post?: IPost;
+  @Output() setaParaCima = new EventEmitter();
 
   editForm = this.fb.group({
     id: [],
@@ -41,14 +44,34 @@ export class MensagemUpdateComponent implements OnInit {
     protected mensagemService: MensagemService,
     protected eventManager: JhiEventManager,
     private fb: FormBuilder,
+    @Inject(DOCUMENT) document: any
     // protected matomoTracker: MatomoTracker
   ) {}
+
+  @Input() set mensagem(umaMensagem: IMensagem) {
+    this._mensagem = umaMensagem;
+    if (umaMensagem === null) return;
+    this.updateForm(umaMensagem);
+
+    // Pegar o último editor e mandar o focus para ele.
+    const editors = document.getElementsByClassName("ql-editor");
+    if (editors.length === 0) return;
+    const editor = editors.item(editors.length - 1) as HTMLElement;
+    // eslint-disable-next-line no-console
+    console.log(editor);
+    editor.focus();
+  }
+
+  get mensagem(): IMensagem {
+    return this._mensagem!;
+  }
 
   ngOnInit(): void {
     this.resetForm();
   }
 
   resetForm(): void {
+    this._mensagem = undefined;
     this.editForm.patchValue({
       id: null,
       versao: null,
@@ -81,6 +104,7 @@ export class MensagemUpdateComponent implements OnInit {
   }
 
   save(): void {
+    if (this.isSaving) return;
     this.isSaving = true;
     const mensagem = this.createFromForm();
     if (mensagem.id != null) {
@@ -117,11 +141,11 @@ export class MensagemUpdateComponent implements OnInit {
   }
 
   protected onSaveSuccess(): void {
-    this.eventManager.broadcast('mensagemListModification');
     this.analyticsEvent();
     this.post!.numeroDeMensagens = this.post!.numeroDeMensagens! + 1;
     this.resetForm();
     this.isSaving = false;
+    this.eventManager.broadcast('mensagemListModification');
   }
 
   protected onSaveError(): void {
@@ -137,4 +161,9 @@ export class MensagemUpdateComponent implements OnInit {
 
   }
 
+  setaParaCimaCliked(): void {
+    if (!this._mensagem) {
+      this.setaParaCima.emit("seta para cima");
+    }
+  }
 }

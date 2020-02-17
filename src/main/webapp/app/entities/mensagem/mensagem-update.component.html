@@ -1,7 +1,7 @@
 <div class="p-2 mt-3">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
         <div>
-            <jhi-quill-editor formControlName="conteudo"></jhi-quill-editor>
+            <jhi-quill-editor formControlName="conteudo" (entered)="save()" (setaParaCima)="setaParaCimaCliked()"></jhi-quill-editor>
         </div>
         <div class="mt-2 d-flex flex-row-reverse">
             <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary ">

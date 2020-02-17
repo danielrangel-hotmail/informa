@@ -1,11 +1,10 @@
-<div #message_container>
+<div #message_container *ngIf="account$ | async as account">
     <div class="message-content max-width-main-view" >
 <!--         infinite-scroll (scrolled)="loadPage(page + 1)" (scrolledUp)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="5" [infiniteScrollUpDistance]="5" [alwaysCallback]="true"-->
         <div class="first-div"></div>
-<!--        <div class="margin_navbar_fixed"></div>-->
         <jhi-post-single [post]="post"></jhi-post-single>
         <div *ngFor="let mensagem of mensagems ;trackBy: trackId" #message>
-            <jhi-mensagem-detail [mensagem]="mensagem"></jhi-mensagem-detail>
+            <jhi-mensagem-detail (editMensagem)="editClicked($event)" [mensagem]="mensagem" [account]="account" ></jhi-mensagem-detail>
         </div>
         <div>
             <div class="last-div"></div>
@@ -16,7 +15,7 @@
             <div *ngIf = "breakpoint === DOCKED" style="width: 260px"></div>
         </ng-container>
         <div class="footer-background max-width-main-view flex-grow-1 m-auto">
-            <jhi-mensagem-update [post]="post"></jhi-mensagem-update>
+            <jhi-mensagem-update [post]="post" [mensagem]="mensagemEditada" (setaParaCima)="setaParaCimaClicked(account)"></jhi-mensagem-update>
         </div>
     </div>
 </div>

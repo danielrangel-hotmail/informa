@@ -1,4 +1,4 @@
-import { Component, forwardRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { QuillEditorComponent } from 'ngx-quill'
 import { UserService } from '../../core/user/user.service';
@@ -23,10 +23,16 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class QuillEditorCustomComponent implements ControlValueAccessor {
   @ViewChild(QuillEditorComponent, { static: true }) editor?: QuillEditorComponent;
+  // @ViewChild('quillEditorComponent', { static: true }) emojiPalette?: ElementRef;
+  @Input() likeWhatsapp = true;
+  @Output() entered = new EventEmitter();
+  @Output() setaParaCima = new EventEmitter();
   content = '';
   modules = {};
   users: User[] = [];
-  constructor(private userService: UserService
+  constructor(
+    private userService: UserService,
+    private elementRef: ElementRef
   ) {
     this.userService.query(
       {
@@ -37,7 +43,7 @@ export class QuillEditorCustomComponent implements ControlValueAccessor {
     ).subscribe((res: HttpResponse<User[]>) => this.onSuccess(res.body));;
     this.modules = {
       'emoji-shortname': true,
-      'emoji-toolbar': true,
+      'emoji-toolbar': { top: '-250px' },
       'mention': {
         allowedChars: /^[A-Za-z\sÅÄÖåäö]*$/,
         onSelect: (item: any, insertItem: (arg0: any) => void) => {
@@ -64,21 +70,6 @@ export class QuillEditorCustomComponent implements ControlValueAccessor {
         }
       }
     }
-  }
-  // eslint-disable-next-line @typescript-eslint/tslint/config
-  addBindingCreated(quillEditor: any): void {
-    quillEditor.keyboard.addBinding({
-      key: 'b'
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    }, (range: any, context: any) => {
-    });
-
-    quillEditor.keyboard.addBinding({
-      key: 'B',
-      shiftKey: true
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    }, (range: any, context: any) => {
-    })
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -109,4 +100,23 @@ export class QuillEditorCustomComponent implements ControlValueAccessor {
     if (users != null) this.users = users;
   }
 
+  aposCriacao(quill: any): void {
+    if (!this.likeWhatsapp) return;
+    quill.keyboard.addBinding(38, () => {
+      if ((this.content === null) || (this.content === '{"ops":[{"insert":"\\n"}]}')) {
+        this.setaParaCima.emit("clicou seta para cima");
+      };
+    });
+
+    // Tentativa de fazer com que o return se comporte como submit
+    // O problema é fazer com que no comportamento do emoji ou da menção ele não dê submit
+    // Talvez dê para filtrar com o context
+    // const binds: any[] = quill.keyboard.bindings[13];
+    // binds.forEach(bind => {
+    //   bind.shiftKey = true;
+    // });
+    // quill.keyboard.addBinding({ key: 13 }, (range: any, context: any) => {
+    //   this.entered.emit("entered");
+    // });
+  }
 }

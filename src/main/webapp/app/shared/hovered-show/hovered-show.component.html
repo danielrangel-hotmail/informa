@@ -1,0 +1,4 @@
+<div [ngStyle]="isHovered ? hoverStyle : null">
+    <ng-content [ngStyle]="isHovered ? hoverStyle : null"></ng-content>
+    <ng-content select=".hovered-in" *ngIf="isHovered" ></ng-content>
+</div>

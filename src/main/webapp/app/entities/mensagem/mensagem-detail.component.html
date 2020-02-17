@@ -1,6 +1,6 @@
-<div *ngIf="mensagem" class="">
+<div *ngIf="mensagem" class="position-relative">
     <div style="background: white">
-        <jhi-hovered [hoverStyle]="{background: 'rgb(249,249,249)' }">
+        <jhi-hovered-show [hoverStyle]="{background: 'rgb(249,249,249)' }">
             <div class="d-flex pt-1 pb-1">
                 <div class="avatar" *ngIf = "!mensagem.conversaContinuada">
                     <img ngxGravatar [round]="false" [size]="36" [cornerRadius]="7" [email]="mensagem.autorEmail" >
@@ -24,6 +24,10 @@
                     </div>
                 </div>
             </div>
-        </jhi-hovered>
+            <jhi-mensagem-popup-menu
+                (edit)="editClicked()"
+                [mensagemDoUsuario]="mensagemDoUsuario()" class = "hovered-in popup-menu"></jhi-mensagem-popup-menu>
+            <div class = "hovered-out"></div>
+        </jhi-hovered-show>
     </div>
 </div>

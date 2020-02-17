@@ -10,10 +10,11 @@ import { GravatarModule } from  'ngx-gravatar';
 import { mensagemRoute } from './mensagem.route';
 import { MensagemPostComponent } from './mensagem-post/mensagem-post.component';
 import {InformaSharedPostModule} from 'app/entities/shared-post/informa-shared-post.module';
+import { MensagemPopupMenuComponent } from './mensagem-popup-menu/mensagem-popup-menu.component';
 
 @NgModule({
   imports: [InformaSharedModule, InformaSharedPostModule, RouterModule.forChild(mensagemRoute), GravatarModule, QuillModule],
-  declarations: [MensagemComponent, MensagemDetailComponent, MensagemUpdateComponent, MensagemDeleteDialogComponent, MensagemPostComponent],
+  declarations: [MensagemComponent, MensagemDetailComponent, MensagemUpdateComponent, MensagemDeleteDialogComponent, MensagemPostComponent, MensagemPopupMenuComponent],
   entryComponents: [MensagemDeleteDialogComponent]
 })
 export class InformaMensagemModule {}

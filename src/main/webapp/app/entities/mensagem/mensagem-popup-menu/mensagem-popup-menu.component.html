@@ -1,0 +1,22 @@
+<div class = "mensagem-container d-flex">
+    <jhi-hovered [hoverStyle]="{background: 'rgb(204,204,204)'}">
+        <div class="p-2">
+            <fa-icon icon="thumbs-up"></fa-icon>
+        </div>
+    </jhi-hovered>
+    <jhi-hovered [hoverStyle]="{background: 'rgb(204,204,204)'}">
+        <div class="p-2">
+            <fa-icon icon="arrow-right"></fa-icon>
+        </div>
+    </jhi-hovered>
+    <jhi-hovered *ngIf="mensagemDoUsuario" (click)="editClicked()" [hoverStyle]="{background: 'rgb(204,204,204)'}">
+        <div class="p-2">
+            <fa-icon icon="pencil-alt"></fa-icon>
+        </div>
+    </jhi-hovered>
+    <jhi-hovered *ngIf="mensagemDoUsuario" [hoverStyle]="{background: 'rgb(204,204,204)'}">
+        <div class="p-2">
+            <fa-icon icon="trash-alt"></fa-icon>
+        </div>
+    </jhi-hovered>
+</div>

@@ -1,0 +1,10 @@
+.mensagem-container {
+  height: 35px;
+  border: 1px solid #dadada;
+  border-radius: 2px;
+}
+
+:host ::ng-deep .div-hovered {
+  height: 100%;
+  width: 100%
+}
